@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "ryu10.m6800-as0",
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "tamasfe.even-better-toml"
+  ]
+}

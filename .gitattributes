@@ -1,0 +1,25 @@
+# Pin LF line endings repository-wide for 68HC11 cross-assemblers (AS11/Blackfoot/A09) & Python parity
+* text=auto eol=lf
+
+*.md text eol=lf
+*.asm text eol=lf
+*.inc text eol=lf
+*.sym text eol=lf
+*.lst text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.sh text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.svg text eol=lf
+
+# Binary assets (if explicitly added under tests/fixtures or docs)
+*.png binary
+*.jpg binary
+*.webp binary
+*.bin binary
+*.parquet binary

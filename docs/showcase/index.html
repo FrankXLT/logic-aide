@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white" data-medium="m3" data-corners="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="data:," />
+  <title>LogicAIDE — 68HC11 SMEC/SBEC Telemetry, Python Twin &amp; Turbo Mopar Workbench</title>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js-enabled');
+      var saved = null;
+      try { saved = localStorage.getItem('logicaide-theme'); } catch (e) {}
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var active = (saved === 'dark' || saved === 'white') ? saved : (prefersDark ? 'dark' : 'white');
+      root.setAttribute('data-theme', active);
+      var meta = document.querySelector('meta[name="color-scheme"]');
+      if (meta) {
+        meta.setAttribute('content', saved === 'dark' ? 'dark' : (saved === 'white' ? 'light' : 'light dark'));
+      }
+    })();
+  </script>
+  <style>
+    @layer reset, tokens, shell, archetypes, evidence, views, utilities;
+
+    @layer reset {
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--bg-shell);
+        color: var(--text-primary);
+        font-family: var(--font-sans);
+        font-size: var(--ts-base);
+        line-height: 1.55;
+        min-block-size: 100dvh;
+        overflow-x: clip;
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 2px;
+      }
+      button, select, input {
+        font: inherit;
+        color: inherit;
+      }
+      button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+      img, svg {
+        display: block;
+        max-inline-size: 100%;
+      }
+      h1, h2, h3, h4, p, ul, ol, figure, blockquote {
+        margin: 0;
+        padding: 0;
+      }
+      ul, ol { list-style: none; }
+      table { border-collapse: collapse; border-spacing: 0; }
+      pre { overflow-x: auto; max-inline-size: 100%; margin: 0; }
+      summary { list-style: none; cursor: pointer; }
+      summary::-webkit-details-marker { display: none; }
+    }
+
+    @layer tokens {
+      :root {
+        font-size: clamp(16px, calc(12.4px + 0.25vw), 22px);
+        color-scheme: light dark;
+        scrollbar-gutter: stable;
+        -webkit-font-smoothing: antialiased;
+        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --font-serif: 'Newsreader', 'Charter', 'Source Serif 4', Georgia, serif;
+        --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+        --font-nums: tabular-nums slashed-zero;
+        --ts-xs: max(11px, 0.6875rem);
+        --ts-sm: max(12px, 0.78125rem);
+        --ts-nav: max(12.5px, 0.8125rem);
+        --ts-base: max(13.5px, 0.875rem);
+        --ts-prose: max(15px, 0.96875rem);
+        --ts-md: max(15.5px, 1rem);
+        --ts-xl: clamp(1.2rem, 1.08rem + 0.4vw, 1.5rem);
+        --ts-display: clamp(1.38rem, 1.22rem + 0.55vw, 1.82rem);
+        --density-row-py: 0.4rem;
+        --density-row-px: 0.65rem;
+        --density-card-pad: 0.9rem;
+        --density-grid-gap: 0.75rem;
+        --inset-pad: 4px;
+        --radius-card: 8px;
+        --radius-sm: 6px;
+        --radius-xs: 2px;
+        --radius-inner: max(0px, calc(var(--radius-card) - var(--inset-pad)));
+        --radius-pill: 999px;
+        --res-touch-min: 32px;
+      }
+
+      :root:has(> head > meta[name="color-scheme"][content="dark"]) {
+        color-scheme: dark;
+      }
+      :root:has(> head > meta[name="color-scheme"][content="light"]) {
+        color-scheme: light;
+      }
+
+      :root,
+      [data-theme="white"] {
+        --bg-shell: #EEF2F6;
+        --bg-canvas: #FFFFFF;
+        --bg-surface: #FFFFFF;
+        --bg-card: var(--bg-surface);
+        --bg-elevated: #F8FAFC;
+        --bg-subtle: #F1F5F9;
+        --bg-header: #FFFFFF;
+        --text-primary: #0F172A;
+        --text-secondary: #334155;
+        --text-muted: #475569;
+        --border-hairline: #E2E8F0;
+        --border-subtle: #E2E8F0;
+        --border-strong: #CBD5E1;
+        --accent-primary: #1D4ED8;
+        --accent-focal: var(--accent-primary);
+        --accent-ink: #FFFFFF;
+        --status-ok: #15803D;
+        --status-ok-bg: #ECFDF5;
+        --status-warn: #B45309;
+        --status-warn-bg: #FFFBEB;
+        --status-danger: #B91C1C;
+        --status-err: var(--status-danger);
+        --status-err-bg: #FFF1F2;
+        --tint-indigo-bg: #EEF2FF;
+        --tint-indigo-fg: #3730A3;
+        --tint-emerald-bg: #ECFDF5;
+        --tint-emerald-fg: #065F46;
+        --tint-amber-bg: #FFFBEB;
+        --tint-amber-fg: #92400E;
+        --tint-rose-bg: #FFF1F2;
+        --tint-rose-fg: #9F1239;
+        --tint-violet-bg: #F5F3FF;
+        --tint-violet-fg: #5B21B6;
+        --scrim: rgba(15, 23, 42, 0.52);
+      }
+
+      [data-theme="dark"] {
+        --bg-shell: #05070B;
+        --bg-canvas: #090D16;
+        --bg-surface: #0F1624;
+        --bg-card: var(--bg-surface);
+        --bg-elevated: #172135;
+        --bg-subtle: #162033;
+        --bg-header: #0B101B;
+        --text-primary: #F1F5F9;
+        --text-secondary: #CBD5E1;
+        --text-muted: #94A3B8;
+        --border-hairline: #1E293B;
+        --border-subtle: #1E293B;
+        --border-strong: #334155;
+        --accent-primary: #38BDF8;
+        --accent-focal: var(--accent-primary);
+        --accent-ink: #05070B;
+        --status-ok: #4ADE80;
+        --status-ok-bg: rgba(34, 197, 94, 0.16);
+        --status-warn: #FBBF24;
+        --status-warn-bg: rgba(245, 158, 11, 0.16);
+        --status-danger: #F87171;
+        --status-err: var(--status-danger);
+        --status-err-bg: rgba(239, 68, 68, 0.16);
+        --tint-indigo-bg: rgba(99, 102, 241, 0.18);
+        --tint-indigo-fg: #C7D2FE;
+        --tint-emerald-bg: rgba(16, 185, 129, 0.18);
+        --tint-emerald-fg: #A7F3D0;
+        --tint-amber-bg: rgba(245, 158, 11, 0.18);
+        --tint-amber-fg: #FDE68A;
+        --tint-rose-bg: rgba(244, 63, 94, 0.18);
+        --tint-rose-fg: #FECDD3;
+        --tint-violet-bg: rgba(139, 92, 246, 0.18);
+        --tint-violet-fg: #DDD6FE;
+        --scrim: rgba(2, 6, 15, 0.68);
+      }
+
+      @media (max-width: 699px), (pointer: coarse) and (max-width: 767px) {
+        :root { --res-touch-min: 44px; }
+      }
+    }
+
+    @layer shell {
+      .skip-link {
+        position: fixed;
+        inset-block-start: -100px;
+        inset-inline-start: 0.75rem;
+        z-index: 300;
+        padding: 0.5rem 0.85rem;
+        background: var(--accent-primary);
+        color: var(--accent-ink);
+        border-radius: var(--radius-sm);
+        font-size: var(--ts-sm);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .skip-link:focus {
+        inset-block-start: 0.5rem;
+      }
+
+      .va-shell-topbar {
+        position: sticky;
+        inset-block-start: 0;
+        z-index: 120;
+        block-size: 46px;
+        min-block-size: 46px;
+        max-block-size: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding-inline: 0.75rem;
+        background: var(--bg-header);
+        color: var(--text-primary);
+        border-block-end: 1px solid var(--border-hairline);
+      }
+
+      .topbar-left, .topbar-right {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        min-inline-size: 0;
+      }
+
+      .topbar-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.42rem;
+        font-size: var(--ts-sm);
+        font-weight: 700;
+        color: var(--text-primary);
+        white-space: nowrap;
+      }
+
+      .topbar-brand svg {
+        inline-size: 18px;
+        block-size: 18px;
+        color: var(--accent-primary);
+        flex-shrink: 0;
+      }
+
+      .topbar-sub {
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .topbar-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        min-block-size: 32px;
+        padding: 0.25rem 0.65rem;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .topbar-btn:hover {
+        border-color: var(--accent-primary);
+      }
+      .topbar-btn svg {
+        inline-size: 15px;
+        block-size: 15px;
+        flex-shrink: 0;
+      }
+
+      .rail-trigger {
+        min-inline-size: 34px;
+        padding-inline: 0.4rem;
+      }
+
+      @media (max-width: 699px) {
+        .topbar-sub { display: none; }
+        .topbar-btn::after {
+          content: "";
+          position: absolute;
+          inset: -6px -4px;
+        }
+      }
+      @media (min-width: 1100px) {
+        .rail-trigger { display: none; }
+      }
+
+      .va-stage {
+        container-type: inline-size;
+        container-name: stage;
+        inline-size: 100%;
+        min-inline-size: 0;
+      }
+      .va-stage[data-width="workbench"] {
+        max-inline-size: min(96vw, 112rem);
+        margin-inline: auto;
+        padding: 0.9rem 0.75rem 2.5rem;
+      }
+      @media (max-width: 699px) {
+        .va-stage[data-width="workbench"] {
+          max-inline-size: 100%;
+          padding: 0.65rem 0.6rem 2rem;
+        }
+      }
+
+      .workbench-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+        align-items: start;
+      }
+      @media (min-width: 1100px) {
+        .workbench-shell {
+          grid-template-columns: 236px minmax(0, 1fr);
+          gap: 1.15rem;
+        }
+      }
+
+      .va-side-rail {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-card);
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        min-inline-size: 0;
+      }
+      @media (min-width: 1100px) {
+        .va-side-rail {
+          position: sticky;
+          inset-block-start: 58px;
+          max-block-size: calc(100dvh - 72px);
+          overflow-y: auto;
+          overscroll-behavior: contain;
+        }
+      }
+      @media (max-width: 1099px) {
+        .va-side-rail {
+          position: fixed;
+          inset-block: 46px 0;
+          inset-inline-start: 0;
+          z-index: 110;
+          inline-size: min(19rem, 84dvw);
+          border-radius: 0;
+          border-inline-start: none;
+          border-block-start: none;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          transform: translateX(-105%);
+          visibility: hidden;
+          pointer-events: none;
+        }
+        .va-side-rail.is-open {
+          transform: translateX(0);
+          visibility: visible;
+          pointer-events: auto;
+        }
+      }
+
+      .drawer-backdrop {
+        position: fixed;
+        inset: 46px 0 0 0;
+        z-index: 105;
+        background: var(--scrim);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .drawer-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+      @media (min-width: 1100px) {
+        .drawer-backdrop { display: none; }
+      }
+
+      .rail-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.45rem;
+        min-block-size: var(--res-touch-min);
+        padding: 0.35rem 0.55rem;
+        border-radius: var(--radius-inner);
+        color: var(--text-secondary);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        text-align: left;
+      }
+      .rail-link:hover {
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+      }
+      .rail-link[aria-current="true"] {
+        background: var(--tint-indigo-bg);
+        color: var(--tint-indigo-fg);
+      }
+      .rail-divider {
+        border-block-start: 1px solid var(--border-hairline);
+        margin-block: 0.35rem;
+        padding-block-start: 0.5rem;
+      }
+      .rail-meta {
+        font-size: var(--ts-xs);
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        padding-inline: 0.35rem;
+      }
+
+      .main-col {
+        min-inline-size: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+      }
+
+      .hero-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-card);
+        padding: 1rem 1.1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .hero-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.65rem;
+      }
+      .va-editorial-h1 {
+        font-family: var(--font-serif);
+        font-size: var(--ts-display);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.015em;
+        color: var(--text-primary);
+        text-wrap: balance;
+      }
+      .hero-lead {
+        max-inline-size: 72ch;
+        color: var(--text-secondary);
+        font-size: var(--ts-base);
+      }
+
+      .va-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        gap: 0.65rem;
+        min-inline-size: 0;
+      }
+      .va-kpi-card {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-inner);
+        padding: 0.65rem 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        min-inline-size: 0;
+      }
+      .va-kpi-label {
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .va-kpi-val {
+        font-family: var(--font-mono);
+        font-variant-numeric: var(--font-nums);
+        font-size: var(--ts-xl);
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.15;
+      }
+      .va-kpi-sub {
+        font-size: var(--ts-xs);
+        color: var(--text-secondary);
+      }
+
+      .va-tab-strip {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        scroll-snap-type: inline proximity;
+        border-block-end: 1px solid var(--border-hairline);
+        background: var(--bg-surface);
+        padding: 0.35rem 0.5rem 0;
+        border-radius: var(--radius-card) var(--radius-card) 0 0;
+        border: 1px solid var(--border-hairline);
+        min-inline-size: 0;
+      }
+      .va-tab-strip::-webkit-scrollbar { display: none; }
+      .va-tab {
+        position: relative;
+        flex: none;
+        scroll-snap-align: start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        min-block-size: max(36px, var(--res-touch-min));
+        padding: 0.4rem 0.72rem;
+        color: var(--text-secondary);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        white-space: nowrap;
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      }
+      .va-tab:hover {
+        color: var(--text-primary);
+        background: var(--bg-elevated);
+      }
+      .va-tab[aria-selected="true"] {
+        color: var(--accent-primary);
+      }
+      .va-tab[aria-selected="true"]::after {
+        content: "";
+        position: absolute;
+        inset: auto 0.25rem 0;
+        border-block-end: 3px solid var(--accent-primary);
+      }
+      @media (forced-colors: active) {
+        .va-tab[aria-selected="true"]::after {
+          border-block-end-color: Highlight;
+        }
+      }
+    }
+
+    @layer archetypes {
+      .panel-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        min-inline-size: 0;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.85rem;
+        min-inline-size: 0;
+      }
+      @media (min-width: 820px) {
+        .grid-2 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          align-items: start;
+        }
+      }
+
+      .va-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-card);
+        padding: var(--density-card-pad);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        min-inline-size: 0;
+      }
+      .card-hdr {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.45rem;
+      }
+      .card-title {
+        font-size: var(--ts-md);
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.25;
+      }
+      .va-meta-inline {
+        color: var(--text-muted);
+        font-size: var(--ts-xs);
+        font-family: var(--font-mono);
+        font-variant-numeric: var(--font-nums);
+      }
+
+      .va-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        min-block-size: 20px;
+        max-block-size: 22px;
+        padding-inline: 0.45rem;
+        border-radius: var(--radius-xs);
+        border: 1px solid transparent;
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .va-pill[data-variant="tag"] {
+        background: var(--bg-elevated);
+        border-color: var(--border-hairline);
+        color: var(--text-secondary);
+      }
+      .va-pill[data-variant="status"][data-state="nominal"] {
+        background: transparent;
+        border-color: transparent;
+        padding-inline: 0;
+        color: var(--text-secondary);
+      }
+      .va-pill[data-variant="status"][data-state="nominal"]::before {
+        content: "";
+        inline-size: 6px;
+        block-size: 6px;
+        border-radius: 50%;
+        background: var(--status-ok);
+      }
+      .va-pill[data-variant="status"][data-state="warn"] {
+        background: var(--status-warn-bg);
+        border-color: var(--border-strong);
+        border-inline-start: 2.5px solid var(--status-warn);
+        color: var(--tint-amber-fg);
+      }
+      .va-pill[data-variant="status"][data-state="warn"]::before {
+        content: "▲" / "";
+        font-size: var(--ts-xs);
+        line-height: 1;
+      }
+      .va-pill[data-variant="status"][data-state="fault"] {
+        background: var(--status-err-bg);
+        border-color: var(--border-strong);
+        border-inline-start: 2.5px solid var(--status-danger);
+        color: var(--status-danger);
+      }
+      .va-pill[data-variant="status"][data-state="fault"]::before {
+        content: "◆" / "";
+        font-size: var(--ts-xs);
+        line-height: 1;
+      }
+
+      .va-table-wrap {
+        overflow-x: auto;
+        max-inline-size: 100%;
+        min-inline-size: 0;
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-inner);
+        background: var(--bg-surface);
+      }
+      table.booktabs {
+        inline-size: 100%;
+        border-collapse: collapse;
+        font-size: var(--ts-xs);
+        font-variant-numeric: var(--font-nums);
+      }
+      table.booktabs th, table.booktabs td {
+        padding: 0.45rem 0.6rem;
+        text-align: left;
+        border-block-end: 1px solid var(--border-hairline);
+        vertical-align: top;
+      }
+      table.booktabs th {
+        background: var(--bg-elevated);
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+        border-block-end: 1.5px solid var(--border-strong);
+      }
+      table.booktabs tbody th {
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        text-transform: none;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+      table.booktabs td.num, table.booktabs th.num {
+        text-align: right;
+        font-family: var(--font-mono);
+        white-space: nowrap;
+      }
+      code {
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        background: var(--bg-elevated);
+        padding: 0.08rem 0.28rem;
+        border-radius: var(--radius-xs);
+      }
+      .code-block {
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-inner);
+        padding: 0.7rem 0.8rem;
+        color: var(--text-primary);
+        line-height: 1.48;
+      }
+    }
+
+    @layer evidence {
+      .va-figure-card {
+        margin: 0;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-card);
+        padding: var(--density-card-pad);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        min-inline-size: 0;
+      }
+      .va-figure-hdr, .qe-card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .qe-fig-title {
+        font-size: var(--ts-base);
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+      .qe-fig-badges {
+        display: inline-flex;
+        gap: 0.35rem;
+        align-items: center;
+      }
+      .qe-schematic-hdr, .qe-bf-hdr {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        margin-block-end: 0.35rem;
+      }
+      .qe-dwg-num, .qe-bf-addr {
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+      .va-figure-scroll {
+        overflow-x: auto;
+        max-inline-size: 100%;
+        min-inline-size: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .qe-svg { display: block; block-size: auto; margin-inline: auto; }
+      .qe-svg-600 { inline-size: min(100%, 720px); min-inline-size: 540px; }
+      .qe-svg-720 { inline-size: min(100%, 820px); min-inline-size: 640px; }
+      .qe-cond-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem 0.9rem;
+        padding: 0.45rem 0.65rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-inner);
+        font-size: var(--ts-xs);
+        margin-block-end: 0.45rem;
+      }
+      .qe-cond-item { display: inline-flex; gap: 0.35rem; align-items: baseline; }
+      .qe-cond-lbl { font-weight: 700; color: var(--text-muted); }
+      .qe-cond-val { font-family: var(--font-mono); color: var(--text-primary); }
+      .qe-param-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem 1rem;
+        padding: 0.45rem 0.65rem;
+        border-block-start: 1px solid var(--border-hairline);
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        color: var(--text-secondary);
+      }
+      .qe-legend-series { display: inline-flex; flex-wrap: wrap; gap: 0.45rem 0.9rem; }
+      .qe-leg-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+      .qe-leg-svg { display: inline-block; flex-shrink: 0; }
+      .va-figure-caption {
+        font-size: var(--ts-xs);
+        color: var(--text-muted);
+        padding-block-start: 0.35rem;
+        border-block-start: 1px solid var(--border-hairline);
+      }
+      .qe-spec-drawer {
+        border-block-start: 1px solid var(--border-hairline);
+        padding-block-start: 0.4rem;
+      }
+      .qe-spec-summary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        color: var(--accent-primary);
+      }
+      .qe-spec-summary::before { content: "▸" / ""; }
+      .qe-spec-drawer[open] > .qe-spec-summary::before { content: "▾" / ""; }
+      .qe-spec-pre {
+        max-block-size: 260px;
+        overflow: auto;
+        margin-block-start: 0.4rem;
+        padding: 0.65rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-inner);
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+      }
+      .qe-m1-only { display: none; }
+    }
+
+    @layer views {
+      .builder-form {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.65rem;
+      }
+      @media (min-width: 680px) {
+        .builder-form {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      .field-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        min-inline-size: 0;
+      }
+      .field-label {
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+      .va-select {
+        min-block-size: max(36px, var(--res-touch-min));
+        padding: 0.35rem 0.55rem;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        inline-size: 100%;
+      }
+      .sim-readout {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.55rem;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-inner);
+        padding: 0.65rem;
+      }
+      .sim-stat-lbl {
+        font-size: var(--ts-xs);
+        color: var(--text-muted);
+      }
+      .sim-stat-val {
+        font-family: var(--font-mono);
+        font-variant-numeric: var(--font-nums);
+        font-size: var(--ts-sm);
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+      .list-check {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        font-size: var(--ts-sm);
+        color: var(--text-secondary);
+      }
+      .list-check li {
+        padding-inline-start: 0.65rem;
+        border-inline-start: 2px solid var(--border-strong);
+      }
+      .roadmap-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+      }
+      @media (min-width: 820px) {
+        .roadmap-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      .site-footer {
+        border-block-start: 1px solid var(--border-hairline);
+        padding-block: 0.85rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: var(--ts-xs);
+        color: var(--text-muted);
+      }
+
+      /* No-JS graceful degradation: show all panels cleanly in sequence */
+      @media (scripting: none) {
+        .va-tab-strip, #rail-toggle, #theme-toggle { display: none; }
+        [role="tabpanel"][hidden="until-found"] {
+          display: block;
+          content-visibility: visible;
+          margin-block-start: 1.25rem;
+        }
+      }
+      html:not(.js-enabled) [role="tabpanel"][hidden="until-found"] {
+        display: block;
+        content-visibility: visible;
+        margin-block-start: 1.25rem;
+      }
+    }
+
+    @layer utilities {
+      .va-nums { font-variant-numeric: var(--font-nums); }
+      .va-kicker {
+        font-size: var(--ts-xs);
+        font-weight: 700;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .hidden,
+      [hidden]:not([hidden="until-found"]) {
+        display: none;
+      }
+    }
+
+    @media print {
+      .va-shell-topbar, .va-side-rail, .va-tab-strip, .drawer-backdrop, .qe-spec-drawer { display: none; }
+      [role="tabpanel"][hidden="until-found"] { display: block; }
+      body { background: #FFFFFF; color: #0F172A; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-stage" class="skip-link">Skip to workbench content</a>
+
+  <header class="va-shell-topbar" role="banner">
+    <div class="topbar-left">
+      <button type="button" id="rail-toggle" class="topbar-btn rail-trigger" aria-label="Toggle section navigation" aria-expanded="false" aria-controls="section-rail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="topbar-brand">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="6" y="6" width="12" height="12" rx="2"/>
+          <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
+        </svg>
+        <span>LogicAIDE</span>
+        <span class="topbar-sub">68HC11 SMEC / SBEC</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="va-pill" data-variant="status" data-state="nominal">Deadbolt Armed</span>
+      <button type="button" id="theme-toggle" class="topbar-btn" aria-pressed="false" aria-label="Switch to Garage Dark theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        <span id="theme-label">Garage Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <div class="va-stage" data-width="workbench">
+    <div class="workbench-shell">
+      <aside id="section-rail" class="va-side-rail" aria-label="Architecture Sections">
+        <span class="va-kicker">Architecture Map</span>
+        <button type="button" class="rail-link" data-tab-jump="tab-topology" aria-current="true">1. System Topology <span class="va-meta-inline">LA-TOPO</span></button>
+        <button type="button" class="rail-link" data-tab-jump="tab-telemetry">2. 62.5k SCI &amp; Lake <span class="va-meta-inline">0xF2/F4</span></button>
+        <button type="button" class="rail-link" data-tab-jump="tab-emulator">3. Python Twin &amp; Sim <span class="va-meta-inline">m68hc11</span></button>
+        <button type="button" class="rail-link" data-tab-jump="tab-drivetrain">4. Drivetrain &amp; Turbo <span class="va-meta-inline">PR / T2</span></button>
+        <button type="button" class="rail-link" data-tab-jump="tab-safety">5. RAG &amp; Deadbolt <span class="va-meta-inline">3-Gate</span></button>
+        <button type="button" class="rail-link" data-tab-jump="tab-reference">6. 60-Way &amp; Roadmap <span class="va-meta-inline">M1-M4</span></button>
+        <div class="rail-divider">
+          <div class="rail-meta">CLI: uv run logicaide</div>
+          <div class="rail-meta">Loop Cap: 11.0 ms (22k cyc)</div>
+          <div class="rail-meta">Storage: 30s Zstd Parquet</div>
+        </div>
+      </aside>
+
+      <main id="main-stage" class="main-col" tabindex="-1">
+        <section class="hero-card" aria-labelledby="hero-title">
+          <div class="hero-head">
+            <div>
+              <span class="va-kicker">Logic Module + Agentic IDE</span>
+              <h1 id="hero-title" class="va-editorial-h1">LogicAIDE: 68HC11 SMEC &amp; SBEC Tuning Architecture</h1>
+            </div>
+            <span class="va-pill" data-variant="tag">Offline Monograph · WF-01</span>
+          </div>
+          <p class="hero-lead">
+            Multi-car telemetry data lake, Python behavioral twins verified bit-exact inside deterministic <code>m68hc11</code> Sobol Monte Carlo sweeps, modular Mopar drivetrain &amp; compressor thermodynamics, and Chrysler heritage hybrid RAG behind a strict Human-Only Hardware Deadbolt.
+          </p>
+          <div class="va-kpi-grid">
+            <div class="va-kpi-card">
+              <span class="va-kpi-label">High-Speed SCI</span>
+              <span class="va-kpi-val">62,500 baud</span>
+              <span class="va-kpi-sub">0x12 switch · 0xF2 / 0xF4 RAM</span>
+            </div>
+            <div class="va-kpi-card">
+              <span class="va-kpi-label">Load-Cell Resolution</span>
+              <span class="va-kpi-val">250 × 10 kPa</span>
+              <span class="va-kpi-sub">RPM × MAP × TPS × ACT bins</span>
+            </div>
+            <div class="va-kpi-card">
+              <span class="va-kpi-label">HC11 Loop Ceiling</span>
+              <span class="va-kpi-val">11.0 ms</span>
+              <span class="va-kpi-sub">22,000 E-cycles @ 2.0 MHz</span>
+            </div>
+            <div class="va-kpi-card">
+              <span class="va-kpi-label">AI Serial Write Access</span>
+              <span class="va-kpi-val">0 ports</span>
+              <span class="va-kpi-sub">Staging Pen + Manual CLI only</span>
+            </div>
+          </div>
+        </section>
+
+        <div>
+          <div class="va-tab-strip" role="tablist" aria-label="LogicAIDE Architecture Sections">
+            <button type="button" role="tab" class="va-tab" id="tab-topology" aria-controls="panel-topology" aria-selected="true" tabindex="0">System Topology</button>
+            <button type="button" role="tab" class="va-tab" id="tab-telemetry" aria-controls="panel-telemetry" aria-selected="false" tabindex="-1">62.5k SCI &amp; Lake</button>
+            <button type="button" role="tab" class="va-tab" id="tab-emulator" aria-controls="panel-emulator" aria-selected="false" tabindex="-1">Python Twin &amp; Sim</button>
+            <button type="button" role="tab" class="va-tab" id="tab-drivetrain" aria-controls="panel-drivetrain" aria-selected="false" tabindex="-1">Drivetrain &amp; Turbo</button>
+            <button type="button" role="tab" class="va-tab" id="tab-safety" aria-controls="panel-safety" aria-selected="false" tabindex="-1">RAG &amp; Deadbolt</button>
+            <button type="button" role="tab" class="va-tab" id="tab-reference" aria-controls="panel-reference" aria-selected="false" tabindex="-1">60-Way &amp; Roadmap</button>
+          </div>
+
+          <div role="tabpanel" id="panel-topology" aria-labelledby="tab-topology" tabindex="0">
+            <div class="panel-body">
+              <figure class="va-figure-card qe-figure" id="logicaide-system-topology" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-TOPO-001</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries"><svg class="qe-svg qe-svg-720" viewBox="0 0 780 346" role="img" aria-label="LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries">
+<defs><marker id="qe-topo-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--text-primary)"/></marker><marker id="qe-topo-focal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent-focal)"/></marker></defs>
+<rect data-role="enclave" x="14.0" y="34.0" width="200.0" height="116.0" rx="8" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" stroke-dasharray="6,3,2,3"/>
+<text x="26.0" y="52.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.2" stroke-linejoin="round">VEHICLE ENCLAVE</text>
+<text x="26.0" y="68.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--accent-focal)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.2" stroke-linejoin="round">68HC11 RO LOGGING BUS</text>
+<rect data-role="enclave" x="284.0" y="34.0" width="210.0" height="296.0" rx="8" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" stroke-dasharray="5,4"/>
+<text x="296.0" y="52.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.2" stroke-linejoin="round">OFFLINE AI WORKBENCH</text>
+<text x="296.0" y="68.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--accent-focal)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.2" stroke-linejoin="round">DUCKDB + M68HC11 SIM</text>
+<rect data-role="enclave" x="562.0" y="34.0" width="204.0" height="214.0" rx="8" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" stroke-dasharray="6,3,2,3"/>
+<text x="574.0" y="52.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.2" stroke-linejoin="round">DEADBOLT PEN</text>
+<text x="574.0" y="68.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--accent-focal)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.2" stroke-linejoin="round">MANUAL CLI FLASH ONLY</text>
+<path d="M 200.0 107.0 L 298.0 107.0" fill="none" stroke="var(--text-primary)" stroke-width="1.6" marker-end="url(#qe-topo-focal)"/>
+<path d="M 389.0 136.0 L 389.0 176.0" fill="none" stroke="var(--text-primary)" stroke-width="1.6" marker-end="url(#qe-topo-arr)"/>
+<path d="M 480.0 205.0 L 528.0 205.0 L 528.0 107.0 L 576.0 107.0" fill="none" stroke="var(--text-primary)" stroke-width="1.6" marker-end="url(#qe-topo-focal)"/>
+<path d="M 664.0 136.0 L 664.0 176.0" fill="none" stroke="var(--text-primary)" stroke-width="1.6" stroke-dasharray="5,3" marker-end="url(#qe-topo-arr)"/>
+<rect data-role="node" x="28.0" y="78.0" width="172.0" height="58.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="114.0" y="102.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">68HC11 SMEC / SBEC</text>
+<text x="114.0" y="120.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-muted)">Pin 25/45 SCI + 5V Iso</text>
+<rect data-role="node" x="298.0" y="78.0" width="182.0" height="58.0" rx="5" fill="var(--bg-card)" stroke="var(--accent-focal)" stroke-width="1.5"/>
+<text x="389.0" y="102.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">62.5k SCI &amp; Parquet Lake</text>
+<text x="389.0" y="120.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-muted)">30s Zstd + Load-Cell Bins</text>
+<rect data-role="node" x="298.0" y="176.0" width="182.0" height="58.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="389.0" y="200.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Python Twin &amp; m68hc11</text>
+<text x="389.0" y="218.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-muted)">Sobol Sweeps + 11 ms Gate</text>
+<rect data-role="node" x="298.0" y="262.0" width="182.0" height="54.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="389.0" y="286.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Heritage Hybrid RAG</text>
+<text x="389.0" y="304.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-muted)">FTS5 + sqlite-vec</text>
+<rect data-role="node" x="576.0" y="78.0" width="176.0" height="58.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="664.0" y="102.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">staging/candidates/</text>
+<text x="664.0" y="120.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-muted)">SHA-256 + REPORT.md</text>
+<rect data-role="node" x="576.0" y="176.0" width="176.0" height="58.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="664.0" y="200.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Human Manual Flash</text>
+<text x="664.0" y="218.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-muted)">Ostrich 2.0 / BoostBtn</text>
+<g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="215.0" y="98.5" width="68.0" height="17.0" rx="2" fill="var(--bg-surface)" stroke="none"/><text x="249.0" y="111.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">62.5k RO</text></g>
+<g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="355.0" y="147.5" width="68.0" height="17.0" rx="2" fill="var(--bg-elevated)" stroke="none"/><text x="389.0" y="160.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Stimulus</text></g>
+<text x="528.0" y="160.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.8" stroke-linejoin="round">Staged .bin</text>
+<g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="622.8" y="147.5" width="82.5" height="17.0" rx="2" fill="var(--bg-elevated)" stroke="none"/><text x="664.0" y="160.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Manual CLI</text></g>
+</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries"><code>{
+  &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
+  &quot;id&quot;: &quot;logicaide-system-topology&quot;,
+  &quot;schematic_kind&quot;: &quot;topology&quot;,
+  &quot;width&quot;: 780,
+  &quot;height&quot;: 340,
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries&quot;,
+    &quot;rigor_level&quot;: &quot;L2&quot;,
+    &quot;drawing_number&quot;: &quot;LA-TOPO-001&quot;
+  },
+  &quot;enclaves&quot;: [
+    {
+      &quot;id&quot;: &quot;enc-vehicle&quot;,
+      &quot;label&quot;: &quot;VEHICLE ENCLAVE&quot;,
+      &quot;fips_level&quot;: &quot;68HC11 RO LOGGING BUS&quot;,
+      &quot;border_style&quot;: &quot;dash-dot&quot;,
+      &quot;fill_token&quot;: &quot;var(--bg-elevated)&quot;
+    },
+    {
+      &quot;id&quot;: &quot;enc-host&quot;,
+      &quot;label&quot;: &quot;OFFLINE AI WORKBENCH&quot;,
+      &quot;fips_level&quot;: &quot;DUCKDB + M68HC11 SIM&quot;,
+      &quot;border_style&quot;: &quot;dashed&quot;,
+      &quot;fill_token&quot;: &quot;var(--bg-elevated)&quot;
+    },
+    {
+      &quot;id&quot;: &quot;enc-deadbolt&quot;,
+      &quot;label&quot;: &quot;DEADBOLT PEN&quot;,
+      &quot;fips_level&quot;: &quot;MANUAL CLI FLASH ONLY&quot;,
+      &quot;border_style&quot;: &quot;dash-dot&quot;,
+      &quot;fill_token&quot;: &quot;var(--bg-elevated)&quot;
+    }
+  ],
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: &quot;ecu&quot;,
+      &quot;enclave_id&quot;: &quot;enc-vehicle&quot;,
+      &quot;label&quot;: &quot;68HC11 SMEC / SBEC&quot;,
+      &quot;sublabel&quot;: &quot;Pin 25/45 SCI + 5V Iso&quot;,
+      &quot;x&quot;: 28,
+      &quot;y&quot;: 78,
+      &quot;w&quot;: 172,
+      &quot;h&quot;: 58
+    },
+    {
+      &quot;id&quot;: &quot;poller&quot;,
+      &quot;enclave_id&quot;: &quot;enc-host&quot;,
+      &quot;label&quot;: &quot;62.5k SCI &amp; Parquet Lake&quot;,
+      &quot;sublabel&quot;: &quot;30s Zstd + Load-Cell Bins&quot;,
+      &quot;x&quot;: 298,
+      &quot;y&quot;: 78,
+      &quot;w&quot;: 182,
+      &quot;h&quot;: 58,
+      &quot;focal&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;twin&quot;,
+      &quot;enclave_id&quot;: &quot;enc-host&quot;,
+      &quot;label&quot;: &quot;Python Twin &amp; m68hc11&quot;,
+      &quot;sublabel&quot;: &quot;Sobol Sweeps + 11 ms Gate&quot;,
+      &quot;x&quot;: 298,
+      &quot;y&quot;: 176,
+      &quot;w&quot;: 182,
+      &quot;h&quot;: 58
+    },
+    {
+      &quot;id&quot;: &quot;rag&quot;,
+      &quot;enclave_id&quot;: &quot;enc-host&quot;,
+      &quot;label&quot;: &quot;Heritage Hybrid RAG&quot;,
+      &quot;sublabel&quot;: &quot;FTS5 + sqlite-vec&quot;,
+      &quot;x&quot;: 298,
+      &quot;y&quot;: 262,
+      &quot;w&quot;: 182,
+      &quot;h&quot;: 54
+    },
+    {
+      &quot;id&quot;: &quot;staging&quot;,
+      &quot;enclave_id&quot;: &quot;enc-deadbolt&quot;,
+      &quot;label&quot;: &quot;staging/candidates/&quot;,
+      &quot;sublabel&quot;: &quot;SHA-256 + REPORT.md&quot;,
+      &quot;x&quot;: 576,
+      &quot;y&quot;: 78,
+      &quot;w&quot;: 176,
+      &quot;h&quot;: 58
+    },
+    {
+      &quot;id&quot;: &quot;human_flash&quot;,
+      &quot;enclave_id&quot;: &quot;enc-deadbolt&quot;,
+      &quot;label&quot;: &quot;Human Manual Flash&quot;,
+      &quot;sublabel&quot;: &quot;Ostrich 2.0 / BoostBtn&quot;,
+      &quot;x&quot;: 576,
+      &quot;y&quot;: 176,
+      &quot;w&quot;: 176,
+      &quot;h&quot;: 58
+    }
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;ecu&quot;,
+      &quot;to&quot;: &quot;poller&quot;,
+      &quot;label&quot;: &quot;62.5k RO&quot;,
+      &quot;crosses_enclave_boundary&quot;: true
+    },
+    {
+      &quot;from&quot;: &quot;poller&quot;,
+      &quot;to&quot;: &quot;twin&quot;,
+      &quot;label&quot;: &quot;Stimulus&quot;
+    },
+    {
+      &quot;from&quot;: &quot;twin&quot;,
+      &quot;to&quot;: &quot;staging&quot;,
+      &quot;label&quot;: &quot;Staged .bin&quot;,
+      &quot;crosses_enclave_boundary&quot;: true
+    },
+    {
+      &quot;from&quot;: &quot;staging&quot;,
+      &quot;to&quot;: &quot;human_flash&quot;,
+      &quot;label&quot;: &quot;Manual CLI&quot;,
+      &quot;style&quot;: &quot;dashed&quot;
+    }
+  ]
+}</code></pre></details></figure>
+              <div class="grid-2">
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">Agent- &amp; IDE-Neutral Dual Interface</h2>
+                    <span class="va-pill" data-variant="tag">CLI + FastMCP</span>
+                  </div>
+                  <p>Every telemetry query, 68HC11 Sobol sweep, and heritage lookup exposes identical deterministic behavior over both CLI (<code>uv run logicaide ...</code>) and FastMCP tools—usable from Claude Code, Antigravity, Cursor, Codex CLI, or VS Code Copilot.</p>
+                  <pre class="code-block" tabindex="0" role="region" aria-label="CLI and FastMCP parity mapping"><code>uv run logicaide telemetry rollup --car 89-csx-vnt --issue ISS-04
+uv run logicaide sim sweep --build 89-csx-peftbl-r1 --method sobol --samples 5000
+uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre>
+                </article>
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">Supported 1988–1993 Turbo Fleet</h2>
+                    <span class="va-pill" data-variant="tag">SMEC / SBEC</span>
+                  </div>
+                  <ul class="list-check">
+                    <li><strong>1988–1989 SMEC</strong>: Daytona Shelby Z, Shelby CSX / CSX-VNT, Omni GLHS retrofits, Turbo Shadow. Dual logic + power boards inside one housing.</li>
+                    <li><strong>1990–1993 SBEC</strong>: Spirit R/T (2.2L Lotus 16V Turbo III), Daytona IROC R/T, Turbo Caravan / Voyager minivans. Single integrated board.</li>
+                    <li><strong>1984–1987 LM/PM Context</strong>: Two-box Logic Module + Power Module heritage documented cleanly in <code>knowledge/</code> without mixing pinouts.</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="panel-telemetry" aria-labelledby="tab-telemetry" hidden="until-found">
+            <div class="panel-body">
+              <figure class="va-figure-card qe-figure" id="logicaide-sci-fsm" data-qe-modality="schematic" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-schematic-wrap" data-rigor="L3" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-SCI-002</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 220" role="img" aria-label="Finite State Machine">
+<defs><marker id="qe-fsm-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--text-primary)"/></marker></defs>
+<circle cx="24" cy="58.0" r="7" fill="var(--text-primary)"/><circle cx="24" cy="58.0" r="12" fill="none" stroke="var(--text-primary)" stroke-width="1.4"/>
+<rect data-role="node" x="50.0" y="34.0" width="112.0" height="48.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.6"/>
+<text x="106.0" y="55.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">7812.5 Boot</text>
+<text x="106.0" y="71.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Echoed 0x10-0x17</text>
+<line x1="36" y1="58.0" x2="50.0" y2="58.0" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-fsm-arr)"/>
+<rect data-role="node" x="182.0" y="34.0" width="112.0" height="48.0" rx="5" fill="var(--bg-card)" stroke="var(--accent-focal)" stroke-width="1.6"/>
+<text x="238.0" y="55.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">0x12 Switch</text>
+<text x="238.0" y="71.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Wait Echo 0x12</text>
+<rect data-role="node" x="314.0" y="34.0" width="112.0" height="48.0" rx="5" fill="var(--status-warn-bg)" stroke="var(--status-warn)" stroke-width="1.6"/>
+<text x="370.0" y="55.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-warn)">Probe Watch</text>
+<text x="370.0" y="71.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">0xF2/0xF4 Check</text>
+<rect data-role="node" x="446.0" y="34.0" width="112.0" height="48.0" rx="5" fill="var(--status-ok-bg)" stroke="var(--status-ok)" stroke-width="1.6"/>
+<text x="502.0" y="55.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-ok)">62.5k Stream</text>
+<text x="502.0" y="71.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">25-50 Hz No Echo</text>
+<rect data-role="node" x="578.0" y="34.0" width="112.0" height="48.0" rx="5" fill="var(--bg-card)" stroke="var(--accent-focal)" stroke-width="1.6"/>
+<text x="634.0" y="55.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">Parquet Flush</text>
+<text x="634.0" y="71.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">30s Zstd + Bins</text>
+<line x1="162.0" y1="58.0" x2="182.0" y2="58.0" stroke="var(--text-primary)" stroke-width="1.4" marker-end="url(#qe-fsm-arr)"/>
+<text x="172.0" y="24.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Send 0x12</text>
+<line x1="294.0" y1="58.0" x2="314.0" y2="58.0" stroke="var(--text-primary)" stroke-width="1.4" marker-end="url(#qe-fsm-arr)"/>
+<text x="304.0" y="24.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Set 62.5k</text>
+<line x1="426.0" y1="58.0" x2="446.0" y2="58.0" stroke="var(--text-primary)" stroke-width="1.4" marker-end="url(#qe-fsm-arr)"/>
+<text x="436.0" y="24.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Drop Dead Cells</text>
+<line x1="558.0" y1="58.0" x2="578.0" y2="58.0" stroke="var(--text-primary)" stroke-width="1.4" marker-end="url(#qe-fsm-arr)"/>
+<text x="568.0" y="24.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Bookmark / 30s</text>
+<path d="M 634.0 82.0 L 634.0 118.0 A 8 8 0 0 1 626.0 126.0 L 510.0 126.0 A 8 8 0 0 1 502.0 118.0 L 502.0 82.0" fill="none" stroke="var(--text-secondary)" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#qe-fsm-arr)"/>
+<g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="526.8" y="133.5" width="82.5" height="17.0" rx="2" fill="var(--bg-surface)" stroke="none"/><text x="568.0" y="146.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-secondary)">Next Chunk</text></g>
+<path d="M 502.0 82.0 L 502.0 162.0 A 8 8 0 0 1 494.0 170.0 L 114.0 170.0 A 8 8 0 0 1 106.0 162.0 L 106.0 82.0" fill="none" stroke="var(--text-secondary)" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#qe-fsm-arr)"/>
+<g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="233.8" y="177.5" width="140.4" height="17.0" rx="2" fill="var(--bg-surface)" stroke="none"/><text x="304.0" y="190.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-secondary)">Timeout -&gt; Re-Sync</text></g>
+</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for 62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM"><code>{
+  &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
+  &quot;id&quot;: &quot;logicaide-sci-fsm&quot;,
+  &quot;schematic_kind&quot;: &quot;fsm&quot;,
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM&quot;,
+    &quot;rigor_level&quot;: &quot;L3&quot;,
+    &quot;drawing_number&quot;: &quot;LA-SCI-002&quot;
+  },
+  &quot;states&quot;: [
+    {
+      &quot;id&quot;: &quot;boot&quot;,
+      &quot;label&quot;: &quot;7812.5 Boot&quot;,
+      &quot;sublabel&quot;: &quot;Echoed 0x10-0x17&quot;,
+      &quot;tone&quot;: &quot;neutral&quot;
+    },
+    {
+      &quot;id&quot;: &quot;hs&quot;,
+      &quot;label&quot;: &quot;0x12 Switch&quot;,
+      &quot;sublabel&quot;: &quot;Wait Echo 0x12&quot;,
+      &quot;tone&quot;: &quot;focal&quot;
+    },
+    {
+      &quot;id&quot;: &quot;probe&quot;,
+      &quot;label&quot;: &quot;Probe Watch&quot;,
+      &quot;sublabel&quot;: &quot;0xF2/0xF4 Check&quot;,
+      &quot;tone&quot;: &quot;warn&quot;
+    },
+    {
+      &quot;id&quot;: &quot;stream&quot;,
+      &quot;label&quot;: &quot;62.5k Stream&quot;,
+      &quot;sublabel&quot;: &quot;25-50 Hz No Echo&quot;,
+      &quot;tone&quot;: &quot;ok&quot;
+    },
+    {
+      &quot;id&quot;: &quot;flush&quot;,
+      &quot;label&quot;: &quot;Parquet Flush&quot;,
+      &quot;sublabel&quot;: &quot;30s Zstd + Bins&quot;,
+      &quot;tone&quot;: &quot;focal&quot;
+    }
+  ],
+  &quot;transitions&quot;: [
+    {
+      &quot;from&quot;: &quot;boot&quot;,
+      &quot;to&quot;: &quot;hs&quot;,
+      &quot;label&quot;: &quot;Send 0x12&quot;
+    },
+    {
+      &quot;from&quot;: &quot;hs&quot;,
+      &quot;to&quot;: &quot;probe&quot;,
+      &quot;label&quot;: &quot;Set 62.5k&quot;
+    },
+    {
+      &quot;from&quot;: &quot;probe&quot;,
+      &quot;to&quot;: &quot;stream&quot;,
+      &quot;label&quot;: &quot;Drop Dead Cells&quot;
+    },
+    {
+      &quot;from&quot;: &quot;stream&quot;,
+      &quot;to&quot;: &quot;flush&quot;,
+      &quot;label&quot;: &quot;Bookmark / 30s&quot;
+    },
+    {
+      &quot;from&quot;: &quot;flush&quot;,
+      &quot;to&quot;: &quot;stream&quot;,
+      &quot;label&quot;: &quot;Next Chunk&quot;
+    },
+    {
+      &quot;from&quot;: &quot;stream&quot;,
+      &quot;to&quot;: &quot;boot&quot;,
+      &quot;label&quot;: &quot;Timeout -&gt; Re-Sync&quot;
+    }
+  ]
+}</code></pre></details></figure>
+              <figure class="va-figure-card qe-figure" id="logicaide-lake-er" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-DATA-006</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 348" role="img" aria-label="ER Schema Lineage">
+<defs><marker id="qe-er-many" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 1 L 10 6 L 0 11 M 5 1 L 5 11" fill="none" stroke="var(--border-strong)" stroke-width="1.2"/></marker><marker id="qe-er-one" viewBox="0 0 12 12" refX="2" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 4 1 L 4 11 M 8 1 L 8 11" fill="none" stroke="var(--border-strong)" stroke-width="1.4"/></marker></defs>
+<rect data-role="node" x="36.0" y="20.0" width="296.0" height="122.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<rect data-role="node-header" x="36.0" y="20.0" width="296.0" height="24" rx="5" fill="var(--bg-header)"/>
+<text x="184.0" y="36.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">vehicles + profiles</text>
+<text x="48.0" y="63.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">car_id (PK) · ecu_family</text>
+<text x="48.0" y="80.5" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">block · head · transaxle</text>
+<text x="48.0" y="98.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">turbo_spec_json · fuel</text>
+<rect data-role="node" x="388.0" y="20.0" width="296.0" height="122.0" rx="5" fill="var(--bg-card)" stroke="var(--accent-focal)" stroke-width="1.5"/>
+<rect data-role="node-header" x="388.0" y="20.0" width="296.0" height="24" rx="5" fill="var(--tint-indigo-bg)"/>
+<text x="536.0" y="36.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">tuning_issues</text>
+<text x="400.0" y="63.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">issue_id (PK) · car_id</text>
+<text x="400.0" y="80.5" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">session_id · build_id</text>
+<text x="400.0" y="98.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">status · campaign_id</text>
+<rect data-role="node" x="36.0" y="184.0" width="296.0" height="122.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<rect data-role="node-header" x="36.0" y="184.0" width="296.0" height="24" rx="5" fill="var(--bg-header)"/>
+<text x="184.0" y="200.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">parquet_chunks (30s Zstd)</text>
+<text x="48.0" y="227.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">run_kind · car_id · build_id</text>
+<text x="48.0" y="244.5" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">session_id · dead_cell_quarantine</text>
+<text x="48.0" y="262.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">NIST scaled + null mask</text>
+<rect data-role="node" x="388.0" y="184.0" width="296.0" height="122.0" rx="5" fill="var(--bg-card)" stroke="var(--accent-focal)" stroke-width="1.5"/>
+<rect data-role="node-header" x="388.0" y="184.0" width="296.0" height="24" rx="5" fill="var(--tint-indigo-bg)"/>
+<text x="536.0" y="200.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">load_cell_rollups</text>
+<text x="400.0" y="227.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">250 RPM x 10 kPa MAP bin</text>
+<text x="400.0" y="244.5" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">tps_regime · charge_temp_bin</text>
+<text x="400.0" y="262.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">NOT dead_cell_quarantine</text>
+<line x1="332.0" y1="81.0" x2="388.0" y2="81.0" stroke="var(--border-strong)" stroke-width="1.5" marker-start="url(#qe-er-one)" marker-end="url(#qe-er-many)"/>
+<line x1="184.0" y1="142.0" x2="184.0" y2="184.0" stroke="var(--border-strong)" stroke-width="1.5" marker-start="url(#qe-er-one)" marker-end="url(#qe-er-many)"/>
+<line x1="332.0" y1="245.0" x2="388.0" y2="245.0" stroke="var(--border-strong)" stroke-width="1.5" marker-start="url(#qe-er-one)" marker-end="url(#qe-er-many)"/>
+<line x1="536.0" y1="142.0" x2="536.0" y2="184.0" stroke="var(--border-strong)" stroke-width="1.5" marker-start="url(#qe-er-one)" marker-end="url(#qe-er-many)"/>
+</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage"><code>{
+  &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
+  &quot;id&quot;: &quot;logicaide-lake-er&quot;,
+  &quot;schematic_kind&quot;: &quot;er_lineage&quot;,
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage&quot;,
+    &quot;rigor_level&quot;: &quot;L2&quot;,
+    &quot;drawing_number&quot;: &quot;LA-DATA-006&quot;
+  },
+  &quot;entities&quot;: [
+    {
+      &quot;id&quot;: &quot;vehicles&quot;,
+      &quot;label&quot;: &quot;vehicles + profiles&quot;,
+      &quot;columns&quot;: [
+        &quot;car_id (PK) \u00b7 ecu_family&quot;,
+        &quot;block \u00b7 head \u00b7 transaxle&quot;,
+        &quot;turbo_spec_json \u00b7 fuel&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;issues&quot;,
+      &quot;label&quot;: &quot;tuning_issues&quot;,
+      &quot;columns&quot;: [
+        &quot;issue_id (PK) \u00b7 car_id&quot;,
+        &quot;session_id \u00b7 build_id&quot;,
+        &quot;status \u00b7 campaign_id&quot;
+      ],
+      &quot;focal&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;chunks&quot;,
+      &quot;label&quot;: &quot;parquet_chunks (30s Zstd)&quot;,
+      &quot;columns&quot;: [
+        &quot;run_kind \u00b7 car_id \u00b7 build_id&quot;,
+        &quot;session_id \u00b7 dead_cell_quarantine&quot;,
+        &quot;NIST scaled + null mask&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;rollups&quot;,
+      &quot;label&quot;: &quot;load_cell_rollups&quot;,
+      &quot;columns&quot;: [
+        &quot;250 RPM x 10 kPa MAP bin&quot;,
+        &quot;tps_regime \u00b7 charge_temp_bin&quot;,
+        &quot;NOT dead_cell_quarantine&quot;
+      ],
+      &quot;focal&quot;: true
+    }
+  ],
+  &quot;relations&quot;: [
+    {
+      &quot;from&quot;: &quot;vehicles&quot;,
+      &quot;to&quot;: &quot;issues&quot;
+    },
+    {
+      &quot;from&quot;: &quot;vehicles&quot;,
+      &quot;to&quot;: &quot;chunks&quot;
+    },
+    {
+      &quot;from&quot;: &quot;chunks&quot;,
+      &quot;to&quot;: &quot;rollups&quot;
+    },
+    {
+      &quot;from&quot;: &quot;issues&quot;,
+      &quot;to&quot;: &quot;rollups&quot;
+    }
+  ]
+}</code></pre></details></figure>
+              <article class="va-card">
+                <div class="card-hdr">
+                  <h2 class="card-title">Unified Parquet Contract &amp; Dead-Cell Quarantine</h2>
+                  <span class="va-pill" data-variant="tag">30s Zstd Parquet</span>
+                </div>
+                <div class="va-table-wrap" tabindex="0" role="region" aria-label="Parquet and Load-Cell Lake contract">
+                  <table class="booktabs">
+                    <thead>
+                      <tr>
+                        <th scope="col">Field / Bin</th>
+                        <th scope="col">Type / Scale</th>
+                        <th scope="col">Source / Provenance</th>
+                        <th scope="col">Null &amp; Safety Rule</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><code>run_kind</code> · <code>car_id</code> · <code>build_id</code></th>
+                        <td>Hive Partition Keys</td>
+                        <td><code>VEHICLE_SCI</code> | <code>SINGLE_REPLAY</code> | <code>MONTE_CARLO_SWEEP</code></td>
+                        <td>Unifies road pulls and Sobol campaigns in one DuckDB lake</td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><code>raw_rpm_b</code> / <code>raw_map_b</code></th>
+                        <td><code>uint8</code> / <code>uint16</code></td>
+                        <td>62,500-baud zero-echo SCI poll (<code>0xF2</code>/<code>0xF4 AA -&gt; BB</code>)</td>
+                        <td>Unpolled cells remain <code>null</code> (<code>null != 0</code>)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><code>dead_cell_quarantine</code></th>
+                        <td><code>bool</code> + <code>load_cell_rollups</code></td>
+                        <td><code>250 RPM × 10 kPa</code> (<code>tps_regime</code>, <code>charge_temp_bin</code>)</td>
+                        <td>Bus stalls set <code>true</code> and are excluded by rollup filter</td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><code>imu_grade_pct</code></th>
+                        <td><code>float32</code> (%)</td>
+                        <td>Phone IMU baro + accel merge (optional)</td>
+                        <td>Raw GPS lat/lon stripped prior to fixture or staging export</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="panel-emulator" aria-labelledby="tab-emulator" hidden="until-found">
+            <div class="panel-body">
+              <figure class="va-figure-card qe-figure" id="hc11-sci-adctl-1030" data-qe-modality="bitfield" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">BITFIELD</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-bitfield-wrap" data-rigor="L3" data-medium="m2"><div class="qe-bf-hdr qe-bit-meta"><span class="va-kicker">HC11_IO_PAIR</span><span class="qe-bf-addr va-nums">Offset: $102D / $1030</span><span class="qe-bf-addr va-nums">Reset: 0x0000</span><span class="va-pill va-nums" data-variant="tag">Live: 0x0C30</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 132" role="img" aria-label="68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair">
+<rect data-role="bitheader" x="40.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="60.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">15</text>
+<rect data-role="bitheader" x="80.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="100.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">14</text>
+<rect data-role="bitheader" x="120.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="140.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">13</text>
+<rect data-role="bitheader" x="160.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="180.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">12</text>
+<rect data-role="bitheader" x="200.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="220.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">11</text>
+<rect data-role="bitheader" x="240.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="260.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">10</text>
+<rect data-role="bitheader" x="280.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="300.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">9</text>
+<rect data-role="bitheader" x="320.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="340.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">8</text>
+<rect data-role="bitheader" x="360.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="380.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">7</text>
+<rect data-role="bitheader" x="400.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="420.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">6</text>
+<rect data-role="bitheader" x="440.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="460.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">5</text>
+<rect data-role="bitheader" x="480.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="500.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">4</text>
+<rect data-role="bitheader" x="520.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="540.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">3</text>
+<rect data-role="bitheader" x="560.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="580.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">2</text>
+<rect data-role="bitheader" x="600.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="620.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">1</text>
+<rect data-role="bitheader" x="640.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
+<text x="660.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">0</text>
+<rect data-role="bitcell" x="40.0" y="36.0" width="80.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="80.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">TIE_TCIE</text>
+<text x="80.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="60.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<text x="100.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<rect data-role="bitcell" x="120.0" y="36.0" width="80.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="160.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">RIE_ILIE</text>
+<text x="160.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="140.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<text x="180.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<rect data-role="bitcell" x="200.0" y="36.0" width="40.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="220.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">TE_E</text>
+<text x="220.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="220.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">1</text>
+<rect data-role="bitcell" x="240.0" y="36.0" width="40.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="260.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">RE_E</text>
+<text x="260.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="260.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">1</text>
+<rect data-role="bitcell" x="280.0" y="36.0" width="80.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="320.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">RWU_SBK</text>
+<text x="320.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="300.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<text x="340.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<rect data-role="bitcell" x="360.0" y="36.0" width="40.0" height="48.0" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4"/>
+<text x="380.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">CCF</text>
+<text x="380.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RO</text>
+<text x="380.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<rect data-role="bitcell" x="400.0" y="36.0" width="40.0" height="48.0" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4"/>
+<text x="420.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">RESV</text>
+<text x="420.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RO</text>
+<text x="420.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<rect data-role="bitcell" x="440.0" y="36.0" width="40.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="460.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">SCAN</text>
+<text x="460.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="460.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">1</text>
+<rect data-role="bitcell" x="480.0" y="36.0" width="40.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="500.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">MULT</text>
+<text x="500.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="500.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">1</text>
+<rect data-role="bitcell" x="520.0" y="36.0" width="160.0" height="48.0" fill="var(--tint-indigo-bg)" stroke="var(--accent-primary)" stroke-width="1.4"/>
+<text x="600.0" y="56.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--tint-indigo-fg)">ADC_CH</text>
+<text x="600.0" y="73.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">RW</text>
+<text x="540.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<text x="580.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<text x="620.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+<text x="660.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
+</svg></div><div class="va-bleed-wide va-table-wrap" tabindex="0" role="region" aria-label="HC11_IO_PAIR Bit Decode Ledger">
+<table class="booktabs qe-table">
+<caption class="qe-table-caption">HC11_IO_PAIR Bit Decode Ledger</caption>
+<thead><tr><th scope="col">Bits</th><th scope="col">Field</th><th scope="col">Access</th><th scope="col" class="num">Reset</th><th scope="col" class="num">Value</th><th scope="col">Operational Decode</th></tr></thead><tbody>
+<tr><th scope="row" class="va-nums" data-label="Bits">[15:14]</th><td data-label="Field"><span class="qe-bf-field"><code>TIE_TCIE</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b00 (0)</td><td data-label="Decode">SCI TX interrupts (masked in poll mode)</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[13:12]</th><td data-label="Field"><span class="qe-bf-field"><code>RIE_ILIE</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b00 (0)</td><td data-label="Decode">SCI RX/Idle interrupt enables</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[11]</th><td data-label="Field"><span class="qe-bf-field"><code>TE_EN</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b1 (1)</td><td data-label="Decode">SCI Transmitter Enable (Pin 25)</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[10]</th><td data-label="Field"><span class="qe-bf-field"><code>RE_EN</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b1 (1)</td><td data-label="Decode">SCI Receiver Enable (Pin 45)</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[9:8]</th><td data-label="Field"><span class="qe-bf-field"><code>RWU_SBK</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b00 (0)</td><td data-label="Decode">Wakeup / Send Break control</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[7]</th><td data-label="Field"><span class="qe-bf-field"><code>CCF</code></span></td><td data-label="Access"><span class="qe-bf-access-ro">RO</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b0 (0)</td><td data-label="Decode">A/D Conversion Complete Flag</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[6]</th><td data-label="Field"><span class="qe-bf-field"><code>RESV</code></span></td><td data-label="Access"><span class="qe-bf-access-ro">RO</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b0 (0)</td><td data-label="Decode">Reserved bit (always reads 0)</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[5]</th><td data-label="Field"><span class="qe-bf-field"><code>SCAN</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b1 (1)</td><td data-label="Decode">Continuous A/D Scan Mode</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[4]</th><td data-label="Field"><span class="qe-bf-field"><code>MULT</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b1 (1)</td><td data-label="Decode">4-Channel Group Scan (MAP/TPS/CTS/O2)</td></tr>
+<tr><th scope="row" class="va-nums" data-label="Bits">[3:0]</th><td data-label="Field"><span class="qe-bf-field"><code>ADC_CH</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b0000 (0)</td><td data-label="Decode">Multiplexed Sensor Channel Select</td></tr>
+</tbody></table></div></div><figcaption class="va-figure-caption">16-bit concatenated view of $102D (SCCR2 High Byte) and $1030 (ADCTL Low Byte) hooked by m68hc11</figcaption><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:bitfield)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for 68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair"><code>{
+  &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:bitfield&quot;,
+  &quot;id&quot;: &quot;hc11-sci-adctl-1030&quot;,
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair&quot;,
+    &quot;mnemonic&quot;: &quot;HC11_IO_PAIR&quot;,
+    &quot;description&quot;: &quot;16-bit concatenated view of $102D (SCCR2 High Byte) and $1030 (ADCTL Low Byte) hooked by m68hc11&quot;,
+    &quot;rigor_level&quot;: &quot;L3&quot;,
+    &quot;address_offset&quot;: &quot;$102D / $1030&quot;,
+    &quot;register_width_bits&quot;: 16,
+    &quot;reset_value&quot;: &quot;0x0000&quot;,
+    &quot;current_value&quot;: &quot;0x0C30&quot;
+  },
+  &quot;fields&quot;: [
+    {
+      &quot;name&quot;: &quot;TIE_TCIE&quot;,
+      &quot;bit_range&quot;: [
+        15,
+        14
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;SCI TX interrupts (masked in poll mode)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RIE_ILIE&quot;,
+      &quot;bit_range&quot;: [
+        13,
+        12
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;SCI RX/Idle interrupt enables&quot;
+    },
+    {
+      &quot;name&quot;: &quot;TE_EN&quot;,
+      &quot;bit_range&quot;: [
+        11,
+        11
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;SCI Transmitter Enable (Pin 25)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RE_EN&quot;,
+      &quot;bit_range&quot;: [
+        10,
+        10
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;SCI Receiver Enable (Pin 45)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RWU_SBK&quot;,
+      &quot;bit_range&quot;: [
+        9,
+        8
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;Wakeup / Send Break control&quot;
+    },
+    {
+      &quot;name&quot;: &quot;CCF&quot;,
+      &quot;bit_range&quot;: [
+        7,
+        7
+      ],
+      &quot;access&quot;: &quot;RO&quot;,
+      &quot;description&quot;: &quot;A/D Conversion Complete Flag&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RESV&quot;,
+      &quot;bit_range&quot;: [
+        6,
+        6
+      ],
+      &quot;access&quot;: &quot;RO&quot;,
+      &quot;description&quot;: &quot;Reserved bit (always reads 0)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;SCAN&quot;,
+      &quot;bit_range&quot;: [
+        5,
+        5
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;Continuous A/D Scan Mode&quot;
+    },
+    {
+      &quot;name&quot;: &quot;MULT&quot;,
+      &quot;bit_range&quot;: [
+        4,
+        4
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;4-Channel Group Scan (MAP/TPS/CTS/O2)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;ADC_CH&quot;,
+      &quot;bit_range&quot;: [
+        3,
+        0
+      ],
+      &quot;access&quot;: &quot;RW&quot;,
+      &quot;description&quot;: &quot;Multiplexed Sensor Channel Select&quot;
+    }
+  ]
+}</code></pre></details></figure>
+              <div class="grid-2">
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">Python Behavioral Twin &amp; Splayed ROM Loop</h2>
+                    <span class="va-pill" data-variant="tag">SHA-256 Gate</span>
+                  </div>
+                  <ul class="list-check">
+                    <li><strong>Splayed 32 KB ROM (<code>$8000–$FFFF</code>)</strong>: Decomposed via Turbonator relocatable sources or Ghidra into <code>vectors.asm</code>, <code>fuel_tables.asm</code>, <code>spark_tables.asm</code>, and <code>boost_vnt.asm</code>, verified byte-identical by SHA-256 via <code>AS11</code> / Blackfoot / <code>A09</code>.</li>
+                    <li><strong>Python Behavioral Twin (<code>rom/models/*_twin.py</code>)</strong>: Prototypes logic changes in typed Python first, then proves bit-exact register parity against the compiled 68HC11 routine inside <code>m68hc11</code>.</li>
+                    <li><strong>IDE Navigation</strong>: Automated <code>ctags</code> generated from <code>rom_manifest.json</code> alongside <code>.vscode/extensions.json</code> (<code>ryu10.m6800-as0</code>) with LF line endings.</li>
+                  </ul>
+                </article>
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">Sobol &amp; Optuna Monte Carlo Verification</h2>
+                    <span class="va-pill" data-variant="tag">5,000+ Sweeps</span>
+                  </div>
+                  <ul class="list-check">
+                    <li><strong><code>scipy.stats.qmc</code> Perturbations</strong>: Sweeps intake heat-soak (<code>ACT</code>), battery voltage sag (<code>9.5 V–15.0 V</code> injector deadtime), and MAP sensor jitter across road-captured Stimulus Fixtures.</li>
+                    <li><strong>8-Bit Carry &amp; Wrap Guard</strong>: Flags unsigned <code>uint8</code> rollover or negative-signed overflow in fuel pulsewidth and spark advance tables before staging.</li>
+                    <li><strong>11 ms E-Clock Ceiling</strong>: Enforces strict <code>&lt;= 22,000</code> E-cycles (<code>2.0 MHz</code> E-clock from <code>8.0 MHz</code> crystal) across worst-case interrupt nesting.</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="panel-drivetrain" aria-labelledby="tab-drivetrain" hidden="until-found">
+            <div class="panel-body">
+              <figure class="va-figure-card qe-figure" id="plot-compressor-thermo" data-qe-modality="plot" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">PLOT</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-plot-wrap" data-rigor="L3" data-medium="m2">
+
+<div class="va-test-condition-block qe-cond-strip" role="note" aria-label="Test Conditions"><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">DUT</span><span class="qe-cond-val va-nums">89-CSX-VNT / 91-SPIRIT-RT</span></div><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">FW</span><span class="qe-cond-val va-nums">SMEC/SBEC-62.5k</span></div><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">T<sub>amb</sub></span><span class="qe-cond-val va-nums">22.0 °C</span></div><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">f<sub>s</sub></span><span class="qe-cond-val va-nums">38.00 Hz</span></div></div>
+<div class="va-figure-scroll" tabindex="0" role="region" aria-label="TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)"><div class="qe-svg-fallback"><svg class="qe-svg qe-svg-600" viewBox="0 0 600 306" role="img" aria-label="TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)">
+<defs><clipPath id="qe-clip-632100"><rect x="78.0" y="26.0" width="496.0" height="224.0"/></clipPath></defs>
+<line class="qe-grid-minor qe-m1-only" x1="108.5" y1="26.0" x2="108.5" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="108.5" y1="250.0" x2="108.5" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="121.7" y1="26.0" x2="121.7" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="121.7" y1="250.0" x2="121.7" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="134.9" y1="26.0" x2="134.9" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="134.9" y1="250.0" x2="134.9" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="148.1" y1="26.0" x2="148.1" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="148.1" y1="250.0" x2="148.1" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="174.4" y1="26.0" x2="174.4" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="174.4" y1="250.0" x2="174.4" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="187.6" y1="26.0" x2="187.6" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="187.6" y1="250.0" x2="187.6" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="200.8" y1="26.0" x2="200.8" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="200.8" y1="250.0" x2="200.8" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="214.0" y1="26.0" x2="214.0" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="214.0" y1="250.0" x2="214.0" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="240.3" y1="26.0" x2="240.3" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="240.3" y1="250.0" x2="240.3" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="253.5" y1="26.0" x2="253.5" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="253.5" y1="250.0" x2="253.5" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="266.7" y1="26.0" x2="266.7" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="266.7" y1="250.0" x2="266.7" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="279.9" y1="26.0" x2="279.9" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="279.9" y1="250.0" x2="279.9" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="306.2" y1="26.0" x2="306.2" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="306.2" y1="250.0" x2="306.2" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="319.4" y1="26.0" x2="319.4" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="319.4" y1="250.0" x2="319.4" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="332.6" y1="26.0" x2="332.6" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="332.6" y1="250.0" x2="332.6" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="345.8" y1="26.0" x2="345.8" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="345.8" y1="250.0" x2="345.8" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="372.1" y1="26.0" x2="372.1" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="372.1" y1="250.0" x2="372.1" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="385.3" y1="26.0" x2="385.3" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="385.3" y1="250.0" x2="385.3" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="398.5" y1="26.0" x2="398.5" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="398.5" y1="250.0" x2="398.5" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="411.7" y1="26.0" x2="411.7" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="411.7" y1="250.0" x2="411.7" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="438.0" y1="26.0" x2="438.0" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="438.0" y1="250.0" x2="438.0" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="451.2" y1="26.0" x2="451.2" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="451.2" y1="250.0" x2="451.2" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="464.4" y1="26.0" x2="464.4" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="464.4" y1="250.0" x2="464.4" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="477.6" y1="26.0" x2="477.6" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="477.6" y1="250.0" x2="477.6" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="503.9" y1="26.0" x2="503.9" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="503.9" y1="250.0" x2="503.9" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="517.1" y1="26.0" x2="517.1" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="517.1" y1="250.0" x2="517.1" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="530.3" y1="26.0" x2="530.3" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="530.3" y1="250.0" x2="530.3" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="543.5" y1="26.0" x2="543.5" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="543.5" y1="250.0" x2="543.5" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="241.0" x2="574.0" y2="241.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="241.0" x2="78.0" y2="241.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="232.1" x2="574.0" y2="232.1" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="232.1" x2="78.0" y2="232.1" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="223.1" x2="574.0" y2="223.1" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="223.1" x2="78.0" y2="223.1" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="214.2" x2="574.0" y2="214.2" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="214.2" x2="78.0" y2="214.2" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="196.2" x2="574.0" y2="196.2" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="196.2" x2="78.0" y2="196.2" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="187.3" x2="574.0" y2="187.3" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="187.3" x2="78.0" y2="187.3" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="178.3" x2="574.0" y2="178.3" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="178.3" x2="78.0" y2="178.3" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="169.4" x2="574.0" y2="169.4" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="169.4" x2="78.0" y2="169.4" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="151.4" x2="574.0" y2="151.4" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="151.4" x2="78.0" y2="151.4" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="142.5" x2="574.0" y2="142.5" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="142.5" x2="78.0" y2="142.5" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="133.5" x2="574.0" y2="133.5" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="133.5" x2="78.0" y2="133.5" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="124.6" x2="574.0" y2="124.6" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="124.6" x2="78.0" y2="124.6" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="106.6" x2="574.0" y2="106.6" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="106.6" x2="78.0" y2="106.6" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="97.7" x2="574.0" y2="97.7" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="97.7" x2="78.0" y2="97.7" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="88.7" x2="574.0" y2="88.7" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="88.7" x2="78.0" y2="88.7" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="79.8" x2="574.0" y2="79.8" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="79.8" x2="78.0" y2="79.8" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="61.8" x2="574.0" y2="61.8" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="61.8" x2="78.0" y2="61.8" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="52.9" x2="574.0" y2="52.9" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="52.9" x2="78.0" y2="52.9" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="43.9" x2="574.0" y2="43.9" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="43.9" x2="78.0" y2="43.9" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line class="qe-grid-minor qe-m1-only" x1="78.0" y1="35.0" x2="574.0" y2="35.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
+<line x1="74.0" y1="35.0" x2="78.0" y2="35.0" stroke="var(--border-strong)" stroke-width="0.8"/>
+<line x1="95.4" y1="26.0" x2="95.4" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="95.4" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">0</text>
+<line x1="161.3" y1="26.0" x2="161.3" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="161.3" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">5</text>
+<line x1="227.2" y1="26.0" x2="227.2" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="227.2" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">10</text>
+<line x1="293.1" y1="26.0" x2="293.1" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="293.1" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">15</text>
+<line x1="358.9" y1="26.0" x2="358.9" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="358.9" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">20</text>
+<line x1="424.8" y1="26.0" x2="424.8" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="424.8" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">25</text>
+<line x1="490.7" y1="26.0" x2="490.7" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="490.7" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">30</text>
+<line x1="556.6" y1="26.0" x2="556.6" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="556.6" y="272.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">35</text>
+<line x1="78.0" y1="250.0" x2="574.0" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="70.0" y="253.0" text-anchor="end" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">1.0</text>
+<line x1="78.0" y1="205.2" x2="574.0" y2="205.2" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="70.0" y="208.2" text-anchor="end" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">1.5</text>
+<line x1="78.0" y1="160.4" x2="574.0" y2="160.4" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="70.0" y="163.4" text-anchor="end" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">2.0</text>
+<line x1="78.0" y1="115.6" x2="574.0" y2="115.6" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="70.0" y="118.6" text-anchor="end" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">2.5</text>
+<line x1="78.0" y1="70.8" x2="574.0" y2="70.8" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="70.0" y="73.8" text-anchor="end" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">3.0</text>
+<line x1="78.0" y1="26.0" x2="574.0" y2="26.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
+<text x="70.0" y="29.0" text-anchor="end" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">3.5</text>
+<rect data-role="frame" x="78.0" y="26.0" width="496.0" height="224.0" fill="none" stroke="var(--text-primary)" stroke-width="1.1"/>
+<text x="326.0" y="290.0" text-anchor="middle" font-family="var(--font-mono)" font-size="12.0" font-weight="700" fill="var(--text-primary)">m_dot_corr / lb·min⁻¹</text>
+<text x="22" y="138.0" transform="rotate(-90 22 138.0)" text-anchor="middle" font-family="var(--font-mono)" font-size="12.0" font-weight="700" fill="var(--text-primary)">PR / 1</text>
+<g clip-path="url(#qe-clip-632100)">
+<polygon points="78.0,84.2 574.0,84.2 574.0,26.0 78.0,26.0" fill="var(--status-err-bg)" opacity="0.50"/>
+<path d="M 78.0 84.2 L 574.0 84.2" fill="none" stroke="var(--status-danger)" stroke-width="1.7" stroke-dasharray="8,3,2,3"/>
+<polygon points="95.4,250.0 103.2,250.0 111.0,244.9 118.8,238.8 126.6,232.7 134.5,226.6 142.3,220.5 150.1,214.4 157.9,208.3 165.7,202.2 173.5,196.0 181.4,189.9 189.2,183.8 197.0,177.7 204.8,171.6 212.6,165.5 220.5,159.4 228.3,153.3 236.1,147.1 243.9,141.0 251.7,134.9 259.5,128.8 267.4,122.7 275.2,116.6 283.0,110.5 290.8,104.4 298.6,98.2 306.5,92.1 314.3,86.0 322.1,79.9 329.9,73.8 337.7,67.7 345.5,61.6 353.4,55.5 361.2,49.3 369.0,43.2 376.8,37.1 384.6,31.0 392.5,26.0 400.3,26.0 408.1,26.0 415.9,26.0 423.7,26.0 431.5,26.0 439.4,26.0 447.2,26.0 455.0,26.0 462.8,26.0 470.6,26.0 478.5,26.0 486.3,26.0 494.1,26.0 501.9,26.0 509.7,26.0 517.5,26.0 525.4,26.0 533.2,26.0 541.0,26.0 548.8,26.0 556.6,26.0 556.6,26.0 95.4,26.0" fill="var(--status-warn-bg)" opacity="0.50"/>
+<path d="M 95.4 250.0 L 103.2 250.0 L 111.0 244.9 L 118.8 238.8 L 126.6 232.7 L 134.5 226.6 L 142.3 220.5 L 150.1 214.4 L 157.9 208.3 L 165.7 202.2 L 173.5 196.0 L 181.4 189.9 L 189.2 183.8 L 197.0 177.7 L 204.8 171.6 L 212.6 165.5 L 220.5 159.4 L 228.3 153.3 L 236.1 147.1 L 243.9 141.0 L 251.7 134.9 L 259.5 128.8 L 267.4 122.7 L 275.2 116.6 L 283.0 110.5 L 290.8 104.4 L 298.6 98.2 L 306.5 92.1 L 314.3 86.0 L 322.1 79.9 L 329.9 73.8 L 337.7 67.7 L 345.5 61.6 L 353.4 55.5 L 361.2 49.3 L 369.0 43.2 L 376.8 37.1 L 384.6 31.0 L 392.5 26.0 L 400.3 26.0 L 408.1 26.0 L 415.9 26.0 L 423.7 26.0 L 431.5 26.0 L 439.4 26.0 L 447.2 26.0 L 455.0 26.0 L 462.8 26.0 L 470.6 26.0 L 478.5 26.0 L 486.3 26.0 L 494.1 26.0 L 501.9 26.0 L 509.7 26.0 L 517.5 26.0 L 525.4 26.0 L 533.2 26.0 L 541.0 26.0 L 548.8 26.0 L 556.6 26.0" fill="none" stroke="var(--status-warn)" stroke-width="1.7" stroke-dasharray="5,4"/>
+<path d="M 95.4 248.2 L 100.5 245.1 L 105.7 242.1 L 110.9 239.0 L 116.1 236.0 L 121.3 233.0 L 126.5 230.1 L 131.6 227.1 L 136.8 224.2 L 142.0 221.3 L 147.2 218.4 L 152.4 215.6 L 157.6 212.8 L 162.7 210.0 L 167.9 207.2 L 173.1 204.5 L 178.3 201.8 L 183.5 199.1 L 188.7 196.4 L 193.8 193.8 L 199.0 191.2 L 204.2 188.6 L 209.4 186.0 L 214.6 183.5 L 219.8 181.0 L 224.9 178.5 L 230.1 176.0 L 235.3 173.6 L 240.5 171.2 L 245.7 168.8 L 250.8 166.4 L 256.0 164.1 L 261.2 161.8 L 266.4 159.5 L 271.6 157.2 L 276.8 155.0 L 281.9 152.7 L 287.1 150.6 L 292.3 148.4 L 297.5 146.2 L 302.7 144.1 L 307.9 142.0 L 313.0 140.0 L 318.2 137.9 L 323.4 135.9 L 328.6 133.9 L 333.8 132.0 L 339.0 130.0 L 344.1 128.1 L 349.3 126.2 L 354.5 124.3 L 359.7 122.5 L 364.9 120.7 L 370.1 118.9 L 375.2 117.1 L 380.4 115.4 L 385.6 113.7 L 390.8 112.0 L 396.0 110.3 L 401.2 108.7 L 406.3 107.1 L 411.5 105.5 L 416.7 103.9 L 421.9 102.4 L 427.1 100.8 L 432.2 99.3 L 437.4 97.9 L 442.6 96.4 L 447.8 95.0 L 453.0 93.6 L 458.2 92.3 L 463.3 90.9 L 468.5 89.6 L 473.7 88.3 L 478.9 87.0 L 484.1 85.8 L 489.3 84.6 L 494.4 83.4 L 499.6 82.2 L 504.8 81.1 L 510.0 80.0 L 515.2 78.9 L 520.4 77.8 L 525.5 76.8 L 530.7 75.7 L 535.9 74.7 L 541.1 73.8 L 546.3 72.8 L 551.5 71.9 L 556.6 71.0" fill="none" stroke="var(--accent-focal)" stroke-width="2"/>
+<path d="M 203.4 207.0 L 245.6 176.5 L 301.0 147.0 L 360.3 129.9 L 422.2 124.6 L 459.1 128.1" fill="none" stroke="var(--status-ok)" stroke-width="1.3" opacity="0.65"/>
+<line x1="203.4" y1="202.5" x2="203.4" y2="211.5" stroke="var(--status-ok)" stroke-width="1.3"/>
+<line x1="200.4" y1="202.5" x2="206.4" y2="202.5" stroke="var(--status-ok)" stroke-width="1.2"/>
+<line x1="200.4" y1="211.5" x2="206.4" y2="211.5" stroke="var(--status-ok)" stroke-width="1.2"/>
+<g><circle cx="203.4" cy="207.0" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></g>
+<line x1="245.6" y1="172.0" x2="245.6" y2="181.0" stroke="var(--status-ok)" stroke-width="1.3"/>
+<line x1="242.6" y1="172.0" x2="248.6" y2="172.0" stroke="var(--status-ok)" stroke-width="1.2"/>
+<line x1="242.6" y1="181.0" x2="248.6" y2="181.0" stroke="var(--status-ok)" stroke-width="1.2"/>
+<g><circle cx="245.6" cy="176.5" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></g>
+<line x1="301.0" y1="141.6" x2="301.0" y2="152.3" stroke="var(--status-ok)" stroke-width="1.3"/>
+<line x1="298.0" y1="141.6" x2="304.0" y2="141.6" stroke="var(--status-ok)" stroke-width="1.2"/>
+<line x1="298.0" y1="152.3" x2="304.0" y2="152.3" stroke="var(--status-ok)" stroke-width="1.2"/>
+<g><circle cx="301.0" cy="147.0" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></g>
+<line x1="360.3" y1="124.6" x2="360.3" y2="135.3" stroke="var(--status-ok)" stroke-width="1.3"/>
+<line x1="357.3" y1="124.6" x2="363.3" y2="124.6" stroke="var(--status-ok)" stroke-width="1.2"/>
+<line x1="357.3" y1="135.3" x2="363.3" y2="135.3" stroke="var(--status-ok)" stroke-width="1.2"/>
+<g><circle cx="360.3" cy="129.9" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></g>
+<line x1="422.2" y1="119.2" x2="422.2" y2="129.9" stroke="var(--status-ok)" stroke-width="1.3"/>
+<line x1="419.2" y1="119.2" x2="425.2" y2="119.2" stroke="var(--status-ok)" stroke-width="1.2"/>
+<line x1="419.2" y1="129.9" x2="425.2" y2="129.9" stroke="var(--status-ok)" stroke-width="1.2"/>
+<g><circle cx="422.2" cy="124.6" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></g>
+<line x1="459.1" y1="121.9" x2="459.1" y2="134.4" stroke="var(--status-ok)" stroke-width="1.3"/>
+<line x1="456.1" y1="121.9" x2="462.1" y2="121.9" stroke="var(--status-ok)" stroke-width="1.2"/>
+<line x1="456.1" y1="134.4" x2="462.1" y2="134.4" stroke="var(--status-ok)" stroke-width="1.2"/>
+<g><circle cx="459.1" cy="128.1" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></g>
+</g>
+<text x="216.0" y="137.5" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-warn)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="4.0" stroke-linejoin="round" transform="rotate(-38.02 216.0 137.5)" dominant-baseline="central">Surge Limit</text>
+<g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="255.8" y="75.7" width="140.4" height="17.0" rx="2" fill="var(--bg-surface)" stroke="none"/><text x="326.0" y="88.2" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">Overboost PR Limit</text></g>
+</svg></div><div class="qe-echarts-host" hidden></div></div>
+<div class="qe-param-legend"><span class="qe-legend-series"><span class="qe-leg-item" data-epistemic="model"><svg class="qe-leg-svg" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><line x1="1" y1="7" x2="19" y2="7" stroke="var(--accent-focal)" stroke-width="2"/></svg><span class="qe-leg-txt">Analytical Pull (E85 Charge-Cooled) · Analytical Model</span></span><span class="qe-leg-item" data-epistemic="discrete"><svg class="qe-leg-svg" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><line x1="1" y1="7" x2="19" y2="7" stroke="var(--status-ok)" stroke-width="1.3" opacity="0.65"/><circle cx="10.0" cy="7.0" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></svg><span class="qe-leg-txt">Logged SCI Vehicle Pull (38 Hz) · Discrete Sample</span></span></span></div>
+</div><figcaption class="va-figure-caption">Theoretical adiabatic trajectory vs. VEHICLE_SCI Parquet points within Surge and PR limits</figcaption><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:plot)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)"><code>{
+  &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:plot&quot;,
+  &quot;id&quot;: &quot;plot-compressor-thermo&quot;,
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)&quot;,
+    &quot;description&quot;: &quot;Theoretical adiabatic trajectory vs. VEHICLE_SCI Parquet points within Surge and PR limits&quot;,
+    &quot;rigor_level&quot;: &quot;L3&quot;
+  },
+  &quot;test_environment&quot;: {
+    &quot;dut_id&quot;: &quot;89-CSX-VNT / 91-SPIRIT-RT&quot;,
+    &quot;firmware_version&quot;: &quot;SMEC/SBEC-62.5k&quot;,
+    &quot;ambient_temperature_c&quot;: 22.0,
+    &quot;sampling_rate_hz&quot;: 38.0
+  },
+  &quot;axes&quot;: {
+    &quot;x_axis&quot;: {
+      &quot;quantity&quot;: &quot;m_dot_corr&quot;,
+      &quot;quantity_calculus&quot;: &quot;m_dot_corr / lb\u00b7min\u207b\u00b9&quot;,
+      &quot;unit&quot;: &quot;lb/min&quot;,
+      &quot;scale_type&quot;: &quot;linear&quot;,
+      &quot;domain&quot;: [
+        4.0,
+        34.0
+      ]
+    },
+    &quot;y_axis&quot;: {
+      &quot;quantity&quot;: &quot;PR&quot;,
+      &quot;quantity_calculus&quot;: &quot;PR / 1&quot;,
+      &quot;unit&quot;: &quot;1&quot;,
+      &quot;scale_type&quot;: &quot;linear&quot;,
+      &quot;domain&quot;: [
+        1.0,
+        3.2
+      ]
+    }
+  },
+  &quot;envelopes&quot;: [
+    {
+      &quot;id&quot;: &quot;env-pr-cut&quot;,
+      &quot;type&quot;: &quot;abort&quot;,
+      &quot;label&quot;: &quot;Overboost PR Limit&quot;,
+      &quot;stroke_style&quot;: &quot;dash-dot&quot;,
+      &quot;stroke_color&quot;: &quot;var(--status-danger)&quot;,
+      &quot;threshold_value&quot;: 2.85,
+      &quot;direction&quot;: &quot;upper&quot;
+    },
+    {
+      &quot;id&quot;: &quot;env-surge&quot;,
+      &quot;type&quot;: &quot;warning&quot;,
+      &quot;label&quot;: &quot;Surge Limit&quot;,
+      &quot;stroke_style&quot;: &quot;dashed&quot;,
+      &quot;stroke_color&quot;: &quot;var(--status-warn)&quot;,
+      &quot;equation&quot;: &quot;0.92 + 0.115 * x&quot;,
+      &quot;direction&quot;: &quot;upper&quot;
+    }
+  ],
+  &quot;series&quot;: [
+    {
+      &quot;id&quot;: &quot;series-theoretical-pull&quot;,
+      &quot;name&quot;: &quot;Analytical Pull (E85 Charge-Cooled)&quot;,
+      &quot;epistemic_type&quot;: &quot;analytical_model&quot;,
+      &quot;stroke_style&quot;: &quot;solid&quot;,
+      &quot;stroke_color&quot;: &quot;var(--accent-focal)&quot;,
+      &quot;stroke_width&quot;: 2.0,
+      &quot;equation&quot;: &quot;1.02 + 0.088 * x - 0.0009 * x^2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;series-sci-pull&quot;,
+      &quot;name&quot;: &quot;Logged SCI Vehicle Pull (38 Hz)&quot;,
+      &quot;epistemic_type&quot;: &quot;discrete_measurement&quot;,
+      &quot;marker_glyph&quot;: &quot;circle&quot;,
+      &quot;marker_size_px&quot;: 5.5,
+      &quot;marker_color&quot;: &quot;var(--status-ok)&quot;,
+      &quot;connect_piecewise&quot;: true,
+      &quot;data_points&quot;: [
+        {
+          &quot;x&quot;: 8.2,
+          &quot;y&quot;: 1.48,
+          &quot;u_y&quot;: 0.05
+        },
+        {
+          &quot;x&quot;: 11.4,
+          &quot;y&quot;: 1.82,
+          &quot;u_y&quot;: 0.05
+        },
+        {
+          &quot;x&quot;: 15.6,
+          &quot;y&quot;: 2.15,
+          &quot;u_y&quot;: 0.06
+        },
+        {
+          &quot;x&quot;: 20.1,
+          &quot;y&quot;: 2.34,
+          &quot;u_y&quot;: 0.06
+        },
+        {
+          &quot;x&quot;: 24.8,
+          &quot;y&quot;: 2.4,
+          &quot;u_y&quot;: 0.06
+        },
+        {
+          &quot;x&quot;: 27.6,
+          &quot;y&quot;: 2.36,
+          &quot;u_y&quot;: 0.07
+        }
+      ]
+    }
+  ]
+}</code></pre></details></figure>
+              <div class="grid-2">
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">Modular Mopar Drivetrain &amp; Thermo Calculator</h2>
+                    <span id="compat-badge" class="va-pill" data-variant="status" data-state="nominal">Compatible Build</span>
+                  </div>
+                  <div class="builder-form">
+                    <div class="field-wrap">
+                      <label for="sel-block" class="field-label">Engine Block</label>
+                      <select id="sel-block" class="va-select">
+                        <optgroup label="Vintage K-Car Common Block">
+                          <option value="b22" selected>2.2L SOHC/Turbo Block (87.5 × 92.0 mm)</option>
+                          <option value="b25">2.5L Long-Stroke Block (87.5 × 104.0 mm)</option>
+                        </optgroup>
+                        <optgroup label="Platteville / Stratus Iron Block">
+                          <option value="b24">2.4L EDZ Iron Block (87.5 × 101.0 mm)</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                    <div class="field-wrap">
+                      <label for="sel-head" class="field-label">Cylinder Head</label>
+                      <select id="sel-head" class="va-select">
+                        <optgroup label="Fits 2.2L / 2.5L K-Car Block">
+                          <option value="h8v">8V SOHC Turbo I / II Head</option>
+                          <option value="h16v" selected>2.2L Lotus 16V Turbo III Head</option>
+                        </optgroup>
+                        <optgroup label="Fits 2.4L Block Only">
+                          <option value="hecc">Neon ECC / EDZ 2.0L-2.4L DOHC Head</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                    <div class="field-wrap">
+                      <label for="sel-trans" class="field-label">Transaxle &amp; Final Drive</label>
+                      <select id="sel-trans" class="va-select">
+                        <optgroup label="5-Speed Manual Transaxles">
+                          <option value="a525">A525 (3.20..0.72 · 3.87 FD)</option>
+                          <option value="a555">A555 Getrag (3.25..0.72 · 3.85 FD)</option>
+                          <option value="a568" selected>A568 HD (3.52..0.73 · 3.85 FD)</option>
+                          <option value="nvt350">NV-T350 (3.50..0.72 · 3.94 FD)</option>
+                        </optgroup>
+                        <optgroup label="3-Speed Automatic">
+                          <option value="a413">A413 Auto (2.74..1.00 · 3.22 FD)</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                    <div class="field-wrap">
+                      <label for="sel-fuel" class="field-label">Fuel &amp; Intercooler Target</label>
+                      <select id="sel-fuel" class="va-select">
+                        <optgroup label="Pump &amp; Ethanol Fuels">
+                          <option value="e10">93 Octane E10 (ΔH_vap ~355 kJ/kg)</option>
+                          <option value="e85" selected>E85 Ethanol Blend (ΔH_vap ~860 kJ/kg)</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="sim-readout" aria-live="polite">
+                    <div>
+                      <div class="sim-stat-lbl">Displacement / Ratio</div>
+                      <div id="out-disp" class="sim-stat-val">2213 cc · 124.2 km/h @ 3k</div>
+                    </div>
+                    <div>
+                      <div class="sim-stat-lbl">Adiabatic T2 @ PR 2.40</div>
+                      <div id="out-t2" class="sim-stat-val">138.5 °C (Turbo ηc 0.72)</div>
+                    </div>
+                    <div>
+                      <div class="sim-stat-lbl">Charge Temp After Evap</div>
+                      <div id="out-t3" class="sim-stat-val">34.0 °C (E85 Cool)</div>
+                    </div>
+                  </div>
+                </article>
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">Mopar Transaxle &amp; 4-Point Map Reference</h2>
+                    <span class="va-pill" data-variant="tag">NIST SP 811</span>
+                  </div>
+                  <div class="va-table-wrap" tabindex="0" role="region" aria-label="Mopar transaxle gear ratios">
+                    <table class="booktabs">
+                      <thead>
+                        <tr>
+                          <th scope="col">Transaxle</th>
+                          <th scope="col" class="num">1st</th>
+                          <th scope="col" class="num">2nd</th>
+                          <th scope="col" class="num">3rd</th>
+                          <th scope="col" class="num">4th</th>
+                          <th scope="col" class="num">5th</th>
+                          <th scope="col" class="num">FD</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">A525</th><td class="num">3.20</td><td class="num">2.08</td><td class="num">1.36</td><td class="num">1.00</td><td class="num">0.72</td><td class="num">3.87</td></tr>
+                        <tr><th scope="row">A555</th><td class="num">3.25</td><td class="num">2.08</td><td class="num">1.36</td><td class="num">1.03</td><td class="num">0.72</td><td class="num">3.85</td></tr>
+                        <tr><th scope="row">A568</th><td class="num">3.52</td><td class="num">2.08</td><td class="num">1.35</td><td class="num">0.97</td><td class="num">0.73</td><td class="num">3.85</td></tr>
+                        <tr><th scope="row">NV-T350</th><td class="num">3.50</td><td class="num">1.95</td><td class="num">1.36</td><td class="num">0.97</td><td class="num">0.72</td><td class="num">3.94</td></tr>
+                        <tr><th scope="row">A413</th><td class="num">2.74</td><td class="num">1.54</td><td class="num">1.00</td><td class="num">—</td><td class="num">—</td><td class="num">3.22</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p class="va-meta-inline">4-click <code>turbo_spec.json</code> affine map calibration tracks intake depression, intercooler ΔP, surge on lift, and altitude choke.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="panel-safety" aria-labelledby="tab-safety" hidden="until-found">
+            <div class="panel-body">
+              <figure class="va-figure-card qe-figure" id="logicaide-deadbolt-interlock" data-qe-modality="schematic" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-schematic-wrap" data-rigor="L3" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-SAFE-005</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 276" role="img" aria-label="Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock">
+<defs><marker id="qe-il-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--border-strong)"/></marker></defs>
+<rect data-role="node" x="24" y="24.0" width="184" height="42" rx="4" fill="var(--bg-card)" stroke="var(--status-ok)" stroke-width="1.5"/>
+<text x="116.0" y="41.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">SHA-256 + $FFC0 Vectors</text>
+<text x="116.0" y="57.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--status-ok)">PASS (Byte-Exact)</text>
+<path d="M 208 45.0 H 242 V 72.0 H 274.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-il-arr)"/>
+<rect data-role="node" x="24" y="78.0" width="184" height="42" rx="4" fill="var(--bg-card)" stroke="var(--status-ok)" stroke-width="1.5"/>
+<text x="116.0" y="95.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">11 ms + 5k Sobol Sweep</text>
+<text x="116.0" y="111.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--status-ok)">18.4k Cyc · 0 Overflows</text>
+<path d="M 208 99.0 H 242 V 100.0 H 274.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-il-arr)"/>
+<rect data-role="node" x="24" y="132.0" width="184" height="42" rx="4" fill="var(--bg-card)" stroke="var(--status-ok)" stroke-width="1.5"/>
+<text x="116.0" y="149.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Boost / Spark Clamps</text>
+<text x="116.0" y="165.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--status-ok)">WITHIN ENVELOPE</text>
+<path d="M 208 153.0 H 242 V 128.0 H 274.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-il-arr)"/>
+<rect data-role="node" x="276.0" y="52.0" width="168.0" height="96.0" rx="6" fill="var(--tint-amber-bg)" stroke="var(--status-warn)" stroke-width="1.8"/>
+<text x="360.0" y="88.0" text-anchor="middle" font-family="var(--font-sans)" font-size="12.0" font-weight="700" fill="var(--text-primary)">3-of-3 Safety Gate</text>
+<text x="360.0" y="110.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--status-warn)">3/3 Green + Sign-Off</text>
+<text x="360.0" y="130.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">AI WRITE BLOCKED</text>
+<path d="M 444.0 84.0 H 480 V 74.0 H 510" fill="none" stroke="var(--accent-focal)" stroke-width="1.6" marker-end="url(#qe-il-arr)"/>
+<rect data-role="node" x="512" y="52.0" width="184" height="44" rx="4" fill="var(--bg-card)" stroke="var(--accent-focal)" stroke-width="1.6"/>
+<text x="604.0" y="70.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">staging/candidates/</text>
+<text x="604.0" y="86.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--accent-focal)">REPORT.md + .bin READY</text>
+<path d="M 444.0 116.0 H 480 V 136.0 H 510" fill="none" stroke="var(--status-danger)" stroke-width="1.6" marker-end="url(#qe-il-arr)"/>
+<rect data-role="node" x="512" y="114.0" width="184" height="44" rx="4" fill="var(--bg-card)" stroke="var(--status-danger)" stroke-width="1.6"/>
+<text x="604.0" y="132.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">USB-SCI / Ostrich</text>
+<text x="604.0" y="148.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">MANUAL CLI ONLY</text>
+<rect x="24" y="206" width="672" height="54" rx="4" fill="var(--bg-elevated)" stroke="var(--border-hairline)" stroke-width="1"/>
+<text x="38.0" y="224.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Truth Table:</text>
+<text x="150.0" y="224.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">All 3 Gates Pass</text>
+<text x="150.0" y="245.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-ok)">Stage + Copy CLI</text>
+<text x="323.3" y="224.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Any Gate Fails</text>
+<text x="323.3" y="245.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">SAFETY GATE BLOCKED</text>
+<text x="496.7" y="224.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">AI Serial Write</text>
+<text x="496.7" y="245.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">DENY HOOK ABORT</text>
+</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock"><code>{
+  &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
+  &quot;id&quot;: &quot;logicaide-deadbolt-interlock&quot;,
+  &quot;schematic_kind&quot;: &quot;interlock&quot;,
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock&quot;,
+    &quot;rigor_level&quot;: &quot;L3&quot;,
+    &quot;drawing_number&quot;: &quot;LA-SAFE-005&quot;
+  },
+  &quot;sensors&quot;: [
+    {
+      &quot;label&quot;: &quot;SHA-256 + $FFC0 Vectors&quot;,
+      &quot;reading&quot;: &quot;PASS (Byte-Exact)&quot;,
+      &quot;tripped&quot;: false
+    },
+    {
+      &quot;label&quot;: &quot;11 ms + 5k Sobol Sweep&quot;,
+      &quot;reading&quot;: &quot;18.4k Cyc \u00b7 0 Overflows&quot;,
+      &quot;tripped&quot;: false
+    },
+    {
+      &quot;label&quot;: &quot;Boost / Spark Clamps&quot;,
+      &quot;reading&quot;: &quot;WITHIN ENVELOPE&quot;,
+      &quot;tripped&quot;: false
+    }
+  ],
+  &quot;voter&quot;: {
+    &quot;label&quot;: &quot;3-of-3 Safety Gate&quot;,
+    &quot;rule&quot;: &quot;3/3 Green + Sign-Off&quot;,
+    &quot;decision&quot;: &quot;AI WRITE BLOCKED&quot;
+  },
+  &quot;actuators&quot;: [
+    {
+      &quot;label&quot;: &quot;staging/candidates/&quot;,
+      &quot;state&quot;: &quot;REPORT.md + .bin READY&quot;,
+      &quot;tripped&quot;: false
+    },
+    {
+      &quot;label&quot;: &quot;USB-SCI / Ostrich&quot;,
+      &quot;state&quot;: &quot;MANUAL CLI ONLY&quot;,
+      &quot;tripped&quot;: true
+    }
+  ],
+  &quot;truth_rows&quot;: [
+    {
+      &quot;pattern&quot;: &quot;All 3 Gates Pass&quot;,
+      &quot;outcome&quot;: &quot;Stage + Copy CLI&quot;,
+      &quot;trip&quot;: false
+    },
+    {
+      &quot;pattern&quot;: &quot;Any Gate Fails&quot;,
+      &quot;outcome&quot;: &quot;SAFETY GATE BLOCKED&quot;,
+      &quot;trip&quot;: true
+    },
+    {
+      &quot;pattern&quot;: &quot;AI Serial Write&quot;,
+      &quot;outcome&quot;: &quot;DENY HOOK ABORT&quot;,
+      &quot;trip&quot;: true
+    }
+  ]
+}</code></pre></details></figure>
+              <figure class="va-figure-card qe-figure" id="logicaide-heritage-rag" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-RAG-004</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 186" role="img" aria-label="Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline">
+<defs><marker id="qe-pipe-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--border-strong)"/></marker></defs>
+<text x="90.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">1. CAPTURE</text>
+<text x="262.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">2. TRUST TAG</text>
+<text x="434.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">3. HYBRID INDEX</text>
+<text x="606.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">4. CITATIONS</text>
+<path d="M 164.0 63.0 H 176.0 V 63.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 164.0 129.0 H 176.0 V 129.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 164.0 63.0 H 176.0 V 129.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 336.0 129.0 H 348.0 V 63.0 H 358.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 336.0 129.0 H 348.0 V 129.0 H 358.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 508.0 63.0 H 520.0 V 96.0 H 530.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 508.0 129.0 H 520.0 V 96.0 H 530.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<rect data-role="node" x="16.0" y="40.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="90.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Trafilatura + WARC</text>
+<text x="90.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">MiniMopar / SDAC</text>
+<rect data-role="node" x="16.0" y="106.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="90.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Docling PDF-&gt;MD</text>
+<text x="90.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Engineer Binders</text>
+<rect data-role="node" x="188.0" y="40.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="262.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">heritage_raw/</text>
+<text x="262.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Gitignored Vault</text>
+<rect data-role="node" x="188.0" y="106.0" width="148.0" height="46.0" rx="5" fill="var(--tint-indigo-bg)" stroke="var(--accent-focal)" stroke-width="1.5"/>
+<text x="262.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">3-Tier Provenance</text>
+<text x="262.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--accent-focal)">Tier 1 / 2 / 3 MD</text>
+<rect data-role="node" x="360.0" y="40.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="434.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">SQLite FTS5 BM25</text>
+<text x="434.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">$8000 / 0xF2 Exact</text>
+<rect data-role="node" x="360.0" y="106.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="434.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">sqlite-vec HNSW</text>
+<text x="434.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Semantic Concepts</text>
+<rect data-role="node" x="532.0" y="73.0" width="148.0" height="46.0" rx="5" fill="var(--tint-indigo-bg)" stroke="var(--accent-focal)" stroke-width="1.5"/>
+<text x="606.0" y="91.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">RRF Fusion Gate</text>
+<text x="606.0" y="109.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--accent-focal)">No Match -&gt; Refuse</text>
+</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline"><code>{
+  &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
+  &quot;id&quot;: &quot;logicaide-heritage-rag&quot;,
+  &quot;schematic_kind&quot;: &quot;pipeline&quot;,
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline&quot;,
+    &quot;rigor_level&quot;: &quot;L2&quot;,
+    &quot;drawing_number&quot;: &quot;LA-RAG-004&quot;
+  },
+  &quot;stages&quot;: [
+    &quot;1. CAPTURE&quot;,
+    &quot;2. TRUST TAG&quot;,
+    &quot;3. HYBRID INDEX&quot;,
+    &quot;4. CITATIONS&quot;
+  ],
+  &quot;nodes&quot;: [
+    {
+      &quot;id&quot;: &quot;web&quot;,
+      &quot;stage&quot;: 0,
+      &quot;label&quot;: &quot;Trafilatura + WARC&quot;,
+      &quot;metric&quot;: &quot;MiniMopar / SDAC&quot;
+    },
+    {
+      &quot;id&quot;: &quot;pdf&quot;,
+      &quot;stage&quot;: 0,
+      &quot;label&quot;: &quot;Docling PDF-&gt;MD&quot;,
+      &quot;metric&quot;: &quot;Engineer Binders&quot;
+    },
+    {
+      &quot;id&quot;: &quot;vault&quot;,
+      &quot;stage&quot;: 1,
+      &quot;label&quot;: &quot;heritage_raw/&quot;,
+      &quot;metric&quot;: &quot;Gitignored Vault&quot;
+    },
+    {
+      &quot;id&quot;: &quot;tier&quot;,
+      &quot;stage&quot;: 1,
+      &quot;label&quot;: &quot;3-Tier Provenance&quot;,
+      &quot;metric&quot;: &quot;Tier 1 / 2 / 3 MD&quot;,
+      &quot;focal&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;fts&quot;,
+      &quot;stage&quot;: 2,
+      &quot;label&quot;: &quot;SQLite FTS5 BM25&quot;,
+      &quot;metric&quot;: &quot;$8000 / 0xF2 Exact&quot;
+    },
+    {
+      &quot;id&quot;: &quot;vec&quot;,
+      &quot;stage&quot;: 2,
+      &quot;label&quot;: &quot;sqlite-vec HNSW&quot;,
+      &quot;metric&quot;: &quot;Semantic Concepts&quot;
+    },
+    {
+      &quot;id&quot;: &quot;rrf&quot;,
+      &quot;stage&quot;: 3,
+      &quot;label&quot;: &quot;RRF Fusion Gate&quot;,
+      &quot;metric&quot;: &quot;No Match -&gt; Refuse&quot;,
+      &quot;focal&quot;: true
+    }
+  ],
+  &quot;edges&quot;: [
+    {
+      &quot;from&quot;: &quot;web&quot;,
+      &quot;to&quot;: &quot;vault&quot;
+    },
+    {
+      &quot;from&quot;: &quot;pdf&quot;,
+      &quot;to&quot;: &quot;tier&quot;
+    },
+    {
+      &quot;from&quot;: &quot;web&quot;,
+      &quot;to&quot;: &quot;tier&quot;
+    },
+    {
+      &quot;from&quot;: &quot;tier&quot;,
+      &quot;to&quot;: &quot;fts&quot;
+    },
+    {
+      &quot;from&quot;: &quot;tier&quot;,
+      &quot;to&quot;: &quot;vec&quot;
+    },
+    {
+      &quot;from&quot;: &quot;fts&quot;,
+      &quot;to&quot;: &quot;rrf&quot;
+    },
+    {
+      &quot;from&quot;: &quot;vec&quot;,
+      &quot;to&quot;: &quot;rrf&quot;
+    }
+  ]
+}</code></pre></details></figure>
+              <div class="grid-2">
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">Active Day-1 Hardware Deadbolt Policy</h2>
+                    <span class="va-pill" data-variant="status" data-state="fault">AI Serial Flash Denied</span>
+                  </div>
+                  <pre class="code-block" tabindex="0" role="region" aria-label="Active Claude settings deny rules"><code>{
+  "permissions": {
+    "deny": [
+      "Bash(*ostrich2*)", "Bash(*flash_ecu*)", "Bash(*mptun*)",
+      "Bash(*dd */dev/tty*)", "Bash(*&gt; /dev/tty*)", "Bash(*COM[0-9]*)",
+      "Read(**/.env*)", "Read(**/secrets.env)",
+      "Edit(./rom/inputs/**)", "Write(./rom/stock_baselines/**)"
+    ]
+  }
+}</code></pre>
+                  <p class="va-meta-inline">Any failed checksum, vector error, 8-bit overflow, or &gt; 11 ms loop overrun switches Staging Pen to <code>SAFETY GATE BLOCKED</code> and suppresses CLI flash instructions.</p>
+                </article>
+                <article class="va-card">
+                  <div class="card-hdr">
+                    <h2 class="card-title">3-Tier Chrysler Heritage Provenance</h2>
+                    <span class="va-pill" data-variant="tag">FTS5 + sqlite-vec</span>
+                  </div>
+                  <ul class="list-check">
+                    <li><strong>Tier 1 (Chrysler Engineer / Factory)</strong>: Former Chrysler engineer source notes and factory technical service bulletins parsed via <code>Docling</code>.</li>
+                    <li><strong>Tier 2 (Curated Guides)</strong>: MiniMopar, Turbonator `.asm` docs, SDAC, and Turbo-Mopar reference digests archived via <code>Trafilatura</code> + WARC.</li>
+                    <li><strong>Tier 3 (Archival Forum Threads)</strong>: Preserved historical troubleshooting logs with explicit uncertainty tags; raw dumps stay gitignored in <code>data/heritage_raw/</code>.</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" id="panel-reference" aria-labelledby="tab-reference" hidden="until-found">
+            <div class="panel-body">
+              <article class="va-card">
+                <div class="card-hdr">
+                  <h2 class="card-title">60-Way SMEC / SBEC Connector &amp; Electrical Safety Matrix</h2>
+                  <span class="va-pill" data-variant="status" data-state="warn">Verify Harness Before Probe</span>
+                </div>
+                <div class="va-table-wrap" tabindex="0" role="region" aria-label="60-way SMEC and SBEC connector pinout reference">
+                  <table class="booktabs">
+                    <thead>
+                      <tr>
+                        <th scope="col">Pin</th>
+                        <th scope="col">Signal</th>
+                        <th scope="col">Year / ECU Variant Rule</th>
+                        <th scope="col">Safety / Isolation Note</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><th scope="row">Pin 1</th><td>MAP Sensor Signal</td><td>1988–1993 SMEC &amp; SBEC</td><td>0–5 V analog input; match 1-bar/2-bar/3-bar calibration</td></tr>
+                      <tr><th scope="row">Pin 2</th><td>CTS (or Early Knock)</td><td><strong>Variant Check Required</strong>: CTS on later SMEC/SBEC; Knock on some early 88–89 turbo SMECs (CTS on Pin 3)</td><td>Confirm exact model-year FSM wiring before logging</td></tr>
+                      <tr><th scope="row">Pin 3</th><td>CTS (Early Turbo SMEC) / Variant</td><td><strong>Variant Check Required</strong>: CTS on early 88–89 turbo SMECs when Pin 2 is Knock; blank/reassigned later</td><td>Verify against exact model-year FSM diagram</td></tr>
+                      <tr><th scope="row">Pin 4 / 5</th><td>Sensor Signal Return</td><td>Low-current analog ground</td><td>Do not splice high-current chassis or injector returns</td></tr>
+                      <tr><th scope="row">Pin 6</th><td>+5 V Sensor Supply</td><td>Regulated MAP / TPS reference</td><td>Protect against +12 V short during bench probing</td></tr>
+                      <tr><th scope="row">Pin 11</th><td><strong>SMEC Boot vs. SBEC Ground</strong></td><td><strong>CRITICAL</strong>: Blank on 88–89 SMEC (wired for +12V/+21V BoostButton); Power/Chassis Ground on some 90–93 SBEC/TBI</td><td>Mandatory ohmmeter continuity check to Pin 12 / ground before applying bootstrap voltage</td></tr>
+                      <tr><th scope="row">Pin 12</th><td>Power / Chassis Ground</td><td>Main ECU power/ground return (<code>Z1</code> <code>BK/TN</code>)</td><td>Check ohmmeter isolation between Pin 11 and Pin 12 on SBEC/TBI harnesses</td></tr>
+                      <tr><th scope="row">Pin 22</th><td>TPS Signal</td><td>0.5–4.8 V throttle position</td><td>Calibrate closed/WOT ADC counts in <code>rom_manifest.json</code></td></tr>
+                      <tr><th scope="row">Pin 25</th><td>SCI Transmit (TX)</td><td>Present on TBI/SBEC &amp; supported SMEC; blank on some early 88–89 Turbo I/II harnesses (under-hood pigtail)</td><td>Isolate FT232RL USB-UART from 12V/21V flash bootstrap lines</td></tr>
+                      <tr><th scope="row">Pin 41</th><td>O2 / Narrowband Input</td><td>Factory HEGO input</td><td>WB02 emulation requires explicit transfer curve verification</td></tr>
+                      <tr><th scope="row">Pin 45</th><td>SCI Receive (RX)</td><td>Present on TBI/SBEC &amp; supported SMEC; certain early Turbo I SMECs assign C20 A/C clutch here</td><td>Verify FSM assignment &amp; diagnostic pigtail continuity before FTDI connect</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+
+              <section aria-label="Four Milestone Roadmap">
+                <div class="roadmap-grid">
+                  <article class="va-card">
+                    <div class="card-hdr">
+                      <h3 class="card-title">Milestone 1 — Telemetry &amp; Lake</h3>
+                      <span class="va-pill" data-variant="tag">WF-02 · WF-03</span>
+                    </div>
+                    <p>Protected USB-SCI 62.5k poller, startup dead-cell quarantine, 30s Zstd Parquet chunker, Spacebar <code>tuning_issues</code> bookmarks, and multi-car DuckDB <code>load_cell_rollups</code>.</p>
+                  </article>
+                  <article class="va-card">
+                    <div class="card-hdr">
+                      <h3 class="card-title">Milestone 2 — Splayed ROM &amp; Twin</h3>
+                      <span class="va-pill" data-variant="tag">WF-04</span>
+                    </div>
+                    <p>Turbonator/Ghidra <code>$8000–$FFFF</code> splaying, <code>AS11</code>/Blackfoot SHA-256 round-trip proof, Python Behavioral Twins, <code>m68hc11</code> <code>$1000–$103F</code> hooks, and <code>Sobol</code>/<code>Optuna</code> sweeps.</p>
+                  </article>
+                  <article class="va-card">
+                    <div class="card-hdr">
+                      <h3 class="card-title">Milestone 3 — Drivetrain &amp; RAG</h3>
+                      <span class="va-pill" data-variant="tag">WF-05 · WF-06</span>
+                    </div>
+                    <p>Modular Mopar block/head/transaxle profiles, 4-point <code>turbo_spec.json</code> compressor-map digitizer, E85 charge-cooling thermodynamics, and FTS5 + <code>sqlite-vec</code> heritage RAG.</p>
+                  </article>
+                  <article class="va-card">
+                    <div class="card-hdr">
+                      <h3 class="card-title">Milestone 4 — HMI &amp; Staging Pen</h3>
+                      <span class="va-pill" data-variant="tag">1280×800 HMI</span>
+                    </div>
+                    <p>Full multi-car bench &amp; <code>1280×800</code> passenger-seat workbench UI, 16×16 <code>PEFTBL</code> replay diff, <code>firmware-safety-reviewer</code> gate, and manual Ostrich 2.0 / BoostButton staging pen.</p>
+                  </article>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <span>LogicAIDE Architecture Overview · Zero External Assets · 100% Offline</span>
+          <span class="va-nums">SMEC (1988–1989) · SBEC (1990–1993) · Motorola 68HC11</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var meta = document.querySelector('meta[name="color-scheme"]');
+      var themeBtn = document.getElementById('theme-toggle');
+      var themeLbl = document.getElementById('theme-label');
+
+      function applyTheme(nextTheme, persist) {
+        root.setAttribute('data-theme', nextTheme);
+        var isDark = nextTheme === 'dark';
+        if (themeBtn) {
+          themeBtn.setAttribute('aria-pressed', String(isDark));
+          themeBtn.setAttribute('aria-label', isDark ? 'Switch to Sunlight High-Contrast theme' : 'Switch to Garage Dark theme');
+        }
+        if (themeLbl) {
+          themeLbl.textContent = isDark ? 'Sunlight' : 'Garage Dark';
+        }
+        if (meta) {
+          meta.setAttribute('content', isDark ? 'dark' : 'light');
+        }
+        if (persist) {
+          try { localStorage.setItem('logicaide-theme', nextTheme); } catch (e) {}
+        }
+      }
+
+      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'white', false);
+
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          var cur = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'white';
+          applyTheme(cur === 'dark' ? 'white' : 'dark', true);
+        });
+      }
+
+      window.addEventListener('storage', function (ev) {
+        if (ev.key === 'logicaide-theme' && (ev.newValue === 'dark' || ev.newValue === 'white')) {
+          applyTheme(ev.newValue, false);
+        }
+      });
+
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+      var panels = Array.prototype.slice.call(document.querySelectorAll('[role="tabpanel"]'));
+      var railLinks = Array.prototype.slice.call(document.querySelectorAll('[data-tab-jump]'));
+      var rail = document.getElementById('section-rail');
+      var railTrigger = document.getElementById('rail-toggle');
+      var backdrop = document.getElementById('drawer-backdrop');
+
+      function setRailOpen(open) {
+        if (!rail || !railTrigger || !backdrop) return;
+        rail.classList.toggle('is-open', open);
+        backdrop.classList.toggle('is-open', open);
+        railTrigger.setAttribute('aria-expanded', String(open));
+      }
+
+      if (railTrigger) {
+        railTrigger.addEventListener('click', function () {
+          setRailOpen(!rail.classList.contains('is-open'));
+        });
+      }
+      if (backdrop) {
+        backdrop.addEventListener('click', function () { setRailOpen(false); });
+      }
+      window.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape' && rail && rail.classList.contains('is-open')) {
+          setRailOpen(false);
+          if (railTrigger) railTrigger.focus();
+        }
+      });
+
+      function selectTab(targetTab, focusTab) {
+        tabs.forEach(function (t) {
+          var active = t === targetTab;
+          t.setAttribute('aria-selected', String(active));
+          t.setAttribute('tabindex', active ? '0' : '-1');
+        });
+        panels.forEach(function (p) {
+          var match = p.getAttribute('aria-labelledby') === targetTab.id;
+          if (match) {
+            p.removeAttribute('hidden');
+            p.setAttribute('tabindex', '0');
+          } else {
+            p.setAttribute('hidden', 'until-found');
+            p.removeAttribute('tabindex');
+          }
+        });
+        railLinks.forEach(function (link) {
+          var active = link.getAttribute('data-tab-jump') === targetTab.id;
+          link.setAttribute('aria-current', active ? 'true' : 'false');
+        });
+        try {
+          targetTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        } catch (e) {}
+        if (focusTab) targetTab.focus();
+      }
+
+      tabs.forEach(function (tab, idx) {
+        tab.addEventListener('click', function () { selectTab(tab, false); });
+        tab.addEventListener('keydown', function (ev) {
+          var next = -1;
+          if (ev.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+          else if (ev.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+          else if (ev.key === 'Home') next = 0;
+          else if (ev.key === 'End') next = tabs.length - 1;
+          if (next >= 0) {
+            ev.preventDefault();
+            selectTab(tabs[next], true);
+          }
+        });
+      });
+
+      panels.forEach(function (panel) {
+        panel.addEventListener('beforematch', function () {
+          var ownerId = panel.getAttribute('aria-labelledby');
+          var owner = ownerId ? document.getElementById(ownerId) : null;
+          if (owner) selectTab(owner, false);
+        });
+      });
+
+      railLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var tid = link.getAttribute('data-tab-jump');
+          var target = tid ? document.getElementById(tid) : null;
+          if (target) selectTab(target, false);
+          setRailOpen(false);
+        });
+      });
+
+      var BLOCKS = {
+        b22: { cc: 2213, family: 'kcar' },
+        b25: { cc: 2501, family: 'kcar' },
+        b24: { cc: 2429, family: 'edz' }
+      };
+      var HEADS = {
+        h8v: { family: 'kcar' },
+        h16v: { family: 'kcar' },
+        hecc: { family: 'edz' }
+      };
+      var TRANS = {
+        a525: { top: 0.72, fd: 3.87 },
+        a555: { top: 0.72, fd: 3.85 },
+        a568: { top: 0.73, fd: 3.85 },
+        nvt350: { top: 0.72, fd: 3.94 },
+        a413: { top: 1.00, fd: 3.22 }
+      };
+      var FUELS = {
+        e10: { coolC: 4.5, label: '93 E10' },
+        e85: { coolC: 16.0, label: 'E85 Cool' }
+      };
+
+      function updateBuilder() {
+        var blkEl = document.getElementById('sel-block');
+        var hdEl = document.getElementById('sel-head');
+        var trEl = document.getElementById('sel-trans');
+        var fuEl = document.getElementById('sel-fuel');
+        var badge = document.getElementById('compat-badge');
+        var outDisp = document.getElementById('out-disp');
+        var outT2 = document.getElementById('out-t2');
+        var outT3 = document.getElementById('out-t3');
+        if (!blkEl || !hdEl || !trEl || !fuEl) return;
+
+        var blk = BLOCKS[blkEl.value] || BLOCKS.b22;
+        var hd = HEADS[hdEl.value] || HEADS.h16v;
+        var tr = TRANS[trEl.value] || TRANS.a568;
+        var fu = FUELS[fuEl.value] || FUELS.e85;
+
+        var compatible = blk.family === hd.family;
+        if (badge) {
+          badge.setAttribute('data-state', compatible ? 'nominal' : 'fault');
+          badge.textContent = compatible ? 'Compatible Build' : 'Incompatible Drivetrain';
+        }
+
+        var kmhAt3000 = ((3000 / (tr.top * tr.fd)) * 60 * 1.94) / 1000;
+        var t1K = 295.15;
+        var pr = 2.40;
+        var turboEff = 0.72;
+        var t2K = t1K * (1 + (Math.pow(pr, 0.4 / 1.4) - 1) / turboEff);
+        var t2C = t2K - 273.15;
+        var icEff = 0.76;
+        var t3C = t2C - icEff * (t2C - 22.0) - fu.coolC;
+
+        if (outDisp) outDisp.textContent = blk.cc + ' cc · ' + kmhAt3000.toFixed(1) + ' km/h @ 3k';
+        if (outT2) outT2.textContent = t2C.toFixed(1) + ' °C (Turbo ηc ' + turboEff.toFixed(2) + ')';
+        if (outT3) outT3.textContent = t3C.toFixed(1) + ' °C (' + fu.label + ')';
+      }
+
+      ['sel-block', 'sel-head', 'sel-trans', 'sel-fuel'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('change', updateBuilder);
+      });
+      updateBuilder();
+    })();
+  </script>
+</body>
+</html>

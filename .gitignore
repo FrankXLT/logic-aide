@@ -1,0 +1,56 @@
+# Compiled & raw ECU binaries (copyrighted OEM ROMs and candidate flash outputs)
+*.bin
+*.s19
+*.rom
+*.hex
+*.srec
+
+# Live & logged vehicle telemetry / simulation Parquet lakes and SQLite/DuckDB stores
+data/drives/*.parquet
+data/drives/**/*.parquet
+data/drives/*.db
+data/drives/*.sqlite
+data/drives/*.sqlite3
+data/lake/**
+*.parquet
+*.duckdb
+*.duckdb.wal
+**/*.sqlite
+**/*.sqlite3
+**/*.sqlite-wal
+**/*.sqlite-shm
+**/*.db
+**/*.db-wal
+**/*.db-shm
+
+# Raw copyright/private heritage archives (curated cleanroom digests live in knowledge/)
+data/heritage_raw/**
+!data/heritage_raw/.gitkeep
+
+# Secrets, local env overrides, and personal local Claude instructions
+.env
+.env.*
+!.env.example
+secrets.env
+*.pem
+*.key
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Python / Node / IDE artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+node_modules/
+.DS_Store
+Thumbs.db
+tags
+*.log

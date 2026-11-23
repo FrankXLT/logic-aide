@@ -1,0 +1,112 @@
+# LogicAIDE Workflows & Operator Contract (`docs/WORKFLOWS.md`)
+
+## Who & Core Goal
+
+**LogicAIDE** (*Logic Module + Agentic IDE*) serves **multi-car Turbo Chrysler SMEC and SBEC tuners** operating across any coding agent (**Claude Code**, **Antigravity**, **Cursor**, **Codex CLI**, or **VS Code Copilot**) via shared `uv run logicaide ...` CLI entrypoints and FastMCP servers. Its core goal is to turn 62,500-baud vehicle telemetry, splayed 68HC11 ROM disassembly, Python Behavioral Twins, Sobol Monte Carlo simulation, and curated Chrysler heritage knowledge into safe, auditable calibration candidates—while keeping live ECU flashing strictly behind a **Human-Only Hardware Deadbolt**.
+
+---
+
+## Common Terms Glossary
+
+- **Logic Module**: Chrysler's 68HC11-based engine controller family (`SMEC` / `SBEC`, 60-way harness connector, `$8000`–`$FFFF` EPROM calibration/program space).
+- **High-Speed SCI**: Chrysler's 62,500-baud (`62.5k`) Serial Communications Interface diagnostic stream polled during live vehicle drives (`VEHICLE_SCI`).
+- **Load-Cell Data Lake**: DuckDB-queried 30-second Zstd Parquet lake unifying `VEHICLE_SCI`, `SINGLE_REPLAY`, and `MONTE_CARLO_SWEEP` runs with `load_cell_rollups` binned by `250 RPM x 10 kPa MAP x TPS Regime x ACT`.
+- **Monte Carlo Sweep**: Deterministic `m68hc11` parameter sweeps generated with `scipy.stats.qmc` Sobol sequences (and optional `Optuna` surface search) across temperature, pressure, voltage, and load corners.
+- **Python Behavioral Twin**: Readable Python model (`rom/models/*_twin.py`) implementing exact 8-bit/16-bit Q-format math and saturation clamps, verified bit-for-bit against 68HC11 `.asm` before staging.
+- **Drivetrain & Turbo Profile**: Vehicle hardware manifest (`profiles/<car_id>.json` + `turbo_spec.json`) defining block, head, transaxle, fuel (`93 E10` vs `E85`), injector flow, and compressor map with physical compatibility guards.
+- **Staging Pen**: `staging/candidates/<build_id>/`, the sole destination for candidate `.bin` builds and `REPORT.md` safety audits awaiting manual human flashing.
+
+---
+
+## Visual & Ergonomic Baseline (All Workflows)
+
+- **Contract**: `.quiet-ui.md` (`v9.5.0`, `Strict Drift: true`) with `.va-stage[data-width="workbench"]` (`max-inline-size: min(96vw, 112rem)`).
+- **Themes**: **Sunlight High-Contrast** (`#FFFFFF` Studio canvas, `>= 4.5:1` contrast) and **Garage Dark** (`#090D16` / `#0F1624` midnight telemetry canvas).
+- **Chrome & Units**: `<= 48px` N2 topbar with left-of-brand section control; N1 collapsible rail at `>= 1100px`; `ISA-101` calm alarm palette; zero emojis in chrome; `NIST SP 811` labels (`Boost / kPa`, `Pulse Width / ms`, `Mass Flow / lb·min⁻¹`, `Charge Temp / °C`); deterministic `quiet-evidence` / `window.QuietSvgLayout` SVGs.
+
+---
+
+## `WF-01` — Project Showcase (`docs/showcase/index.html`)
+
+- **What User Sees & Taps**:
+  - Offline static showcase page using WAI-ARIA tabs across the six LogicAIDE capabilities, theme toggle (**Sunlight High-Contrast** / **Garage Dark**), and copyable CLI quick-start commands (`uv run logicaide ...`).
+  - Zero network dependencies; includes `@media (scripting: none)` fallback rendering all tab panels sequentially when JS is disabled.
+- **Viewport Behavior**:
+  - `390x844`: Single-column cards, horizontally scrollable or wrapped tab list with `>= 44px` hit targets, `0px` horizontal overflow.
+  - `900x1000`: Two-column capability grid, compact `<= 48px` header.
+  - `1280x800`: Passenger-seat HMI proportions with full above-the-fold architecture summary and tab strip.
+  - `1440x900`: Full `.va-stage[data-width="workbench"]` engineering showcase with N1 collapsible rail.
+- **Empty & Error States**:
+  - If scripting is blocked or offline fonts/assets are absent, `@media (scripting: none)` reveals all sections cleanly with system monospace/sans fallbacks and no broken icons.
+
+## `WF-02` — Live SCI Monitor
+
+- **What User Sees & Taps**:
+  - Calm Cockpit top status strip showing `car_id`, active `62.5k` SCI polling state, frame rate (`Hz`), and a single prominent **`Bookmark Issue (Spacebar)`** action writing to `tuning_issues`.
+  - Live numeric tiles (`RPM`, `MAP / kPa`, `AFR`, `Spark / °BTDC`, `Knock / °`, `ACT / °C`) plus a **Dead-Cell Quarantine** annunciator when packet timeouts occur.
+  - Strictly read-only: no ECU write, boost-override, or flash controls exist in the monitor.
+- **Viewport Behavior**:
+  - `390x844`: Large `>= 44px` touch `Bookmark Issue` button pinned for thumb access, 2-column high-contrast numeric tiles, `0px` overflow.
+  - `900x1000`: 3-column numeric readout + rolling 30s sparkline strip.
+  - `1280x800`: Passenger-seat HMI layout—high-legibility numeric grid, rolling strip chart, and `Spacebar` shortcut badge visible without scrolling.
+  - `1440x900`: Full cockpit strip + collapsible watchlist drawer showing active vs `Not in Watchlist (null)` RAM offsets.
+- **Empty & Error States**:
+  - **No Adapter / Idle**: Calm nominal badge `SCI STANDBY — NO ADAPTER CONNECTED` with `uv run logicaide telemetry watch` guidance (no flashing red alarm).
+  - **Packet Drop / Bus Stall**: Triggers `ISA-101` amber **`DEAD-CELL QUARANTINE`** banner, tags interval `dead_cell_quarantine = true`, and refuses to interpolate stale values.
+  - **Unpolled Offset**: Displays `Not in Watchlist (null)` rather than `0.0`.
+
+## `WF-03` — Multi-Car Lake & 16x16 Replay
+
+- **What User Sees & Taps**:
+  - Filter bar (`car_id`, `run_kind` pill selector for `VEHICLE_SCI | SINGLE_REPLAY | MONTE_CARLO_SWEEP`, `session_id`, and `tuning_issues` bookmark jump).
+  - Synchronized multi-channel strip plots (`quiet-evidence` SVG) linked with a `16x16` `PEFTBL` / Spark diff heatmap table (`250 RPM x 10 kPa MAP` load cells) and an **`Export Stimulus Fixture`** button (GPS-stripped).
+- **Viewport Behavior**:
+  - `390x844`: Stacked filter accordion, single-chart focus selector, horizontally scrollable `16x16` table inside card container (`0px` page overflow).
+  - `900x1000`: Stacked strip plot above `16x16` load-cell matrix.
+  - `1280x800`: Synchronized strip plot (top) + compact `16x16` diff table (bottom) with hover/tap cell inspection.
+  - `1440x900`: Side-by-side N1 issue/session tree (`>= 1100px`), synchronized strip plots, and `16x16` delta matrix.
+- **Empty & Error States**:
+  - **Empty Parquet Lake**: Shows empty-state card with exact `uv run logicaide telemetry ingest` CLI command and sample fixture loader.
+  - **Missing Channel**: Renders cell/series gap labeled `Not in Watchlist (null)` (never plotted as zero).
+  - **GPS Guard Violation**: Blocks fixture export if `lat`/`lon` columns are detected, displaying `EXPORT BLOCKED: STRIP GPS COLUMNS FIRST`.
+
+## `WF-04` — Python Twin & Safety Staging
+
+- **What User Sees & Taps**:
+  - Side-by-side diff between `rom/models/*_twin.py` output and `m68hc11` `$8000`–`$FFFF` execution trace, paired with Sobol Monte Carlo pass/fail distribution.
+  - Prominent **`ISA-101` Safety Gate Card** (`staging/candidates/<build_id>/REPORT.md`) showing 6 discrete gate checks (SHA-256 baseline round-trip, `$FFC0`–`$FFFF` vectors, `< 11 ms` bus cycles, 8-bit carry overflow, mechanical clamps, GPS-free fixtures).
+  - When all checks pass, displays a **copyable manual flash CLI block**; AI never flashes hardware.
+- **Viewport Behavior**:
+  - `390x844`: Vertical gate checklist cards with `>= 44px` copy button (`0px` overflow).
+  - `900x1000`: Two-column gate checklist + cycle-budget bar chart.
+  - `1280x800`: Twin-vs-HC11 parity summary alongside the 6-check `ISA-101` gate card.
+  - `1440x900`: Full 3-pane staging workbench (N1 candidate tree, cycle/parity charts, `REPORT.md` gate card).
+- **Empty & Error States**:
+  - **No Staged Candidate**: Displays `NO STAGED CANDIDATES` with `uv run logicaide sim stage` instructions.
+  - **Safety Failure**: Displays high-contrast crimson **`SAFETY GATE BLOCKED`** header, suppresses any copyable flash CLI block, and highlights the exact failing cycle, vector, or carry check.
+
+## `WF-05` — Heritage Hybrid RAG
+
+- **What User Sees & Taps**:
+  - Search bar (`uv run logicaide heritage query ...`) and `.va-split-reader-gallery` layout (`>= 60%` clean prose column, `<= 40%` schematic/evidence column).
+  - Every retrieved claim displays a **3-tier provenance tag pill** (`Tier 1: Factory/OEM`, `Tier 2: Verified Disassembly`, `Tier 3: Community Notes`) with exact file/page/symbol citations, plus Pin 11 continuity and Pin 2/3/25/45 variant callouts when 60-way SMEC/SBEC wiring is queried.
+- **Viewport Behavior**:
+  - `390x844`: Single-column reader (`>= 44px` filter/tier chips, readable line length, `0px` overflow).
+  - `900x1000`: Reader column with collapsible schematic drawer.
+  - `1280x800` & `1440x900`: `.va-split-reader-gallery` (`>= 60%` prose left, deterministic `quiet-evidence` pinout/table figure right).
+- **Empty & Error States**:
+  - **Unverified Address/Pinout**: Strictly renders **`No Verified Source Match`** — never synthesizes or guesses hex RAM addresses or 60-way pin numbers.
+  - **Missing Index**: Prompts operator to run `uv run logicaide heritage index`.
+
+## `WF-06` — Drivetrain & Compressor Map
+
+- **What User Sees & Taps**:
+  - Semantic `<optgroup>` hardware selectors (`Engine Block`, `Cylinder Head`, `Transaxle`, `Fuel`) and turbo selection (`turbo_spec.json`).
+  - Interactive `NIST SP 811` digitized compressor map (`Pressure Ratio` vs `Corrected Mass Flow / lb·min⁻¹`) with efficiency islands, surge line, choke boundary, and overlaid operating points from `load_cell_rollups`.
+- **Viewport Behavior**:
+  - `390x844`: Stacked `<optgroup>` selectors (`>= 44px` height) above responsive `quiet-evidence` compressor SVG (`0px` overflow).
+  - `900x1000`: Compact selector strip above full-width compressor island chart.
+  - `1280x800` & `1440x900`: Left hardware/fuel builder rail + right digitized compressor island overlay and injector duty summary.
+- **Empty & Error States**:
+  - **Invalid Drivetrain Combination**: Selecting a vintage `2.2L` or `2.5L` K-car block with an `ECC` 2.0L DOHC cylinder head immediately triggers an `ISA-101` crimson **`INCOMPATIBLE DRIVETRAIN`** block (`2.2L/2.5L` requires `8V SOHC` or `2.2L Lotus 16V Turbo III`; `ECC`/`EDZ` DOHC requires `2.4L` iron block) and disables simulation export.
+  - **Compressor Surge / Choke**: Operating points crossing the surge line or choke limit highlight in `ISA-101` amber/crimson with mass-flow margin readout.
