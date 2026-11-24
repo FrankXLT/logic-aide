@@ -36,6 +36,18 @@
       initial-value: 0px;
     }
 
+    @property --edge-fade-start {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 0px;
+    }
+
+    @property --edge-fade-end {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 0px;
+    }
+
     @layer reset {
       *, *::before, *::after { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; }
@@ -780,6 +792,54 @@
         padding: 0.08rem 0.28rem;
         border-radius: var(--radius-xs);
       }
+      .va-scroll-frame {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        min-inline-size: 0;
+        max-inline-size: 100%;
+      }
+      .va-code-box {
+        min-inline-size: 0;
+        max-inline-size: 100%;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-inner);
+        overflow: clip;
+      }
+      @supports selector(:has(*)) {
+        .va-code-box:has(> pre:focus-visible) {
+          outline: 2px solid var(--accent-primary);
+          outline-offset: 2px;
+        }
+        .va-code-box > pre:focus-visible {
+          outline: none;
+        }
+      }
+      @supports not selector(:has(*)) {
+        .va-code-box > pre:focus-visible {
+          outline-offset: -2px;
+        }
+      }
+      .va-scroll-cue {
+        display: none;
+        align-self: flex-end;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.14rem 0.5rem;
+        border-radius: var(--radius-xs);
+        border: 1px solid var(--border-strong);
+        background: var(--bg-elevated);
+        color: var(--text-secondary);
+        font-family: var(--font-mono);
+        font-size: var(--ts-xs);
+        font-weight: 600;
+        line-height: 1.3;
+        pointer-events: none;
+      }
+      .va-scroll-frame[data-overflow-end="true"] > .va-scroll-cue {
+        display: inline-flex;
+      }
       .code-block {
         font-family: var(--font-mono);
         font-size: var(--ts-xs);
@@ -789,6 +849,12 @@
         padding: 0.7rem 0.8rem;
         color: var(--text-primary);
         line-height: 1.48;
+      }
+      .va-code-box > pre.code-block {
+        border: 0;
+        background: transparent;
+        border-radius: 0;
+        margin-block-start: 0;
       }
     }
 
@@ -902,6 +968,55 @@
         border-radius: var(--radius-inner);
         font-family: var(--font-mono);
         font-size: var(--ts-xs);
+      }
+      .qe-spec-drawer > .va-scroll-code {
+        margin-block-start: 0.4rem;
+      }
+      .va-code-box > pre.qe-spec-pre {
+        border: 0;
+        background: transparent;
+        border-radius: 0;
+        margin-block-start: 0;
+      }
+      .va-figure-scroll,
+      .va-code-box > pre {
+        --edge-fade-size: 2.5rem;
+        --edge-fade-dir: right;
+        --edge-fade-start-pos: 0;
+        --edge-fade-end-pos: 100%;
+        scroll-padding-inline: var(--edge-fade-size);
+        mask:
+          linear-gradient(black, black) no-clip subtract,
+          linear-gradient(to var(--edge-fade-dir), black, transparent) var(--edge-fade-start-pos) 0 / var(--edge-fade-start) 100% no-repeat no-clip,
+          linear-gradient(to var(--edge-fade-dir), transparent, black) var(--edge-fade-end-pos) 0 / var(--edge-fade-end) 100% no-repeat no-clip;
+        animation: reveal-edge-fade-start linear both, hide-edge-fade-end linear both;
+        animation-timeline: scroll(self inline);
+        animation-range: 0 var(--edge-fade-size), calc(100% - var(--edge-fade-size)) 100%;
+        transition: --edge-fade-start 0.2s, --edge-fade-end 0.2s;
+      }
+      .va-figure-scroll:dir(rtl),
+      .va-code-box > pre:dir(rtl) {
+        --edge-fade-dir: left;
+        --edge-fade-start-pos: 100%;
+        --edge-fade-end-pos: 0;
+      }
+      .va-figure-scroll.more-start,
+      .va-code-box > pre.more-start {
+        --edge-fade-start: var(--edge-fade-size);
+      }
+      .va-figure-scroll.more-end,
+      .va-code-box > pre.more-end {
+        --edge-fade-end: var(--edge-fade-size);
+      }
+      @keyframes reveal-edge-fade-start {
+        to {
+          --edge-fade-start: var(--edge-fade-size);
+        }
+      }
+      @keyframes hide-edge-fade-end {
+        from {
+          --edge-fade-end: var(--edge-fade-size);
+        }
       }
       .qe-m1-only { display: none; }
     }
@@ -1054,10 +1169,16 @@
           margin-block-start: 1.25rem;
         }
       }
+      @media (scripting: none) and (max-width: 767px) {
+        .va-scroll-frame > .va-scroll-cue { display: inline-flex; }
+      }
       html:not(.js-enabled) [role="tabpanel"][hidden="until-found"] {
         display: block;
         content-visibility: visible;
         margin-block-start: 1.25rem;
+      }
+      @media (max-width: 767px) {
+        html:not(.js-enabled) .va-scroll-frame > .va-scroll-cue { display: inline-flex; }
       }
     }
 
@@ -1077,7 +1198,7 @@
     }
 
     @media print {
-      .va-shell-topbar, .va-side-rail, .va-tab-shell, .va-tab-strip, .drawer-backdrop, .qe-spec-drawer { display: none; }
+      .skip-link, .va-shell-topbar, .va-side-rail, .va-tab-shell, .va-tab-strip, .drawer-backdrop, .qe-spec-drawer, .va-scroll-cue { display: none; }
       [role="tabpanel"][hidden="until-found"] { display: block; }
       body { background: #FFFFFF; color: #0F172A; }
     }
@@ -1191,7 +1312,7 @@
 
           <div role="tabpanel" id="panel-topology" aria-labelledby="tab-topology" tabindex="0">
             <div class="panel-body">
-              <figure class="va-figure-card qe-figure" id="logicaide-system-topology" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-TOPO-001</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries"><svg class="qe-svg qe-svg-720" viewBox="0 0 780 346" role="img" aria-label="LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries">
+              <figure class="va-figure-card qe-figure" id="logicaide-system-topology" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-TOPO-001</span></div><div class="va-scroll-frame" data-overflow-end="false"><div class="va-figure-scroll" tabindex="0" role="region" aria-label="LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries"><svg class="qe-svg qe-svg-720" viewBox="0 0 780 346" role="img" aria-label="LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries">
 <defs><marker id="qe-topo-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--text-primary)"/></marker><marker id="qe-topo-focal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent-focal)"/></marker></defs>
 <rect data-role="enclave" x="14.0" y="34.0" width="200.0" height="116.0" rx="8" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" stroke-dasharray="6,3,2,3"/>
 <text x="26.0" y="52.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.2" stroke-linejoin="round">VEHICLE ENCLAVE</text>
@@ -1228,7 +1349,7 @@
 <g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="355.0" y="147.5" width="68.0" height="17.0" rx="2" fill="var(--bg-elevated)" stroke="none"/><text x="389.0" y="160.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Stimulus</text></g>
 <text x="528.0" y="160.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.8" stroke-linejoin="round">Staged .bin</text>
 <g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="622.8" y="147.5" width="82.5" height="17.0" rx="2" fill="var(--bg-elevated)" stroke="none"/><text x="664.0" y="160.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Manual CLI</text></g>
-</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries"><code>{
+</svg></div><div class="va-scroll-cue" aria-hidden="true">Swipe schematic &rarr;</div></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><div class="va-scroll-frame va-scroll-code" data-overflow-end="false"><div class="va-code-box"><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for LogicAIDE System Topology and Hardware Deadbolt Trust Boundaries"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
   &quot;id&quot;: &quot;logicaide-system-topology&quot;,
   &quot;schematic_kind&quot;: &quot;topology&quot;,
@@ -1350,7 +1471,7 @@
       &quot;style&quot;: &quot;dashed&quot;
     }
   ]
-}</code></pre></details></figure>
+}</code></pre></div><div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div></div></details></figure>
               <div class="grid-2">
                 <article class="va-card">
                   <div class="card-hdr">
@@ -1358,9 +1479,14 @@
                     <span class="va-pill" data-variant="tag">CLI + FastMCP</span>
                   </div>
                   <p>Every telemetry query, 68HC11 Sobol sweep, and heritage lookup exposes identical deterministic behavior over both CLI (<code>uv run logicaide ...</code>) and FastMCP tools—usable from Claude Code, Antigravity, Cursor, Codex CLI, or VS Code Copilot.</p>
-                  <pre class="code-block" tabindex="0" role="region" aria-label="CLI and FastMCP parity mapping"><code>uv run logicaide telemetry rollup --car 89-csx-vnt --issue ISS-04
+                  <div class="va-scroll-frame va-scroll-code" data-overflow-end="false">
+                    <div class="va-code-box">
+                      <pre class="code-block" tabindex="0" role="region" aria-label="CLI and FastMCP parity mapping"><code>uv run logicaide telemetry rollup --car 89-csx-vnt --issue ISS-04
 uv run logicaide sim sweep --build 89-csx-peftbl-r1 --method sobol --samples 5000
 uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre>
+                    </div>
+                    <div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div>
+                  </div>
                 </article>
                 <article class="va-card">
                   <div class="card-hdr">
@@ -1379,7 +1505,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 
           <div role="tabpanel" id="panel-telemetry" aria-labelledby="tab-telemetry" hidden="until-found">
             <div class="panel-body">
-              <figure class="va-figure-card qe-figure" id="logicaide-sci-fsm" data-qe-modality="schematic" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-schematic-wrap" data-rigor="L3" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-SCI-002</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 220" role="img" aria-label="Finite State Machine">
+              <figure class="va-figure-card qe-figure" id="logicaide-sci-fsm" data-qe-modality="schematic" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-schematic-wrap" data-rigor="L3" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-SCI-002</span></div><div class="va-scroll-frame" data-overflow-end="false"><div class="va-figure-scroll" tabindex="0" role="region" aria-label="62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 220" role="img" aria-label="Finite State Machine">
 <defs><marker id="qe-fsm-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--text-primary)"/></marker></defs>
 <circle cx="24" cy="58.0" r="7" fill="var(--text-primary)"/><circle cx="24" cy="58.0" r="12" fill="none" stroke="var(--text-primary)" stroke-width="1.4"/>
 <rect data-role="node" x="50.0" y="34.0" width="112.0" height="48.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.6"/>
@@ -1410,7 +1536,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 <g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="526.8" y="133.5" width="82.5" height="17.0" rx="2" fill="var(--bg-surface)" stroke="none"/><text x="568.0" y="146.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-secondary)">Next Chunk</text></g>
 <path d="M 502.0 82.0 L 502.0 162.0 A 8 8 0 0 1 494.0 170.0 L 114.0 170.0 A 8 8 0 0 1 106.0 162.0 L 106.0 82.0" fill="none" stroke="var(--text-secondary)" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#qe-fsm-arr)"/>
 <g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="233.8" y="177.5" width="140.4" height="17.0" rx="2" fill="var(--bg-surface)" stroke="none"/><text x="304.0" y="190.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-secondary)">Timeout -&gt; Re-Sync</text></g>
-</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for 62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM"><code>{
+</svg></div><div class="va-scroll-cue" aria-hidden="true">Swipe schematic &rarr;</div></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><div class="va-scroll-frame va-scroll-code" data-overflow-end="false"><div class="va-code-box"><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for 62,500-Baud Chrysler SCI Handshake and Dead-Cell Quarantine FSM"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
   &quot;id&quot;: &quot;logicaide-sci-fsm&quot;,
   &quot;schematic_kind&quot;: &quot;fsm&quot;,
@@ -1483,8 +1609,8 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
       &quot;label&quot;: &quot;Timeout -&gt; Re-Sync&quot;
     }
   ]
-}</code></pre></details></figure>
-              <figure class="va-figure-card qe-figure" id="logicaide-lake-er" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-DATA-006</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 348" role="img" aria-label="ER Schema Lineage">
+}</code></pre></div><div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div></div></details></figure>
+              <figure class="va-figure-card qe-figure" id="logicaide-lake-er" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-DATA-006</span></div><div class="va-scroll-frame" data-overflow-end="false"><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 348" role="img" aria-label="ER Schema Lineage">
 <defs><marker id="qe-er-many" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 1 L 10 6 L 0 11 M 5 1 L 5 11" fill="none" stroke="var(--border-strong)" stroke-width="1.2"/></marker><marker id="qe-er-one" viewBox="0 0 12 12" refX="2" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 4 1 L 4 11 M 8 1 L 8 11" fill="none" stroke="var(--border-strong)" stroke-width="1.4"/></marker></defs>
 <rect data-role="node" x="36.0" y="20.0" width="296.0" height="122.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
 <rect data-role="node-header" x="36.0" y="20.0" width="296.0" height="24" rx="5" fill="var(--bg-header)"/>
@@ -1514,7 +1640,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 <line x1="184.0" y1="142.0" x2="184.0" y2="184.0" stroke="var(--border-strong)" stroke-width="1.5" marker-start="url(#qe-er-one)" marker-end="url(#qe-er-many)"/>
 <line x1="332.0" y1="245.0" x2="388.0" y2="245.0" stroke="var(--border-strong)" stroke-width="1.5" marker-start="url(#qe-er-one)" marker-end="url(#qe-er-many)"/>
 <line x1="536.0" y1="142.0" x2="536.0" y2="184.0" stroke="var(--border-strong)" stroke-width="1.5" marker-start="url(#qe-er-one)" marker-end="url(#qe-er-many)"/>
-</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage"><code>{
+</svg></div><div class="va-scroll-cue" aria-hidden="true">Swipe schematic &rarr;</div></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><div class="va-scroll-frame va-scroll-code" data-overflow-end="false"><div class="va-code-box"><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Multi-Car SQLite Catalog, Issue Tracker &amp; Parquet Load-Cell Lineage"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
   &quot;id&quot;: &quot;logicaide-lake-er&quot;,
   &quot;schematic_kind&quot;: &quot;er_lineage&quot;,
@@ -1581,7 +1707,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
       &quot;to&quot;: &quot;rollups&quot;
     }
   ]
-}</code></pre></details></figure>
+}</code></pre></div><div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div></div></details></figure>
               <article class="va-card">
                 <div class="card-hdr">
                   <h2 class="card-title">Unified Parquet Contract &amp; Dead-Cell Quarantine</h2>
@@ -1631,7 +1757,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 
           <div role="tabpanel" id="panel-emulator" aria-labelledby="tab-emulator" hidden="until-found">
             <div class="panel-body">
-              <figure class="va-figure-card qe-figure" id="hc11-sci-adctl-1030" data-qe-modality="bitfield" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">BITFIELD</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-bitfield-wrap" data-rigor="L3" data-medium="m2"><div class="qe-bf-hdr qe-bit-meta"><span class="va-kicker">HC11_IO_PAIR</span><span class="qe-bf-addr va-nums">Offset: $102D / $1030</span><span class="qe-bf-addr va-nums">Reset: 0x0000</span><span class="va-pill va-nums" data-variant="tag">Live: 0x0C30</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 132" role="img" aria-label="68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair">
+              <figure class="va-figure-card qe-figure" id="hc11-sci-adctl-1030" data-qe-modality="bitfield" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">BITFIELD</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-bitfield-wrap" data-rigor="L3" data-medium="m2"><div class="qe-bf-hdr qe-bit-meta"><span class="va-kicker">HC11_IO_PAIR</span><span class="qe-bf-addr va-nums">Offset: $102D / $1030</span><span class="qe-bf-addr va-nums">Reset: 0x0000</span><span class="va-pill va-nums" data-variant="tag">Live: 0x0C30</span></div><div class="va-scroll-frame" data-overflow-end="false"><div class="va-figure-scroll" tabindex="0" role="region" aria-label="68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 132" role="img" aria-label="68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair">
 <rect data-role="bitheader" x="40.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
 <text x="60.0" y="29.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="600" fill="var(--text-muted)">15</text>
 <rect data-role="bitheader" x="80.0" y="14.0" width="40.0" height="22.0" fill="var(--bg-header)" stroke="var(--border-hairline)" stroke-width="0.8"/>
@@ -1710,7 +1836,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 <text x="580.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
 <text x="620.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
 <text x="660.0" y="99.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="400" fill="var(--text-muted)">0</text>
-</svg></div><div class="va-bleed-wide va-table-wrap" tabindex="0" role="region" aria-label="HC11_IO_PAIR Bit Decode Ledger">
+</svg></div><div class="va-scroll-cue" aria-hidden="true">Swipe schematic &rarr;</div></div><div class="va-bleed-wide va-table-wrap" tabindex="0" role="region" aria-label="HC11_IO_PAIR Bit Decode Ledger">
 <table class="booktabs qe-table">
 <caption class="qe-table-caption">HC11_IO_PAIR Bit Decode Ledger</caption>
 <thead><tr><th scope="col">Bits</th><th scope="col">Field</th><th scope="col">Access</th><th scope="col" class="num">Reset</th><th scope="col" class="num">Value</th><th scope="col">Operational Decode</th></tr></thead><tbody>
@@ -1724,7 +1850,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 <tr><th scope="row" class="va-nums" data-label="Bits">[5]</th><td data-label="Field"><span class="qe-bf-field"><code>SCAN</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b1 (1)</td><td data-label="Decode">Continuous A/D Scan Mode</td></tr>
 <tr><th scope="row" class="va-nums" data-label="Bits">[4]</th><td data-label="Field"><span class="qe-bf-field"><code>MULT</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b1 (1)</td><td data-label="Decode">4-Channel Group Scan (MAP/TPS/CTS/O2)</td></tr>
 <tr><th scope="row" class="va-nums" data-label="Bits">[3:0]</th><td data-label="Field"><span class="qe-bf-field"><code>ADC_CH</code></span></td><td data-label="Access"><span class="va-pill" data-variant="tag">RW</span></td><td class="num" data-label="Reset">0x0</td><td class="num" data-label="Value">0b0000 (0)</td><td data-label="Decode">Multiplexed Sensor Channel Select</td></tr>
-</tbody></table></div></div><figcaption class="va-figure-caption">16-bit concatenated view of $102D (SCCR2 High Byte) and $1030 (ADCTL Low Byte) hooked by m68hc11</figcaption><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:bitfield)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for 68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair"><code>{
+</tbody></table></div></div><figcaption class="va-figure-caption">16-bit concatenated view of $102D (SCCR2 High Byte) and $1030 (ADCTL Low Byte) hooked by m68hc11</figcaption><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:bitfield)</summary><div class="va-scroll-frame va-scroll-code" data-overflow-end="false"><div class="va-code-box"><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for 68HC11 Peripheral Control Snapshot: ADCTL ($1030) &amp; SCCR2 ($102D) Pair"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:bitfield&quot;,
   &quot;id&quot;: &quot;hc11-sci-adctl-1030&quot;,
   &quot;metadata&quot;: {
@@ -1829,7 +1955,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
       &quot;description&quot;: &quot;Multiplexed Sensor Channel Select&quot;
     }
   ]
-}</code></pre></details></figure>
+}</code></pre></div><div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div></div></details></figure>
               <div class="grid-2">
                 <article class="va-card">
                   <div class="card-hdr">
@@ -1862,7 +1988,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
               <figure class="va-figure-card qe-figure" id="plot-compressor-thermo" data-qe-modality="plot" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">PLOT</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-plot-wrap" data-rigor="L3" data-medium="m2">
 
 <div class="va-test-condition-block qe-cond-strip" role="note" aria-label="Test Conditions"><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">DUT</span><span class="qe-cond-val va-nums">89-CSX-VNT / 91-SPIRIT-RT</span></div><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">FW</span><span class="qe-cond-val va-nums">SMEC/SBEC-62.5k</span></div><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">T<sub>amb</sub></span><span class="qe-cond-val va-nums">22.0 °C</span></div><div class="qe-cond-item"><span class="qe-cond-lbl qe-unit">f<sub>s</sub></span><span class="qe-cond-val va-nums">38.00 Hz</span></div></div>
-<div class="va-figure-scroll" tabindex="0" role="region" aria-label="TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)"><div class="qe-svg-fallback"><svg class="qe-svg qe-svg-600" viewBox="0 0 600 306" role="img" aria-label="TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)">
+<div class="va-scroll-frame" data-overflow-end="false"><div class="va-figure-scroll" tabindex="0" role="region" aria-label="TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)"><div class="qe-svg-fallback"><svg class="qe-svg qe-svg-600" viewBox="0 0 600 306" role="img" aria-label="TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)">
 <defs><clipPath id="qe-clip-632100"><rect x="78.0" y="26.0" width="496.0" height="224.0"/></clipPath></defs>
 <line class="qe-grid-minor qe-m1-only" x1="108.5" y1="26.0" x2="108.5" y2="250.0" stroke="var(--border-hairline)" stroke-width="0.5" stroke-dasharray="1,3"/>
 <line x1="108.5" y1="250.0" x2="108.5" y2="254.0" stroke="var(--border-strong)" stroke-width="0.8"/>
@@ -2029,9 +2155,9 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 </g>
 <text x="216.0" y="137.5" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-warn)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="4.0" stroke-linejoin="round" transform="rotate(-38.02 216.0 137.5)" dominant-baseline="central">Surge Limit</text>
 <g class="qe-svg-knockout"><rect class="qe-svg-knockout-bg" x="255.8" y="75.7" width="140.4" height="17.0" rx="2" fill="var(--bg-surface)" stroke="none"/><text x="326.0" y="88.2" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">Overboost PR Limit</text></g>
-</svg></div><div class="qe-echarts-host" hidden></div></div>
+</svg></div><div class="qe-echarts-host" hidden></div></div><div class="va-scroll-cue" aria-hidden="true">Swipe schematic &rarr;</div></div>
 <div class="qe-param-legend"><span class="qe-legend-series"><span class="qe-leg-item" data-epistemic="model"><svg class="qe-leg-svg" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><line x1="1" y1="7" x2="19" y2="7" stroke="var(--accent-focal)" stroke-width="2"/></svg><span class="qe-leg-txt">Analytical Pull (E85 Charge-Cooled) · Analytical Model</span></span><span class="qe-leg-item" data-epistemic="discrete"><svg class="qe-leg-svg" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><line x1="1" y1="7" x2="19" y2="7" stroke="var(--status-ok)" stroke-width="1.3" opacity="0.65"/><circle cx="10.0" cy="7.0" r="2.8" fill="var(--bg-canvas)" stroke="var(--status-ok)" stroke-width="1.5"/></svg><span class="qe-leg-txt">Logged SCI Vehicle Pull (38 Hz) · Discrete Sample</span></span></span></div>
-</div><figcaption class="va-figure-caption">Theoretical adiabatic trajectory vs. VEHICLE_SCI Parquet points within Surge and PR limits</figcaption><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:plot)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)"><code>{
+</div><figcaption class="va-figure-caption">Theoretical adiabatic trajectory vs. VEHICLE_SCI Parquet points within Surge and PR limits</figcaption><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:plot)</summary><div class="va-scroll-frame va-scroll-code" data-overflow-end="false"><div class="va-code-box"><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for TD04-15G / Super-60 Compressor Map Overlay (2.2L / 2.5L Turbo Pull)"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:plot&quot;,
   &quot;id&quot;: &quot;plot-compressor-thermo&quot;,
   &quot;metadata&quot;: {
@@ -2149,7 +2275,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
       ]
     }
   ]
-}</code></pre></details></figure>
+}</code></pre></div><div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div></div></details></figure>
               <div class="grid-2">
                 <article class="va-card">
                   <div class="card-hdr">
@@ -2263,7 +2389,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 
           <div role="tabpanel" id="panel-safety" aria-labelledby="tab-safety" hidden="until-found">
             <div class="panel-body">
-              <figure class="va-figure-card qe-figure" id="logicaide-deadbolt-interlock" data-qe-modality="schematic" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-schematic-wrap" data-rigor="L3" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-SAFE-005</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 276" role="img" aria-label="Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock">
+              <figure class="va-figure-card qe-figure" id="logicaide-deadbolt-interlock" data-qe-modality="schematic" data-qe-rigor="L3" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L3</span></span></div><div class="qe-schematic-wrap" data-rigor="L3" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-SAFE-005</span></div><div class="va-scroll-frame" data-overflow-end="false"><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 276" role="img" aria-label="Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock">
 <defs><marker id="qe-il-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--border-strong)"/></marker></defs>
 <rect data-role="node" x="24" y="24.0" width="184" height="42" rx="4" fill="var(--bg-card)" stroke="var(--status-ok)" stroke-width="1.5"/>
 <text x="116.0" y="41.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">SHA-256 + $FFC0 Vectors</text>
@@ -2297,7 +2423,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 <text x="323.3" y="245.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">SAFETY GATE BLOCKED</text>
 <text x="496.7" y="224.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">AI Serial Write</text>
 <text x="496.7" y="245.0" text-anchor="start" font-family="var(--font-mono)" font-size="11.5" font-weight="700" fill="var(--status-danger)">DENY HOOK ABORT</text>
-</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock"><code>{
+</svg></div><div class="va-scroll-cue" aria-hidden="true">Swipe schematic &rarr;</div></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><div class="va-scroll-frame va-scroll-code" data-overflow-end="false"><div class="va-code-box"><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Human-Only Hardware Deadbolt &amp; 3-Gate Staging Interlock"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
   &quot;id&quot;: &quot;logicaide-deadbolt-interlock&quot;,
   &quot;schematic_kind&quot;: &quot;interlock&quot;,
@@ -2357,8 +2483,8 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
       &quot;trip&quot;: true
     }
   ]
-}</code></pre></details></figure>
-              <figure class="va-figure-card qe-figure" id="logicaide-heritage-rag" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-RAG-004</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 186" role="img" aria-label="Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG">
+}</code></pre></div><div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div></div></details></figure>
+              <figure class="va-figure-card qe-figure" id="logicaide-heritage-rag" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-RAG-004</span></div><div class="va-scroll-frame" data-overflow-end="false"><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 186" role="img" aria-label="Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG">
 <defs><marker id="qe-pipe-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--border-strong)"/></marker></defs>
 <text x="90.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">1. SCRAPE &amp; OCR</text>
 <text x="262.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">2. VERIFY &amp; CHUNK</text>
@@ -2394,7 +2520,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 <rect data-role="node" x="532.0" y="73.0" width="148.0" height="46.0" rx="5" fill="var(--tint-indigo-bg)" stroke="var(--accent-focal)" stroke-width="1.5"/>
 <text x="606.0" y="91.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Trust RRF + Rerank</text>
 <text x="606.0" y="109.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--accent-focal)">Hydrate / Abstain</text>
-</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG"><code>{
+</svg></div><div class="va-scroll-cue" aria-hidden="true">Swipe schematic &rarr;</div></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><div class="va-scroll-frame va-scroll-code" data-overflow-end="false"><div class="va-code-box"><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
   &quot;id&quot;: &quot;logicaide-heritage-rag&quot;,
   &quot;schematic_kind&quot;: &quot;pipeline&quot;,
@@ -2467,14 +2593,16 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
     { &quot;from&quot;: &quot;vec&quot;, &quot;to&quot;: &quot;rrf&quot; }
   ]
 }
-</code></pre></details></figure>
+</code></pre></div><div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div></div></details></figure>
               <div class="grid-2">
                 <article class="va-card">
                   <div class="card-hdr">
                     <h2 class="card-title">Active Day-1 Hardware Deadbolt Policy</h2>
                     <span class="va-pill" data-variant="status" data-state="fault">AI Serial Flash Denied</span>
                   </div>
-                  <pre class="code-block" tabindex="0" role="region" aria-label="Active Claude settings deny rules"><code>{
+                  <div class="va-scroll-frame va-scroll-code" data-overflow-end="false">
+                    <div class="va-code-box">
+                      <pre class="code-block" tabindex="0" role="region" aria-label="Active Claude settings deny rules"><code>{
   "permissions": {
     "deny": [
       "Bash(*ostrich2*)", "Bash(*flash_ecu*)", "Bash(*mptun*)",
@@ -2484,6 +2612,9 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
     ]
   }
 }</code></pre>
+                    </div>
+                    <div class="va-scroll-cue" aria-hidden="true">Scroll &rarr;</div>
+                  </div>
                   <p class="va-meta-inline">Any failed checksum, vector error, 8-bit overflow, or &gt; 11 ms loop overrun switches Staging Pen to <code>SAFETY GATE BLOCKED</code> and suppresses CLI flash instructions.</p>
                 </article>
                 <article class="va-card">
@@ -2682,11 +2813,18 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
           try { targetTab.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e2) {}
         }
         if (typeof requestAnimationFrame === 'function') {
-          requestAnimationFrame(updateTabOverflowHints);
+          requestAnimationFrame(function () {
+            updateTabOverflowHints();
+            updateScrollFrames();
+          });
+        } else {
+          updateTabOverflowHints();
+          updateScrollFrames();
         }
         if (focusTab) targetTab.focus();
       }
 
+      var supportsScrollTimeline = typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && CSS.supports('animation-timeline', 'scroll()');
       var tabShell = document.querySelector('.va-tab-shell');
       var tabStrip = document.querySelector('.va-tab-strip');
       function updateTabOverflowHints() {
@@ -2699,7 +2837,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
         tabShell.setAttribute('data-overflow-end', String(hasOverflow && !atEnd));
       }
       if (tabStrip) {
-        if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && !CSS.supports('animation-timeline', 'scroll()')) {
+        if (!supportsScrollTimeline) {
           var firstTab = tabStrip.firstElementChild;
           var lastTab = tabStrip.lastElementChild;
           if (firstTab && lastTab && typeof IntersectionObserver === 'function') {
@@ -2719,6 +2857,53 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
           window.addEventListener('resize', updateTabOverflowHints);
         }
         updateTabOverflowHints();
+      }
+
+      var scrollFrames = Array.prototype.slice.call(document.querySelectorAll('.va-scroll-frame'));
+      function updateScrollFrame(frame, scroller) {
+        if (!frame || !scroller) return;
+        var maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        var pos = Math.abs(scroller.scrollLeft);
+        var hasEnd = maxScroll > 4 && pos < maxScroll - 4;
+        var hasStart = maxScroll > 4 && pos > 4;
+        frame.setAttribute('data-overflow-end', String(hasEnd));
+        frame.setAttribute('data-overflow-start', String(hasStart));
+        if (!supportsScrollTimeline) {
+          scroller.classList.toggle('more-start', hasStart);
+          scroller.classList.toggle('more-end', hasEnd);
+        }
+      }
+      function updateScrollFrames() {
+        scrollFrames.forEach(function (frame) {
+          var scroller = frame.querySelector('.va-figure-scroll, pre');
+          if (scroller) updateScrollFrame(frame, scroller);
+        });
+      }
+      if (scrollFrames.length) {
+        var frameResizeObserver = typeof ResizeObserver === 'function'
+          ? new ResizeObserver(function () { updateScrollFrames(); })
+          : null;
+        scrollFrames.forEach(function (frame) {
+          var scroller = frame.querySelector('.va-figure-scroll, pre');
+          if (!scroller) return;
+          scroller.addEventListener('scroll', function () {
+            updateScrollFrame(frame, scroller);
+          }, { passive: true });
+          if (frameResizeObserver) frameResizeObserver.observe(scroller);
+        });
+        if (!frameResizeObserver) {
+          window.addEventListener('resize', updateScrollFrames);
+        }
+        document.addEventListener('toggle', function (ev) {
+          var tgt = ev.target;
+          if (!tgt || tgt.tagName !== 'DETAILS') return;
+          if (typeof requestAnimationFrame === 'function') {
+            requestAnimationFrame(updateScrollFrames);
+          } else {
+            updateScrollFrames();
+          }
+        }, true);
+        updateScrollFrames();
       }
 
       tabs.forEach(function (tab, idx) {

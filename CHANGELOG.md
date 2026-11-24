@@ -5,6 +5,11 @@ All notable changes to **LogicAIDE** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2026-11-24
+
+### Fixed
+- **Mobile Showcase Horizontal Scroll Cues (`docs/showcase/index.html`, `docs/WORKFLOWS.md`)**: Added registered `@property` CSS edge fade masks (`animation-timeline: scroll(self inline)` + fallback) and non-overlapping `Swipe schematic ->` / `Scroll ->` hint pills across overflowing `.va-figure-scroll` schematics and `<pre>` code blocks (`390x844` / `900x1000` + `@media (scripting: none)` fallback), automatically hiding on `1280x800` / `1440x900` desktop or once scrolled to the right end, and recorded the `WF-01` never-regress guardrail.
+
 ## [0.3.0] - 2026-11-23
 
 ### Changed

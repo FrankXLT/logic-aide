@@ -32,12 +32,12 @@
   - Offline static showcase page using WAI-ARIA tabs across the six LogicAIDE capabilities—including the upgraded `RAG & Deadbolt` pipeline (`warcio` + `Trafilatura`/`Crawl4AI`, `Docling` + `Marker`/`Surya`, `mmdlint` + OCR Mermaid Gate, Parent-Child `FTS5` + `sqlite-vec`)—theme toggle (**Sunlight High-Contrast** / **Garage Dark**) with Sun/Moon icon swap, `M1`–`M5` implementation roadmap (`docs/IMPLEMENTATION_ROADMAP.md`), and copyable CLI quick-start commands (`uv run logicaide ...`).
   - Zero network dependencies; includes `@media (scripting: none)` fallback rendering all tab panels sequentially when JS is disabled, plus keyboard-accessible `role="region"` table scroll wrappers.
 - **Viewport Behavior**:
-  - `390x844`: Single-column cards, horizontally scrollable tab list with subtle right-edge fade scroll cue and `>= 44px` hit targets, `0px` horizontal overflow.
-  - `900x1000`: Two-column capability grid, compact `<= 48px` header.
-  - `1280x800`: Passenger-seat HMI proportions with full above-the-fold architecture summary and tab strip.
-  - `1440x900`: Full `.va-stage[data-width="workbench"]` engineering showcase with N1 collapsible rail (`M1-M5` badge).
+  - `390x844`: Single-column cards, horizontally scrollable tab list with subtle right-edge fade scroll cue and `>= 44px` hit targets, `0px` horizontal overflow. **Never-Regress Scroll Guardrail**: Every horizontally overflowing `.quiet-evidence` schematic container (`.va-figure-scroll`) or `<pre>` code block (`scrollWidth > clientWidth`) MUST display a crisp right-edge gradient fade and non-overlapping `Swipe schematic ->` or `Scroll ->` hint badge (plus `role="region"`, `aria-label`, and `tabindex="0"`), automatically hiding both cue and fade when content fits (`1280x800` / `1440x900`) or once scrolled to the far-right end.
+  - `900x1000`: Two-column capability grid, compact `<= 48px` header; overflowing two-column `<pre>` blocks retain right-edge scroll cues cleanly.
+  - `1280x800`: Passenger-seat HMI proportions with full above-the-fold architecture summary and tab strip; non-overflowing diagrams render without scroll badges.
+  - `1440x900`: Full `.va-stage[data-width="workbench"]` engineering showcase with N1 collapsible rail (`M1-M5` badge) and zero scroll hint clutter.
 - **Empty & Error States**:
-  - If scripting is blocked or offline fonts/assets are absent, `@media (scripting: none)` reveals all sections cleanly with system monospace/sans fallbacks and no broken icons.
+  - If scripting is blocked or offline fonts/assets are absent, `@media (scripting: none)` reveals all sections cleanly with system monospace/sans fallbacks, no broken icons, and a CSS-only mobile (`< 768px`) baseline scroll cue on wide schematics and `<pre>` blocks.
 
 ## `WF-02` — Live SCI Monitor
 
