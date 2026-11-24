@@ -19,7 +19,7 @@ Designed for **Daytona Shelby**, **Shelby CSX**, **Turbo Shadow**, **Spirit R/T*
 ## System Architecture
 
 ```mermaid
-flowchart LR
+flowchart TB
     Car["1988-1993 Turbo Chrysler (SMEC / SBEC 62.5k SCI)"] -->|"Read-Only Telemetry"| Poller["Telemetry Poller & Dead-Cell Probe"]
     Poller -->|"30s Zstd Parquet + SQLite"| Lake["Multi-Car Load-Cell Data Lake"]
     Lake -->|"Stimulus Slices (GPS-Stripped)"| Twin["Python Behavioral Twin & m68hc11 Simulator"]
