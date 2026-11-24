@@ -28,9 +28,9 @@ LogicAIDE is structured as a **six-layer deterministic engineering pipeline** wi
 - Models physical vehicle combinations across blocks (`2.2L`, `2.5L`, `2.0L ECC`, `2.4L EDZ` sharing `4.00 in` / `101.6 mm` bore spacing), cylinder heads across a 3-tier compatibility matrix (`BOLT_ON_NATIVE` `8V #445/#782`, `Lotus 16V Turbo III`, `Maserati 16V TC`; `HYBRID_MACHINING_REQUIRED` `Neon ECC` / `2.4L EDZ` DOHC swaps with mandatory Swap Advisory Checklist; `INCOMPATIBLE` hard blocks), transaxle ratios (`A525`, `A555`, `A568`, `NV-T350`, `A413`), and Draft 2020-12 vehicle build schemas (`profiles/schema/vehicle_build.schema.json`).
 - Integrates `turbo_spec.json` 4-point digitized compressor maps to compute pressure ratio, corrected mass flow (`lb·min⁻¹`), surge margin, choke boundary, and adiabatic charge-temp rise.
 
-### Layer 5 — Heritage Hybrid FTS5 / `sqlite-vec` RAG (`knowledge/`)
-- Ingests cleanroom documentation using `Trafilatura` (web archives) and `Docling` (technical documents) into gitignored `data/heritage_raw/`, then distills verified **3-tier provenance Markdown digests** into `knowledge/`.
-- Combines SQLite `FTS5` lexical search (for exact hex addresses, part numbers, and SCI PIDs) with `sqlite-vec` semantic search for contextual troubleshooting.
+### Layer 5 — Heritage Preservation, Verified Schematics & Hybrid RAG (`knowledge/`)
+- Preserves archival web sources at `1 req/s` (`warcio` `.warc.gz` in gitignored `data/heritage_raw/`), normalizes `<pre>`/`<table>` blocks with `lxml` + `Trafilatura` + `Crawl4AI`, and parses FSM/technical docs with `Docling` (`TableFormer`, `300 DPI` figure crops, cross-page stitching) + `Marker`/`Surya` OCR fallback while passing transpiled diagrams through the `mmdlint`/Page-OCR Mermaid Gate (`VERIFIED` vs. `NEEDS_HUMAN_REVIEW`).
+- Indexes 2-line `[DOC|TIER|ECU|ENGINE|SECTION]` scope-prefixed parent-child chunks (with `> 35`-row repeated-header table slices) into SQLite `FTS5` (`tokenchars '$_-#.'`) and `sqlite-vec` (`BAAI/bge-m3`), fusing via Trust-Weighted RRF (`Tier 1 = 1.25x`, `Tier 2 = 1.10x`, `Tier 3 = 0.90x`) with `No Verified Source Match` abstention.
 
 ### Layer 6 — Quiet UI v9.5.0 Workbench & Human Deadbolt Staging Pen (`ui/`, `staging/candidates/`)
 - Presents telemetry, 16x16 fuel/spark diffs, compressor overlays, and heritage citations in a Quiet UI `v9.5.0` workbench (`.quiet-ui.md`) supporting **Garage Dark** and **Sunlight High-Contrast** themes at `390x844`, `900x1000`, `1280x800`, and `1440x900`.

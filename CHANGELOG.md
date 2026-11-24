@@ -5,6 +5,11 @@ All notable changes to **LogicAIDE** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-11-23
+
+### Changed
+- **Heritage Preservation, Verified Schematics & Parent-Child Hybrid RAG (`M4`)**: Upgraded [`docs/HERITAGE_KNOWLEDGE_AND_RAG.md`](docs/HERITAGE_KNOWLEDGE_AND_RAG.md), `docs/IMPLEMENTATION_ROADMAP.md`, `docs/WORKFLOWS.md` (`WF-01`, `WF-05`), `knowledge/README.md`, `docs/DATA_MODEL_AND_MCP.md`, `mcp_servers/README.md`, `ARCHITECTURE.md`, `CLAUDE.md`, and `docs/showcase/index.html` (`LA-RAG-004` + Milestone 4 card) to specify `warcio` (`1 req/s`) + `lxml`/`Trafilatura`/`Crawl4AI`, `Docling` (`TableFormer`, `300 DPI` crops) + `Marker`/`Surya` OCR fallback, Gate 4a `mmdlint` + Gate 4b Page-OCR Mermaid verification (`VERIFIED` vs. `NEEDS_HUMAN_REVIEW`), 2-line `[DOC|TIER|ECU|ENGINE|SECTION]` scope-prefixed parent-child chunking with `> 35`-row repeated-header table slices, SQLite `FTS5` (`tokenchars '$_-#.'`) + `BAAI/bge-m3` `sqlite-vec` Trust-Weighted RRF (`1.25x`/`1.10x`/`0.90x`), and updated CLI/FastMCP contracts (`heritage crawl`, `parse-web`, `parse-docs`, `build-index`, `query`, `diagram`; `search_heritage_docs`, `get_verified_schematic`).
+
 ## [0.2.0] - 2026-11-23
 
 ### Added

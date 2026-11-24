@@ -29,7 +29,7 @@
 ## `WF-01` — Project Showcase (`docs/showcase/index.html`)
 
 - **What User Sees & Taps**:
-  - Offline static showcase page using WAI-ARIA tabs across the six LogicAIDE capabilities, theme toggle (**Sunlight High-Contrast** / **Garage Dark**) with Sun/Moon icon swap, `M1`–`M5` implementation roadmap (`docs/IMPLEMENTATION_ROADMAP.md`), and copyable CLI quick-start commands (`uv run logicaide ...`).
+  - Offline static showcase page using WAI-ARIA tabs across the six LogicAIDE capabilities—including the upgraded `RAG & Deadbolt` pipeline (`warcio` + `Trafilatura`/`Crawl4AI`, `Docling` + `Marker`/`Surya`, `mmdlint` + OCR Mermaid Gate, Parent-Child `FTS5` + `sqlite-vec`)—theme toggle (**Sunlight High-Contrast** / **Garage Dark**) with Sun/Moon icon swap, `M1`–`M5` implementation roadmap (`docs/IMPLEMENTATION_ROADMAP.md`), and copyable CLI quick-start commands (`uv run logicaide ...`).
   - Zero network dependencies; includes `@media (scripting: none)` fallback rendering all tab panels sequentially when JS is disabled, plus keyboard-accessible `role="region"` table scroll wrappers.
 - **Viewport Behavior**:
   - `390x844`: Single-column cards, horizontally scrollable tab list with subtle right-edge fade scroll cue and `>= 44px` hit targets, `0px` horizontal overflow.
@@ -89,15 +89,16 @@
 ## `WF-05` — Heritage Hybrid RAG
 
 - **What User Sees & Taps**:
-  - Search bar (`uv run logicaide heritage query ...`) and `.va-split-reader-gallery` layout (`>= 60%` clean prose column, `<= 40%` schematic/evidence column).
-  - Every retrieved claim displays a **3-tier provenance tag pill** (`Tier 1: Factory/OEM`, `Tier 2: Verified Disassembly`, `Tier 3: Community Notes`) with exact file/page/symbol citations, plus Pin 11 continuity and Pin 2/3/25/45 variant callouts when 60-way SMEC/SBEC wiring is queried.
+  - Querying `uv run logicaide heritage query ...` or `uv run logicaide heritage diagram ...` renders `.va-split-reader-gallery` (`>= 60%` clean attributed prose and header-repeated/stitched pipe tables on the left; `<= 40%` verified Mermaid schematic / connector viewer on the right).
+  - Every retrieved claim displays `Tier 1`/`Tier 2`/`Tier 3` provenance pills (`Tier 1: Factory/OEM`, `Tier 2: Verified Disassembly`, `Tier 3: Community Notes`), `ECU` scope badges (`SMEC_88_89` vs. `SBEC_90_93`), exact source `page_ref` / `warc_capture_date`, and Pin 11 continuity / Pin 2, 3, 25, 45 variant callouts when 60-way wiring is queried.
 - **Viewport Behavior**:
   - `390x844`: Single-column reader (`>= 44px` filter/tier chips, readable line length, `0px` overflow).
   - `900x1000`: Reader column with collapsible schematic drawer.
-  - `1280x800` & `1440x900`: `.va-split-reader-gallery` (`>= 60%` prose left, deterministic `quiet-evidence` pinout/table figure right).
-- **Empty & Error States**:
-  - **Unverified Address/Pinout**: Strictly renders **`No Verified Source Match`** — never synthesizes or guesses hex RAM addresses or 60-way pin numbers.
-  - **Missing Index**: Prompts operator to run `uv run logicaide heritage index`.
+  - `1280x800` & `1440x900`: `.va-split-reader-gallery` (`>= 60%` prose/table left, verified Mermaid schematic / connector viewer right).
+- **Empty, Quarantine & Error States**:
+  - **Unverified Address/Pinout**: Strictly renders **`No Verified Source Match`** when lexical/vector scores fail thresholds or only `Tier 3` forum speculation exists for a 60-way pin or `0xF2`/`0xF4` offset — never synthesizes or guesses hex RAM addresses or 60-way pin numbers.
+  - **Quarantined Diagram (`NEEDS_HUMAN_REVIEW`)**: If a scanned FSM/wiring diagram transpiled into Mermaid contains any pin number, circuit code, or hex address not backed by page-level OCR tokens (or fails headless `mmdlint` syntax checks after 2 retries), tags it `mermaid_verification: NEEDS_HUMAN_REVIEW`, excludes it from automated agent wiring guidance (`get_verified_schematic`), and displays it in `ISA-101` amber in the operator review queue until human sign-off.
+  - **Missing Index**: Prompts operator to run `uv run logicaide heritage build-index` (alias `heritage index`).
 
 ## `WF-06` — Drivetrain & Compressor Map
 

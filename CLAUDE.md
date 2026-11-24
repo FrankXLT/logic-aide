@@ -8,7 +8,7 @@
   1. **M1 — CLI, Vehicle Schema & Catalog**: `pyproject.toml`, `src/logicaide/` CLI, `logicaide profile compile` (Draft 2020-12 validator + Mopar 3-tier guard), SQLite `vehicles` & `vehicle_profile_revisions`, and `rom_manifest.json` loader.
   2. **M2 — 62.5k SCI Poller & Parquet Lake**: `telemetry/` `62.5k` SCI poller (tested via `pyserial` `loop://`), startup dead-cell quarantine (`null != 0`), 30s Zstd Parquet chunks, DuckDB `load_cell_rollups`, and `tuning_issues` bookmarks.
   3. **M3 — Behavioral Twins, `m68hc11` & Staging**: `rom/models/*_twin.py` fixed-point twins, `m68hc11` `$8000`–`$FFFF` harness (`<= 11 ms` / `<= 22,000` E-cycles & `$FFC0`–`$FFFF` vectors), `AS11`/`Blackfoot` SHA-256 proof, `scipy.stats.qmc` Sobol sweeps, and `staging/candidates/<build_id>/REPORT.md`.
-  4. **M4 — Heritage Hybrid RAG**: `knowledge/` 3-tier YAML digests (`Trafilatura` + `Docling` into gitignored `data/heritage_raw/`), SQLite `FTS5` + `sqlite-vec` RRF search, and `No Verified Source Match` abstention.
+  4. **M4 — Heritage Hybrid RAG**: `warcio`+`Trafilatura`/`Crawl4AI` web & `Docling`+`Marker`/`Surya` OCR ingestion into `data/heritage_raw/`, `mmdlint`/OCR Mermaid gate (`VERIFIED` vs `NEEDS_HUMAN_REVIEW`), 2-line scope-prefixed parent-child `FTS5`+`sqlite-vec` Trust-Weighted RRF, and `No Verified Source Match`.
   5. **M5 — FastMCP & Quiet UI Workbench**: `mcp_servers/` thin wrappers (`ecu-telemetry`, `hc11-emulator`, `chrysler-heritage`), root `.mcp.json` activation, and Quiet UI `v9.5.0` workbench (`ui/`).
 - Full acceptance criteria: [`docs/IMPLEMENTATION_ROADMAP.md`](docs/IMPLEMENTATION_ROADMAP.md).
 

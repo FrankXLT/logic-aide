@@ -8,7 +8,7 @@
 | :--- | :--- | :--- |
 | **`ecu-telemetry`** | `uv run logicaide telemetry ...` | Query 30s Zstd Parquet chunks, `load_cell_rollups`, dead-cell quarantine reports, & `tuning_issues` bookmarks (strictly read-only toward hardware) |
 | **`hc11-emulator`** | `uv run logicaide sim ...` | Run `m68hc11` `$8000`–`$FFFF` stimulus replays, Python Twin bit-exact parity assertions, `< 11 ms` timing checks, & Sobol/Optuna sweeps |
-| **`chrysler-heritage`** | `uv run logicaide heritage ...` | Hybrid `FTS5` + `sqlite-vec` search over `knowledge/` 3-tier provenance digests & `rom_manifest.json` symbol lookups |
+| **`chrysler-heritage`** | `uv run logicaide heritage ...` | Parent-child `FTS5` + `sqlite-vec` hybrid RAG over `knowledge/` 3-tier digests, verified Mermaid schematics (`VERIFIED` vs. `NEEDS_HUMAN_REVIEW`), & `rom_manifest.json` symbol lookups |
 
 ## Design Rules
 - **Thin Protocol Wrappers**: FastMCP tools must contain zero duplicated business logic; they delegate directly to the same Python library functions invoked by `uv run logicaide`.

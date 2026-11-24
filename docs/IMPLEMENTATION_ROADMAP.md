@@ -43,12 +43,18 @@ LogicAIDE boots from a **completed `Phase 0` architecture & contract baseline** 
 
 ---
 
-## Milestone 4 — Cleanroom Chrysler Heritage Hybrid RAG (`M4`)
+## Milestone 4 — Heritage Scraping, Verified Schematics & Hybrid RAG (`M4`)
 - **Primary Deliverables**:
-  - `src/logicaide/heritage/` (`ingest_warc.py`, `ingest_docling.py`, `frontmatter.py`, `hybrid_index.py`, `search.py`).
-  - `Trafilatura` (WARC/HTML) and `Docling` (PDF/binder OCR) ingestion writing raw captures strictly to gitignored `data/heritage_raw/`, distilling cleanroom `Tier 1`/`Tier 2`/`Tier 3` YAML-frontmattered digests into `knowledge/`.
-  - Rebuildable `data/heritage_index.sqlite` combining `FTS5` (`tokenize = 'unicode61 tokenchars "$_x"'`) and `sqlite-vec` via Reciprocal Rank Fusion (`k = 60`), returning **`No Verified Source Match`** when below verification thresholds.
-- **Acceptance Gate**: `uv run pytest -n 0 tests/test_heritage_rag.py` verifies YAML schema validation, exact hex/pin retrieval (`Pin 11`, `0xF2`, `$8000`), and zero-hallucination abstention on unknown symbols.
+  - `src/logicaide/heritage/`:
+    - `crawl_warc.py`: `1 req/s` polite `warcio` `.warc.gz` archival capture into gitignored `data/heritage_raw/`.
+    - `parse_web.py`: `lxml` `<pre>`/`<table>` -> GFM pipe-table normalizer + `Trafilatura` prose extraction + `Crawl4AI` multi-page thread stitcher.
+    - `parse_docs.py`: `Docling` `TableFormer` + `300 DPI` figure crops + cross-page table stitcher + `Marker`+`Surya` OCR fallback for engineer margin annotations.
+    - `mermaid_gate.py`: `mmdlint` AST Gate 4a (`<= 2` repair retries) + Page-OCR Token Grounding Gate 4b emitting `VERIFIED` vs. `NEEDS_HUMAN_REVIEW` with 3–5 bullet walkthroughs.
+    - `chunker.py`: 2-line `[DOC|TIER|ECU|ENGINE|SECTION]` scope prefix injection + `> 35`-row table splitting into `15–20` row slices with repeated header/separator rows + parent-child splitting.
+    - `hybrid_index.py`: Rebuildable `data/heritage_index.sqlite` storing `heritage_parents`, `heritage_children`, `heritage_fts` (`tokenize = "unicode61 remove_diacritics 0 tokenchars '$_-#.'"`), and `heritage_vec` (`BAAI/bge-m3` `1024-d` cosine embeddings).
+    - `search.py`: Trust-Weighted RRF (`k = 60`; `Tier 1 = 1.25x`, `Tier 2 = 1.10x`, `Tier 3 = 0.90x`), optional `BAAI/bge-reranker-v2-m3`, `parent_id` hydration, and **`No Verified Source Match`** abstention.
+  - CLI subcommands: `heritage crawl`, `heritage parse-web`, `heritage parse-docs`, `heritage build-index` (alias `heritage index`), `heritage query`, `heritage diagram`.
+- **Acceptance Gate**: `uv run pytest -n 0 tests/test_heritage_rag.py` verifies `<pre>` / HTML table normalization, cross-page table stitching & `> 35`-row slice header repetition, Gate 4a `mmdlint` + Gate 4b Page-OCR grounding quarantining unbacked pins/hex as `NEEDS_HUMAN_REVIEW` and excluding them from `get_verified_schematic`, exact `FTS5` token preservation (`$8000`, `0xF2`, `Pin_11`, `#782`, `#445`, `P4529353`), SMEC-vs-SBEC scope isolation, parent hydration, and `No Verified Source Match` abstention.
 
 ---
 

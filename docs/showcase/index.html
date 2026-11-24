@@ -2358,132 +2358,116 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
     }
   ]
 }</code></pre></details></figure>
-              <figure class="va-figure-card qe-figure" id="logicaide-heritage-rag" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-RAG-004</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 186" role="img" aria-label="Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline">
+              <figure class="va-figure-card qe-figure" id="logicaide-heritage-rag" data-qe-modality="schematic" data-qe-rigor="L2" data-qe-medium="m2" data-qe-theme="white"><div class="va-figure-hdr qe-card-head"><h2 class="qe-fig-title">Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG</h2><span class="qe-fig-badges"><span class="va-pill" data-variant="tag">SCHEMATIC</span><span class="va-pill" data-variant="tag">L2</span></span></div><div class="qe-schematic-wrap" data-rigor="L2" data-medium="m2"><div class="qe-schematic-hdr"><span class="qe-dwg-num va-nums">DWG: LA-RAG-004</span></div><div class="va-figure-scroll" tabindex="0" role="region" aria-label="Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG"><svg class="qe-svg qe-svg-720" viewBox="0 0 720 186" role="img" aria-label="Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG">
 <defs><marker id="qe-pipe-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--border-strong)"/></marker></defs>
-<text x="90.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">1. CAPTURE</text>
-<text x="262.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">2. TRUST TAG</text>
+<text x="90.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">1. SCRAPE &amp; OCR</text>
+<text x="262.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">2. VERIFY &amp; CHUNK</text>
 <text x="434.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">3. HYBRID INDEX</text>
-<text x="606.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">4. CITATIONS</text>
+<text x="606.0" y="22.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-secondary)">4. HYDRATE &amp; GATE</text>
 <path d="M 164.0 63.0 H 176.0 V 63.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
-<path d="M 164.0 129.0 H 176.0 V 129.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
 <path d="M 164.0 63.0 H 176.0 V 129.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 164.0 129.0 H 176.0 V 63.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 164.0 129.0 H 176.0 V 129.0 H 186.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
+<path d="M 262.0 86.0 V 104.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
 <path d="M 336.0 129.0 H 348.0 V 63.0 H 358.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
 <path d="M 336.0 129.0 H 348.0 V 129.0 H 358.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
 <path d="M 508.0 63.0 H 520.0 V 96.0 H 530.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
 <path d="M 508.0 129.0 H 520.0 V 96.0 H 530.0" fill="none" stroke="var(--border-strong)" stroke-width="1.4" marker-end="url(#qe-pipe-arr)"/>
 <rect data-role="node" x="16.0" y="40.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
-<text x="90.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Trafilatura + WARC</text>
-<text x="90.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">MiniMopar / SDAC</text>
+<text x="90.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">warcio + Trafilatura</text>
+<text x="90.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">lxml + Crawl4AI</text>
 <rect data-role="node" x="16.0" y="106.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
-<text x="90.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Docling PDF-&gt;MD</text>
-<text x="90.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Engineer Binders</text>
-<rect data-role="node" x="188.0" y="40.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
-<text x="262.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">heritage_raw/</text>
-<text x="262.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Gitignored Vault</text>
-<rect data-role="node" x="188.0" y="106.0" width="148.0" height="46.0" rx="5" fill="var(--tint-indigo-bg)" stroke="var(--accent-focal)" stroke-width="1.5"/>
-<text x="262.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">3-Tier Provenance</text>
-<text x="262.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--accent-focal)">Tier 1 / 2 / 3 MD</text>
+<text x="90.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Docling + Marker</text>
+<text x="90.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Surya + 300 DPI</text>
+<rect data-role="node" x="188.0" y="40.0" width="148.0" height="46.0" rx="5" fill="var(--tint-indigo-bg)" stroke="var(--accent-focal)" stroke-width="1.5"/>
+<text x="262.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">mmdlint + OCR Gate</text>
+<text x="262.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--accent-focal)">VERIFIED / Review</text>
+<rect data-role="node" x="188.0" y="106.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
+<text x="262.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Parent-Child Split</text>
+<text x="262.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">2-Line Scope Tag</text>
 <rect data-role="node" x="360.0" y="40.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
-<text x="434.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">SQLite FTS5 BM25</text>
-<text x="434.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">$8000 / 0xF2 Exact</text>
+<text x="434.0" y="58.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">FTS5 (tokenchars)</text>
+<text x="434.0" y="76.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">$8000, 0xF2, #782</text>
 <rect data-role="node" x="360.0" y="106.0" width="148.0" height="46.0" rx="5" fill="var(--bg-card)" stroke="var(--border-strong)" stroke-width="1.5"/>
-<text x="434.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">sqlite-vec HNSW</text>
-<text x="434.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">Semantic Concepts</text>
+<text x="434.0" y="124.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">sqlite-vec (vec0)</text>
+<text x="434.0" y="142.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">BAAI/bge-m3 1024d</text>
 <rect data-role="node" x="532.0" y="73.0" width="148.0" height="46.0" rx="5" fill="var(--tint-indigo-bg)" stroke="var(--accent-focal)" stroke-width="1.5"/>
-<text x="606.0" y="91.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">RRF Fusion Gate</text>
-<text x="606.0" y="109.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--accent-focal)">No Match -&gt; Refuse</text>
-</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline"><code>{
+<text x="606.0" y="91.0" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="700" fill="var(--text-primary)">Trust RRF + Rerank</text>
+<text x="606.0" y="109.0" text-anchor="middle" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--accent-focal)">Hydrate / Abstain</text>
+</svg></div></div><details class="qe-spec-drawer"><summary class="qe-spec-summary">Inspect JSON Spec (urn:quiet-ui:schema:v9:schematic)</summary><pre class="va-mermaid-code qe-spec-pre" tabindex="0" role="region" aria-label="Raw JSON specification for Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG"><code>{
   &quot;$schema&quot;: &quot;urn:quiet-ui:schema:v9:schematic&quot;,
   &quot;id&quot;: &quot;logicaide-heritage-rag&quot;,
   &quot;schematic_kind&quot;: &quot;pipeline&quot;,
   &quot;metadata&quot;: {
-    &quot;title&quot;: &quot;Chrysler ECU Heritage Preservation and Hybrid RRF Search Pipeline&quot;,
+    &quot;title&quot;: &quot;Chrysler Heritage Scraping, Mermaid Gate &amp; Parent-Child Hybrid RAG&quot;,
     &quot;rigor_level&quot;: &quot;L2&quot;,
     &quot;drawing_number&quot;: &quot;LA-RAG-004&quot;
   },
   &quot;stages&quot;: [
-    &quot;1. CAPTURE&quot;,
-    &quot;2. TRUST TAG&quot;,
+    &quot;1. SCRAPE &amp; OCR&quot;,
+    &quot;2. VERIFY &amp; CHUNK&quot;,
     &quot;3. HYBRID INDEX&quot;,
-    &quot;4. CITATIONS&quot;
+    &quot;4. HYDRATE &amp; GATE&quot;
   ],
   &quot;nodes&quot;: [
     {
       &quot;id&quot;: &quot;web&quot;,
       &quot;stage&quot;: 0,
-      &quot;label&quot;: &quot;Trafilatura + WARC&quot;,
-      &quot;metric&quot;: &quot;MiniMopar / SDAC&quot;
+      &quot;label&quot;: &quot;warcio + Trafilatura&quot;,
+      &quot;metric&quot;: &quot;lxml + Crawl4AI&quot;
     },
     {
       &quot;id&quot;: &quot;pdf&quot;,
       &quot;stage&quot;: 0,
-      &quot;label&quot;: &quot;Docling PDF-&gt;MD&quot;,
-      &quot;metric&quot;: &quot;Engineer Binders&quot;
+      &quot;label&quot;: &quot;Docling + Marker&quot;,
+      &quot;metric&quot;: &quot;Surya + 300 DPI&quot;
     },
     {
-      &quot;id&quot;: &quot;vault&quot;,
+      &quot;id&quot;: &quot;mermaid&quot;,
       &quot;stage&quot;: 1,
-      &quot;label&quot;: &quot;heritage_raw/&quot;,
-      &quot;metric&quot;: &quot;Gitignored Vault&quot;
-    },
-    {
-      &quot;id&quot;: &quot;tier&quot;,
-      &quot;stage&quot;: 1,
-      &quot;label&quot;: &quot;3-Tier Provenance&quot;,
-      &quot;metric&quot;: &quot;Tier 1 / 2 / 3 MD&quot;,
+      &quot;label&quot;: &quot;mmdlint + OCR Gate&quot;,
+      &quot;metric&quot;: &quot;VERIFIED / Review&quot;,
       &quot;focal&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;chunk&quot;,
+      &quot;stage&quot;: 1,
+      &quot;label&quot;: &quot;Parent-Child Split&quot;,
+      &quot;metric&quot;: &quot;2-Line Scope Tag&quot;
     },
     {
       &quot;id&quot;: &quot;fts&quot;,
       &quot;stage&quot;: 2,
-      &quot;label&quot;: &quot;SQLite FTS5 BM25&quot;,
-      &quot;metric&quot;: &quot;$8000 / 0xF2 Exact&quot;
+      &quot;label&quot;: &quot;FTS5 (tokenchars)&quot;,
+      &quot;metric&quot;: &quot;$8000, 0xF2, #782&quot;
     },
     {
       &quot;id&quot;: &quot;vec&quot;,
       &quot;stage&quot;: 2,
-      &quot;label&quot;: &quot;sqlite-vec HNSW&quot;,
-      &quot;metric&quot;: &quot;Semantic Concepts&quot;
+      &quot;label&quot;: &quot;sqlite-vec (vec0)&quot;,
+      &quot;metric&quot;: &quot;BAAI/bge-m3 1024d&quot;
     },
     {
       &quot;id&quot;: &quot;rrf&quot;,
       &quot;stage&quot;: 3,
-      &quot;label&quot;: &quot;RRF Fusion Gate&quot;,
-      &quot;metric&quot;: &quot;No Match -&gt; Refuse&quot;,
+      &quot;label&quot;: &quot;Trust RRF + Rerank&quot;,
+      &quot;metric&quot;: &quot;Hydrate / Abstain&quot;,
       &quot;focal&quot;: true
     }
   ],
   &quot;edges&quot;: [
-    {
-      &quot;from&quot;: &quot;web&quot;,
-      &quot;to&quot;: &quot;vault&quot;
-    },
-    {
-      &quot;from&quot;: &quot;pdf&quot;,
-      &quot;to&quot;: &quot;tier&quot;
-    },
-    {
-      &quot;from&quot;: &quot;web&quot;,
-      &quot;to&quot;: &quot;tier&quot;
-    },
-    {
-      &quot;from&quot;: &quot;tier&quot;,
-      &quot;to&quot;: &quot;fts&quot;
-    },
-    {
-      &quot;from&quot;: &quot;tier&quot;,
-      &quot;to&quot;: &quot;vec&quot;
-    },
-    {
-      &quot;from&quot;: &quot;fts&quot;,
-      &quot;to&quot;: &quot;rrf&quot;
-    },
-    {
-      &quot;from&quot;: &quot;vec&quot;,
-      &quot;to&quot;: &quot;rrf&quot;
-    }
+    { &quot;from&quot;: &quot;web&quot;, &quot;to&quot;: &quot;mermaid&quot; },
+    { &quot;from&quot;: &quot;web&quot;, &quot;to&quot;: &quot;chunk&quot; },
+    { &quot;from&quot;: &quot;pdf&quot;, &quot;to&quot;: &quot;mermaid&quot; },
+    { &quot;from&quot;: &quot;pdf&quot;, &quot;to&quot;: &quot;chunk&quot; },
+    { &quot;from&quot;: &quot;mermaid&quot;, &quot;to&quot;: &quot;chunk&quot; },
+    { &quot;from&quot;: &quot;chunk&quot;, &quot;to&quot;: &quot;fts&quot; },
+    { &quot;from&quot;: &quot;chunk&quot;, &quot;to&quot;: &quot;vec&quot; },
+    { &quot;from&quot;: &quot;fts&quot;, &quot;to&quot;: &quot;rrf&quot; },
+    { &quot;from&quot;: &quot;vec&quot;, &quot;to&quot;: &quot;rrf&quot; }
   ]
-}</code></pre></details></figure>
+}
+</code></pre></details></figure>
               <div class="grid-2">
                 <article class="va-card">
                   <div class="card-hdr">
@@ -2505,13 +2489,14 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
                 <article class="va-card">
                   <div class="card-hdr">
                     <h2 class="card-title">3-Tier Chrysler Heritage Provenance</h2>
-                    <span class="va-pill" data-variant="tag">FTS5 + sqlite-vec</span>
+                    <span class="va-pill" data-variant="tag">Parent-Child RRF</span>
                   </div>
                   <ul class="list-check">
-                    <li><strong>Tier 1 (Chrysler Engineer / Factory)</strong>: Former Chrysler engineer source notes and factory technical service bulletins parsed via <code>Docling</code>.</li>
-                    <li><strong>Tier 2 (Curated Guides)</strong>: MiniMopar, Turbonator `.asm` docs, SDAC, and Turbo-Mopar reference digests archived via <code>Trafilatura</code> + WARC.</li>
-                    <li><strong>Tier 3 (Archival Forum Threads)</strong>: Preserved historical troubleshooting logs with explicit uncertainty tags; raw dumps stay gitignored in <code>data/heritage_raw/</code>.</li>
+                    <li><strong>Tier 1 (<code>1.25x</code> · Chrysler Engineer / Factory)</strong>: FSMs, TSBs &amp; engineer binders parsed via <code>Docling</code> (<code>TableFormer</code> cross-page table stitching, <code>300 DPI</code> crops) + <code>Marker</code>/<code>Surya</code> OCR fallback; 4-step Mermaid diagrams must clear <code>mmdlint</code> + Page-OCR token grounding (<code>VERIFIED</code>), while unbacked pins/hex quarantine as <code>NEEDS_HUMAN_REVIEW</code> in <code>ISA-101</code> amber (excluded from <code>get_verified_schematic</code>).</li>
+                    <li><strong>Tier 2 (<code>1.10x</code> · Curated Guides)</strong>: <code>MiniMopar</code>, <code>thedodgegarage</code>, <code>Turbonator</code>, <code>SDAC</code>, &amp; <code>Turbo-Mopar</code> captured via polite <code>1 req/s</code> <code>warcio</code> <code>.warc.gz</code>, <code>lxml</code> <code>&lt;pre&gt;</code>/<code>&lt;table&gt;</code>-to-GFM pipe normalization, &amp; <code>Trafilatura</code>.</li>
+                    <li><strong>Tier 3 (<code>0.90x</code> · Archival Threads)</strong>: Multi-page <code>Crawl4AI</code> thread stitcher (<code>page=1..N</code>, quote/avatar stripping -&gt; <code>Symptom -&gt; Verified Fix</code>); raw scrapes stay gitignored in <code>data/heritage_raw/</code>.</li>
                   </ul>
+                  <p class="va-meta-inline">Child chunks inject a 2-line <code>[DOC|TIER|ECU|ENGINE|SECTION]</code> scope prefix, repeat headers across <code>&gt; 35</code>-row tables, index into <code>FTS5</code> (<code>tokenchars '$_-#.'</code>) + <code>sqlite-vec</code> (<code>BAAI/bge-m3</code> <code>1024d</code>) with optional <code>bge-reranker-v2-m3</code>, hydrate whole parents, and return <code>No Verified Source Match</code> when ungrounded.</p>
                 </article>
               </div>
             </div>
@@ -2579,7 +2564,7 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
                       <h3 class="card-title">Milestone 4 — Heritage Hybrid RAG</h3>
                       <span class="va-pill" data-variant="tag">WF-05</span>
                     </div>
-                    <p><code>Trafilatura</code> + <code>Docling</code> cleanroom ingestion (<code>data/heritage_raw/</code>), 3-tier YAML frontmatter validation (<code>knowledge/</code>), SQLite <code>FTS5</code> + <code>sqlite-vec</code> RRF search, and <code>No Verified Source Match</code> abstention.</p>
+                    <p><code>warcio</code> + <code>lxml</code>/<code>Trafilatura</code>/<code>Crawl4AI</code> web archiving (<code>data/heritage_raw/</code>), <code>Docling</code> + <code>Marker</code>/<code>Surya</code> OCR, <code>mmdlint</code> + Page-OCR Mermaid gate (<code>VERIFIED</code> vs. <code>NEEDS_HUMAN_REVIEW</code>), 2-line scope-prefixed parent-child <code>FTS5</code> (<code>tokenchars '$_-#.'</code>) + <code>sqlite-vec</code> (<code>BAAI/bge-m3</code>) Trust RRF, and <code>No Verified Source Match</code> abstention.</p>
                   </article>
                   <article class="va-card">
                     <div class="card-hdr">
