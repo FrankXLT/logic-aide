@@ -6,8 +6,8 @@ LogicAIDE operates on real 1988–1993 Turbo Chrysler engine controllers (`SMEC`
 
 ## 1. Strict Engine/ECU Hardware Deadbolt
 
-- **Zero Automated Flashing**: AI agents and automated scripts are **strictly prohibited** from writing to vehicle serial ports (`/dev/ttyUSB*`, `/dev/ttyACM*`, `COM*`), invoking `ostrich2`, `flash_ecu`, or running SCI bootstrap loaders.
-- **Read-Only Telemetry Only**: Automated telemetry tools may only *read* the `62.5 kbaud` SCI stream.
+- **Zero Automated Flashing**: AI agents and automated scripts are **strictly prohibited** from accessing physical vehicle serial ports (`/dev/ttyUSB*`, `/dev/ttyACM*`, `/dev/ttyS*`, `/dev/cu.*`, `COM*`), invoking `ostrich2`, `flash_ecu`, `boostbutton`, `mptun`, `minipro`, `xgpro`, `stm32flash`, or running SCI bootstrap loaders. (`pyserial` `loop://` offline unit tests run sequentially via `uv run pytest -n 0` are permitted.)
+- **Read-Only, Manifest-Only Telemetry**: Automated telemetry tools may only *read* the `62.5 kbaud` SCI stream and must resolve `0xF2`/`0xF4` RAM offsets exclusively from `rom_manifest.json` (`No Verified Source Match` if unverified — never hardcoded across SMEC/SBEC IDs).
 - **Staging Pen Workflow**: All modified ROMs must be written exclusively to `staging/candidates/<build_id>/` alongside a `REPORT.md`, SHA-256 checksum, `$FFC0`–`$FFFF` vector proof, `< 11 ms` cycle proof, and Monte Carlo diff. Only a human operator may inspect those artifacts and copy/execute the manual flash command.
 
 ---
@@ -28,9 +28,11 @@ LogicAIDE operates on real 1988–1993 Turbo Chrysler engine controllers (`SMEC`
 ## 3. Mechanical & Calibration Safety Clamps
 
 Every candidate ROM staged for human review must enforce hard calibration safety boundaries:
-- **Wastegate & Overboost Fuel Cut**: Verify mechanical wastegate base pressure and ROM overboost fuel-cut thresholds (`MAP` ceiling) are intact and never silently disabled.
+- **Wastegate & Overboost Fuel Cut**: Verify mechanical wastegate base pressure and ROM overboost fuel-cut thresholds (`MAP` ceiling bounded by `map_sensor_bar` saturation: `1-bar <= 105 kPa`, `2-bar <= 205 kPa`, `3-bar <= 315 kPa`) are intact and never silently disabled.
+- **8-Bit Rev-Limit Ceiling (`<= 8160 RPM`)**: SMEC/SBEC 8-bit RPM limits (`32 RPM/bit`) must never exceed `8160 RPM`.
 - **Spark Advance Clamps**: High-load/high-boost timing cells must remain bounded against knock-prone advance values; Python Twin & Sobol Monte Carlo sweeps check for signed/unsigned 8-bit overflow wrap (`0xFF -> 0x00`) that could flip retard into dangerous advance.
 - **8-Bit Carry & `$FFC0`–`$FFFF` Vectors**: The `firmware-safety-reviewer` gate must verify interrupt vectors and stack safety prior to staging sign-off.
+- **Mopar 3-Tier Drivetrain Guard**: Enforce `profiles/schema/vehicle_build.schema.json` across `4.00 in` (`101.6 mm`) bore-spacing blocks (`BOLT_ON_NATIVE`, `HYBRID_MACHINING_REQUIRED` swap checklist, and hard compilation blocks on `INCOMPATIBLE` pairings).
 
 ---
 

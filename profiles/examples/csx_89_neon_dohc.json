@@ -1,0 +1,123 @@
+{
+  "$schema": "../schema/vehicle_build.schema.json",
+  "identity_and_chassis": {
+    "car_id": "csx_89_neon_dohc",
+    "year": 1989,
+    "make": "Shelby",
+    "model": "CSX",
+    "trim": "CSX Hybrid 16V DOHC",
+    "chassis_code": "P-body",
+    "vin_hash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "curb_weight_kg": 1235.0,
+    "drag_area_cda_m2": 0.68,
+    "notes": "1989 Shelby CSX hybrid swap pairing .020-over 2.2L K-block with Neon ECC 2.0L DOHC cylinder head under SMEC dual-board control."
+  },
+  "engine_bottom_end": {
+    "block_code": "2.2L_K",
+    "nominal_bore_mm": 87.5,
+    "overbore_in": 0.02,
+    "actual_bore_mm": 88.008,
+    "stroke_mm": 92.0,
+    "bore_center_spacing_mm": 101.6,
+    "displacement_cc": 2238.63,
+    "compression_ratio": 8.5,
+    "head_bolt_size_mm": 11,
+    "cross_drilled_block": true,
+    "piston_valve_reliefs": true,
+    "deck_modifications": [
+      "oil_coolant_deck_passage_plugging",
+      "head_bolt_stud_sleeves_11mm_to_10mm",
+      "external_head_oil_feed_and_pan_drainback"
+    ]
+  },
+  "cylinder_head_and_cam": {
+    "head_code": "NEON_ECC_20_DOHC",
+    "valves": 16,
+    "cam_architecture": "DOHC",
+    "compatibility_tier": "HYBRID_MACHINING_REQUIRED",
+    "required_swap_mods": [
+      "oil_coolant_deck_passage_plugging",
+      "external_head_oil_feed_and_pan_drainback",
+      "head_bolt_stud_sleeve_alignment",
+      "custom_timing_belt_tensioner_geometry",
+      "piston_valve_reliefs",
+      "smec_sbec_crank_cam_hall_sync",
+      "ccw_peftbl_cam_peak_rotation",
+      "10mm_11mm_bolt_gasket_note"
+    ],
+    "advisory_notes": "Verify 11mm K-block stud alignment sleeves in 10mm ECC head bores, confirm external head oil supply and pan return clearance, and re-index PEFTBL airflow cells for CCW DOHC VE peak."
+  },
+  "transaxle_and_gearing": {
+    "transaxle_code": "A555",
+    "assembly_tag": "P4539555_A555_385",
+    "forward_ratios": [3.25, 2.08, 1.36, 1.03, 0.72],
+    "final_drive_ratio": 3.85,
+    "tire_spec": {
+      "section_width_mm": 205,
+      "aspect_ratio_pct": 50,
+      "rim_diameter_in": 15,
+      "loaded_radius_factor": 0.97,
+      "rollout_circumference_in": 70.3
+    },
+    "vss_pulses_per_rev": 8
+  },
+  "fuel_system": {
+    "fuel_grade": "93_E10",
+    "stoich_afr": 14.1,
+    "specific_gravity": 0.742,
+    "latent_heat_vap_kj_kg": 360.0,
+    "regulator_topology": "MANIFOLD_REFERENCED_1_TO_1",
+    "fmu_ratio": null,
+    "base_fuel_pressure_psi": 55.0,
+    "rated_injector_pressure_psi": 43.5,
+    "rated_injector_flow_lb_hr": 80.0,
+    "effective_flow_lb_hr": 89.96,
+    "injector_impedance": "HIGH_Z_SATURATED",
+    "batoff_deadtime_ms": {
+      "voltage_points_v": [8, 9, 10, 11, 12, 13, 14, 15],
+      "deadtime_ms": [2.35, 1.92, 1.58, 1.32, 1.12, 0.96, 0.84, 0.75],
+      "pressure_slope_ms_per_psi": 0.0085,
+      "short_pulse_knee_ms": 1.35,
+      "min_linear_pw_ms": 1.65
+    },
+    "fuel_pump": {
+      "model": "Walbro GSS342 255 HP",
+      "rewired": true,
+      "flow_lph_at_13_5v": 228.0,
+      "voltage_derated_curve": [
+        { "voltage_v": 10.5, "pressure_psi": 55.0, "flow_lph": 152.0 },
+        { "voltage_v": 12.0, "pressure_psi": 55.0, "flow_lph": 191.0 },
+        { "voltage_v": 13.5, "pressure_psi": 55.0, "flow_lph": 228.0 },
+        { "voltage_v": 14.4, "pressure_psi": 55.0, "flow_lph": 248.0 }
+      ]
+    }
+  },
+  "turbo_and_intercooler": {
+    "turbo_id": "garrett_t3_t4_50trim",
+    "turbo_spec_ref": "profiles/turbo/garrett_t3_t4_50trim/turbo_spec.json",
+    "wastegate_type": "EXTERNAL_WASTEGATE",
+    "base_spring_psi": 12.0,
+    "max_boost_ceiling_kpa": 275.0,
+    "intercooler": {
+      "type": "FRONT_MOUNT_BAR_PLATE",
+      "effectiveness": 0.78,
+      "pressure_drop_kpa": 7.5
+    },
+    "intake_tract_loss_kpa": 3.5,
+    "bov_bypass_valve": "Recirculated 34mm diaphragm bypass valve"
+  },
+  "ecu_and_sensors": {
+    "ecu_family": "SMEC_DUAL_BOARD",
+    "ecu_part_number": "P5233689",
+    "eprom_size_bytes": 32768,
+    "rom_manifest_ref": "rom/rom_manifest.json",
+    "pin11_continuity_verified": true,
+    "pin2_3_25_45_verified": true,
+    "fuel_table_architecture": "CHRYSLER_2D_PEFTBL",
+    "iat_reference_c": 90,
+    "map_sensor_bar": 3,
+    "rev_limit_rpm": 7400,
+    "overboost_fuel_cut_kpa": 285.0,
+    "sci_baud": 62500
+  }
+}

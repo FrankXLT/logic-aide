@@ -1,0 +1,110 @@
+{
+  "$schema": "../schema/vehicle_build.schema.json",
+  "identity_and_chassis": {
+    "car_id": "shadow_90_sbec_t2",
+    "year": 1990,
+    "make": "Dodge",
+    "model": "Shadow",
+    "trim": "ES Turbo II",
+    "chassis_code": "P-body",
+    "vin_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+    "curb_weight_kg": 1195.0,
+    "drag_area_cda_m2": 0.69,
+    "notes": "1990 Dodge Shadow Turbo II bolt-on native 8V swirl-head build running SBEC single-board ECU with +40% injectors at 55.0 psi base rail pressure."
+  },
+  "engine_bottom_end": {
+    "block_code": "2.2L_K",
+    "nominal_bore_mm": 87.5,
+    "overbore_in": 0.0,
+    "actual_bore_mm": 87.5,
+    "stroke_mm": 92.0,
+    "bore_center_spacing_mm": 101.6,
+    "displacement_cc": 2212.86,
+    "compression_ratio": 8.1,
+    "head_bolt_size_mm": 11,
+    "cross_drilled_block": true,
+    "piston_valve_reliefs": false,
+    "deck_modifications": []
+  },
+  "cylinder_head_and_cam": {
+    "head_code": "8V_782_SWIRL",
+    "valves": 8,
+    "cam_architecture": "SOHC",
+    "compatibility_tier": "BOLT_ON_NATIVE",
+    "required_swap_mods": [],
+    "advisory_notes": "Native 1990 cross-drilled 2.2L K-block paired with #782 fast-burn swirl 8V SOHC head and 11mm head bolts; no hybrid deck machining required."
+  },
+  "transaxle_and_gearing": {
+    "transaxle_code": "A555",
+    "assembly_tag": "P4539555_T2_385",
+    "forward_ratios": [3.25, 2.08, 1.36, 1.03, 0.72],
+    "final_drive_ratio": 3.85,
+    "tire_spec": {
+      "section_width_mm": 205,
+      "aspect_ratio_pct": 55,
+      "rim_diameter_in": 15,
+      "loaded_radius_factor": 0.97,
+      "rollout_circumference_in": 72.76
+    },
+    "vss_pulses_per_rev": 8
+  },
+  "fuel_system": {
+    "fuel_grade": "93_E10",
+    "stoich_afr": 14.1,
+    "specific_gravity": 0.742,
+    "latent_heat_vap_kj_kg": 360.0,
+    "regulator_topology": "MANIFOLD_REFERENCED_1_TO_1",
+    "fmu_ratio": null,
+    "base_fuel_pressure_psi": 55.0,
+    "rated_injector_pressure_psi": 43.5,
+    "rated_injector_flow_lb_hr": 46.0,
+    "effective_flow_lb_hr": 51.72,
+    "injector_impedance": "LOW_Z_PEAK_HOLD",
+    "batoff_deadtime_ms": {
+      "voltage_points_v": [8, 9, 10, 11, 12, 13, 14, 15],
+      "deadtime_ms": [1.75, 1.42, 1.15, 0.94, 0.78, 0.66, 0.56, 0.49],
+      "pressure_slope_ms_per_psi": 0.0065,
+      "short_pulse_knee_ms": 1.05,
+      "min_linear_pw_ms": 1.35
+    },
+    "fuel_pump": {
+      "model": "Walbro GSS342 255 HP",
+      "rewired": true,
+      "flow_lph_at_13_5v": 228.0,
+      "voltage_derated_curve": [
+        { "voltage_v": 10.5, "pressure_psi": 55.0, "flow_lph": 152.0 },
+        { "voltage_v": 12.0, "pressure_psi": 55.0, "flow_lph": 191.0 },
+        { "voltage_v": 13.5, "pressure_psi": 55.0, "flow_lph": 228.0 },
+        { "voltage_v": 14.4, "pressure_psi": 55.0, "flow_lph": 248.0 }
+      ]
+    }
+  },
+  "turbo_and_intercooler": {
+    "turbo_id": "garrett_t3_super60_t2",
+    "turbo_spec_ref": "profiles/turbo/garrett_t3_super60_t2/turbo_spec.json",
+    "wastegate_type": "INTERNAL_ACTUATOR",
+    "base_spring_psi": 10.0,
+    "max_boost_ceiling_kpa": 190.0,
+    "intercooler": {
+      "type": "STOCK_TURBO_II_SIDE_MOUNT",
+      "effectiveness": 0.64,
+      "pressure_drop_kpa": 9.0
+    },
+    "intake_tract_loss_kpa": 4.0,
+    "bov_bypass_valve": "Factory Turbo II Bosch compressor bypass valve"
+  },
+  "ecu_and_sensors": {
+    "ecu_family": "SBEC_SINGLE_BOARD",
+    "ecu_part_number": "P5234890",
+    "eprom_size_bytes": 32768,
+    "rom_manifest_ref": "rom/rom_manifest.json",
+    "pin11_continuity_verified": true,
+    "pin2_3_25_45_verified": true,
+    "fuel_table_architecture": "CHRYSLER_2D_PEFTBL",
+    "iat_reference_c": 60,
+    "map_sensor_bar": 2,
+    "rev_limit_rpm": 6500,
+    "overboost_fuel_cut_kpa": 200.0,
+    "sci_baud": 62500
+  }
+}

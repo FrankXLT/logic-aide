@@ -19,7 +19,7 @@ Copy this template into `docs/specs/<milestone>-<slug>.md` (or a PR description)
 Describe what operator problem this milestone solves, which files/directories it touches, and what is explicitly **out of scope**.
 
 - **Physical Drivetrain Compatibility Check** *(if hardware/profile related)*:
-  - Engine Block + Cylinder Head pairing verified valid (`2.2L/2.5L` <-> `8V SOHC` or `2.2L Lotus 16V Turbo III`; `2.4L` <-> `ECC/EDZ DOHC`).
+  - Engine Block + Cylinder Head pairing verified under Mopar 3-tier matrix (`BOLT_ON_NATIVE`, `HYBRID_MACHINING_REQUIRED` 7-item checklist, never `INCOMPATIBLE`).
   - SMEC vs SBEC 60-way Pin 11 continuity and Pin 2/Pin 3/Pin 25/Pin 45 FSM variant assignments verified before any wiring note.
 
 ## 3. Data, Telemetry & Privacy Contracts
@@ -27,7 +27,7 @@ Describe what operator problem this milestone solves, which files/directories it
 - **Parquet `run_kind` Impact**: `[VEHICLE_SCI | SINGLE_REPLAY | MONTE_CARLO_SWEEP | N/A]`
 - **`load_cell_rollups` Dimensions**: `250 RPM x 10 kPa MAP x TPS Regime x ACT`
 - **Missing & Fault Semantics**:
-  - Unpolled SCI parameters remain `Not in Watchlist (null)` (never coerced to `0`).
+  - Unpolled SCI parameters remain `Not in Watchlist (null)` (never coerced to `0`), with `0xF2`/`0xF4` offsets resolved strictly from `rom_manifest.json`.
   - Packet timeouts set `dead_cell_quarantine = true`.
 - **GPS Privacy**: Confirm `lat`, `lon`, `altitude`, and `gps_track` are stripped from all `tests/fixtures/` and `staging/candidates/` exports.
 
@@ -39,7 +39,7 @@ Describe what operator problem this milestone solves, which files/directories it
   - Fixed-point scaling / Q-format: `<e.g., uint8 * 0.5 kPa>`
   - Overflow / Carry guard: `<BCS/BCC clamp behavior>`
 - **68HC11 `.asm` Parity & Timing Targets**:
-  - Bit-exact parity test: `uv run pytest tests/test_<module>_parity.py`
+  - Bit-exact parity test: `uv run pytest -n 0 tests/test_<module>_parity.py`
   - Loop bus-cycle budget: `< 11 ms (< 22,000 E-clock cycles at 2.0 MHz)`
   - `$FFC0`–`$FFFF` vectors unchanged: `[Yes | Explicitly Audited]`
 
@@ -55,7 +55,7 @@ Describe what operator problem this milestone solves, which files/directories it
 Every checked gate below must be executed after the final edit and recorded with observed results:
 
 - [ ] **Module Budget**: All touched files `<= 500` lines (`650` hard ceiling); functions `<= 100` lines; LF line endings.
-- [ ] **Unit & Parity Tests**: `uv run pytest` passes with zero skipped parity assertions.
+- [ ] **Unit & Parity Tests**: `uv run pytest -n 0` passes with zero skipped parity assertions.
 - [ ] **Safety Gate** *(if firmware)*: Fresh-context `firmware-safety-reviewer` stamps `staging/candidates/<build_id>/REPORT.md` (Human Deadbolt intact; zero hardware flash calls).
 - [ ] **UI Gates** *(if UI)*: `audit_quiet_html.py`, `audit_workbench_probes.py`, and `verify_visual_contract.py` pass across `390x844`, `900x1000`, `1280x800`, and `1440x900` in both themes.
 - [ ] **Docs Sync**: `docs/WORKFLOWS.md` updated if any `WF-01`..`WF-06` behavior or error state changed.

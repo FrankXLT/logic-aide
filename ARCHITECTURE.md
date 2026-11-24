@@ -25,7 +25,7 @@ LogicAIDE is structured as a **six-layer deterministic engineering pipeline** wi
 - **Monte Carlo Exploration**: Uses `scipy.stats.qmc` (Sobol / Latin Hypercube Sampling) and `Optuna` campaigns driven by GPS-stripped `1–3 s` road stimulus slices to explore table sensitivities without risking real hardware.
 
 ### Layer 4 — Mopar Drivetrain & Compressor Thermodynamics (`profiles/`)
-- Models physical vehicle combinations across blocks (`2.2L`, `2.5L`, `2.4L`), cylinder heads (`8V SOHC`, `2.2L Lotus 16V Turbo III`, `Neon ECC DOHC` restricted strictly to `2.4L` blocks), and transaxle ratios (`A525`, `A555`, `A568`, `NV-T350`, `A413`).
+- Models physical vehicle combinations across blocks (`2.2L`, `2.5L`, `2.0L ECC`, `2.4L EDZ` sharing `4.00 in` / `101.6 mm` bore spacing), cylinder heads across a 3-tier compatibility matrix (`BOLT_ON_NATIVE` `8V #445/#782`, `Lotus 16V Turbo III`, `Maserati 16V TC`; `HYBRID_MACHINING_REQUIRED` `Neon ECC` / `2.4L EDZ` DOHC swaps with mandatory Swap Advisory Checklist; `INCOMPATIBLE` hard blocks), transaxle ratios (`A525`, `A555`, `A568`, `NV-T350`, `A413`), and Draft 2020-12 vehicle build schemas (`profiles/schema/vehicle_build.schema.json`).
 - Integrates `turbo_spec.json` 4-point digitized compressor maps to compute pressure ratio, corrected mass flow (`lb·min⁻¹`), surge margin, choke boundary, and adiabatic charge-temp rise.
 
 ### Layer 5 — Heritage Hybrid FTS5 / `sqlite-vec` RAG (`knowledge/`)
@@ -58,6 +58,6 @@ LogicAIDE is structured as a **six-layer deterministic engineering pipeline** wi
 - [ ] **Python Twin parity**: `rom/models/*_twin.py` matches `m68hc11` register/RAM outputs bit-for-bit on stimulus fixtures.
 - [ ] **11 ms loop ceiling**: Simulated worst-case interrupt + main loop execution remains `< 11 ms`.
 - [ ] **`$FFC0`–`$FFFF` vector integrity**: Reset and interrupt vectors resolve to valid ROM entrypoints.
-- [ ] **Drivetrain physics guard**: `Neon ECC` DOHC head is never paired with a `2.2L` or `2.5L` block.
+- [ ] **Mopar 3-tier drivetrain guard**: `BOLT_ON_NATIVE` vs. `HYBRID_MACHINING_REQUIRED` swap checklist enforced, and `INCOMPATIBLE` block/head pairings (e.g., `8V #445/#782` on `2.4L EDZ`) hard-blocked.
 - [ ] **GPS stripped**: `tests/fixtures/` and `staging/candidates/` contain zero raw GPS coordinates.
 - [ ] **UI contract verified**: `ui/` and `docs/showcase/` pass `audit_quiet_html.py`, `audit_workbench_probes.py`, and `verify_visual_contract.py`.

@@ -6,24 +6,38 @@ All drivetrain builders, compressor-map overlays, and charge-cooling calculation
 
 ## 1. Modular Mopar Drivetrain Schema (`profiles/`)
 
-### 1.1 Engine Blocks (`profiles/blocks.json`)
+### 1.1 Engine Blocks (`profiles/blocks.json` / `vehicle_build.schema.json`)
+
+All Chrysler `2.2L`, `2.5L`, `2.0L` Neon `ECC`/`ECB`, and `2.4L` `EDZ`/SRT-4 inline-4 blocks share **`4.00 in` (`101.6 mm`) bore-center spacing** and **`87.5 mm` standard bore** (supporting `.020` / `.040` machined overbores):
 
 | Block Code | Bore $\times$ Stroke (`mm`) | Displacement (`cm³` / `L`) | Architecture & Notes |
 | :--- | :---: | :---: | :--- |
-| **`2.2L` K-Block** | $87.5 \times 92.0$ | $2{,}213\text{ cm}^3$ (`2.2 L`) | Cast-iron open-deck inline-4; later Turbo II castings include cross-drilled block/head oil-coolant passages. |
-| **`2.5L` K-Block** | $87.5 \times 104.0$ | $2{,}501\text{ cm}^3$ (`2.5 L`) | Long-stroke cast-iron K-block sharing `87.5 mm` bore and K-deck bolt geometry with `2.2L`. |
-| **`2.4L` `EDZ` Block** | $87.5 \times 101.0$ | $2{,}429\text{ cm}^3$ (`2.4 L`) | Thin-wall cast-iron block (Stratus/Cloud/PT/SRT architecture) with oil-pan balance-shaft carrier; distinct deck/bolt layout from K-blocks. |
+| **`2.2L` K-Block** | $87.5 \times 92.0$ | $2{,}213\text{ cm}^3$ (`2.2 L`) | Cast-iron open-deck inline-4 (`10 mm` head bolts `1981–1987`; `11 mm` bolts `1988+` common block); Turbo II/III castings include cross-drilled block/head oil-coolant passages. |
+| **`2.5L` K-Block** | $87.5 \times 104.0$ | $2{,}501\text{ cm}^3$ (`2.5 L`) | Long-stroke cast-iron K-block sharing `87.5 mm` bore, `101.6 mm` bore centers, and K-deck geometry with `2.2L`. |
+| **`2.0L` `ECC` Block** | $87.5 \times 83.0$ | $1{,}996\text{ cm}^3$ (`2.0 L`) | Neon short-stroke block sharing `4.00 in` bore spacing and `87.5 mm` bore (`ECC` DOHC / `ECB` SOHC). |
+| **`2.4L` `EDZ` Block** | $87.5 \times 101.0$ | $2{,}429\text{ cm}^3$ (`2.4 L`) | Tall-deck thin-wall cast-iron block (Cloud/PT/SRT-4 architecture) sharing `4.00 in` bore centers; distinct oil-pan balance-shaft carrier & deck passages vs. K-blocks. |
 
-### 1.2 Cylinder Heads & Strict Compatibility Matrix (`profiles/heads.json`)
+### 1.2 Cylinder Heads & 3-Tier Mopar Compatibility Matrix (`profiles/heads.json`)
 
-| Cylinder Head | Valves / Cam | `2.2L` K-Block | `2.5L` K-Block | `2.4L` `EDZ` Block | Engineering Notes |
-| :--- | :--- | :---: | :---: | :---: | :--- |
-| **`8V SOHC` Open (`#445` Bathtub)** | 8V SOHC | **Compatible** | **Compatible** | Incompatible | Early 1983–87 chamber; verify turbo inconel exhaust valves and heavier springs on boosted builds. |
-| **`8V SOHC` Swirl (`#782` Fast-Burn)** | 8V SOHC | **Compatible** | **Compatible** | Incompatible | Smaller fast-burn chamber (`~6 cm³` tighter) improving low-end swirl and knock resistance (`Turbo I`/`II`). |
-| **`2.2L` Lotus `16V` (`Turbo III`)** | 16V DOHC | **Compatible** | **Compatible** | Incompatible | `Spirit R/T` & `Daytona IROC R/T` Lotus-engineered aluminum 16V head designed on the vintage K-block footprint. |
-| **Neon `ECC` (`2.0L`) / PT `EDZ` (`2.4L`) DOHC** | 16V DOHC | **FORBIDDEN** | **FORBIDDEN** | **Compatible ONLY** | **Hard Physical Guard**: `ECC`/`EDZ` DOHC heads fit **ONLY** the `2.4L` `EDZ` (and `2.0L ECC`) block. Bore-center spacing, head-bolt pattern, and oil/coolant passages are physically incompatible with vintage `2.2L`/`2.5L` K-blocks (`AGENTS.md`). |
+| Cylinder Head | Valves / Cam | `2.2L` / `2.5L` K-Block | `2.4L` `EDZ` Block | Engineering & Swap Notes |
+| :--- | :--- | :---: | :---: | :--- |
+| **`8V SOHC` Open (`#445` Bathtub)** | 8V SOHC | **`BOLT_ON_NATIVE`** | **`INCOMPATIBLE`** | Early 1983–87 chamber; verify `10 mm` vs. `11 mm` head bolts, cross-drilled gasket alignment, and inconel exhaust valves on boosted builds. |
+| **`8V SOHC` Swirl (`#782` Fast-Burn)** | 8V SOHC | **`BOLT_ON_NATIVE`** | **`INCOMPATIBLE`** | Smaller fast-burn chamber (`~6 cm³` tighter) improving swirl & knock margin (`Turbo I`/`II`); verify `11 mm` head-bolt torque & cross-drilled passages. |
+| **`1991–1993` Lotus `16V` (`Turbo III`)** | 16V DOHC | **`BOLT_ON_NATIVE`** | **`INCOMPATIBLE`** | `Spirit R/T` & `Daytona IROC R/T` Lotus-engineered K-footprint head (`11 mm` bolts, cross-drilled cooling/oil gasket verification). |
+| **`1988–1991` Maserati `16V` (`Chrysler TC`)** | 16V DOHC | **`BOLT_ON_NATIVE`** | **`INCOMPATIBLE`** | Chrysler TC by Maserati K-footprint 16V head (`11 mm` head bolts and cross-drilled block/head oil-coolant gasket checks). |
+| **Neon `ECC` (`2.0L`) / `2.4L` `EDZ`/SRT-4 DOHC** | 16V DOHC | **`HYBRID_MACHINING_REQUIRED`** | **`HYBRID_MACHINING_REQUIRED`** *(chassis swap)* / Native Deck | Shared `4.00 in` (`101.6 mm`) bore centers permit DOHC-on-K hybrid builds and full `2.4L EDZ` swaps into SMEC/SBEC cars when **all 7 Swap Advisory Checklist items** are satisfied (see below). |
 
-> **Profile Validator Invariant**: Attempting to pair `2.2L` or `2.5L` K-block profiles with an `ECC` or `EDZ` DOHC cylinder head MUST raise a hard schema validation error (`INCOMPATIBLE_BLOCK_HEAD_PAIR`).
+#### Mopar 3-Tier Validation Rules (`profiles/schema/vehicle_build.schema.json`)
+1. **`BOLT_ON_NATIVE`**: Permitted directly with `10 mm` vs. `11 mm` head-bolt sizing and cross-drilled block/head gasket verification notes (`2.2L`/`2.5L` + `8V #445`, `8V #782`, `1991–1993` Lotus `16V`, or `1988–1991` Maserati `16V`).
+2. **`HYBRID_MACHINING_REQUIRED` (`ISA-101` Amber Swap Advisory Checklist)**: Triggered when pairing a `2.2L` or `2.5L` K-block with a Neon `ECC` `2.0L` DOHC or `2.4L` `EDZ`/SRT-4 `16V` DOHC head (or installing a full `2.4L EDZ` engine into a `1988–1993` SMEC/SBEC car). Compilation requires explicit confirmation of:
+   - Oil and coolant deck passage plugging between K-block and `ECC`/`EDZ` head surfaces.
+   - External head oil feed line and external oil-pan drainback routing.
+   - Head-bolt / stud sleeve alignment (`10 mm` / `11 mm` bolt/dowel geometry).
+   - Custom timing-belt tensioner and idler geometry.
+   - Piston valve reliefs cleared for 4-valve intake/exhaust pockets.
+   - SMEC/SBEC crank/cam Hall-effect trigger synchronization.
+   - Counter-clockwise `PEFTBL` cam-peak rotation (accounting for shifted DOHC volumetric-efficiency cam peak in `PEFTBL`).
+3. **`INCOMPATIBLE` (Hard Compilation Block)**: Genuinely non-viable mechanical pairings—such as fitting an older `8V #445` or `#782` SOHC K-head (or K-footprint `Lotus`/`Maserati 16V` head) onto a `2.4L EDZ` block—halt `logicaide profile compile` with an explicit mechanical explanation.
 
 ### 1.3 Transaxle & Final Drive Library (`profiles/transaxles.json`)
 

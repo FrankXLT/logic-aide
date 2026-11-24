@@ -13,7 +13,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE vehicles (
     car_id             TEXT PRIMARY KEY,
-    vin_hash           TEXT UNIQUE NOT NULL,
+    vin_hash           TEXT UNIQUE,
     year               INTEGER NOT NULL CHECK (year BETWEEN 1984 AND 1995),
     model              TEXT NOT NULL,
     ecu_family         TEXT NOT NULL CHECK (ecu_family IN ('LM_PM', 'SMEC_DUAL_BOARD', 'SBEC_SINGLE_BOARD')),
@@ -22,6 +22,17 @@ CREATE TABLE vehicles (
     turbo_spec_id      TEXT,
     pinout_verified    INTEGER NOT NULL DEFAULT 0 CHECK (pinout_verified IN (0, 1)),
     created_at         TEXT NOT NULL
+);
+
+CREATE TABLE vehicle_profile_revisions (
+    revision_id         TEXT PRIMARY KEY,
+    car_id              TEXT NOT NULL REFERENCES vehicles(car_id),
+    schema_version      TEXT NOT NULL DEFAULT '2020-12',
+    compatibility_tier  TEXT NOT NULL CHECK (compatibility_tier IN ('BOLT_ON_NATIVE', 'HYBRID_MACHINING_REQUIRED')),
+    profile_sha256      TEXT NOT NULL,
+    profile_json        TEXT NOT NULL,
+    swap_checklist_json TEXT NOT NULL DEFAULT '[]',
+    compiled_at_utc     TEXT NOT NULL
 );
 
 CREATE TABLE sessions (
@@ -231,10 +242,12 @@ Every core subsystem exposes identical deterministic logic through both `uv run 
 
 | Subsystem | CLI Command (`uv run logicaide ...`) | FastMCP Server (`mcp_servers/`) | Exposed Operations |
 | :--- | :--- | :--- | :--- |
+| **Vehicle Profiles** | `profile compile` | *(CLI & SQLite Catalog)* | Validate Draft 2020-12 build JSON, enforce Mopar 3-tier compatibility, persist `vehicles` & `vehicle_profile_revisions` |
 | **Telemetry & Lake** | `telemetry watch`, `telemetry ingest`, `telemetry rollup`, `telemetry issues`, `telemetry export-fixture` | **`ecu-telemetry`** | `list_vehicles`, `query_load_cell_rollups`, `get_drive_timeseries`, `list_bookmarks`, `create_or_update_tuning_issue`, `export_gps_stripped_fixture` |
 | **Emulator & Twin** | `sim splay`, `sim manifest-sync`, `sim verify-sha256`, `sim parity`, `sim replay`, `sim sweep`, `sim stage` | **`hc11-emulator`** | `inspect_rom_manifest`, `verify_roundtrip_sha256`, `run_twin_parity`, `run_single_replay`, `run_monte_carlo_sweep`, `evaluate_staging_safety_gate` |
 | **Heritage RAG** | `heritage ingest`, `heritage index`, `heritage query`, `heritage verify` | **`chrysler-heritage`** | `hybrid_search_heritage`, `lookup_60way_pin`, `lookup_sci_offset`, `get_provenance_card` |
 
-### Zero Direct Serial-Flash Tool Exposure (Hardware Deadbolt)
-- **No Flashing or Raw Port Tools**: Neither `ecu-telemetry`, `hc11-emulator`, `chrysler-heritage`, nor any agent-invocable CLI wrapper exposes `ostrich2`, `flash_ecu`, `mptun`, Pin 11 bootstrap activation, or `/dev/ttyUSB*` / `COM*` write handles (`telemetry watch` is strictly read-only SCI polling).
+### Zero Direct Serial-Flash Tool Exposure & Manifest-Only SCI Polling
+- **No Flashing or Raw Port Tools**: Neither `ecu-telemetry`, `hc11-emulator`, `chrysler-heritage`, nor any agent-invocable CLI wrapper exposes `ostrich2`, `flash_ecu`, `boostbutton`, `mptun`, `minipro`, `xgpro`, `stm32flash`, Pin 11 bootstrap activation, or physical `/dev/ttyUSB*` / `COM*` write handles (`telemetry watch` is strictly read-only SCI polling, with `pyserial` `loop://` allowed for offline tests run via `uv run pytest -n 0`).
+- **Manifest-Only `0xF2`/`0xF4` Resolution**: `telemetry watch` never hardcodes `0xF2`/`0xF4` RAM offsets across SMEC vs. SBEC calibration masks — every offset comes strictly from `rom_manifest.json`.
 - **Staging Boundary Only**: `hc11-emulator` writes validated candidate builds and `REPORT.md` safety audits exclusively to `staging/candidates/<build_id>/` and emits a copyable manual flash CLI block only when all safety gate checks pass.

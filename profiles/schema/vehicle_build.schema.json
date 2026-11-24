@@ -1,0 +1,374 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://logicaide.local/profiles/schema/vehicle_build.schema.json",
+  "title": "LogicAIDE Vehicle Build Profile",
+  "description": "Draft 2020-12 schema for Mopar 1984-1995 turbo vehicle profiles, 3-tier block/head compatibility, fuel scaling, and 68HC11 ECU boundaries.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "identity_and_chassis",
+    "engine_bottom_end",
+    "cylinder_head_and_cam",
+    "transaxle_and_gearing",
+    "fuel_system",
+    "turbo_and_intercooler",
+    "ecu_and_sensors"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "description": "Optional JSON Schema dialect or schema location reference." },
+    "identity_and_chassis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["car_id", "year", "make", "model", "trim", "chassis_code", "curb_weight_kg", "drag_area_cda_m2"],
+      "properties": {
+        "car_id": { "type": "string", "minLength": 1, "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$" },
+        "year": { "type": "integer", "minimum": 1984, "maximum": 1995 },
+        "make": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "trim": { "type": "string", "minLength": 1 },
+        "chassis_code": { "type": "string", "minLength": 1 },
+        "vin_hash": { "type": "string", "minLength": 1, "description": "Optional SHA-256 hex digest or anonymized VIN identifier." },
+        "curb_weight_kg": { "type": "number", "exclusiveMinimum": 0 },
+        "drag_area_cda_m2": { "type": "number", "exclusiveMinimum": 0 },
+        "notes": { "type": "string" }
+      }
+    },
+    "engine_bottom_end": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_code", "nominal_bore_mm", "overbore_in", "actual_bore_mm", "stroke_mm",
+        "bore_center_spacing_mm", "displacement_cc", "compression_ratio",
+        "head_bolt_size_mm", "cross_drilled_block", "piston_valve_reliefs", "deck_modifications"
+      ],
+      "properties": {
+        "block_code": { "type": "string", "enum": ["2.2L_K", "2.5L_K", "2.4L_EDZ", "2.0L_ECC"] },
+        "nominal_bore_mm": { "type": "number", "const": 87.5 },
+        "overbore_in": { "type": "number", "minimum": 0 },
+        "actual_bore_mm": { "type": "number", "minimum": 87.5 },
+        "stroke_mm": { "type": "number", "exclusiveMinimum": 0 },
+        "bore_center_spacing_mm": { "type": "number", "const": 101.6 },
+        "displacement_cc": { "type": "number", "exclusiveMinimum": 0 },
+        "compression_ratio": { "type": "number", "exclusiveMinimum": 0 },
+        "head_bolt_size_mm": { "type": "integer", "enum": [10, 11] },
+        "cross_drilled_block": { "type": "boolean" },
+        "piston_valve_reliefs": { "type": "boolean" },
+        "deck_modifications": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "cylinder_head_and_cam": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["head_code", "valves", "cam_architecture", "compatibility_tier", "required_swap_mods"],
+      "properties": {
+        "head_code": {
+          "type": "string",
+          "enum": ["8V_445_BATHTUB", "8V_782_SWIRL", "LOTUS_16V_T3", "MASERATI_16V_TC", "NEON_ECC_20_DOHC", "EDZ_24_DOHC"]
+        },
+        "valves": { "type": "integer", "enum": [8, 16] },
+        "cam_architecture": { "type": "string", "enum": ["SOHC", "DOHC"] },
+        "compatibility_tier": { "type": "string", "enum": ["BOLT_ON_NATIVE", "HYBRID_MACHINING_REQUIRED"] },
+        "required_swap_mods": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "oil_coolant_deck_passage_plugging",
+              "external_head_oil_feed_and_pan_drainback",
+              "head_bolt_stud_sleeve_alignment",
+              "custom_timing_belt_tensioner_geometry",
+              "piston_valve_reliefs",
+              "smec_sbec_crank_cam_hall_sync",
+              "ccw_peftbl_cam_peak_rotation",
+              "10mm_11mm_bolt_gasket_note",
+              "edz_chassis_mount_swap"
+            ]
+          }
+        },
+        "advisory_notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "head_code": { "enum": ["8V_445_BATHTUB", "8V_782_SWIRL"] } },
+            "required": ["head_code"]
+          },
+          "then": {
+            "properties": { "valves": { "const": 8 }, "cam_architecture": { "const": "SOHC" } }
+          },
+          "else": {
+            "properties": { "valves": { "const": 16 }, "cam_architecture": { "const": "DOHC" } }
+          }
+        }
+      ]
+    },
+    "transaxle_and_gearing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transaxle_code", "assembly_tag", "forward_ratios", "final_drive_ratio", "tire_spec", "vss_pulses_per_rev"],
+      "properties": {
+        "transaxle_code": { "type": "string", "enum": ["A525", "A555", "A568", "NV_T350", "A413"] },
+        "assembly_tag": { "type": "string", "minLength": 1 },
+        "forward_ratios": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "items": { "type": "number", "exclusiveMinimum": 0 }
+        },
+        "final_drive_ratio": { "type": "number", "exclusiveMinimum": 0 },
+        "tire_spec": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["section_width_mm", "aspect_ratio_pct", "rim_diameter_in", "loaded_radius_factor", "rollout_circumference_in"],
+          "properties": {
+            "section_width_mm": { "type": "number", "exclusiveMinimum": 0 },
+            "aspect_ratio_pct": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+            "rim_diameter_in": { "type": "number", "exclusiveMinimum": 0 },
+            "loaded_radius_factor": { "type": "number", "exclusiveMinimum": 0, "maximum": 1.05 },
+            "rollout_circumference_in": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        },
+        "vss_pulses_per_rev": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "fuel_system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fuel_grade", "stoich_afr", "specific_gravity", "latent_heat_vap_kj_kg",
+        "regulator_topology", "base_fuel_pressure_psi", "rated_injector_pressure_psi",
+        "rated_injector_flow_lb_hr", "effective_flow_lb_hr", "injector_impedance",
+        "batoff_deadtime_ms", "fuel_pump"
+      ],
+      "properties": {
+        "fuel_grade": { "type": "string", "enum": ["93_E10", "E85", "91_E10", "RACE_100"] },
+        "stoich_afr": { "type": "number", "exclusiveMinimum": 0 },
+        "specific_gravity": { "type": "number", "exclusiveMinimum": 0 },
+        "latent_heat_vap_kj_kg": { "type": "number", "exclusiveMinimum": 0 },
+        "regulator_topology": {
+          "type": "string",
+          "enum": ["MANIFOLD_REFERENCED_1_TO_1", "FIXED_ATMOSPHERIC_RETURNLESS", "RISING_RATE_FMU"]
+        },
+        "fmu_ratio": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "base_fuel_pressure_psi": { "type": "number", "exclusiveMinimum": 0 },
+        "rated_injector_pressure_psi": { "type": "number", "exclusiveMinimum": 0 },
+        "rated_injector_flow_lb_hr": { "type": "number", "exclusiveMinimum": 0 },
+        "effective_flow_lb_hr": { "type": "number", "exclusiveMinimum": 0 },
+        "injector_impedance": { "type": "string", "enum": ["LOW_Z_PEAK_HOLD", "HIGH_Z_SATURATED"] },
+        "batoff_deadtime_ms": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["voltage_points_v", "deadtime_ms", "pressure_slope_ms_per_psi", "short_pulse_knee_ms", "min_linear_pw_ms"],
+          "properties": {
+            "voltage_points_v": {
+              "type": "array",
+              "minItems": 8,
+              "items": { "type": "number", "minimum": 6, "maximum": 18 },
+              "allOf": [
+                { "contains": { "type": "number", "maximum": 8 } },
+                { "contains": { "type": "number", "minimum": 15 } }
+              ]
+            },
+            "deadtime_ms": { "type": "array", "minItems": 8, "items": { "type": "number", "minimum": 0 } },
+            "pressure_slope_ms_per_psi": { "type": "number", "minimum": 0 },
+            "short_pulse_knee_ms": { "type": "number", "minimum": 0 },
+            "min_linear_pw_ms": { "type": "number", "minimum": 0 }
+          }
+        },
+        "fuel_pump": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["model", "rewired", "flow_lph_at_13_5v", "voltage_derated_curve"],
+          "properties": {
+            "model": { "type": "string", "minLength": 1 },
+            "rewired": { "type": "boolean" },
+            "flow_lph_at_13_5v": { "type": "number", "exclusiveMinimum": 0 },
+            "voltage_derated_curve": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["voltage_v", "pressure_psi", "flow_lph"],
+                "properties": {
+                  "voltage_v": { "type": "number", "exclusiveMinimum": 0 },
+                  "pressure_psi": { "type": "number", "minimum": 0 },
+                  "flow_lph": { "type": "number", "minimum": 0 }
+                }
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "regulator_topology": { "const": "RISING_RATE_FMU" } },
+            "required": ["regulator_topology"]
+          },
+          "then": {
+            "properties": { "fmu_ratio": { "type": "number", "exclusiveMinimum": 1 } },
+            "required": ["fmu_ratio"]
+          }
+        }
+      ]
+    },
+    "turbo_and_intercooler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "turbo_id", "turbo_spec_ref", "wastegate_type", "base_spring_psi",
+        "max_boost_ceiling_kpa", "intercooler", "intake_tract_loss_kpa", "bov_bypass_valve"
+      ],
+      "properties": {
+        "turbo_id": { "type": "string", "minLength": 1 },
+        "turbo_spec_ref": { "type": "string", "minLength": 1 },
+        "wastegate_type": { "type": "string", "minLength": 1 },
+        "base_spring_psi": { "type": "number", "minimum": 0 },
+        "max_boost_ceiling_kpa": { "type": "number", "exclusiveMinimum": 0 },
+        "intercooler": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "effectiveness", "pressure_drop_kpa"],
+          "properties": {
+            "type": { "type": "string", "minLength": 1 },
+            "effectiveness": { "type": "number", "minimum": 0, "maximum": 1 },
+            "pressure_drop_kpa": { "type": "number", "minimum": 0 }
+          }
+        },
+        "intake_tract_loss_kpa": { "type": "number", "minimum": 0 },
+        "bov_bypass_valve": { "type": "string", "minLength": 1 }
+      }
+    },
+    "ecu_and_sensors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ecu_family", "ecu_part_number", "eprom_size_bytes", "rom_manifest_ref",
+        "pin11_continuity_verified", "pin2_3_25_45_verified", "fuel_table_architecture",
+        "iat_reference_c", "map_sensor_bar", "rev_limit_rpm", "overboost_fuel_cut_kpa", "sci_baud"
+      ],
+      "properties": {
+        "ecu_family": { "type": "string", "enum": ["SMEC_DUAL_BOARD", "SBEC_SINGLE_BOARD", "LM_PM"] },
+        "ecu_part_number": { "type": "string", "minLength": 1 },
+        "eprom_size_bytes": { "type": "integer", "const": 32768 },
+        "rom_manifest_ref": { "type": "string", "minLength": 1 },
+        "pin11_continuity_verified": { "type": "boolean" },
+        "pin2_3_25_45_verified": { "type": "boolean" },
+        "fuel_table_architecture": { "type": "string", "enum": ["CHRYSLER_2D_PEFTBL", "CHRYSLER_3D_T3"] },
+        "iat_reference_c": { "type": "integer", "enum": [60, 90] },
+        "map_sensor_bar": { "type": "integer", "enum": [1, 2, 3] },
+        "rev_limit_rpm": { "type": "integer", "minimum": 1000, "maximum": 8160 },
+        "overboost_fuel_cut_kpa": { "type": "number", "exclusiveMinimum": 0 },
+        "sci_baud": { "type": "integer", "const": 62500 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "map_sensor_bar": { "const": 1 } }, "required": ["map_sensor_bar"] },
+          "then": { "properties": { "overboost_fuel_cut_kpa": { "maximum": 105 } } }
+        },
+        {
+          "if": { "properties": { "map_sensor_bar": { "const": 2 } }, "required": ["map_sensor_bar"] },
+          "then": { "properties": { "overboost_fuel_cut_kpa": { "maximum": 205 } } }
+        },
+        {
+          "if": { "properties": { "map_sensor_bar": { "const": 3 } }, "required": ["map_sensor_bar"] },
+          "then": { "properties": { "overboost_fuel_cut_kpa": { "maximum": 315 } } }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "engine_bottom_end": { "properties": { "block_code": { "enum": ["2.4L_EDZ", "2.0L_ECC"] } }, "required": ["block_code"] },
+          "cylinder_head_and_cam": {
+            "properties": { "head_code": { "enum": ["8V_445_BATHTUB", "8V_782_SWIRL", "LOTUS_16V_T3", "MASERATI_16V_TC"] } },
+            "required": ["head_code"]
+          }
+        },
+        "required": ["engine_bottom_end", "cylinder_head_and_cam"]
+      },
+      "then": false
+    },
+    {
+      "if": {
+        "properties": {
+          "engine_bottom_end": { "properties": { "block_code": { "enum": ["2.4L_EDZ", "2.0L_ECC"] } }, "required": ["block_code"] },
+          "cylinder_head_and_cam": { "properties": { "head_code": { "enum": ["NEON_ECC_20_DOHC", "EDZ_24_DOHC"] } }, "required": ["head_code"] }
+        },
+        "required": ["engine_bottom_end", "cylinder_head_and_cam"]
+      },
+      "then": {
+        "properties": {
+          "cylinder_head_and_cam": {
+            "properties": {
+              "compatibility_tier": { "const": "HYBRID_MACHINING_REQUIRED" },
+              "required_swap_mods": {
+                "allOf": [
+                  { "contains": { "const": "smec_sbec_crank_cam_hall_sync" } },
+                  { "contains": { "const": "ccw_peftbl_cam_peak_rotation" } },
+                  { "contains": { "const": "edz_chassis_mount_swap" } }
+                ]
+              }
+            },
+            "required": ["compatibility_tier", "required_swap_mods"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "engine_bottom_end": { "properties": { "block_code": { "enum": ["2.2L_K", "2.5L_K"] } }, "required": ["block_code"] },
+          "cylinder_head_and_cam": { "properties": { "head_code": { "enum": ["NEON_ECC_20_DOHC", "EDZ_24_DOHC"] } }, "required": ["head_code"] }
+        },
+        "required": ["engine_bottom_end", "cylinder_head_and_cam"]
+      },
+      "then": {
+        "properties": {
+          "engine_bottom_end": { "properties": { "piston_valve_reliefs": { "const": true } }, "required": ["piston_valve_reliefs"] },
+          "cylinder_head_and_cam": {
+            "properties": {
+              "compatibility_tier": { "const": "HYBRID_MACHINING_REQUIRED" },
+              "required_swap_mods": {
+                "allOf": [
+                  { "contains": { "const": "oil_coolant_deck_passage_plugging" } },
+                  { "contains": { "const": "external_head_oil_feed_and_pan_drainback" } },
+                  { "contains": { "const": "head_bolt_stud_sleeve_alignment" } },
+                  { "contains": { "const": "custom_timing_belt_tensioner_geometry" } },
+                  { "contains": { "const": "piston_valve_reliefs" } },
+                  { "contains": { "const": "smec_sbec_crank_cam_hall_sync" } },
+                  { "contains": { "const": "ccw_peftbl_cam_peak_rotation" } }
+                ]
+              }
+            },
+            "required": ["compatibility_tier", "required_swap_mods"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "engine_bottom_end": { "properties": { "block_code": { "enum": ["2.2L_K", "2.5L_K"] } }, "required": ["block_code"] },
+          "cylinder_head_and_cam": {
+            "properties": { "head_code": { "enum": ["8V_445_BATHTUB", "8V_782_SWIRL", "LOTUS_16V_T3", "MASERATI_16V_TC"] } },
+            "required": ["head_code"]
+          }
+        },
+        "required": ["engine_bottom_end", "cylinder_head_and_cam"]
+      },
+      "then": {
+        "properties": {
+          "cylinder_head_and_cam": {
+            "properties": { "compatibility_tier": { "const": "BOLT_ON_NATIVE" } },
+            "required": ["compatibility_tier"]
+          }
+        }
+      }
+    }
+  ]
+}

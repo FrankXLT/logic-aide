@@ -13,7 +13,7 @@ The `.claude/` directory configures specialized subagents, path-scoped safety ru
 
 `.claude/settings.json` enforces a non-negotiable read-only boundary around live vehicle flashing, secrets, and stock ROM baselines:
 
-- **Denied Flashing / Serial Bash patterns**: `*ostrich2*`, `*flash_ecu*`, `*mptun*`, `*dd */dev/tty*`, serial redirection/tools (`*> /dev/tty*`, `*tee */dev/tty*`, `*cp */dev/tty*`, `*cat */dev/tty*`, `*pyserial*`, `*minicom*`, `*picocom*`, `*socat*`, `*stty */dev/tty*`, `*COM[0-9]*`), plus `Bash` mutation patterns against `rom/inputs` and `rom/stock_baselines`
+- **Denied Flashing / Serial Bash patterns**: `*ostrich2*`, `*flash_ecu*`, `*boostbutton*`, `*mptun*`, `*minipro*`, `*xgpro*`, `*stm32flash*`, physical serial paths (`*/dev/ttyUSB*`, `*/dev/ttyACM*`, `*/dev/ttyS*`, `*/dev/cu.*`, `*COM[0-9]*`), serial redirection/tools (`*dd */dev/tty*`, `*> /dev/tty*`, `*tee */dev/tty*`, `*cp */dev/tty*`, `*cat */dev/tty*`, `*minicom*`, `*picocom*`, `*socat*`, `*stty */dev/tty*`), plus `Bash` mutation patterns against `rom/inputs` and `rom/stock_baselines`. *(Note: `pyserial` package installation via `uv add pyserial` and offline `pyserial` `loop://` unit tests are intentionally allowed.)*
 - **Denied Secret Access (`Read` / `Grep` / `Bash`)**: `./.env`, `./.env.*`, `./secrets.env`, nested `**/.env*`, `**/secrets.env`, `**/*.pem`, `**/*.key`
 - **Denied Baseline Edits/Writes (`Edit` / `Write`)**: `./rom/inputs/**`, `./rom/stock_baselines/**`
 

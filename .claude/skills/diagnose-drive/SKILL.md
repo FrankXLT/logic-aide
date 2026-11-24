@@ -22,7 +22,7 @@ Use this workflow to investigate a vehicle drive (`VEHICLE_SCI`) from `Spacebar`
 Before blaming calibration tables, classify every anomalous channel:
 - **`Not in Watchlist (null)`**: Channel was omitted from that drive's 62.5k High-Speed SCI watchlist. Do **not** treat `null` as `0.0` or a sensor short.
 - **Dead-Cell Timeout Quarantine**: Check `dead_cell_quarantine = true` flags indicating SCI packet drop or bus stall; exclude quarantined ticks from statistical rollups and flag hardware cable/baud diagnostics.
-- **Confirmed Sensor/Calibration Anomaly**: Verify physical plausibility (`MAP kPa`, `TPS %`, `ACT °C`, `ECT °C`, `Battery V`) and cross-reference `rom_manifest.json` symbols (`rom-disassembly-analyst`) or `knowledge/` (`chrysler-heritage`).
+- **Confirmed Sensor/Calibration Anomaly**: Verify physical plausibility (`MAP kPa`, `TPS %`, `ACT °C`, `ECT °C`, `Battery V`) and cross-reference `rom_manifest.json` symbols (`rom-disassembly-analyst`, resolving `0xF2`/`0xF4` offsets strictly from `rom_manifest.json` — never hardcoded across SMEC/SBEC IDs) or `knowledge/` (`chrysler-heritage`).
 
 ## Step 4 — Export GPS-Stripped `Stimulus Fixture`
 

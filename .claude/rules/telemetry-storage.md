@@ -27,3 +27,6 @@ Applies whenever working with High-Speed SCI ingestion, DuckDB queries, Parquet 
    - Raw GPS coordinates (`lat`, `lon`, `altitude`, `gps_track`) may remain in local private drive logs (`data/drives/`, gitignored) if recorded, but MUST be stripped completely before exporting any `Stimulus Fixture` slice to `tests/fixtures/` or `staging/candidates/`.
 5. **Module & Secret Hygiene**:
    - Keep modules `<= 500` lines (`650` ceiling) and never read `.env` or `secrets.env`.
+6. **Manifest-Only SCI Offsets & Sequential Tests**:
+   - Resolve `0xF2`/`0xF4` SCI RAM watchlist offsets exclusively from `rom_manifest.json` (`No Verified Source Match` if unverified — never hardcode across SMEC vs. SBEC calibration masks).
+   - Execute tests sequentially via `uv run pytest -n 0` (`pyserial` `loop://` offline tests are permitted; physical `/dev/ttyUSB*`/`COM*` writes remain strictly denied).

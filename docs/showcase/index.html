@@ -17,12 +17,24 @@
       root.setAttribute('data-theme', active);
       var meta = document.querySelector('meta[name="color-scheme"]');
       if (meta) {
-        meta.setAttribute('content', saved === 'dark' ? 'dark' : (saved === 'white' ? 'light' : 'light dark'));
+        meta.setAttribute('content', active === 'dark' ? 'dark' : 'light');
       }
     })();
   </script>
   <style>
     @layer reset, tokens, shell, archetypes, evidence, views, utilities;
+
+    @property --tab-fade-start {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 0px;
+    }
+
+    @property --tab-fade-end {
+      syntax: "<length>";
+      inherits: false;
+      initial-value: 0px;
+    }
 
     @layer reset {
       *, *::before, *::after { box-sizing: border-box; }
@@ -101,6 +113,12 @@
       }
       :root:has(> head > meta[name="color-scheme"][content="light"]) {
         color-scheme: light;
+      }
+      [data-theme="white"] {
+        color-scheme: light;
+      }
+      [data-theme="dark"] {
+        color-scheme: dark;
       }
 
       :root,
@@ -273,6 +291,10 @@
         inline-size: 15px;
         block-size: 15px;
         flex-shrink: 0;
+      }
+      [data-theme="dark"] .theme-icon-moon,
+      :root:not([data-theme="dark"]) .theme-icon-sun {
+        display: none;
       }
 
       .rail-trigger {
@@ -490,6 +512,41 @@
         color: var(--text-secondary);
       }
 
+      .va-tab-shell {
+        position: relative;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-card) var(--radius-card) 0 0;
+        min-inline-size: 0;
+        overflow: clip;
+      }
+      .va-tab-shell::before,
+      .va-tab-shell::after {
+        position: absolute;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        font-family: var(--font-mono);
+        font-size: var(--ts-sm);
+        font-weight: 700;
+        line-height: 1;
+        color: var(--text-secondary);
+        pointer-events: none;
+        opacity: 0;
+      }
+      .va-tab-shell::before {
+        content: "‹" / "";
+        inset-inline-start: 0.35rem;
+      }
+      .va-tab-shell::after {
+        content: "›" / "";
+        inset-inline-end: 0.35rem;
+      }
+      .va-tab-shell[data-overflow-start="true"]::before,
+      .va-tab-shell[data-overflow-end="true"]::after {
+        opacity: 1;
+      }
+
       .va-tab-strip {
         display: flex;
         align-items: center;
@@ -497,12 +554,42 @@
         overflow-x: auto;
         scrollbar-width: none;
         scroll-snap-type: inline proximity;
-        border-block-end: 1px solid var(--border-hairline);
-        background: var(--bg-surface);
         padding: 0.35rem 0.5rem 0;
-        border-radius: var(--radius-card) var(--radius-card) 0 0;
-        border: 1px solid var(--border-hairline);
         min-inline-size: 0;
+        --tab-fade-size: 2.25rem;
+        --tab-fade-dir: right;
+        --tab-fade-start-pos: 0;
+        --tab-fade-end-pos: 100%;
+        scroll-padding-inline: var(--tab-fade-size);
+        mask:
+          linear-gradient(black, black) no-clip subtract,
+          linear-gradient(to var(--tab-fade-dir), black, transparent) var(--tab-fade-start-pos) 0 / var(--tab-fade-start) 100% no-repeat no-clip,
+          linear-gradient(to var(--tab-fade-dir), transparent, black) var(--tab-fade-end-pos) 0 / var(--tab-fade-end) 100% no-repeat no-clip;
+        animation: reveal-tab-fade-start linear both, hide-tab-fade-end linear both;
+        animation-timeline: scroll(self inline);
+        animation-range: 0 var(--tab-fade-size), calc(100% - var(--tab-fade-size)) 100%;
+        transition: --tab-fade-start 0.2s, --tab-fade-end 0.2s;
+      }
+      .va-tab-strip:dir(rtl) {
+        --tab-fade-dir: left;
+        --tab-fade-start-pos: 100%;
+        --tab-fade-end-pos: 0;
+      }
+      .va-tab-strip.more-start {
+        --tab-fade-start: var(--tab-fade-size);
+      }
+      .va-tab-strip.more-end {
+        --tab-fade-end: var(--tab-fade-size);
+      }
+      @keyframes reveal-tab-fade-start {
+        to {
+          --tab-fade-start: var(--tab-fade-size);
+        }
+      }
+      @keyframes hide-tab-fade-end {
+        from {
+          --tab-fade-end: var(--tab-fade-size);
+        }
       }
       .va-tab-strip::-webkit-scrollbar { display: none; }
       .va-tab {
@@ -883,6 +970,57 @@
         padding-inline-start: 0.65rem;
         border-inline-start: 2px solid var(--border-strong);
       }
+      .compat-advisory {
+        border: 1px solid var(--border-hairline);
+        border-inline-start: 3px solid var(--status-ok);
+        border-radius: var(--radius-inner);
+        padding: 0.65rem 0.75rem;
+        background: var(--status-ok-bg);
+        color: var(--text-primary);
+        font-size: var(--ts-xs);
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .compat-advisory[data-state="warn"] {
+        background: var(--status-warn-bg);
+        border-color: var(--border-strong);
+        border-inline-start-color: var(--status-warn);
+      }
+      .compat-advisory[data-state="fault"] {
+        background: var(--status-err-bg);
+        border-color: var(--border-strong);
+        border-inline-start-color: var(--status-danger);
+      }
+      .compat-advisory-title {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        color: var(--status-ok);
+      }
+      .compat-advisory[data-state="warn"] .compat-advisory-title {
+        color: var(--tint-amber-fg);
+      }
+      .compat-advisory[data-state="fault"] .compat-advisory-title {
+        color: var(--status-danger);
+      }
+      .compat-advisory-body {
+        color: var(--text-secondary);
+      }
+      .compat-checklist {
+        margin: 0.15rem 0 0;
+        padding-inline-start: 1.15rem;
+        list-style: decimal;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.25rem;
+        color: var(--text-secondary);
+      }
+      @media (min-width: 680px) {
+        .compat-checklist {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: 1rem;
+        }
+      }
       .roadmap-grid {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
@@ -891,6 +1029,9 @@
       @media (min-width: 820px) {
         .roadmap-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .roadmap-grid > .va-card:last-child:nth-child(odd) {
+          grid-column: 1 / -1;
         }
       }
       .site-footer {
@@ -906,7 +1047,7 @@
 
       /* No-JS graceful degradation: show all panels cleanly in sequence */
       @media (scripting: none) {
-        .va-tab-strip, #rail-toggle, #theme-toggle { display: none; }
+        .va-tab-shell, .va-tab-strip, #rail-toggle, #theme-toggle { display: none; }
         [role="tabpanel"][hidden="until-found"] {
           display: block;
           content-visibility: visible;
@@ -936,7 +1077,7 @@
     }
 
     @media print {
-      .va-shell-topbar, .va-side-rail, .va-tab-strip, .drawer-backdrop, .qe-spec-drawer { display: none; }
+      .va-shell-topbar, .va-side-rail, .va-tab-shell, .va-tab-strip, .drawer-backdrop, .qe-spec-drawer { display: none; }
       [role="tabpanel"][hidden="until-found"] { display: block; }
       body { background: #FFFFFF; color: #0F172A; }
     }
@@ -962,7 +1103,20 @@
     <div class="topbar-right">
       <span class="va-pill" data-variant="status" data-state="nominal">Deadbolt Armed</span>
       <button type="button" id="theme-toggle" class="topbar-btn" aria-pressed="false" aria-label="Switch to Garage Dark theme">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="5"/>
+          <line x1="12" y1="19" x2="12" y2="22"/>
+          <line x1="2" y1="12" x2="5" y2="12"/>
+          <line x1="19" y1="12" x2="22" y2="12"/>
+          <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/>
+          <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/>
+          <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/>
+          <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/>
+        </svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>
+        </svg>
         <span id="theme-label">Garage Dark</span>
       </button>
     </div>
@@ -979,7 +1133,7 @@
         <button type="button" class="rail-link" data-tab-jump="tab-emulator">3. Python Twin &amp; Sim <span class="va-meta-inline">m68hc11</span></button>
         <button type="button" class="rail-link" data-tab-jump="tab-drivetrain">4. Drivetrain &amp; Turbo <span class="va-meta-inline">PR / T2</span></button>
         <button type="button" class="rail-link" data-tab-jump="tab-safety">5. RAG &amp; Deadbolt <span class="va-meta-inline">3-Gate</span></button>
-        <button type="button" class="rail-link" data-tab-jump="tab-reference">6. 60-Way &amp; Roadmap <span class="va-meta-inline">M1-M4</span></button>
+        <button type="button" class="rail-link" data-tab-jump="tab-reference">6. 60-Way &amp; Roadmap <span class="va-meta-inline">M1-M5</span></button>
         <div class="rail-divider">
           <div class="rail-meta">CLI: uv run logicaide</div>
           <div class="rail-meta">Loop Cap: 11.0 ms (22k cyc)</div>
@@ -1024,13 +1178,15 @@
         </section>
 
         <div>
-          <div class="va-tab-strip" role="tablist" aria-label="LogicAIDE Architecture Sections">
-            <button type="button" role="tab" class="va-tab" id="tab-topology" aria-controls="panel-topology" aria-selected="true" tabindex="0">System Topology</button>
-            <button type="button" role="tab" class="va-tab" id="tab-telemetry" aria-controls="panel-telemetry" aria-selected="false" tabindex="-1">62.5k SCI &amp; Lake</button>
-            <button type="button" role="tab" class="va-tab" id="tab-emulator" aria-controls="panel-emulator" aria-selected="false" tabindex="-1">Python Twin &amp; Sim</button>
-            <button type="button" role="tab" class="va-tab" id="tab-drivetrain" aria-controls="panel-drivetrain" aria-selected="false" tabindex="-1">Drivetrain &amp; Turbo</button>
-            <button type="button" role="tab" class="va-tab" id="tab-safety" aria-controls="panel-safety" aria-selected="false" tabindex="-1">RAG &amp; Deadbolt</button>
-            <button type="button" role="tab" class="va-tab" id="tab-reference" aria-controls="panel-reference" aria-selected="false" tabindex="-1">60-Way &amp; Roadmap</button>
+          <div class="va-tab-shell" data-overflow-start="false" data-overflow-end="false">
+            <div class="va-tab-strip" role="tablist" aria-label="LogicAIDE Architecture Sections">
+              <button type="button" role="tab" class="va-tab" id="tab-topology" aria-controls="panel-topology" aria-selected="true" tabindex="0">System Topology</button>
+              <button type="button" role="tab" class="va-tab" id="tab-telemetry" aria-controls="panel-telemetry" aria-selected="false" tabindex="-1">62.5k SCI &amp; Lake</button>
+              <button type="button" role="tab" class="va-tab" id="tab-emulator" aria-controls="panel-emulator" aria-selected="false" tabindex="-1">Python Twin &amp; Sim</button>
+              <button type="button" role="tab" class="va-tab" id="tab-drivetrain" aria-controls="panel-drivetrain" aria-selected="false" tabindex="-1">Drivetrain &amp; Turbo</button>
+              <button type="button" role="tab" class="va-tab" id="tab-safety" aria-controls="panel-safety" aria-selected="false" tabindex="-1">RAG &amp; Deadbolt</button>
+              <button type="button" role="tab" class="va-tab" id="tab-reference" aria-controls="panel-reference" aria-selected="false" tabindex="-1">60-Way &amp; Roadmap</button>
+            </div>
           </div>
 
           <div role="tabpanel" id="panel-topology" aria-labelledby="tab-topology" tabindex="0">
@@ -1833,13 +1989,17 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
 <line x1="78.0" y1="26.0" x2="574.0" y2="26.0" stroke="var(--border-hairline)" stroke-width="0.9"/>
 <text x="70.0" y="29.0" text-anchor="end" font-family="var(--font-mono)" font-size="11.5" font-weight="500" fill="var(--text-secondary)">3.5</text>
 <rect data-role="frame" x="78.0" y="26.0" width="496.0" height="224.0" fill="none" stroke="var(--text-primary)" stroke-width="1.1"/>
-<text x="326.0" y="290.0" text-anchor="middle" font-family="var(--font-mono)" font-size="12.0" font-weight="700" fill="var(--text-primary)">m_dot_corr / lb·min⁻¹</text>
+<text x="326.0" y="290.0" text-anchor="middle" font-family="var(--font-mono)" font-size="12.0" font-weight="700" fill="var(--text-primary)">Corrected Airflow / lb·min⁻¹</text>
 <text x="22" y="138.0" transform="rotate(-90 22 138.0)" text-anchor="middle" font-family="var(--font-mono)" font-size="12.0" font-weight="700" fill="var(--text-primary)">PR / 1</text>
 <g clip-path="url(#qe-clip-632100)">
-<polygon points="78.0,84.2 574.0,84.2 574.0,26.0 78.0,26.0" fill="var(--status-err-bg)" opacity="0.50"/>
+<polygon points="78.0,84.2 574.0,84.2 574.0,26.0 78.0,26.0" fill="var(--status-err-bg)" opacity="0.24"/>
 <path d="M 78.0 84.2 L 574.0 84.2" fill="none" stroke="var(--status-danger)" stroke-width="1.7" stroke-dasharray="8,3,2,3"/>
-<polygon points="95.4,250.0 103.2,250.0 111.0,244.9 118.8,238.8 126.6,232.7 134.5,226.6 142.3,220.5 150.1,214.4 157.9,208.3 165.7,202.2 173.5,196.0 181.4,189.9 189.2,183.8 197.0,177.7 204.8,171.6 212.6,165.5 220.5,159.4 228.3,153.3 236.1,147.1 243.9,141.0 251.7,134.9 259.5,128.8 267.4,122.7 275.2,116.6 283.0,110.5 290.8,104.4 298.6,98.2 306.5,92.1 314.3,86.0 322.1,79.9 329.9,73.8 337.7,67.7 345.5,61.6 353.4,55.5 361.2,49.3 369.0,43.2 376.8,37.1 384.6,31.0 392.5,26.0 400.3,26.0 408.1,26.0 415.9,26.0 423.7,26.0 431.5,26.0 439.4,26.0 447.2,26.0 455.0,26.0 462.8,26.0 470.6,26.0 478.5,26.0 486.3,26.0 494.1,26.0 501.9,26.0 509.7,26.0 517.5,26.0 525.4,26.0 533.2,26.0 541.0,26.0 548.8,26.0 556.6,26.0 556.6,26.0 95.4,26.0" fill="var(--status-warn-bg)" opacity="0.50"/>
+<polygon points="95.4,250.0 103.2,250.0 111.0,244.9 118.8,238.8 126.6,232.7 134.5,226.6 142.3,220.5 150.1,214.4 157.9,208.3 165.7,202.2 173.5,196.0 181.4,189.9 189.2,183.8 197.0,177.7 204.8,171.6 212.6,165.5 220.5,159.4 228.3,153.3 236.1,147.1 243.9,141.0 251.7,134.9 259.5,128.8 267.4,122.7 275.2,116.6 283.0,110.5 290.8,104.4 298.6,98.2 306.5,92.1 314.3,86.0 322.1,79.9 329.9,73.8 337.7,67.7 345.5,61.6 353.4,55.5 361.2,49.3 369.0,43.2 376.8,37.1 384.6,31.0 392.5,26.0 400.3,26.0 408.1,26.0 415.9,26.0 423.7,26.0 431.5,26.0 439.4,26.0 447.2,26.0 455.0,26.0 462.8,26.0 470.6,26.0 478.5,26.0 486.3,26.0 494.1,26.0 501.9,26.0 509.7,26.0 517.5,26.0 525.4,26.0 533.2,26.0 541.0,26.0 548.8,26.0 556.6,26.0 556.6,26.0 95.4,26.0" fill="var(--status-warn-bg)" opacity="0.22"/>
 <path d="M 95.4 250.0 L 103.2 250.0 L 111.0 244.9 L 118.8 238.8 L 126.6 232.7 L 134.5 226.6 L 142.3 220.5 L 150.1 214.4 L 157.9 208.3 L 165.7 202.2 L 173.5 196.0 L 181.4 189.9 L 189.2 183.8 L 197.0 177.7 L 204.8 171.6 L 212.6 165.5 L 220.5 159.4 L 228.3 153.3 L 236.1 147.1 L 243.9 141.0 L 251.7 134.9 L 259.5 128.8 L 267.4 122.7 L 275.2 116.6 L 283.0 110.5 L 290.8 104.4 L 298.6 98.2 L 306.5 92.1 L 314.3 86.0 L 322.1 79.9 L 329.9 73.8 L 337.7 67.7 L 345.5 61.6 L 353.4 55.5 L 361.2 49.3 L 369.0 43.2 L 376.8 37.1 L 384.6 31.0 L 392.5 26.0 L 400.3 26.0 L 408.1 26.0 L 415.9 26.0 L 423.7 26.0 L 431.5 26.0 L 439.4 26.0 L 447.2 26.0 L 455.0 26.0 L 462.8 26.0 L 470.6 26.0 L 478.5 26.0 L 486.3 26.0 L 494.1 26.0 L 501.9 26.0 L 509.7 26.0 L 517.5 26.0 L 525.4 26.0 L 533.2 26.0 L 541.0 26.0 L 548.8 26.0 L 556.6 26.0" fill="none" stroke="var(--status-warn)" stroke-width="1.7" stroke-dasharray="5,4"/>
+<path d="M 477.5 134.0 L 476.0 126.8 L 471.5 120.5 L 464.1 115.1 L 454.1 110.9 L 441.5 107.9 L 426.8 106.4 L 410.4 106.3 L 392.6 107.6 L 373.9 110.2 L 355.0 114.2 L 336.5 119.4 L 318.8 125.6 L 302.6 132.7 L 288.5 140.3 L 277.0 148.4 L 268.5 156.6 L 263.2 164.7 L 261.5 172.5 L 263.3 179.6 L 268.6 186.0 L 277.2 191.4 L 288.7 195.6 L 302.9 198.5 L 319.1 200.1 L 336.8 200.2 L 355.4 198.9 L 374.3 196.2 L 392.9 192.2 L 410.7 187.1 L 427.1 180.8 L 441.8 173.8 L 454.3 166.1 L 464.3 158.1 L 471.6 149.9 L 476.1 141.8 Z" fill="none" stroke="var(--text-muted)" stroke-width="1.1" stroke-dasharray="4,3" opacity="0.72"/>
+<text x="374.3" y="196.2" text-anchor="middle" dominant-baseline="central" font-family="var(--font-mono)" font-size="10.5" font-weight="600" fill="var(--text-muted)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.5" stroke-linejoin="round">68%</text>
+<path d="M 431.4 139.8 L 430.7 136.0 L 428.5 132.6 L 425.0 129.7 L 420.0 127.3 L 413.8 125.5 L 406.5 124.4 L 398.2 124.1 L 389.0 124.4 L 379.3 125.5 L 369.3 127.2 L 359.4 129.6 L 349.8 132.5 L 341.0 135.9 L 333.2 139.6 L 326.8 143.6 L 322.0 147.8 L 319.1 151.9 L 318.1 155.9 L 319.1 159.7 L 322.1 163.1 L 326.9 166.0 L 333.3 168.4 L 341.1 170.2 L 350.0 171.3 L 359.5 171.7 L 369.5 171.3 L 379.4 170.3 L 389.1 168.5 L 398.3 166.1 L 406.6 163.2 L 413.9 159.8 L 420.1 156.1 L 425.0 152.1 L 428.6 147.9 L 430.7 143.8 Z" fill="var(--tint-indigo-bg)" fill-opacity="0.22" stroke="var(--accent-focal)" stroke-width="1.15" stroke-dasharray="3,2" opacity="0.78"/>
+<text x="374.3" y="170.8" text-anchor="middle" dominant-baseline="central" font-family="var(--font-mono)" font-size="10.5" font-weight="700" fill="var(--accent-focal)" class="va-svg-halo-text" paint-order="stroke fill" stroke="var(--bg-surface)" stroke-width="3.5" stroke-linejoin="round">74%</text>
 <path d="M 95.4 248.2 L 100.5 245.1 L 105.7 242.1 L 110.9 239.0 L 116.1 236.0 L 121.3 233.0 L 126.5 230.1 L 131.6 227.1 L 136.8 224.2 L 142.0 221.3 L 147.2 218.4 L 152.4 215.6 L 157.6 212.8 L 162.7 210.0 L 167.9 207.2 L 173.1 204.5 L 178.3 201.8 L 183.5 199.1 L 188.7 196.4 L 193.8 193.8 L 199.0 191.2 L 204.2 188.6 L 209.4 186.0 L 214.6 183.5 L 219.8 181.0 L 224.9 178.5 L 230.1 176.0 L 235.3 173.6 L 240.5 171.2 L 245.7 168.8 L 250.8 166.4 L 256.0 164.1 L 261.2 161.8 L 266.4 159.5 L 271.6 157.2 L 276.8 155.0 L 281.9 152.7 L 287.1 150.6 L 292.3 148.4 L 297.5 146.2 L 302.7 144.1 L 307.9 142.0 L 313.0 140.0 L 318.2 137.9 L 323.4 135.9 L 328.6 133.9 L 333.8 132.0 L 339.0 130.0 L 344.1 128.1 L 349.3 126.2 L 354.5 124.3 L 359.7 122.5 L 364.9 120.7 L 370.1 118.9 L 375.2 117.1 L 380.4 115.4 L 385.6 113.7 L 390.8 112.0 L 396.0 110.3 L 401.2 108.7 L 406.3 107.1 L 411.5 105.5 L 416.7 103.9 L 421.9 102.4 L 427.1 100.8 L 432.2 99.3 L 437.4 97.9 L 442.6 96.4 L 447.8 95.0 L 453.0 93.6 L 458.2 92.3 L 463.3 90.9 L 468.5 89.6 L 473.7 88.3 L 478.9 87.0 L 484.1 85.8 L 489.3 84.6 L 494.4 83.4 L 499.6 82.2 L 504.8 81.1 L 510.0 80.0 L 515.2 78.9 L 520.4 77.8 L 525.5 76.8 L 530.7 75.7 L 535.9 74.7 L 541.1 73.8 L 546.3 72.8 L 551.5 71.9 L 556.6 71.0" fill="none" stroke="var(--accent-focal)" stroke-width="2"/>
 <path d="M 203.4 207.0 L 245.6 176.5 L 301.0 147.0 L 360.3 129.9 L 422.2 124.6 L 459.1 128.1" fill="none" stroke="var(--status-ok)" stroke-width="1.3" opacity="0.65"/>
 <line x1="203.4" y1="202.5" x2="203.4" y2="211.5" stroke="var(--status-ok)" stroke-width="1.3"/>
@@ -1887,8 +2047,8 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
   },
   &quot;axes&quot;: {
     &quot;x_axis&quot;: {
-      &quot;quantity&quot;: &quot;m_dot_corr&quot;,
-      &quot;quantity_calculus&quot;: &quot;m_dot_corr / lb\u00b7min\u207b\u00b9&quot;,
+      &quot;quantity&quot;: &quot;Corrected Airflow&quot;,
+      &quot;quantity_calculus&quot;: &quot;Corrected Airflow / lb\u00b7min\u207b\u00b9&quot;,
       &quot;unit&quot;: &quot;lb/min&quot;,
       &quot;scale_type&quot;: &quot;linear&quot;,
       &quot;domain&quot;: [
@@ -1925,6 +2085,16 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
       &quot;stroke_color&quot;: &quot;var(--status-warn)&quot;,
       &quot;equation&quot;: &quot;0.92 + 0.115 * x&quot;,
       &quot;direction&quot;: &quot;upper&quot;
+    }
+  ],
+  &quot;efficiency_islands&quot;: [
+    {
+      &quot;efficiency&quot;: 0.68,
+      &quot;label&quot;: &quot;68%&quot;
+    },
+    {
+      &quot;efficiency&quot;: 0.74,
+      &quot;label&quot;: &quot;74%&quot;
     }
   ],
   &quot;series&quot;: [
@@ -1984,30 +2154,34 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
                 <article class="va-card">
                   <div class="card-hdr">
                     <h2 class="card-title">Modular Mopar Drivetrain &amp; Thermo Calculator</h2>
-                    <span id="compat-badge" class="va-pill" data-variant="status" data-state="nominal">Compatible Build</span>
+                    <span id="compat-badge" class="va-pill" data-variant="status" data-state="nominal">BOLT_ON_NATIVE</span>
                   </div>
                   <div class="builder-form">
                     <div class="field-wrap">
                       <label for="sel-block" class="field-label">Engine Block</label>
                       <select id="sel-block" class="va-select">
-                        <optgroup label="Vintage K-Car Common Block">
-                          <option value="b22" selected>2.2L SOHC/Turbo Block (87.5 × 92.0 mm)</option>
-                          <option value="b25">2.5L Long-Stroke Block (87.5 × 104.0 mm)</option>
+                        <optgroup label="Vintage K-Car Common Block (4.00 in Bore Spacing)">
+                          <option value="b22" selected>2.2L K-Block (87.5 × 92.0 mm)</option>
+                          <option value="b25">2.5L K-Block Long-Stroke (87.5 × 104.0 mm)</option>
                         </optgroup>
-                        <optgroup label="Platteville / Stratus Iron Block">
-                          <option value="b24">2.4L EDZ Iron Block (87.5 × 101.0 mm)</option>
+                        <optgroup label="Neon ECC / Stratus EDZ Iron Block (4.00 in Bore Spacing)">
+                          <option value="b20">2.0L ECC Short-Stroke Block (87.5 × 83.0 mm)</option>
+                          <option value="b24">2.4L EDZ Tall-Deck Block (87.5 × 101.0 mm)</option>
                         </optgroup>
                       </select>
                     </div>
                     <div class="field-wrap">
                       <label for="sel-head" class="field-label">Cylinder Head</label>
                       <select id="sel-head" class="va-select">
-                        <optgroup label="Fits 2.2L / 2.5L K-Car Block">
-                          <option value="h8v">8V SOHC Turbo I / II Head</option>
-                          <option value="h16v" selected>2.2L Lotus 16V Turbo III Head</option>
+                        <optgroup label="K-Car Native (8V SOHC &amp; 16V DOHC)">
+                          <option value="h8v445">8V SOHC Open (#445 Bathtub)</option>
+                          <option value="h8v782">8V SOHC Fast-Burn Swirl (#782)</option>
+                          <option value="h16v" selected>1991–1993 Lotus 16V DOHC (Turbo III)</option>
+                          <option value="hmas">1988–1991 Maserati 16V DOHC (Chrysler TC)</option>
                         </optgroup>
-                        <optgroup label="Fits 2.4L Block Only">
-                          <option value="hecc">Neon ECC / EDZ 2.0L-2.4L DOHC Head</option>
+                        <optgroup label="Neon ECC / EDZ 16V DOHC (4.00 in Bore Spacing)">
+                          <option value="hecc">Neon ECC 2.0L 16V DOHC Head</option>
+                          <option value="hedz">2.4L EDZ / SRT-4 16V DOHC Head</option>
                         </optgroup>
                       </select>
                     </div>
@@ -2048,6 +2222,10 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
                       <div class="sim-stat-lbl">Charge Temp After Evap</div>
                       <div id="out-t3" class="sim-stat-val">34.0 °C (E85 Cool)</div>
                     </div>
+                  </div>
+                  <div id="compat-advisory" class="compat-advisory" data-state="nominal" aria-live="polite">
+                    <div class="compat-advisory-title">BOLT_ON_NATIVE · Direct K-Block Fitment</div>
+                    <p class="compat-advisory-body">Shared 4.00 in (101.6 mm) bore spacing. Verify 10 mm (1981–1987 early K-block) vs. 11 mm (1988+ common/Turbo) head bolts and cross-drilled block/head oil-coolant gasket passages.</p>
                   </div>
                 </article>
                 <article class="va-card">
@@ -2373,35 +2551,42 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
                 </div>
               </article>
 
-              <section aria-label="Four Milestone Roadmap">
+              <section aria-label="Five Milestone Roadmap">
                 <div class="roadmap-grid">
                   <article class="va-card">
                     <div class="card-hdr">
-                      <h3 class="card-title">Milestone 1 — Telemetry &amp; Lake</h3>
+                      <h3 class="card-title">Milestone 1 — Core CLI, Vehicle Schema &amp; Catalog</h3>
+                      <span class="va-pill" data-variant="tag">WF-06 · Draft 2020-12</span>
+                    </div>
+                    <p><code>pyproject.toml</code>, <code>logicaide profile compile</code> validator enforcing the 3-tier Mopar matrix, SQLite <code>vehicles</code> &amp; <code>vehicle_profile_revisions</code>, and <code>rom_manifest.json</code> loader.</p>
+                  </article>
+                  <article class="va-card">
+                    <div class="card-hdr">
+                      <h3 class="card-title">Milestone 2 — 62.5k SCI &amp; DuckDB Parquet Lake</h3>
                       <span class="va-pill" data-variant="tag">WF-02 · WF-03</span>
                     </div>
-                    <p>Protected USB-SCI 62.5k poller, startup dead-cell quarantine, 30s Zstd Parquet chunker, Spacebar <code>tuning_issues</code> bookmarks, and multi-car DuckDB <code>load_cell_rollups</code>.</p>
+                    <p>Protected USB-SCI poller (<code>pyserial loop://</code> tests), startup dead-cell quarantine (<code>Not in Watchlist (null)</code>), 30s Zstd Parquet chunker, Spacebar <code>tuning_issues</code>, and <code>load_cell_rollups</code>.</p>
                   </article>
                   <article class="va-card">
                     <div class="card-hdr">
-                      <h3 class="card-title">Milestone 2 — Splayed ROM &amp; Twin</h3>
+                      <h3 class="card-title">Milestone 3 — Python Twin, <code>m68hc11</code> &amp; Staging Pen</h3>
                       <span class="va-pill" data-variant="tag">WF-04</span>
                     </div>
-                    <p>Turbonator/Ghidra <code>$8000–$FFFF</code> splaying, <code>AS11</code>/Blackfoot SHA-256 round-trip proof, Python Behavioral Twins, <code>m68hc11</code> <code>$1000–$103F</code> hooks, and <code>Sobol</code>/<code>Optuna</code> sweeps.</p>
+                    <p><code>rom/models/*_twin.py</code> Q-format twins, <code>AS11</code>/Blackfoot SHA-256 round-trip, <code>m68hc11</code> <code>$8000–$FFFF</code> cycle gate (<code>&lt;= 11 ms</code>, <code>$FFC0–$FFFF</code> vectors), <code>Sobol</code>/<code>Optuna</code> sweeps, and <code>REPORT.md</code> staging.</p>
                   </article>
                   <article class="va-card">
                     <div class="card-hdr">
-                      <h3 class="card-title">Milestone 3 — Drivetrain &amp; RAG</h3>
-                      <span class="va-pill" data-variant="tag">WF-05 · WF-06</span>
+                      <h3 class="card-title">Milestone 4 — Heritage Hybrid RAG</h3>
+                      <span class="va-pill" data-variant="tag">WF-05</span>
                     </div>
-                    <p>Modular Mopar block/head/transaxle profiles, 4-point <code>turbo_spec.json</code> compressor-map digitizer, E85 charge-cooling thermodynamics, and FTS5 + <code>sqlite-vec</code> heritage RAG.</p>
+                    <p><code>Trafilatura</code> + <code>Docling</code> cleanroom ingestion (<code>data/heritage_raw/</code>), 3-tier YAML frontmatter validation (<code>knowledge/</code>), SQLite <code>FTS5</code> + <code>sqlite-vec</code> RRF search, and <code>No Verified Source Match</code> abstention.</p>
                   </article>
                   <article class="va-card">
                     <div class="card-hdr">
-                      <h3 class="card-title">Milestone 4 — HMI &amp; Staging Pen</h3>
-                      <span class="va-pill" data-variant="tag">1280×800 HMI</span>
+                      <h3 class="card-title">Milestone 5 — FastMCP Servers &amp; Workbench UI</h3>
+                      <span class="va-pill" data-variant="tag">WF-01..WF-06</span>
                     </div>
-                    <p>Full multi-car bench &amp; <code>1280×800</code> passenger-seat workbench UI, 16×16 <code>PEFTBL</code> replay diff, <code>firmware-safety-reviewer</code> gate, and manual Ostrich 2.0 / BoostButton staging pen.</p>
+                    <p>Thin FastMCP wrappers (<code>ecu-telemetry</code>, <code>hc11-emulator</code>, <code>chrysler-heritage</code>), root <code>.mcp.json</code> activation, and <code>1280×800</code> / <code>390×844</code> Garage Dark &amp; Sunlight workbench screens (<code>v9.5.0</code>).</p>
                   </article>
                 </div>
               </section>
@@ -2507,9 +2692,48 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
           link.setAttribute('aria-current', active ? 'true' : 'false');
         });
         try {
-          targetTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-        } catch (e) {}
+          targetTab.scrollIntoView({ block: 'nearest', inline: 'nearest', container: 'nearest' });
+        } catch (e) {
+          try { targetTab.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e2) {}
+        }
+        if (typeof requestAnimationFrame === 'function') {
+          requestAnimationFrame(updateTabOverflowHints);
+        }
         if (focusTab) targetTab.focus();
+      }
+
+      var tabShell = document.querySelector('.va-tab-shell');
+      var tabStrip = document.querySelector('.va-tab-strip');
+      function updateTabOverflowHints() {
+        if (!tabShell || !tabStrip) return;
+        var maxScroll = tabStrip.scrollWidth - tabStrip.clientWidth;
+        var hasOverflow = maxScroll > 4;
+        var atStart = tabStrip.scrollLeft <= 4;
+        var atEnd = !hasOverflow || tabStrip.scrollLeft >= maxScroll - 4;
+        tabShell.setAttribute('data-overflow-start', String(hasOverflow && !atStart));
+        tabShell.setAttribute('data-overflow-end', String(hasOverflow && !atEnd));
+      }
+      if (tabStrip) {
+        if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && !CSS.supports('animation-timeline', 'scroll()')) {
+          var firstTab = tabStrip.firstElementChild;
+          var lastTab = tabStrip.lastElementChild;
+          if (firstTab && lastTab && typeof IntersectionObserver === 'function') {
+            var tabObserver = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                tabStrip.classList.toggle(entry.target === firstTab ? 'more-start' : 'more-end', entry.intersectionRatio < 1);
+              });
+            }, { root: tabStrip, threshold: 1, rootMargin: '1px' });
+            tabObserver.observe(firstTab);
+            tabObserver.observe(lastTab);
+          }
+        }
+        tabStrip.addEventListener('scroll', updateTabOverflowHints, { passive: true });
+        if (typeof ResizeObserver === 'function') {
+          new ResizeObserver(updateTabOverflowHints).observe(tabStrip);
+        } else {
+          window.addEventListener('resize', updateTabOverflowHints);
+        }
+        updateTabOverflowHints();
       }
 
       tabs.forEach(function (tab, idx) {
@@ -2545,15 +2769,44 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
       });
 
       var BLOCKS = {
-        b22: { cc: 2213, family: 'kcar' },
-        b25: { cc: 2501, family: 'kcar' },
-        b24: { cc: 2429, family: 'edz' }
+        b22: { cc: 2213, family: 'kcar', label: '2.2L K-Block' },
+        b25: { cc: 2501, family: 'kcar', label: '2.5L K-Block' },
+        b20: { cc: 1996, family: 'ecc_edz', label: '2.0L ECC Block' },
+        b24: { cc: 2429, family: 'ecc_edz', label: '2.4L EDZ Block' }
       };
       var HEADS = {
-        h8v: { family: 'kcar' },
-        h16v: { family: 'kcar' },
-        hecc: { family: 'edz' }
+        h8v445: {
+          family: 'kcar',
+          label: '8V SOHC Open (#445 Bathtub)',
+          note: 'Verify 10 mm (1981–1987 early K-block) vs. 11 mm (1988+ common/Turbo) head bolts, cross-drilled cooling/oil gasket passages, and inconel exhaust valves on boosted builds.'
+        },
+        h8v782: {
+          family: 'kcar',
+          label: '8V SOHC Fast-Burn Swirl (#782)',
+          note: 'Fast-burn swirl chamber (~6 cm³ tighter) improves low-end knock margin; verify 11 mm Turbo head-bolt torque and cross-drilled block/head cooling & oil gasket passages.'
+        },
+        h16v: {
+          family: 'kcar',
+          label: '1991–1993 Lotus 16V DOHC (Turbo III)',
+          note: 'Direct K-footprint bolt-on for 11 mm common/Turbo blocks (10 mm dowel/bolt check on pre-1988 castings); verify cross-drilled cooling/oil head gasket passages.'
+        },
+        hmas: {
+          family: 'kcar',
+          label: '1988–1991 Maserati 16V DOHC (Chrysler TC)',
+          note: 'Direct K-footprint bolt-on; verify 10 mm vs. 11 mm head-bolt sizing, cross-drilled cooling/oil gasket alignment, and TC timing hardware.'
+        },
+        hecc: { family: 'ecc_edz', label: 'Neon ECC 2.0L 16V DOHC Head' },
+        hedz: { family: 'ecc_edz', label: '2.4L EDZ / SRT-4 16V DOHC Head' }
       };
+      var SWAP_CHECKLIST = [
+        'Oil & coolant deck passage plugging between K-block and ECC/EDZ surfaces',
+        'External head oil feed line & external oil-pan drainback routing',
+        'Head-bolt / stud sleeve alignment (10 mm / 11 mm dowel & bore geometry)',
+        'Custom timing-belt tensioner & idler geometry',
+        'Piston valve reliefs cleared for 4-valve intake/exhaust pockets',
+        'SMEC / SBEC crank & cam Hall-effect trigger synchronization',
+        'Counter-clockwise PEFTBL cam-peak rotation for DOHC VE shift'
+      ];
       var TRANS = {
         a525: { top: 0.72, fd: 3.87 },
         a555: { top: 0.72, fd: 3.85 },
@@ -2566,12 +2819,36 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
         e85: { coolC: 16.0, label: 'E85 Cool' }
       };
 
+      function renderAdvisory(box, state, title, body, items) {
+        if (!box) return;
+        box.setAttribute('data-state', state);
+        var titleEl = document.createElement('div');
+        titleEl.className = 'compat-advisory-title';
+        titleEl.textContent = title;
+        var bodyEl = document.createElement('p');
+        bodyEl.className = 'compat-advisory-body';
+        bodyEl.textContent = body;
+        var nodes = [titleEl, bodyEl];
+        if (items && items.length) {
+          var ol = document.createElement('ol');
+          ol.className = 'compat-checklist';
+          items.forEach(function (txt) {
+            var li = document.createElement('li');
+            li.textContent = txt;
+            ol.appendChild(li);
+          });
+          nodes.push(ol);
+        }
+        box.replaceChildren.apply(box, nodes);
+      }
+
       function updateBuilder() {
         var blkEl = document.getElementById('sel-block');
         var hdEl = document.getElementById('sel-head');
         var trEl = document.getElementById('sel-trans');
         var fuEl = document.getElementById('sel-fuel');
         var badge = document.getElementById('compat-badge');
+        var advisory = document.getElementById('compat-advisory');
         var outDisp = document.getElementById('out-disp');
         var outT2 = document.getElementById('out-t2');
         var outT3 = document.getElementById('out-t3');
@@ -2582,10 +2859,46 @@ uv run logicaide heritage query "0xF2 MAP 3-bar offset" --min-tier 2</code></pre
         var tr = TRANS[trEl.value] || TRANS.a568;
         var fu = FUELS[fuEl.value] || FUELS.e85;
 
-        var compatible = blk.family === hd.family;
-        if (badge) {
-          badge.setAttribute('data-state', compatible ? 'nominal' : 'fault');
-          badge.textContent = compatible ? 'Compatible Build' : 'Incompatible Drivetrain';
+        if (blk.family === 'kcar' && hd.family === 'kcar') {
+          if (badge) {
+            badge.setAttribute('data-state', 'nominal');
+            badge.textContent = 'BOLT_ON_NATIVE';
+          }
+          renderAdvisory(
+            advisory,
+            'nominal',
+            'BOLT_ON_NATIVE · Direct K-Block Fitment',
+            'Shared 4.00 in (101.6 mm) bore spacing (' + blk.label + ' + ' + hd.label + '). ' + hd.note,
+            null
+          );
+        } else if (hd.family === 'ecc_edz') {
+          if (badge) {
+            badge.setAttribute('data-state', 'warn');
+            badge.textContent = 'HYBRID_MACHINING_REQUIRED';
+          }
+          var isKBlock = blk.family === 'kcar';
+          var hybridLead = isKBlock
+            ? 'Shared 4.00 in (101.6 mm) bore centers permit ' + hd.label + ' on ' + blk.label + ' only after completing all 7 ISA-101 Swap Advisory Checklist gates:'
+            : 'Full ' + blk.label + ' + ' + hd.label + ' swap into a 1988–1993 SMEC/SBEC car shares 4.00 in bore spacing (native ECC/EDZ head deck passages when matched) and requires the SMEC/SBEC Swap Advisory Checklist:';
+          renderAdvisory(
+            advisory,
+            'warn',
+            'HYBRID_MACHINING_REQUIRED · ISA-101 Swap Advisory Checklist',
+            hybridLead,
+            SWAP_CHECKLIST
+          );
+        } else {
+          if (badge) {
+            badge.setAttribute('data-state', 'fault');
+            badge.textContent = 'INCOMPATIBLE · Blocked';
+          }
+          renderAdvisory(
+            advisory,
+            'fault',
+            'INCOMPATIBLE · Profile Compilation Blocked',
+            'K-head (' + hd.label + ') deck oil/coolant passages and cam-drive geometry do not align with the tall-deck balance-shaft ' + blk.label + '. logicaide profile compile hard-blocks this pairing.',
+            null
+          );
         }
 
         var kmhAt3000 = ((3000 / (tr.top * tr.fd)) * 60 * 1.94) / 1000;

@@ -3,12 +3,16 @@
 LogicAIDE is intentionally **agent- and IDE-neutral**. Whether operated from **Claude Code**, **Antigravity**, **Cursor**, **Codex CLI**, or **VS Code Copilot**, all coding agents share the same CLI-first tooling (`uv run logicaide ...`), FastMCP servers, `.quiet-ui.md` visual contract, and Hardware Deadbolt safety boundaries.
 
 ## 1. Universal Safety & Ground-Truth Rules
-- **Hardware Deadbolt**: All agents are strictly read-only with respect to live vehicle hardware flashing (`ostrich2`, `flash_ecu`, `/dev/ttyUSB*`, `COM*`) and stock ROM baselines (`rom/inputs/`, `rom/stock_baselines/`). All candidate builds land in `staging/candidates/<build_id>/` with checksums, `$FFC0`–`$FFFF` vector checks, `<= 11 ms` bus-cycle proofs, and Sobol Monte Carlo logs.
-- **Never Guess Hex Offsets or Pinouts**: Cite verified `rom_manifest.json` symbols, `docs/HARDWARE_AND_SCI_PROTOCOL.md`, or `Tier 1`/`Tier 2` heritage sources in `knowledge/`. Return `No Verified Source Match` rather than inventing RAM addresses or pin assignments.
-- **Physical Drivetrain Compatibility Guard**: Never combine a vintage `2.2L`/`2.5L` K-car block with a Neon `ECC` 2.0L DOHC cylinder head (`2.2`/`2.5` blocks use 8V SOHC or 2.2L Lotus 16V Turbo III heads; `ECC`/`EDZ` DOHC swaps pair with the `2.4L` iron block).
+- **Hardware Deadbolt**: All agents are strictly read-only with respect to live vehicle hardware flashing (`ostrich2`, `flash_ecu`, `boostbutton`, `minipro`, `/dev/ttyUSB*`, `COM*`) and stock ROM baselines (`rom/inputs/`, `rom/stock_baselines/`). Offline `pyserial` `loop://` tests are permitted; candidate builds land solely in `staging/candidates/<build_id>/` with checksums, `$FFC0`–`$FFFF` vector checks, `<= 11 ms` bus-cycle proofs, and Sobol Monte Carlo logs.
+- **Never Guess Hex Offsets or Pinouts**: Resolve `0xF2`/`0xF4` SCI RAM watchlist offsets strictly from verified `rom_manifest.json` symbols (never hardcoded across SMEC vs. SBEC calibration masks), `docs/HARDWARE_AND_SCI_PROTOCOL.md`, or `Tier 1`/`Tier 2` heritage sources in `knowledge/`. Return `No Verified Source Match` rather than inventing RAM addresses or pin assignments.
+- **Mopar 3-Tier Drivetrain Compatibility Guard**: Chrysler `2.2L`, `2.5L`, `2.0L ECC`/`ECB`, and `2.4L EDZ`/SRT-4 blocks share `4.00 in` (`101.6 mm`) bore-center spacing (`87.5 mm` bore). Classify builds strictly under `profiles/schema/vehicle_build.schema.json`:
+  - `BOLT_ON_NATIVE`: `2.2L`/`2.5L` K-block with `8V #445`, `8V #782`, `1991–1993` Lotus `16V` (`Turbo III`), or `1988–1991` Maserati `16V` DOHC (`Chrysler TC`).
+  - `HYBRID_MACHINING_REQUIRED`: `2.2L`/`2.5L` K-block with `Neon ECC 2.0L DOHC` or `2.4L EDZ`/SRT-4 `16V` DOHC head (or full `2.4L EDZ` swaps into SMEC/SBEC cars), requiring the 7-item amber Swap Advisory Checklist.
+  - `INCOMPATIBLE`: Hard compilation block for non-viable pairs (e.g., `8V #445`/`#782` SOHC or K-car `Lotus`/`Maserati 16V` heads onto a `2.4L EDZ` block).
 
 ## 2. CLI-First + FastMCP Dual Interface
 Every core subsystem exposes both a deterministic CLI command (`uv run logicaide <subcommand>`) and an optional FastMCP server (`mcp_servers/`) so non-MCP agents and scripts can run identical checks:
+- `uv run logicaide profile compile ...` (Draft 2020-12 schema + SQLite `vehicles` / `vehicle_profile_revisions`)
 - `uv run logicaide telemetry ...` <-> `ecu-telemetry` FastMCP
 - `uv run logicaide sim ...` <-> `hc11-emulator` FastMCP
 - `uv run logicaide heritage ...` <-> `chrysler-heritage` FastMCP
@@ -22,5 +26,6 @@ Every core subsystem exposes both a deterministic CLI command (`uv run logicaide
 
 ## 4. Module & Navigation Discipline
 - Keep modular code, config, and technical doc files `<= 500` lines (`650` hard ceiling) and functions `<= 100` lines (self-contained bundled HTML artifacts with inline `quiet-evidence` SVGs under `docs/showcase/` are compiled outputs exempt from the source cap).
+- Run test suites sequentially via `uv run pytest -n 0` to avoid SQLite/serial/`m68hc11` concurrency races.
 - Generate `ctags` from `rom_manifest.json` so any IDE or agent can jump straight to 68HC11 labels and Python twin counterparts without scanning monolithic binaries.
-- Keep `docs/WORKFLOWS.md` synchronized whenever workflows `WF-01`..`WF-06` evolve.
+- Keep `docs/WORKFLOWS.md` and `docs/IMPLEMENTATION_ROADMAP.md` (`M1`–`M5`) synchronized as workflows evolve.

@@ -26,6 +26,6 @@ Every item below MUST pass with observed command/file evidence. Return the struc
 4. **8-Bit Carry / Overflow & Stack Safety**:
    - Audit every modified `.asm` branch for 8-bit unsigned/signed wraparound (`ADDA`/`SUBA`/`MUL`/`IDIV`), missing `BCS`/`BCC` saturation clamps, and stack pointer (`SP`) underflow/overflow.
 5. **Mechanical & Thermodynamic Clamps**:
-   - Confirm explicit fuel, spark retard, and boost-cut / wastegate ceilings match the target `profiles/` drivetrain & fuel (`93 E10` vs `E85`) limits and guard against `2.2L`/`2.5L` vs `ECC` 2.0L DOHC incompatibility.
+   - Confirm explicit fuel, spark retard, rev limit (`<= 8160 RPM`), and boost-cut / wastegate ceilings match the target `profiles/` drivetrain & fuel (`93 E10` vs `E85`) limits, enforcing the 3-tier Mopar compatibility matrix (`BOLT_ON_NATIVE`, `HYBRID_MACHINING_REQUIRED` swap checklist verified, and hard-blocking `INCOMPATIBLE` pairs such as `8V #445`/`#782` SOHC on `2.4L EDZ`).
 6. **GPS Privacy & Human Deadbolt**:
    - Confirm attached `tests/fixtures/` or `staging/candidates/<build_id>/` stimulus slices contain zero raw GPS coordinates, and confirm `REPORT.md` provides only a copyable manual CLI block — never executing a flash.
