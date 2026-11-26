@@ -1,0 +1,377 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-11-26T23:33:23Z",
+  "preset_count": 3,
+  "presets": [
+    {
+      "preset_id": "sst27sf020_74ls193_socket_adapter",
+      "title": "SST27SF020 + 74LS193 EEPROM Socket Adapter",
+      "ecu_scope": [
+        "LM_PM_84_87",
+        "SMEC_88_89",
+        "SBEC_90_93"
+      ],
+      "bom_items": [
+        {
+          "qty": 10,
+          "part_number": "1-390261-4",
+          "description": "IC Sockets 16P ECONOMY TIN",
+          "mouser_part_number": "571-1-390261-4"
+        },
+        {
+          "qty": 20,
+          "part_number": "CCF0710K0JKE36",
+          "description": "1/4WATT Metal Film Resistors 1/4watt 10Kohms 5% Rated to 1/2watt",
+          "mouser_part_number": "71-CCF0710K0JKE36"
+        },
+        {
+          "qty": 5,
+          "part_number": "NTE74LS193",
+          "description": "replacement Digital ICs SYNC BIN CNTR DIP-16",
+          "mouser_part_number": "526-NTE74LS193"
+        },
+        {
+          "qty": 5,
+          "part_number": "4832-6004-CP",
+          "description": "DIP Sockets 32P DUAL WIPE DIPSKT",
+          "mouser_part_number": "517-4832-6004-CP"
+        },
+        {
+          "qty": 5,
+          "part_number": "SST27SF020-70-3C-PHE",
+          "description": "Memory - MTP 256K X 8 70ns",
+          "mouser_part_number": "804-27SF0207CPHE"
+        }
+      ]
+    },
+    {
+      "preset_id": "knock_sci_4n25_1n4733a_lm2917_board",
+      "title": "Knock / SCI 4N25 + 1N4733A + LM2917 Arduino Interface Board",
+      "ecu_scope": [
+        "SMEC_88_89",
+        "SBEC_90_93"
+      ],
+      "safety_notes": [
+        "1N4733A-TR 5.1V Zener clamp and 4N25 optocoupler isolation enforce SECURITY.md TTL protection.",
+        "Arduino Nano/Uno compatible pinout (D2..D6, D13, A0, A1) with LM2907/LM2917 at 66 Hz/V."
+      ],
+      "bom_items": [
+        {
+          "qty": 10,
+          "part_number": "273-4.7K-RC",
+          "description": "1/2W 1% Metal Film Resistors 4.7Kohms 1% 50PPM"
+        },
+        {
+          "qty": 10,
+          "part_number": "CCF0710K0GKE36",
+          "description": "1/4WATT Metal Film Resistors 1/4watt 10Kohms 2% Rated to 1/2watt",
+          "mouser_part_number": "71-CCF0710K0GKE36"
+        },
+        {
+          "qty": 10,
+          "part_number": "MF1/4DC1001F",
+          "description": "1/4Watt Metal Film Resistors 1K 1% 100PPM",
+          "mouser_part_number": "660-MF1/4DC1001F"
+        },
+        {
+          "qty": 10,
+          "part_number": "MF1/4LCT52R332J",
+          "description": "1/4Watt Metal Film Resistors 1/4 WATT 3.3K OHM 5%",
+          "mouser_part_number": "660-MF1/4LCT52R332J"
+        },
+        {
+          "qty": 10,
+          "part_number": "MF1/4DC1003F",
+          "description": "1/4Watt Metal Film Resistors 100K 1% 100PPM",
+          "mouser_part_number": "660-MF1/4DC1003F"
+        },
+        {
+          "qty": 10,
+          "part_number": "273-470-RC",
+          "description": "1/2W 1% Metal Film Resistors 470ohms 1% 50PPM"
+        },
+        {
+          "qty": 10,
+          "part_number": "C330C105M5R5CA",
+          "description": "Conformally Coated Radial Ceramic Capacitors 50volts 1.0uF 20% X7R",
+          "mouser_part_number": "80-C330C105M5R5CA"
+        },
+        {
+          "qty": 10,
+          "part_number": "140-50Z5-203M-RC",
+          "description": "Ceramic Disc Capacitors 50V .02uF Z5U 20% Tol"
+        },
+        {
+          "qty": 10,
+          "part_number": "2N3904CTA",
+          "description": "Small Signal Transistors NPN Trans Gen Purp Collector=Middle Pin",
+          "mouser_part_number": "512-2N3904CTA"
+        },
+        {
+          "qty": 10,
+          "part_number": "LM7812ACT",
+          "description": "Amplifiers REGULATOR 12V 1A 4%",
+          "mouser_part_number": "512-LM7812ACT"
+        },
+        {
+          "qty": 10,
+          "part_number": "LM7805ACT",
+          "description": "Linear Regulators 3A 2% OUTPUT TOL 3-TERMINAL",
+          "mouser_part_number": "512-LM7805ACT"
+        },
+        {
+          "qty": 10,
+          "part_number": "MF1/2DCT52R4701F",
+          "description": "1/2Watt Metal Film Resistors 4.7Kohms 1% 100PPM",
+          "mouser_part_number": "660-MF1/2DCT52R4701F"
+        },
+        {
+          "qty": 10,
+          "part_number": "140-50Q5-103Z-RC",
+          "description": "Ceramic Disc Capacitors 50V .01uF Z5V +80%/-20% Tol"
+        },
+        {
+          "qty": 10,
+          "part_number": "140-50P2-102K-RC",
+          "description": "Ceramic Disc Capacitors 50V 1000pF Y5P 10% Tol"
+        },
+        {
+          "qty": 10,
+          "part_number": "4N25",
+          "description": "Optocouplers Phototransistor Out",
+          "mouser_part_number": "78-4N25"
+        },
+        {
+          "qty": 10,
+          "part_number": "1N4733A-TR",
+          "description": "Zener Diodes 5.1 Volt 1.0 Watt",
+          "mouser_part_number": "78-1N4733A"
+        },
+        {
+          "qty": 10,
+          "part_number": "MF1/2DCT52R3900F",
+          "description": "1/2Watt Metal Film Resistors 1/2 WATT 390 OHM 1%",
+          "mouser_part_number": "660-MF1/2DCT52R3900F"
+        },
+        {
+          "qty": 10,
+          "part_number": "1N4001",
+          "description": "Rectifiers Vr/50V Io/1A T/R",
+          "mouser_part_number": "512-1N4001"
+        },
+        {
+          "qty": 10,
+          "part_number": "140-50N5-470J-TB-RC",
+          "description": "Class 1 Ceramic Disc Capacitors - Tape/Box 50V 47pF NPO 5% Tol"
+        },
+        {
+          "qty": 10,
+          "part_number": "5WF103MECAI",
+          "description": "Ceramic Disc Capacitors 25volts .01uF 20%",
+          "mouser_part_number": "581-5WF103MECAI"
+        },
+        {
+          "qty": 10,
+          "part_number": "CCF071K00JNR36",
+          "description": "1/4WATT Metal Film Resistors 1/4watt 1Kohms 5% Rated to 1/2watt",
+          "mouser_part_number": "71-CCF07-J-1K"
+        },
+        {
+          "qty": 10,
+          "part_number": "MF1/4LLT52R511J",
+          "description": "1/4Watt Metal Film Resistors 510ohms 5%",
+          "mouser_part_number": "660-MF1/4LLT52R511J"
+        },
+        {
+          "qty": 10,
+          "part_number": "CMF603K9200FHEK",
+          "description": "1/2WATT Metal Film Resistors 1/2watt 3.92Kohms 1%",
+          "mouser_part_number": "71-CMF603K9200FHEK"
+        },
+        {
+          "qty": 10,
+          "part_number": "293-1.0-RC",
+          "description": "1/2W 5% Carbon Film Resistors 1ohms 5%"
+        },
+        {
+          "qty": 2,
+          "part_number": "SN75176BD",
+          "description": "RS-485 Interface ICs Diff Bus Trans",
+          "mouser_part_number": "595-SN75176BD"
+        },
+        {
+          "qty": 20,
+          "part_number": "2N4401TFR",
+          "description": "Small Signal Transistors NPN Transistor General Purpose",
+          "mouser_part_number": "512-2N4401TFR"
+        }
+      ],
+      "firmware": {
+        "freq_to_volt_ic": "LM2907/LM2917",
+        "freq_volt_hz_per_v": 66,
+        "max_input_v": 12,
+        "volt_lsb": 7.62939e-05,
+        "serial_baud": 115200,
+        "lcd_baud": 9600,
+        "pinout": {
+          "ignEvent": "D2",
+          "knockDiscrete": "D3",
+          "clearKnock": "D4",
+          "LEDPin": "D13",
+          "rpmPin": "A0",
+          "knockPin": "A1",
+          "lcdSoftwareSerial": "D5 (RX), D6 (TX)"
+        },
+        "eeprom_size_bytes": 34,
+        "eeprom_map": [
+          {
+            "offset": "0..15",
+            "symbol": "rpmLookup[8]",
+            "type": "uint16[8]",
+            "notes": "RPM lookup breakpoints"
+          },
+          {
+            "offset": "16..31",
+            "symbol": "knockLookup[8]",
+            "type": "uint16[8]",
+            "notes": "Knock voltage threshold"
+          },
+          {
+            "offset": "32",
+            "symbol": "numCylinders",
+            "type": "uint8",
+            "notes": "Engine cylinder count"
+          },
+          {
+            "offset": "33",
+            "symbol": "alertLength",
+            "type": "uint8",
+            "notes": "Discrete hold duration (s)"
+          }
+        ]
+      }
+    },
+    {
+      "preset_id": "dis_adaptor_pic_vb921_waste_spark",
+      "title": "DIS Adaptor PIC12F629/PIC16F690 + VB921/STP10NK80ZFP Waste-Spark",
+      "ecu_scope": [
+        "LM_PM_84_87",
+        "SMEC_88_89",
+        "SBEC_90_93"
+      ],
+      "base_timing_deg_btdc": 9,
+      "driver_options": [
+        "VB921",
+        "STP10NK80ZFP"
+      ],
+      "bom_items": [
+        {
+          "qty": 10,
+          "part_number": "STP10NK80ZFP",
+          "description": "MOSFET N-CH 800V 9A TO-220F"
+        },
+        {
+          "qty": 60,
+          "part_number": "MMBT2222AFSCT-ND",
+          "description": "TRANSISTOR GP NPN AMP SOT-23"
+        },
+        {
+          "qty": 60,
+          "part_number": "MMBT4403FSCT-ND",
+          "description": "TRANSISTOR GP PNP AMP SOT-23"
+        },
+        {
+          "qty": 50,
+          "part_number": "RHM1.0KERCT-ND",
+          "description": "RES 1.0K OHM 1/4W 5% 1206 SMD"
+        },
+        {
+          "qty": 10,
+          "part_number": "RHM220ERCT-ND",
+          "description": "RES 220 OHM 1/4W 5% 1206 SMD"
+        },
+        {
+          "qty": 10,
+          "part_number": "RHM1.0MERCT-ND",
+          "description": "RES 1.0M OHM 1/4W 5% 1206 SMD"
+        },
+        {
+          "qty": 5,
+          "part_number": "MC7805BDTRKGOSCT-ND",
+          "description": "IC REG VOLT POS 1A 5V DPAK"
+        },
+        {
+          "qty": 5,
+          "part_number": "PCE4074CT-ND",
+          "description": "CAP 22UF 50V ELECT TG SMD"
+        },
+        {
+          "qty": 10,
+          "part_number": "399-1249-1-ND",
+          "description": "CAP .10UF 50V CERAMIC X7R 1206"
+        },
+        {
+          "qty": 5,
+          "part_number": "PIC12F629-E/SN-ND",
+          "description": "IC MCU CMOS 8BIT 1K FLASH 8-SOIC"
+        }
+      ],
+      "db15_pinout": {
+        "1": "Simulated HEP out Gray (Turbo only)",
+        "2": "NC",
+        "3": "Simulated HEP out Black (Turbo & TBI/Carb)",
+        "4": "+5 volt Sensor supply (Out)",
+        "5": "+Battery",
+        "6": "1+4 Coil out",
+        "7": "2+3 Coil out",
+        "8": "Ground",
+        "9": "HEP in Gray (Turbo only) or 2.4 Crank in",
+        "10": "HEP in Black or 2.4 Cam in",
+        "11": "Ground",
+        "12": "Coil - in (Do NOT leave coil connected)",
+        "13": "1+4 Coil out",
+        "14": "2+3 Coil out",
+        "15": "Ground"
+      },
+      "db15_pinout_11_9_07": {
+        "1": "Simulated HEP out Gray (Turbo only)",
+        "2": "+8 volt HEP supply (In)",
+        "3": "Simulated HEP out Black (Turbo & TBI/Carb)",
+        "4": "+5 volt Sensor supply (Out)",
+        "5": "+Battery",
+        "6": "1+4 Coil out",
+        "7": "2+3 Coil out",
+        "8": "Ground",
+        "9": "HEP in Gray (Turbo only) or 2.4 Crank in",
+        "10": "HEP in Black or 2.4 Cam in",
+        "11": "Ground",
+        "12": "Coil - in (Do NOT leave coil connected)",
+        "13": "1+4 Coil out",
+        "14": "2+3 Coil out",
+        "15": "Ground"
+      },
+      "firmware_variants": [
+        {
+          "mcu": "PIC12F629",
+          "firing_order": "1-3-4-2",
+          "coil_pairs": [
+            "1+4",
+            "2+3"
+          ],
+          "sync_lockout_threshold": 3,
+          "has_wdt_dwell_short_protection": true
+        },
+        {
+          "mcu": "PIC16F690",
+          "firing_order": "1-3-4-2",
+          "coil_pairs": [
+            "1+4",
+            "2+3"
+          ],
+          "sync_lockout_threshold": 3,
+          "has_wdt_dwell_short_protection": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+schema_version: '1.0'
+wave: C
+generated_utc: '2026-11-26T23:10:39Z'
+vault_sha256_count: 168
+leads:
+- lead_id: wave-c-hardware-adapter-bom-4n25
+  wave: C
+  source_kind: wayback_cdx
+  category: hardware_adapter_bom
+  fingerprint: 4N25
+  query_pattern: turbo-mopar.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: 4N25 optocoupler SCI interface and archival Chrysler turbo hardware notes.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-engine-swap-oil-feed-ecc-dohc-12an-0-098
+  wave: C
+  source_kind: wayback_cdx
+  category: engine_swap_oil_feed
+  fingerprint: ECC DOHC -12AN 0.098
+  query_pattern: relentlessracing.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=relentlessracing.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/engine/
+  rationale: ECC DOHC swap -12AN return and 0.098 oil restrictor machining notes.
+- lead_id: wave-c-transaxle-and-drivetrain-a555
+  wave: C
+  source_kind: wayback_cdx
+  category: transaxle_and_drivetrain
+  fingerprint: A555
+  query_pattern: turbododge.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: Chrysler A555 5-speed manual transaxle ratios, cables, and swap reference.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-hardware-adapter-bom-74ls193
+  wave: C
+  source_kind: wayback_cdx
+  category: hardware_adapter_bom
+  fingerprint: 74LS193
+  query_pattern: moparchem.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=moparchem.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: 74LS193 synchronous counter bank-switching EPROM adapter archive. Confirmed
+    in read-only corpus scan.
+- lead_id: wave-c-digital-dash-harness-26-pin-digital-dash
+  wave: C
+  source_kind: wayback_cdx
+  category: digital_dash_harness
+  fingerprint: 26-pin digital dash
+  query_pattern: thedodgegarage.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: Chrysler 26-pin digital dash connector pinout and cluster swap reference.
+- lead_id: wave-c-ecu-memory-mod-28c256
+  wave: C
+  source_kind: wayback_cdx
+  category: ecu_memory_mod
+  fingerprint: 28C256
+  query_pattern: minimopar.net/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: 28C256 EEPROM SMEC/SBEC socket modification and Pin 11 bootstrap archive.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-hardware-adapter-bom-lm2917
+  wave: C
+  source_kind: wayback_cdx
+  category: hardware_adapter_bom
+  fingerprint: LM2917
+  query_pattern: turbododge.com/*lm2917*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Alm2917%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: LM2917 frequency-to-voltage knock threshold conditioning circuit archive.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-hardware-adapter-bom-1n4733a
+  wave: C
+  source_kind: wayback_cdx
+  category: hardware_adapter_bom
+  fingerprint: 1N4733A
+  query_pattern: turbododge.com/*1n4733a*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2A1n4733a%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: 1N4733A 5.1V Zener SCI RX/TX voltage clamp protection circuit reference.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-ignition-dis-adapter-vb921
+  wave: C
+  source_kind: wayback_cdx
+  category: ignition_dis_adapter
+  fingerprint: VB921
+  query_pattern: turbododge.com/*vb921*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Avb921%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: VB921 smart coil driver stage for waste-spark DIS ignition conversion.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-ignition-dis-adapter-pic16f690
+  wave: C
+  source_kind: wayback_cdx
+  category: ignition_dis_adapter
+  fingerprint: PIC16F690
+  query_pattern: turbododge.com/*pic16f690*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Apic16f690%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: PIC16F690 hybrid waste-spark DIS timing microcontroller firmware archive.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-ignition-dis-adapter-pic12f629
+  wave: C
+  source_kind: wayback_cdx
+  category: ignition_dis_adapter
+  fingerprint: PIC12F629
+  query_pattern: turbododge.com/*pic12f629*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Apic12f629%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: PIC12F629 compact waste-spark DIS pulse translator firmware archive.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-transaxle-and-drivetrain-a568
+  wave: C
+  source_kind: wayback_cdx
+  category: transaxle_and_drivetrain
+  fingerprint: A568
+  query_pattern: thedodgegarage.com/*a568*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Aa568%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: Chrysler A568 Getrag 5-speed transaxle gearing and bellhousing reference.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-transaxle-and-drivetrain-a413
+  wave: C
+  source_kind: wayback_cdx
+  category: transaxle_and_drivetrain
+  fingerprint: A413
+  query_pattern: minimopar.net/*a413*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Aa413%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: Chrysler A413 3-speed TorqueFlite hydraulic and converter stall reference.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-transaxle-and-drivetrain-obx-quaife
+  wave: C
+  source_kind: wayback_cdx
+  category: transaxle_and_drivetrain
+  fingerprint: OBX Quaife
+  query_pattern: turbododge.com/*quaife*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Aquaife%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: OBX and Quaife helical LSD differential fitment notes for A555/A568.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-telemetry-road-log-2275-egt
+  wave: C
+  source_kind: wayback_cdx
+  category: telemetry_road_log
+  fingerprint: 2275 EGT
+  query_pattern: turbo-mopar.com/*egt*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2F%2Aegt%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/telemetry/
+  rationale: Open-thermocouple 2275 F EGT rail fault signature in archival road logs.
+- lead_id: wave-c-telemetry-road-log-run6-dlg
+  wave: C
+  source_kind: wayback_cdx
+  category: telemetry_road_log
+  fingerprint: run6.dlg
+  query_pattern: turbododge.com/*run6*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Arun6%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/telemetry/
+  rationale: Archival 80 ms Chrysler SCI datalogger run6.dlg column layout reference.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-ignition-dis-adapter-dis-adaptor
+  wave: C
+  source_kind: code_forge
+  category: ignition_dis_adapter
+  fingerprint: DIS_Adaptor
+  query_pattern: DIS_Adaptor PIC16F690 PIC12F629 chrysler
+  forge: github
+  code_forge_query_url: https://github.com/search?q=DIS_Adaptor+PIC16F690+PIC12F629+chrysler&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/hardware/
+  rationale: Waste-spark DIS_Adaptor PCB schematics, Gerber notes, and PIC firmware.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-knock-detector-hardware-knock-board
+  wave: C
+  source_kind: code_forge
+  category: knock_detector_hardware
+  fingerprint: Knock_Board
+  query_pattern: Knock_Board LM2917 arduino knock
+  forge: github
+  code_forge_query_url: https://github.com/search?q=Knock_Board+LM2917+arduino+knock&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/hardware/
+  rationale: Arduino + LM2917 8-cell Knock_Board conditioning sketch and schematics.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-sci-telemetry-client-mpscandroid
+  wave: C
+  source_kind: code_forge
+  category: sci_telemetry_client
+  fingerprint: mpscandroid
+  query_pattern: mpscandroid mprxref chrysler sci
+  forge: github
+  code_forge_query_url: https://github.com/search?q=mpscandroid+mprxref+chrysler+sci&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/ecu/
+  rationale: Read-only Chrysler SCI logger cross-reference tables (mprxref/mprsettings).
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-hardware-adapter-bom-sst27sf020
+  wave: C
+  source_kind: code_forge
+  category: hardware_adapter_bom
+  fingerprint: SST27SF020
+  query_pattern: SST27SF020 74LS193 eprom adapter
+  forge: gitlab
+  code_forge_query_url: https://gitlab.com/search?search=SST27SF020+74LS193+eprom+adapter
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/hardware/
+  rationale: SST27SF020 MTP Flash 27C256/27C128 bank-switch EPROM adapter hardware.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-c-sci-hardware-interface-chrysler-sci-hardware
+  wave: C
+  source_kind: code_forge
+  category: sci_hardware_interface
+  fingerprint: Chrysler SCI hardware
+  query_pattern: chrysler sci datalogger 4N25 1N4733A
+  forge: sourceforge
+  code_forge_query_url: https://sourceforge.net/directory/?q=chrysler+sci+datalogger+4N25+1N4733A
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/ecu/
+  rationale: Read-only Chrysler SCI opto-isolated TTL/USB interface schematics.

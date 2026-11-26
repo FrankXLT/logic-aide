@@ -289,7 +289,7 @@ def test_cli_and_sync_error_handling_boundaries(tmp_path: Path) -> None:
     for args in (
         ["sim", "lookup-sci", "--rom-id", "smec_88_89_v19", "--var", "   "],
         ["sim", "manifest-sync", "--rom-id", "unknown_id", "--tags-path", str(tags_file)],
-        ["heritage", "discover", "--wave", "C"],
+        ["heritage", "discover", "--wave", "Z"],
     ):
         res = runner.invoke(cli_main, args)
         assert res.exit_code != 0

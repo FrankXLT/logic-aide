@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import sqlite3
 from typing import Any
 
 import click
+import duckdb
 
 from logicaide import __version__
 
@@ -162,31 +164,21 @@ def sync_wiki(
     )
 
 
-def _register_stub_group(
-    name: str,
-    milestone: str,
-    summary: str,
-    planned: tuple[str, ...],
-) -> click.Group:
-    """Register a placeholder milestone subgroup on ``main``."""
-    planned_list = ", ".join(planned)
-    help_text = f"{summary} (Milestone {milestone}).\n\nPlanned subcommands: {planned_list}."
+_CAR_ID_BY_FORMAT: dict[str, str] = {
+    "lasky_realtimelog": "lm_87_realtimelog",
+    "wot_log_mmss": "smec_89_mpscandroid",
+    "k_smec_13col": "smec_k_logs36",
+    "ecu_dlg": "sbec_90_van_dlg",
+}
 
-    @main.group(
-        name=name,
-        invoke_without_command=True,
-        help=help_text,
-        short_help=f"{summary} ({milestone}).",
-    )
-    @click.pass_context
-    def _stub_group(ctx: click.Context) -> None:
-        if ctx.invoked_subcommand is None:
-            click.echo(
-                f"`logicaide {name}` is scheduled for Milestone {milestone}. "
-                f"Planned subcommands: {planned_list}."
-            )
 
-    return _stub_group
+def _resolve_car_id(car_id: str, source_format: str) -> str:
+    """Resolve ``--car-id auto`` from parsed telemetry source format."""
+    if car_id != "auto":
+        return car_id
+    if source_format.startswith("mpscan_android_"):
+        return "smec_89_mpscandroid"
+    return _CAR_ID_BY_FORMAT.get(source_format, "CHRYSLER_UNKNOWN")
 
 
 @main.group(help="Vehicle profile compiler and SQLite catalog commands.")
@@ -239,12 +231,146 @@ def profile_compile(
     )
 
 
-telemetry = _register_stub_group(
-    "telemetry",
-    "M2",
-    "62.5k SCI telemetry poller and DuckDB lake commands",
-    ("watch", "export-fixture"),
-)
+@main.group(help="62.5k SCI telemetry poller, Zstd Parquet lake, and DuckDB rollup commands.")
+def telemetry() -> None:
+    """62.5k SCI telemetry poller, Zstd Parquet lake, and DuckDB rollup commands."""
+
+
+@telemetry.command(name="ingest")
+@click.option("--input", "input_path", type=click.Path(path_type=Path), default=Path("private_references"), show_default=True, help="Telemetry log file or root directory to ingest.")
+@click.option("--lake-dir", type=click.Path(path_type=Path), default=Path("data/drives"), show_default=True, help="Destination Hive-partitioned Zstd Parquet lake directory.")
+@click.option("--db-path", type=click.Path(path_type=Path), default=Path("data/drives/catalog.sqlite"), show_default=True, help="SQLite catalog database path.")
+@click.option("--car-id", default="auto", show_default=True, help="Vehicle car_id or 'auto' to map from source format.")
+@click.option("--build-id", default="STOCK", show_default=True, help="Calibration build identifier.")
+@click.option("--run-kind", default="VEHICLE_SCI", show_default=True, help="Telemetry run kind (VEHICLE_SCI, SINGLE_REPLAY, MONTE_CARLO_SWEEP).")
+@click.option("--deduplicate/--no-deduplicate", default=True, show_default=True, help="Deduplicate identical log files by SHA-256 when scanning a directory.")
+@click.option("--json", "as_json", is_flag=True, help="Emit ingestion summary as JSON.")
+def telemetry_ingest(
+    input_path: Path, lake_dir: Path, db_path: Path, car_id: str,
+    build_id: str, run_kind: str, deduplicate: bool, as_json: bool,
+) -> None:
+    """Ingest empirical telemetry logs into 30s Zstd Parquet chunks and SQLite catalog."""
+    from logicaide.telemetry import discover_private_logs, parse_telemetry_file, write_session_parquet_chunks
+
+    if not input_path.exists():
+        raise click.ClickException(f"Telemetry input path not found: {input_path}")
+
+    is_dir = input_path.is_dir()
+    files = discover_private_logs(input_path, deduplicate=deduplicate) if is_dir else [input_path]
+    private_root = input_path if is_dir else None
+    parse_car = "CHRYSLER_UNKNOWN" if car_id == "auto" else car_id
+    totals: dict[str, Any] = {
+        "input_path": str(input_path), "lake_dir": str(lake_dir), "db_path": str(db_path),
+        "files_processed": len(files), "session_count": 0, "chunk_count": 0,
+        "row_count": 0, "quarantined_rows": 0, "car_ids": [],
+    }
+    seen_cars: set[str] = set()
+    try:
+        for path in files:
+            sessions = parse_telemetry_file(
+                path, car_id=parse_car, build_id=build_id, run_kind=run_kind, private_root=private_root
+            )
+            for sess in sessions:
+                sess.car_id = _resolve_car_id(car_id, sess.source_format)
+                res = write_session_parquet_chunks(sess, lake_dir=lake_dir, db_path=db_path)
+                totals["session_count"] += 1
+                totals["chunk_count"] += res["chunk_count"]
+                totals["row_count"] += res["row_count"]
+                totals["quarantined_rows"] += sess.quarantined_sample_count
+                seen_cars.add(sess.car_id)
+    except (FileNotFoundError, ValueError, OSError, sqlite3.Error, duckdb.Error) as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    totals["car_ids"] = sorted(seen_cars)
+    if as_json:
+        click.echo(json.dumps(totals, indent=2, sort_keys=True))
+        return
+    click.echo(
+        f"Ingested {totals['files_processed']} files -> {totals['session_count']} sessions, "
+        f"{totals['chunk_count']} chunks, {totals['row_count']} rows "
+        f"(quarantined={totals['quarantined_rows']}) -> {lake_dir}"
+    )
+
+
+@telemetry.command(name="rollups")
+@click.option("--lake-dir", type=click.Path(path_type=Path), default=Path("data/drives"), show_default=True, help="Parquet lake root directory.")
+@click.option("--car-id", default=None, help="Filter rollups to one car_id.")
+@click.option("--run-kind", default=None, help="Filter rollups by run_kind.")
+@click.option("--session-id", default=None, help="Filter rollups by session_id.")
+@click.option("--build-id", default=None, help="Filter rollups by build_id.")
+@click.option("--limit", type=int, default=None, help="Maximum rollup bins to return.")
+@click.option("--json", "as_json", is_flag=True, help="Emit lake summary and load-cell rollups as JSON.")
+def telemetry_rollups(
+    lake_dir: Path, car_id: str | None, run_kind: str | None,
+    session_id: str | None, build_id: str | None, limit: int | None, as_json: bool,
+) -> None:
+    """Query DuckDB load_cell_rollups across the Zstd Parquet telemetry lake."""
+    from logicaide.telemetry import query_load_cell_rollups, summarize_telemetry_lake
+
+    try:
+        summary = summarize_telemetry_lake(lake_dir)
+        bins = query_load_cell_rollups(
+            lake_dir, car_id=car_id, run_kind=run_kind, session_id=session_id, build_id=build_id, limit=limit
+        )
+    except (FileNotFoundError, ValueError, OSError, sqlite3.Error, duckdb.Error) as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    if as_json:
+        click.echo(json.dumps({"summary": summary, "bin_count": len(bins), "rollups": bins}, indent=2, sort_keys=True))
+        return
+
+    click.echo(
+        f"Lake {summary['lake_dir']} | sessions={summary['session_count']} | chunks={summary['chunk_count']} "
+        f"| active_rows={summary['active_rows']} | quarantined={summary['quarantined_rows']} | bins={len(bins)}"
+    )
+    for row in bins[:10]:
+        afr = f"{row['mean_afr']:.2f}" if row["mean_afr"] is not None else "null"
+        pw = f"{row['mean_pw_ms']:.2f}" if row["mean_pw_ms"] is not None else "null"
+        click.echo(
+            f"  - {row['car_id']} {row['rpm_bin']}rpm {row['map_bin_kpa']}kPa "
+            f"{row['tps_regime']} {row['charge_temp_bin']} n={row['sample_count']} afr={afr} pw_ms={pw}"
+        )
+
+
+@telemetry.command(name="export-fixture")
+@click.option("--source", type=click.Path(path_type=Path), default=Path("data/drives"), show_default=True, help="Source Parquet lake directory or telemetry file.")
+@click.option("--output", type=click.Path(path_type=Path), required=True, help="Destination GPS-stripped fixture file.")
+@click.option("--max-rows", type=int, default=150, show_default=True, help="Maximum rows to export.")
+@click.option("--format", "fmt", type=click.Choice(["csv", "json", "parquet"], case_sensitive=False), default="csv", show_default=True, help="Output fixture format.")
+@click.option("--car-id", default=None, help="Optional car_id filter.")
+@click.option("--session-id", default=None, help="Optional session_id filter.")
+@click.option("--db-path", type=click.Path(path_type=Path), default=None, help="Optional SQLite catalog path to record stimulus_fixtures.")
+@click.option("--issue-id", default=None, help="Optional tuning_issues identifier linked to this fixture.")
+@click.option("--json", "as_json", is_flag=True, help="Emit export metadata as JSON.")
+def telemetry_export_fixture(
+    source: Path, output: Path, max_rows: int, fmt: str, car_id: str | None,
+    session_id: str | None, db_path: Path | None, issue_id: str | None, as_json: bool,
+) -> None:
+    """Export a GPS-stripped, PII-scrubbed stimulus fixture slice."""
+    from logicaide.telemetry import export_stimulus_fixture
+
+    try:
+        result = export_stimulus_fixture(
+            source, output, max_rows=max_rows, fmt=fmt, car_id=car_id, session_id=session_id,
+            db_path=db_path, issue_id=issue_id,
+        )
+    except (FileNotFoundError, ValueError, OSError, sqlite3.Error, duckdb.Error) as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    if as_json:
+        click.echo(json.dumps(result, indent=2, sort_keys=True))
+        return
+    click.echo(
+        f"Exported {result['row_count']} rows ({result['format']}) -> {result['output_path']} "
+        f"| gps_stripped={result['gps_stripped']} | sha256={result['sha256'][:12]}..."
+    )
+
+
+@telemetry.command(name="watch")
+def telemetry_watch() -> None:
+    """Stream live 62.5k SCI telemetry frames (Milestone M2)."""
+    click.echo("`logicaide telemetry watch` live 62.5k SCI poller is scheduled for Milestone M2 (read-only loop:// mode).")
+
 
 
 @main.group(help="68HC11/6803 ROM manifests, behavioral twins, and safety gate commands.")

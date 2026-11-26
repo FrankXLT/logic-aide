@@ -15,6 +15,9 @@ MUST_IGNORE_PATHS = (
     "Private References/_probe.md",
     "data/heritage_raw/figures/turbo_maps/probe.gif",
     "data/heritage_raw/discovery_queue/probe.json",
+    "data/drives/catalog.sqlite",
+    "data/drives/probe.parquet",
+    "data/drives/run_kind=VEHICLE_SCI/chunk_0000.parquet",
     "rom/inputs/stock.BIN",
     "rom/stock_baselines/stock.bin",
     "candidate.bin",
@@ -25,21 +28,27 @@ MUST_IGNORE_PATHS = (
 
 MUST_NOT_IGNORE_PATHS = (
     "data/heritage_raw/.gitkeep",
+    "data/drives/.gitkeep",
     "rom/inputs/README.md",
     "rom/stock_baselines/README.md",
 )
 
-FORBIDDEN_INDEX_PREFIXES = ("private_references/", "Private References/", "data/heritage_raw/")
+FORBIDDEN_INDEX_PREFIXES = (
+    "private_references/",
+    "Private References/",
+    "data/heritage_raw/",
+    "data/drives/",
+)
 FORBIDDEN_INDEX_SUFFIXES = (".bin", ".s19", ".parquet", ".sqlite", ".sqlite3")
 
-CLEANROOM_ONLY_DIRS = ("profiles", "knowledge", "wiki", "scripts")
+CLEANROOM_ONLY_DIRS = ("profiles", "knowledge", "wiki", "scripts", "tests/fixtures")
 CODE_DIRS = ("src/logicaide",)
-SCAN_EXTENSIONS = frozenset({".py", ".md", ".yaml", ".yml", ".json", ".toml", ".txt"})
+SCAN_EXTENSIONS = frozenset({".py", ".md", ".yaml", ".yml", ".json", ".toml", ".txt", ".csv", ".dlg"})
 
 EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
-HOME_USER_PATH_RE = re.compile(r"/home/[A-Za-z0-9_.-]+")
+HOME_USER_PATH_RE = re.compile(r"(?:/(?:home|Users)/[A-Za-z0-9_.-]+|(?<![:\\])\\\\[A-Za-z0-9_.-]+\\)")
 WIN_USER_PATH_RE = re.compile(r"[A-Za-z]:\\Users\\[A-Za-z0-9_.-]+", re.IGNORECASE)
-PERSONAL_NAME_RE = re.compile(r"\b(?:bucar|steve|mcclurg)\b", re.IGNORECASE)
+PERSONAL_NAME_RE = re.compile(r"\b(?:bucar|steve|mcclurg|scott|adam)\b", re.IGNORECASE)
 SERIAL_OPEN_RE = re.compile(r"\bserial\.Serial\b")
 DEADBOLT_TOKEN_RE = re.compile(r"(?:Flash\.frm|/dev/ttyUSB)", re.IGNORECASE)
 
@@ -98,7 +107,7 @@ def test_git_index_has_no_forbidden_tracked_artifacts() -> None:
     violations: list[str] = []
 
     for path in tracked:
-        if path == "data/heritage_raw/.gitkeep":
+        if path in ("data/heritage_raw/.gitkeep", "data/drives/.gitkeep"):
             continue
         if path.startswith(FORBIDDEN_INDEX_PREFIXES):
             violations.append(f"forbidden prefix: {path}")
@@ -109,7 +118,7 @@ def test_git_index_has_no_forbidden_tracked_artifacts() -> None:
 
 
 def test_cleanroom_directories_free_of_pii() -> None:
-    """Verify profiles, knowledge, wiki, and scripts contain no local paths, emails, or PII."""
+    """Verify profiles, knowledge, wiki, scripts, and tests/fixtures contain no local paths, emails, or PII."""
     violations: list[str] = []
     for fpath in _iter_scan_files(*CLEANROOM_ONLY_DIRS):
         rel = fpath.relative_to(REPO_ROOT).as_posix()
@@ -137,7 +146,9 @@ def test_code_and_cleanroom_enforce_hardware_deadbolt() -> None:
         rel = fpath.relative_to(REPO_ROOT).as_posix()
         text = fpath.read_text(encoding="utf-8", errors="ignore")
         if HOME_USER_PATH_RE.search(text):
-            violations.append(f"{rel}: matched concrete /home/<user> path")
+            violations.append(f"{rel}: matched concrete user or UNC host path")
+        if WIN_USER_PATH_RE.search(text):
+            violations.append(f"{rel}: matched local Windows user path")
         if SERIAL_OPEN_RE.search(text):
             violations.append(f"{rel}: matched serial.Serial")
         if rel not in blocklist_sources and DEADBOLT_TOKEN_RE.search(text):

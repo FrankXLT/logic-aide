@@ -190,3 +190,40 @@ def test_wave_b_ecu_and_sci_pages_verified() -> None:
     sidebar_text = (REPO_WIKI / "_Sidebar.md").read_text(encoding="utf-8")
     for page in wave_b:
         assert page in sidebar_text
+
+
+def test_wave_c_drivetrain_and_hardware_pages_verified() -> None:
+    overviews = (
+        "drivetrain-and-swaps/drivetrain-and-swaps-overview.md",
+        "hardware-bench/hardware-bench-overview.md",
+    )
+    wave_c = (
+        "drivetrain-and-swaps/dohc-ecc-hybrid-swap-guide.md",
+        "drivetrain-and-swaps/a555-a568-a413-transaxles.md",
+        "hardware-bench/smec-28c256-read-only-socket-notes.md",
+        "hardware-bench/knock-and-dis-conditioning.md",
+    )
+    for rel in (*overviews, *wave_c):
+        text = (REPO_WIKI / rel).read_text(encoding="utf-8")
+        meta = yaml.safe_load(text.split("---\n", 2)[1])
+        assert meta["status"] == "verified", f"{rel} expected verified, got {meta.get('status')!r}"
+        if rel == "hardware-bench/smec-28c256-read-only-socket-notes.md":
+            assert meta["ecu_scope"] == ["SMEC_88_89"]
+
+    home_text = (REPO_WIKI / "Home.md").read_text(encoding="utf-8")
+    assert "| **Drivetrain & Swaps** | `verified` |" in home_text
+    assert "| **Hardware Bench** | `verified` |" in home_text
+    assert "| **Wiring & Diagnostics** | `stub` |" in home_text
+    assert home_text.count("| `stub` |") == 1
+    for rel in (*overviews, *wave_c):
+        assert rel in home_text
+
+    sidebar_text = (REPO_WIKI / "_Sidebar.md").read_text(encoding="utf-8")
+    for page in wave_c:
+        assert page in sidebar_text
+
+    warnings = validate_wiki_tree(REPO_WIKI)["warnings"]
+    assert [w.split(":", 1)[0] for w in warnings] == [
+        "wiring-and-diagnostics/wiring-and-diagnostics-overview.md"
+    ]
+

@@ -450,6 +450,9 @@ def run_discover(
     elif wave_norm == "B":
         from logicaide.heritage import discovery_wave_b
         raw_records = discovery_wave_b.extract_wave_b_fingerprints(private_root, manifest_path, extra_fingerprints)
+    elif wave_norm == "C":
+        from logicaide.heritage import discovery_wave_c
+        raw_records = discovery_wave_c.extract_wave_c_fingerprints(private_root, manifest_path, extra_fingerprints)
     else:
         raise ValueError(f"Unsupported wave identifier: {wave!r}")
 

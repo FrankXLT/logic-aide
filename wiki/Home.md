@@ -25,9 +25,9 @@ Welcome to the cleanroom Chrysler `2.2L` / `2.5L` / `2.0L` / `2.4L` powertrain k
 | **ECU Families** | `verified` | `Tier 1` | [ECU Families Overview](ecu-families/ecu-families-overview.md) |
 | **ROM & SCI Protocol** | `verified` | `Tier 2` | [ROM & SCI Overview](rom-and-sci/rom-and-sci-overview.md) |
 | **Turbo & Airflow** | `verified` | `Tier 2` | [Turbo & Airflow Overview](turbo-and-airflow/turbo-and-airflow-overview.md) |
-| **Drivetrain & Swaps** | `stub` | `Tier 1` | [Drivetrain & Swaps Overview](drivetrain-and-swaps/drivetrain-and-swaps-overview.md) |
+| **Drivetrain & Swaps** | `verified` | `Tier 1` | [Drivetrain & Swaps Overview](drivetrain-and-swaps/drivetrain-and-swaps-overview.md) |
 | **Wiring & Diagnostics** | `stub` | `Tier 1` | [Wiring & Diagnostics Overview](wiring-and-diagnostics/wiring-and-diagnostics-overview.md) |
-| **Hardware Bench** | `stub` | `Tier 2` | [Hardware Bench Overview](hardware-bench/hardware-bench-overview.md) |
+| **Hardware Bench** | `verified` | `Tier 2` | [Hardware Bench Overview](hardware-bench/hardware-bench-overview.md) |
 
 ### Wave A Verified Reference Articles
 
@@ -44,6 +44,13 @@ Welcome to the cleanroom Chrysler `2.2L` / `2.5L` / `2.0L` / `2.4L` powertrain k
 - [Chrysler SCI 7812.5 & 62,500 Baud Protocol](rom-and-sci/sci-7812-and-62500-protocol.md) — `0x12` handshake, `0xF2`/`0xF4`/`0xF6` RAM reads, and Dead-Cell Quarantine contract
 - [DRB-II Commands, 10-Protocol XREF & Fault Registers](rom-and-sci/drb-ii-commands-and-prompts.md) — `0x10`–`0x1C` dispatcher, `26`-entry `DRBMemoryTable`, `402`-variable XREF, and `ERR0`–`ERR3` bitfields
 - [68HC11 / 6803 Fuel & Spark Math: BATOFF, PEFTBL, WOTTBL & MAP Scaling](rom-and-sci/fuel-and-spark-math-peftbl-wottbl.md) — Fixed-point `BATOFF` deadtime, `PEFTBL`/`WOTTBL` lookups, `2-bar`/`3-bar` scaling, and `<= 11 ms` twin parity
+
+### Wave C Verified Reference Articles
+
+- [16V DOHC ECC / EDZ Hybrid Swap & K-Block Machining Guide](drivetrain-and-swaps/dohc-ecc-hybrid-swap-guide.md) — `4.00 in` bore-center 3-tier guard, external AN oiling circuit, 7 swap checklist keys, and `PEFTBL` / Hall-sync notes
+- [Chrysler FWD Transaxles: A555, A568, A413 Ratios, Rollout Math & Helical LSD QC](drivetrain-and-swaps/a555-a568-a413-transaxles.md) — Assembly-tag gearset matrix, tire rollout RPM-to-MPH inference, `A525` girdle `P4349444`, and helical LSD teardown QC
+- [SMEC 28C256 & Bank-Switched Socket Read-Only Hardware Notes](hardware-bench/smec-28c256-read-only-socket-notes.md) — `Pin 11` DMM isolation, `SST27SF020` / Ostrich 2.0 `28-pin` vs. `32-pin` alignment, and `28C256` + `74HC00` BOM
+- [SCI, Knock Box Conditioning & Waste-Spark DIS Adaptor Hardware Notes](hardware-bench/knock-and-dis-conditioning.md) — `4N25` / `1N4733A-TR` opto-isolated SCI/knock BOM, `Knock_Board` review, and `PIC12F629`/`PIC16F690` DIS adaptor notes
 
 ## Topic Map
 

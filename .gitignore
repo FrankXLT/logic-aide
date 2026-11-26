@@ -6,11 +6,8 @@
 *.[sS][rR][eE][cC]
 
 # Live & logged vehicle telemetry / simulation Parquet lakes and SQLite/DuckDB stores
-data/drives/*.parquet
-data/drives/**/*.parquet
-data/drives/*.db
-data/drives/*.sqlite
-data/drives/*.sqlite3
+data/drives/**
+!data/drives/.gitkeep
 data/lake/**
 *.parquet
 *.duckdb
