@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gt4094r",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GT-R Series",
+  "product_name": "GT4094R",
+  "source_product_id": 124,
+  "figure_sha256": "e2aa252b149d6acbb9b829e50358681518f42366165dd0d839ef60f9d57ba200",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/GT4094R_Comp_e.jpg",
+  "legacy_map_path": "maps/garrett/GT4094R_Comp_e.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 90.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 90.0,
+    "pr_min": 1.0,
+    "pr_max": 4.5,
+    "pixel_x_start": 52,
+    "pixel_y_start": 44,
+    "pixel_width": 380,
+    "pixel_height": 499
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.23684210526315788,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0070140280561122245
+      ]
+    ],
+    "b": [
+      -12.31578947368421,
+      4.8086172344689375
+    ],
+    "A_kg_s": [
+      [
+        0.001790496197368421,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0070140280561122245
+      ]
+    ],
+    "b_kg_s": [
+      -0.0931058022631579,
+      4.8086172344689375
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        52,
+        44
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 4.5
+    },
+    "top_right": {
+      "pixel": [
+        432,
+        44
+      ],
+      "flow_lb_min": 90.0,
+      "flow_kg_s": 0.680389,
+      "pressure_ratio": 4.5
+    },
+    "bottom_left": {
+      "pixel": [
+        52,
+        543
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        432,
+        543
+      ],
+      "flow_lb_min": 90.0,
+      "flow_kg_s": 0.680389,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "GARRETT",
+        "model": "GT4094R",
+        "part_number": "751470-19",
+        "compressor": {
+          "inducer_in": 2.669,
+          "inducer_mm": 67.8,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "52",
+          "ar": "0.72"
+        },
+        "turbine": {
+          "major_dia_in": 3.031,
+          "major_dia_mm": 77.0,
+          "exducer_in": 2.591,
+          "exducer_mm": 65.81,
+          "trim": "78",
+          "ar": "0.85",
+          "housing_type": null
+        },
+        "hp_rating": "450-800"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4094R",
+        "part_number": "751470-20",
+        "compressor": {
+          "inducer_in": 2.669,
+          "inducer_mm": 67.8,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "52",
+          "ar": "0.72"
+        },
+        "turbine": {
+          "major_dia_in": 3.031,
+          "major_dia_mm": 77.0,
+          "exducer_in": 2.591,
+          "exducer_mm": 65.81,
+          "trim": "78",
+          "ar": "0.95",
+          "housing_type": null
+        },
+        "hp_rating": "450-800"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4094R",
+        "part_number": "751470-21",
+        "compressor": {
+          "inducer_in": 2.669,
+          "inducer_mm": 67.8,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "52",
+          "ar": "0.72"
+        },
+        "turbine": {
+          "major_dia_in": 3.031,
+          "major_dia_mm": 77.0,
+          "exducer_in": 2.591,
+          "exducer_mm": 65.81,
+          "trim": "78",
+          "ar": "1.06",
+          "housing_type": null
+        },
+        "hp_rating": "450-800"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4094R",
+        "part_number": "751470-22",
+        "compressor": {
+          "inducer_in": 2.669,
+          "inducer_mm": 67.8,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "52",
+          "ar": "0.72"
+        },
+        "turbine": {
+          "major_dia_in": 3.031,
+          "major_dia_mm": 77.0,
+          "exducer_in": 2.591,
+          "exducer_mm": 65.81,
+          "trim": "78",
+          "ar": "1.19",
+          "housing_type": null
+        },
+        "hp_rating": "450-800"
+      }
+    ]
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

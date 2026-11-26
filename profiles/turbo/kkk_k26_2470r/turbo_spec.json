@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "kkk_k26_2470r",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "kkk",
+  "family_name": null,
+  "product_name": "K26-2470R",
+  "figure_sha256": "b274b748acfc01ca89b46b39dec9e46623907f84c17db65d7ebb60979d6c17df",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/kkk/K26-2470R.gif",
+  "legacy_map_path": "maps/kkk/K26-2470R.gif",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

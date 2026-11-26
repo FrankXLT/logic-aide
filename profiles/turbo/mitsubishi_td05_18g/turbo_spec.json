@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "mitsubishi_td05_18g",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Mitsubishi",
+  "family_name": "TD05 Series",
+  "product_name": "18G",
+  "source_product_id": 167,
+  "figure_sha256": "619ec3090271eed2a348a6de29f1299a70a8b5150ab4cbfc7b00931f82df72e3",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/mitsu/td05h-18g-cfm.jpg",
+  "legacy_map_path": "maps/mitsu/td05h-18g-cfm.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "cfm",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 675.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 46.575,
+    "pr_min": 1.0,
+    "pr_max": 3.4,
+    "pixel_x_start": 62,
+    "pixel_y_start": 12,
+    "pixel_width": 367,
+    "pixel_height": 535
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.12690735694822888,
+        0.0
+      ],
+      [
+        0.0,
+        -0.004485981308411215
+      ]
+    ],
+    "b": [
+      -7.868256130790191,
+      3.4538317757009347
+    ],
+    "A_kg_s": [
+      [
+        0.0009594034801430518,
+        0.0
+      ],
+      [
+        0.0,
+        -0.004485981308411215
+      ]
+    ],
+    "b_kg_s": [
+      -0.05948301576886921,
+      3.4538317757009347
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        62,
+        12
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.4
+    },
+    "top_right": {
+      "pixel": [
+        429,
+        12
+      ],
+      "flow_lb_min": 46.575,
+      "flow_kg_s": 0.352101,
+      "pressure_ratio": 3.4
+    },
+    "bottom_left": {
+      "pixel": [
+        62,
+        547
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        429,
+        547
+      ],
+      "flow_lb_min": 46.575,
+      "flow_kg_s": 0.352101,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "Mitsubishi",
+        "model": "TD05-18G",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 1.97,
+          "inducer_mm": 50.04,
+          "exducer_in": 2.652,
+          "exducer_mm": 67.36,
+          "trim": null,
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": 2.184,
+          "major_dia_mm": 55.47,
+          "exducer_in": 1.911,
+          "exducer_mm": 48.54,
+          "trim": null,
+          "ar": null,
+          "housing_type": null
+        },
+        "hp_rating": null
+      }
+    ]
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

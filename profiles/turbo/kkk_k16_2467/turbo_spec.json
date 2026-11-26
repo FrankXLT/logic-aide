@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "kkk_k16_2467",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "BorgWarner Turbo Systems",
+  "family_name": "Legacy-KKK/BW/Schwitzer",
+  "product_name": "K16-2467",
+  "figure_sha256": "7ddf2aa1b48f5a20c08bc38e30a30af4937f9cc9ea719dcf6e726136729781d9",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/kkk/K16-2467.gif",
+  "legacy_map_path": "maps/kkk/K16-2467.gif",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": {
+    "xml_units": "m^3/sec"
+  },
+  "source_notes": ""
+}

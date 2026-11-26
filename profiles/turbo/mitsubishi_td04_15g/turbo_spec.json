@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "mitsubishi_td04_15g",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Mitsubishi",
+  "family_name": "TD04 Series",
+  "product_name": "15G",
+  "source_product_id": 83,
+  "figure_sha256": "1a9156d33c584ee429108c4d7c3953da495b9f282b1184986349a398e1998672",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/mitsu/TD04H-15G.gif",
+  "legacy_map_path": "maps/mitsu/TD04H-15G.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "m^3/sec",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 0.31,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 48.551081,
+    "pr_min": 1.0,
+    "pr_max": 3.0,
+    "pixel_x_start": 56,
+    "pixel_y_start": 55,
+    "pixel_width": 329,
+    "pixel_height": 419
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.1475716754632294,
+        0.0
+      ],
+      [
+        0.0,
+        -0.00477326968973747
+      ]
+    ],
+    "b": [
+      -8.264013825940847,
+      3.2625298329355608
+    ],
+    "A_kg_s": [
+      [
+        0.0011156231003039514,
+        0.0
+      ],
+      [
+        0.0,
+        -0.00477326968973747
+      ]
+    ],
+    "b_kg_s": [
+      -0.06247489361702127,
+      3.2625298329355608
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        56,
+        55
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.0
+    },
+    "top_right": {
+      "pixel": [
+        385,
+        55
+      ],
+      "flow_lb_min": 48.551081,
+      "flow_kg_s": 0.36704,
+      "pressure_ratio": 3.0
+    },
+    "bottom_left": {
+      "pixel": [
+        56,
+        474
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        385,
+        474
+      ],
+      "flow_lb_min": 48.551081,
+      "flow_kg_s": 0.36704,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "Mitsubishi",
+        "model": "TD04-15G",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 1.625,
+          "inducer_mm": 41.28,
+          "exducer_in": 2.187,
+          "exducer_mm": 55.55,
+          "trim": "55",
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": 1.812,
+          "major_dia_mm": 46.02,
+          "exducer_in": 1.625,
+          "exducer_mm": 41.28,
+          "trim": null,
+          "ar": null,
+          "housing_type": null
+        },
+        "hp_rating": null
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "m^3/sec",
+    "units_match": true
+  },
+  "source_notes": ""
+}

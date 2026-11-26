@@ -1,0 +1,1011 @@
+{
+  "schema_version": "1.0",
+  "test_depression_inh2o": 28.0,
+  "test_depression_kpa": 6.97,
+  "nist_sp811_cfm_to_dm3_s": 0.47194745,
+  "flowbench_datasets": [
+    {
+      "dataset_id": "2_5l_head_comparison",
+      "title": "2.5L Swirl, G-Head & 3.0L 12V Flowbench Comparison",
+      "configurations": [
+        "Stock Swirl",
+        "Community Ported G-Head (2.5L Bench)",
+        "Community Ported Swirl Head",
+        "LW Swirl Head",
+        "Stock 3L 12v",
+        "Community Ported 3.0L 12V"
+      ],
+      "intake": {
+        "Stock Swirl": [
+          {
+            "lift_in": 0.1,
+            "cfm": 47.52,
+            "dm3_s": 22.427
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 74.25,
+            "dm3_s": 35.042
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 100.98,
+            "dm3_s": 47.657
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 118.8,
+            "dm3_s": 56.067
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 126.0,
+            "dm3_s": 59.465
+          }
+        ],
+        "Community Ported G-Head (2.5L Bench)": [
+          {
+            "lift_in": 0.1,
+            "cfm": 68.31,
+            "dm3_s": 32.239
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 112.86,
+            "dm3_s": 53.264
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 149.99,
+            "dm3_s": 70.787
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 175.23,
+            "dm3_s": 82.699
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 187.0,
+            "dm3_s": 88.254
+          }
+        ],
+        "Community Ported Swirl Head": [
+          {
+            "lift_in": 0.1,
+            "cfm": 54.7,
+            "dm3_s": 25.816
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 107.8,
+            "dm3_s": 50.876
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 153.0,
+            "dm3_s": 72.208
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 177.2,
+            "dm3_s": 83.629
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 195.4,
+            "dm3_s": 92.219
+          },
+          {
+            "lift_in": 0.6,
+            "cfm": 210.5,
+            "dm3_s": 99.345
+          }
+        ],
+        "LW Swirl Head": [
+          {
+            "lift_in": 0.1,
+            "cfm": 69.56,
+            "dm3_s": 32.829
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 119.88,
+            "dm3_s": 56.577
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 165.0,
+            "dm3_s": 77.871
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 191.4,
+            "dm3_s": 90.331
+          }
+        ],
+        "Stock 3L 12v": [
+          {
+            "lift_in": 0.1,
+            "cfm": 44.5,
+            "dm3_s": 21.002
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 147.01,
+            "dm3_s": 69.381
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 161.86,
+            "dm3_s": 76.389
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 183.0,
+            "dm3_s": 86.366
+          }
+        ],
+        "Community Ported 3.0L 12V": [
+          {
+            "lift_in": 0.1,
+            "cfm": 44.5,
+            "dm3_s": 21.002
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 151.47,
+            "dm3_s": 71.486
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 172.26,
+            "dm3_s": 81.298
+          }
+        ]
+      },
+      "exhaust": {
+        "Stock Swirl": [
+          {
+            "lift_in": 0.1,
+            "cfm": 47.25,
+            "dm3_s": 22.3
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 78.75,
+            "dm3_s": 37.166
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 94.5,
+            "dm3_s": 44.599
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 110.25,
+            "dm3_s": 52.032
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 116.55,
+            "dm3_s": 55.005
+          }
+        ],
+        "Community Ported G-Head (2.5L Bench)": [
+          {
+            "lift_in": 0.1,
+            "cfm": 63.0,
+            "dm3_s": 29.733
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 94.5,
+            "dm3_s": 44.599
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 124.25,
+            "dm3_s": 58.639
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 141.75,
+            "dm3_s": 66.899
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 151.5,
+            "dm3_s": 71.5
+          }
+        ],
+        "Community Ported Swirl Head": [
+          {
+            "lift_in": 0.1,
+            "cfm": 52.8,
+            "dm3_s": 24.919
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 96.8,
+            "dm3_s": 45.685
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 129.2,
+            "dm3_s": 60.976
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 160.0,
+            "dm3_s": 75.512
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 174.9,
+            "dm3_s": 82.544
+          },
+          {
+            "lift_in": 0.6,
+            "cfm": 184.5,
+            "dm3_s": 87.074
+          }
+        ],
+        "LW Swirl Head": [
+          {
+            "lift_in": 0.1,
+            "cfm": 60.9,
+            "dm3_s": 28.742
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 106.56,
+            "dm3_s": 50.291
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 149.6,
+            "dm3_s": 70.603
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 161.4,
+            "dm3_s": 76.172
+          }
+        ],
+        "Stock 3L 12v": [
+          {
+            "lift_in": 0.1,
+            "cfm": 31.5,
+            "dm3_s": 14.866
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 78.75,
+            "dm3_s": 37.166
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 97.65,
+            "dm3_s": 46.086
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          }
+        ],
+        "Community Ported 3.0L 12V": [
+          {
+            "lift_in": 0.1,
+            "cfm": 31.5,
+            "dm3_s": 14.866
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 75.4,
+            "dm3_s": 35.585
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 110.25,
+            "dm3_s": 52.032
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 133.87,
+            "dm3_s": 63.18
+          }
+        ]
+      }
+    },
+    {
+      "dataset_id": "g_head_porting_comparison",
+      "title": "G-Head Porting Progression & DOHC Flowbench Comparison",
+      "configurations": [
+        "Stock Head",
+        "KMP Flowbench Corrected",
+        "G-Head Bowl & Short Turn Porting",
+        "Stock Stealth DOHC",
+        "G-Head Full Rework (Big Valves)"
+      ],
+      "intake": {
+        "Stock Head": [
+          {
+            "lift_in": 0.1,
+            "cfm": 44.5,
+            "dm3_s": 21.002
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 147.01,
+            "dm3_s": 69.381
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 161.86,
+            "dm3_s": 76.389
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 183.0,
+            "dm3_s": 86.366
+          }
+        ],
+        "KMP Flowbench Corrected": [
+          {
+            "lift_in": 0.1,
+            "cfm": 48.5,
+            "dm3_s": 22.889
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 109.95,
+            "dm3_s": 51.891
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 155.01,
+            "dm3_s": 73.157
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 181.86,
+            "dm3_s": 85.828
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 207.5,
+            "dm3_s": 97.929
+          }
+        ],
+        "G-Head Bowl & Short Turn Porting": [
+          {
+            "lift_in": 0.1,
+            "cfm": 44.5,
+            "dm3_s": 21.002
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 151.47,
+            "dm3_s": 71.486
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 172.26,
+            "dm3_s": 81.298
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 194.0,
+            "dm3_s": 91.558
+          }
+        ],
+        "Stock Stealth DOHC": [
+          {
+            "lift_in": 0.1,
+            "cfm": 93.0,
+            "dm3_s": 43.891
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 179.0,
+            "dm3_s": 84.479
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 230.0,
+            "dm3_s": 108.548
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 262.0,
+            "dm3_s": 123.65
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 256.0,
+            "dm3_s": 120.819
+          }
+        ],
+        "G-Head Full Rework (Big Valves)": [
+          {
+            "lift_in": 0.1,
+            "cfm": 68.31,
+            "dm3_s": 32.239
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 112.86,
+            "dm3_s": 53.264
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 149.99,
+            "dm3_s": 70.787
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 175.68,
+            "dm3_s": 82.912
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 187.0,
+            "dm3_s": 88.254
+          }
+        ]
+      },
+      "exhaust": {
+        "Stock Head": [
+          {
+            "lift_in": 0.1,
+            "cfm": 31.5,
+            "dm3_s": 14.866
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 78.75,
+            "dm3_s": 37.166
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 97.65,
+            "dm3_s": 46.086
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 103.95,
+            "dm3_s": 49.059
+          }
+        ],
+        "KMP Flowbench Corrected": [
+          {
+            "lift_in": 0.1,
+            "cfm": 30.5,
+            "dm3_s": 14.394
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 88.75,
+            "dm3_s": 41.885
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 125.65,
+            "dm3_s": 59.3
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 133.95,
+            "dm3_s": 63.217
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 135.95,
+            "dm3_s": 64.161
+          }
+        ],
+        "G-Head Bowl & Short Turn Porting": [
+          {
+            "lift_in": 0.1,
+            "cfm": 31.5,
+            "dm3_s": 14.866
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 75.4,
+            "dm3_s": 35.585
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 110.25,
+            "dm3_s": 52.032
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 133.87,
+            "dm3_s": 63.18
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 148.05,
+            "dm3_s": 69.872
+          }
+        ],
+        "Stock Stealth DOHC": [
+          {
+            "lift_in": 0.1,
+            "cfm": 80.0,
+            "dm3_s": 37.756
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 164.0,
+            "dm3_s": 77.399
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 200.0,
+            "dm3_s": 94.389
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 216.0,
+            "dm3_s": 101.941
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 219.0,
+            "dm3_s": 103.356
+          }
+        ],
+        "G-Head Full Rework (Big Valves)": [
+          {
+            "lift_in": 0.1,
+            "cfm": 63.0,
+            "dm3_s": 29.733
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 94.5,
+            "dm3_s": 44.599
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 124.25,
+            "dm3_s": 58.639
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 141.75,
+            "dm3_s": 66.899
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 151.5,
+            "dm3_s": 71.5
+          }
+        ]
+      }
+    },
+    {
+      "dataset_id": "g_head_full_intake_combos",
+      "title": "G-Head Full Intake Manifold Flow Comparison",
+      "configurations": [
+        "G-Head Only",
+        "G-Head with 1pc Intake",
+        "G-Head with mild 1pc Intake",
+        "G-Head with 2pc Intake",
+        "G-Head with mild 2pc Intake"
+      ],
+      "intake": {
+        "G-Head Only": [
+          {
+            "lift_in": 0.1,
+            "cfm": 46.2,
+            "dm3_s": 21.804
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 93.2,
+            "dm3_s": 43.986
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 128.1,
+            "dm3_s": 60.456
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 150.5,
+            "dm3_s": 71.028
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 161.5,
+            "dm3_s": 76.22
+          }
+        ],
+        "G-Head with 1pc Intake": [
+          {
+            "lift_in": 0.1,
+            "cfm": 44.1,
+            "dm3_s": 20.813
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 85.2,
+            "dm3_s": 40.21
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 108.9,
+            "dm3_s": 51.395
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 121.5,
+            "dm3_s": 57.342
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 130.38,
+            "dm3_s": 61.533
+          }
+        ],
+        "G-Head with mild 1pc Intake": [
+          {
+            "lift_in": 0.1,
+            "cfm": 49.7,
+            "dm3_s": 23.456
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 88.0,
+            "dm3_s": 41.531
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 110.6,
+            "dm3_s": 52.197
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 122.5,
+            "dm3_s": 57.814
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 130.2,
+            "dm3_s": 61.448
+          }
+        ],
+        "G-Head with 2pc Intake": [
+          {
+            "lift_in": 0.1,
+            "cfm": 49.4,
+            "dm3_s": 23.314
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 89.0,
+            "dm3_s": 42.003
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 113.4,
+            "dm3_s": 53.519
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 126.0,
+            "dm3_s": 59.465
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 133.7,
+            "dm3_s": 63.099
+          }
+        ],
+        "G-Head with mild 2pc Intake": [
+          {
+            "lift_in": 0.1,
+            "cfm": 49.4,
+            "dm3_s": 23.314
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 89.0,
+            "dm3_s": 42.003
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 114.8,
+            "dm3_s": 54.18
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 128.8,
+            "dm3_s": 60.787
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 136.5,
+            "dm3_s": 64.421
+          }
+        ]
+      },
+      "exhaust": {}
+    },
+    {
+      "dataset_id": "g_head_lower_intake_combos",
+      "title": "G-Head Lower vs. Complete 2-Piece Intake Flow",
+      "configurations": [
+        "Head Only",
+        "2pc Lower",
+        "mild 2pc Lower",
+        "2pc Intake",
+        "mild 2pc Intake"
+      ],
+      "intake": {
+        "Head Only": [
+          {
+            "lift_in": 0.1,
+            "cfm": 46.2,
+            "dm3_s": 21.804
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 93.2,
+            "dm3_s": 43.986
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 128.1,
+            "dm3_s": 60.456
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 150.5,
+            "dm3_s": 71.028
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 161.5,
+            "dm3_s": 76.22
+          }
+        ],
+        "2pc Lower": [
+          {
+            "lift_in": 0.1,
+            "cfm": 46.1,
+            "dm3_s": 21.757
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 88.3,
+            "dm3_s": 41.673
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 116.9,
+            "dm3_s": 55.171
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 132.4,
+            "dm3_s": 62.486
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 144.4,
+            "dm3_s": 68.149
+          }
+        ],
+        "mild 2pc Lower": [
+          {
+            "lift_in": 0.1,
+            "cfm": 51.2,
+            "dm3_s": 24.164
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 92.3,
+            "dm3_s": 43.561
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 120.4,
+            "dm3_s": 56.822
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 135.2,
+            "dm3_s": 63.807
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 146.1,
+            "dm3_s": 68.952
+          }
+        ],
+        "2pc Intake": [
+          {
+            "lift_in": 0.1,
+            "cfm": 49.4,
+            "dm3_s": 23.314
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 89.0,
+            "dm3_s": 42.003
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 113.4,
+            "dm3_s": 53.519
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 126.0,
+            "dm3_s": 59.465
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 133.7,
+            "dm3_s": 63.099
+          }
+        ],
+        "mild 2pc Intake": [
+          {
+            "lift_in": 0.1,
+            "cfm": 49.4,
+            "dm3_s": 23.314
+          },
+          {
+            "lift_in": 0.2,
+            "cfm": 89.0,
+            "dm3_s": 42.003
+          },
+          {
+            "lift_in": 0.3,
+            "cfm": 114.8,
+            "dm3_s": 54.18
+          },
+          {
+            "lift_in": 0.4,
+            "cfm": 128.8,
+            "dm3_s": 60.787
+          },
+          {
+            "lift_in": 0.5,
+            "cfm": 136.5,
+            "dm3_s": 64.421
+          }
+        ]
+      },
+      "exhaust": {}
+    }
+  ],
+  "ve_calc_reference": {
+    "engine_parameters": {
+      "rated_injector_flow_lb_hr": 52.3,
+      "rated_injector_pressure_psi": 55.0,
+      "displacement_l": 2.5,
+      "cylinders": 4,
+      "base_fuel_pressure_psi": 45.0,
+      "fmu_ratio": 1.0
+    },
+    "rpm_sweep": [
+      {
+        "rpm": 1000.0,
+        "map_psi": 0.0,
+        "iat_deg_f": 85.0,
+        "injector_pw_ms": 3.0,
+        "afr": 14.7,
+        "fuel_pressure_psi": 45.0,
+        "injector_flow_lb_hr": 47.3071,
+        "duty_cycle": 0.025,
+        "ideal_airflow_lb_min": 3.2157,
+        "actual_fuel_flow_lb_min": 0.2188,
+        "calculated_ve": 0.3604
+      },
+      {
+        "rpm": 2000.0,
+        "map_psi": 1.0,
+        "iat_deg_f": 90.0,
+        "injector_pw_ms": 8.0,
+        "afr": 14.0,
+        "fuel_pressure_psi": 46.0,
+        "injector_flow_lb_hr": 47.8299,
+        "duty_cycle": 0.1333,
+        "ideal_airflow_lb_min": 6.8066,
+        "actual_fuel_flow_lb_min": 0.4862,
+        "calculated_ve": 0.8745
+      },
+      {
+        "rpm": 3000.0,
+        "map_psi": 12.0,
+        "iat_deg_f": 108.0,
+        "injector_pw_ms": 12.46,
+        "afr": 13.0,
+        "fuel_pressure_psi": 57.0,
+        "injector_flow_lb_hr": 53.2424,
+        "duty_cycle": 0.3115,
+        "ideal_airflow_lb_min": 16.8148,
+        "actual_fuel_flow_lb_min": 1.2934,
+        "calculated_ve": 0.8548
+      },
+      {
+        "rpm": 4000.0,
+        "map_psi": 15.0,
+        "iat_deg_f": 120.0,
+        "injector_pw_ms": 16.0,
+        "afr": 11.0,
+        "fuel_pressure_psi": 60.0,
+        "injector_flow_lb_hr": 54.6256,
+        "duty_cycle": 0.5333,
+        "ideal_airflow_lb_min": 24.4233,
+        "actual_fuel_flow_lb_min": 2.2203,
+        "calculated_ve": 0.8748
+      },
+      {
+        "rpm": 5000.0,
+        "map_psi": 15.0,
+        "iat_deg_f": 130.0,
+        "injector_pw_ms": 15.97,
+        "afr": 11.0,
+        "fuel_pressure_psi": 60.0,
+        "injector_flow_lb_hr": 54.6256,
+        "duty_cycle": 0.6654,
+        "ideal_airflow_lb_min": 30.0116,
+        "actual_fuel_flow_lb_min": 2.7283,
+        "calculated_ve": 0.8882
+      },
+      {
+        "rpm": 6000.0,
+        "map_psi": 15.0,
+        "iat_deg_f": 130.0,
+        "injector_pw_ms": 15.0,
+        "afr": 11.0,
+        "fuel_pressure_psi": 60.0,
+        "injector_flow_lb_hr": 54.6256,
+        "duty_cycle": 0.75,
+        "ideal_airflow_lb_min": 36.014,
+        "actual_fuel_flow_lb_min": 3.274,
+        "calculated_ve": 0.8342
+      }
+    ]
+  }
+}

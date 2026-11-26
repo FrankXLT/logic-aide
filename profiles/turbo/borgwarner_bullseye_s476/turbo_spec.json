@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "borgwarner_bullseye_s476",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "BorgWarner Turbo Systems",
+  "family_name": "S Series: Bullseye-Power",
+  "product_name": "S476",
+  "source_product_id": 185,
+  "figure_sha256": "c7abc83100ddc6d5a4f9ea1c3513458b1de06db0d93502e2ee9dd4a31465e575",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/bw/BW S476.jpg",
+  "legacy_map_path": "maps/bw/bullseye-power/BW S476.jpg",
+  "figure_match_method": "basename_case_insensitive",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 20.0,
+    "airflow_max_raw": 105.0,
+    "airflow_min_lb_min": 20.0,
+    "airflow_max_lb_min": 105.0,
+    "pr_min": 1.4,
+    "pr_max": 4.8,
+    "pixel_x_start": 82,
+    "pixel_y_start": 19,
+    "pixel_width": 538,
+    "pixel_height": 358
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.1579925650557621,
+        0.0
+      ],
+      [
+        0.0,
+        -0.009497206703910615
+      ]
+    ],
+    "b": [
+      7.044609665427508,
+      4.9804469273743015
+    ],
+    "A_kg_s": [
+      [
+        0.001194403700433705,
+        0.0
+      ],
+      [
+        0.0,
+        -0.009497206703910615
+      ]
+    ],
+    "b_kg_s": [
+      0.053256353231102845,
+      4.9804469273743015
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        82,
+        19
+      ],
+      "flow_lb_min": 20.0,
+      "flow_kg_s": 0.151197,
+      "pressure_ratio": 4.8
+    },
+    "top_right": {
+      "pixel": [
+        620,
+        19
+      ],
+      "flow_lb_min": 105.0,
+      "flow_kg_s": 0.793787,
+      "pressure_ratio": 4.8
+    },
+    "bottom_left": {
+      "pixel": [
+        82,
+        377
+      ],
+      "flow_lb_min": 20.0,
+      "flow_kg_s": 0.151197,
+      "pressure_ratio": 1.4
+    },
+    "bottom_right": {
+      "pixel": [
+        620,
+        377
+      ],
+      "flow_lb_min": 105.0,
+      "flow_kg_s": 0.793787,
+      "pressure_ratio": 1.4
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

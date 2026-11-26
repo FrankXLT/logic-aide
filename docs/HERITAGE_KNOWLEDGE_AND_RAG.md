@@ -16,9 +16,10 @@ Naive fixed-500-token chunkers and stock dense embeddings break down systematica
 
 | Storage Zone | Git Tracked? | Permitted Contents & Directories | Enforced Cleanroom & Rebuild Policy |
 | :--- | :---: | :--- | :--- |
-| **`data/heritage_raw/`** | **No** (`.gitignore`) | `warc/` (ISO 28500 `.warc.gz`), `web_md/` (intermediate parsed threads), `pdfs/` (scanned FSMs/TSBs/binders), `figures/` (`300 DPI` & inline `.gif`/`.jpg` crops). | Local offline preservation vault only; never committed to git and never copied verbatim into `knowledge/`. |
-| **`knowledge/`** | **Yes** | Distilled attributed cleanroom fact sheets, normalized tables, verified Mermaid schematics + walkthroughs, YAML provenance headers. | Every file MUST pass YAML frontmatter schema validation and carry a `trust_tier` badge (`Tier 1`, `Tier 2`, or `Tier 3`). |
-| **`data/heritage_index.sqlite`** | **No** (rebuildable) | Parent-child corpus (`heritage_parents`, `heritage_children`), `FTS5` lexical index (`heritage_fts`), and `sqlite-vec` `BAAI/bge-m3` 1024-d index (`heritage_vec`). | Deterministically rebuilt offline from `knowledge/**/*.md` via `uv run logicaide heritage build-index`. |
+| **`data/heritage_raw/`** | **No** (`.gitignore`) | `warc/` (ISO 28500 `.warc.gz`), `web_md/`, `pdfs/`, `figures/`, `discovery_queue/` (CDX/memento manifests), `wiki_stage/` (default `sync-wiki` staging). | Local offline preservation vault only; never committed to git and never copied verbatim into `knowledge/` or `wiki/`. |
+| **`knowledge/`** | **Yes** | Distilled attributed cleanroom fact sheets, normalized tables, verified Mermaid schematics + walkthroughs, YAML provenance headers, `discovery_leads.yaml`. | Every Markdown file MUST pass YAML frontmatter validation and carry a `trust_tier` badge (`Tier 1`, `Tier 2`, or `Tier 3`); leads must be PII-scrubbed. |
+| **`wiki/`** | **Yes** | Canonical Living Heritage Wiki (`Home.md`, `_Sidebar.md`, `_Footer.md`, and 6 topic directories with `<category>-overview.md` naming). | Every content page MUST pass frontmatter, cross-link, Mermaid, and Hardware Deadbolt/PII checks before RAG indexing or outbound `.wiki.git` mirror. |
+| **`data/heritage_index.sqlite`** | **No** (rebuildable) | Parent-child corpus (`heritage_parents`, `heritage_children`), `FTS5` lexical index (`heritage_fts`), and `sqlite-vec` `BAAI/bge-m3` 1024-d index (`heritage_vec`). | Deterministically rebuilt offline from both `knowledge/**/*.md` and `wiki/**/*.md` via `uv run logicaide heritage build-index`. |
 
 ---
 
@@ -189,11 +190,58 @@ CREATE VIRTUAL TABLE heritage_vec USING vec0(
 
 ---
 
-## 6. Deterministic CLI & `chrysler-heritage` FastMCP Subcommands
+## 6. Wave-Driven Discovery Harvester (`uv run logicaide heritage discover`)
+
+Before running blind broad crawls, `src/logicaide/heritage/discovery.py` implements **Wave A** targeted archival discovery (`SCHEMA_VERSION = "1.0"`):
+
+1. **Read-Only Fingerprint Extraction (`private_references/`)**: Inspects `private_references/` strictly read-only (`MAX_TEXT_SCAN_BYTES = 524288`, `MAX_TEXT_SCAN_FILES = 800`) to harvest high-entropy search seeds without copying private payloads:
+   - Legacy tooling domains & uncalibrated TurboCalc v5 beta 4 raster maps (`squirrelpf.com`, `sqrl_tools`, `turbocalc`, and the `14` `KNOWN_UNCALIBRATED_MAPS` basenames such as `703457-2comp_e.jpg`, `gt3071r_700382_3_com_e.gif`, `hx40.jpg`, `td04h-16t-cfm.gif`).
+   - OEM Chrysler turbochargers (`T03 Garrett`, `TB03 Garrett`, `TE04H`, `VNT25`, `TD04LR`) and head casting / ECU lineage tokens (`#782`, `#445`, `G-Head`, `88-90 SMEC 52-way`, `SBEC`).
+2. **SHA-256 Vault Deduplication**: Computes SHA-256 digests across existing `data/heritage_raw/` artifacts and parses `private_references/_INDEX_AND_ROUTING_MANIFEST.md` so already-preserved captures are skipped before queueing.
+3. **Polite Wayback CDX & Memento Queue (`data/heritage_raw/discovery_queue/`)**:
+   - Constructs canonical Wayback Machine CDX API queries (`fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest`).
+   - Remains deterministic and offline by default; when `--fetch-cdx` is passed, executes live CDX queries with a hard **`1.5s` per-request delay** (`POLITE_REQUEST_DELAY_S = 1.5`) and emits verbatim `https://web.archive.org/web/<ts>id_/<url>` raw memento URLs into gitignored `data/heritage_raw/discovery_queue/`.
+4. **Tracked Cleanroom Leads (`knowledge/discovery_leads.yaml`)**: Scrubs local paths, emails, and UNC hostnames via `scrub_pii()` and writes a tracked, PII-free lead manifest (`knowledge/discovery_leads.yaml`) mapping each fingerprint to its target cleanroom destination (`profiles/turbo/`, `knowledge/engine/`, `knowledge/ecu/`, or `data/heritage_raw/warc/`).
+
+---
+
+## 7. Dual-Publish Living Heritage Wiki (`wiki/` + `uv run logicaide heritage sync-wiki`)
+
+Human-browsable documentation lives canonically inside repo-tracked `wiki/` and shares the same cleanroom verification and SQLite RAG index as `knowledge/`:
+
+```text
+wiki/
+├── Home.md                       # Root index (full YAML frontmatter)
+├── _Sidebar.md                   # GitHub Wiki navigation chrome partial
+├── _Footer.md                    # GitHub Wiki footer chrome partial
+├── ecu-families/                 # ecu-families-overview.md + SMEC/SBEC pages
+├── rom-and-sci/                  # rom-and-sci-overview.md + 68HC11 / SCI pages
+├── turbo-and-airflow/            # turbo-and-airflow-overview.md + map/head pages
+├── drivetrain-and-swaps/         # drivetrain-and-swaps-overview.md
+├── wiring-and-diagnostics/       # wiring-and-diagnostics-overview.md
+└── hardware-bench/               # hardware-bench-overview.md
+```
+
+- **Flat-Namespace Collision Prevention**: Topic overview pages use unique `<category>-overview.md` filenames (never generic `README.md` or `overview.md` inside subdirectories), ensuring lossless 1:1 flattening when mirroring to GitHub Wiki.
+- **Pre-Index & Pre-Mirror Validation (`src/logicaide/heritage/wiki_sync.py`)**:
+  - `validate_wiki_tree(wiki_dir)` enforces required content-page YAML frontmatter (`title`, `slug`, `category`, `tier`, `provenance`, `ecu_scope`, `engine_scope`, `status`, `last_verified`, `tags`) on `Home.md` and `wiki/**/*.md`, while permitting `_Sidebar.md` and `_Footer.md` chrome partials without full frontmatter.
+  - Validates all relative Markdown links (including `_Sidebar.md` and GitHub Wiki flat page links), runs deterministic `validate_mermaid_block(..., use_external_linter=False)` structural checks on every ```` ```mermaid ```` fence, and blocks PII or Hardware Deadbolt/flash tokens (`WikiValidationError`).
+- **Shared RAG Indexing**: `uv run logicaide heritage build-index` ingests both `knowledge/**/*.md` and validated `wiki/**/*.md` into `data/heritage_index.sqlite`.
+- **Dual-Publish Mirror (`sync_wiki` / `run_sync_wiki`)**:
+  - Never mutates `wiki/` in place; stages safely to `data/heritage_raw/wiki_stage/` by default (supporting `--dry-run` and `--validate-only`).
+  - **GitHub `.wiki.git` Target (`strip_frontmatter=True`, `flatten_for_github_wiki=True`)**: Strips YAML frontmatter ONLY on the outbound `.wiki.git` copy (preserving `_Sidebar.md` / `_Footer.md`) and rewrites relative directory links to flattened page filenames.
+  - **Static-Site Target (`flatten_for_github_wiki=False`)**: Preserves subdirectories and leaves relative directory links untouched for zero-rewrite portability to a future static site generator.
+
+---
+
+## 8. Deterministic CLI & `chrysler-heritage` FastMCP Subcommands
 
 Every pipeline step and retrieval primitive maintains 100% logic parity between `uv run logicaide heritage ...` and `mcp_servers/chrysler_heritage.py`:
 
 ```bash
+# Stage 0: Wave A discovery from read-only private_references/ -> discovery_leads.yaml & discovery_queue/
+uv run logicaide heritage discover [--fetch-cdx]
+
 # Stage 1: Polite 1 req/s ISO 28500 WARC archival capture -> data/heritage_raw/warc/
 uv run logicaide heritage crawl --site minimopar --rate-limit 1.0
 
@@ -203,16 +251,21 @@ uv run logicaide heritage parse-web --input data/heritage_raw/warc/minimopar.war
 # Stage 3: Docling TableFormer + cross-page stitch + Marker/Surya fallback + Mermaid Gate 4a/4b
 uv run logicaide heritage parse-docs --input data/heritage_raw/pdfs/smec_notes.pdf --verify-mermaid
 
-# Stage 4: YAML validation + 2-line scope prefix + parent-child FTS5 + BAAI/bge-m3 vec0 build
+# Stage 4: Validate wiki/ + knowledge/, inject 2-line scope prefix, build FTS5 + BAAI/bge-m3 vec0 index
 uv run logicaide heritage build-index --verify-frontmatter   # alias: logicaide heritage index
 
-# Stage 5: Hybrid query & verified Mermaid schematic inspection / human sign-off
+# Stage 5: Validate wiki/ & stage dual-publish mirror (outbound .wiki.git or static site)
+uv run logicaide heritage sync-wiki --dry-run
+
+# Stage 6: Hybrid query & verified Mermaid schematic inspection / human sign-off
 uv run logicaide heritage query "Pin 11 SBEC ground vs SMEC bootstrap" --min-tier 2 --ecu SMEC_88_89
 uv run logicaide heritage diagram --doc smec-code23-tps-tree --pending-review
 ```
 
 | CLI Subcommand | `chrysler-heritage` FastMCP Tool | Contract Guarantee |
 | :--- | :--- | :--- |
+| `logicaide heritage discover` | `discover_heritage_leads` | Read-only fingerprint scan + SHA-256 dedup + PII-scrubbed `knowledge/discovery_leads.yaml` & CDX/memento queue (`1.5s` delay on `--fetch-cdx`) |
+| `logicaide heritage sync-wiki` | `sync_heritage_wiki` | Frontmatter + cross-link + Mermaid + PII gate; non-mutating mirror (`--strip-frontmatter`/`--flatten` for `.wiki.git` vs `--no-strip-frontmatter --no-flatten` for static sites) |
 | `heritage query` | `search_heritage_docs` | Trust-weighted RRF (`1.25x`/`1.10x`/`0.90x`) + parent hydration + `No Verified Source Match` gate |
 | `heritage diagram` | `get_verified_schematic` | Returns only `mermaid_verification = 'VERIFIED'` graphs + walkthrough; excludes `NEEDS_HUMAN_REVIEW` |
 | `heritage query --pin` | `lookup_60way_pin` | Filters strictly `Tier 1`/`Tier 2`, separating `SMEC_88_89` vs `SBEC_90_93` Pin 11/2/3/25/45 rules |

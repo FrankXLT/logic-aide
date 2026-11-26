@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_t04b_60_1_trim_dbb",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "T04B Series",
+  "product_name": "60-1 Trim - DBB",
+  "source_product_id": 188,
+  "figure_sha256": "413045577dbc146713ecad12af277897e3cbd3e826d9ca617fe9ddcfe15c2e83",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/757197_1_comp_e.jpg",
+  "legacy_map_path": "maps/garrett/757197_1_comp_e.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 70.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 70.0,
+    "pr_min": 1.0,
+    "pr_max": 3.5,
+    "pixel_x_start": 42,
+    "pixel_y_start": 46,
+    "pixel_width": 384,
+    "pixel_height": 415
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.18229166666666666,
+        0.0
+      ],
+      [
+        0.0,
+        -0.006024096385542169
+      ]
+    ],
+    "b": [
+      -7.65625,
+      3.7771084337349397
+    ],
+    "A_kg_s": [
+      [
+        0.0013781018185763888,
+        0.0
+      ],
+      [
+        0.0,
+        -0.006024096385542169
+      ]
+    ],
+    "b_kg_s": [
+      -0.05788027638020833,
+      3.7771084337349397
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        42,
+        46
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.5
+    },
+    "top_right": {
+      "pixel": [
+        426,
+        46
+      ],
+      "flow_lb_min": 70.0,
+      "flow_kg_s": 0.529191,
+      "pressure_ratio": 3.5
+    },
+    "bottom_left": {
+      "pixel": [
+        42,
+        461
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        426,
+        461
+      ],
+      "flow_lb_min": 70.0,
+      "flow_kg_s": 0.529191,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": ".70",
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": null,
+  "source_notes": "Upgrade CHRA to Ball Bearing."
+}

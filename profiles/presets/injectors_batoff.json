@@ -1,0 +1,5484 @@
+{
+  "schema_version": "1.0",
+  "preset_count": 95,
+  "nominal_defaults": {
+    "pressure_slope_ms_per_psi": 0.0065,
+    "short_pulse_knee_ms": 1.05,
+    "min_linear_pw_ms": 1.35
+  },
+  "presets": [
+    {
+      "preset_id": "holley_delphi_75lb_788cc",
+      "label": "Holley 75 lb / Delphi 788 cc",
+      "rated_flow_cc_min": 788.0,
+      "rated_flow_lb_hr": 75.0,
+      "flow_at_55psi_lb_hr": 84.333,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0
+        ],
+        "deadtime_ms": [
+          2.55,
+          2.22,
+          1.63,
+          1.26,
+          1.02,
+          0.86,
+          0.71,
+          0.62,
+          0.54,
+          0.44,
+          0.37
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0
+      ],
+      "measured_deadtime_ms": [
+        2.55,
+        2.22,
+        1.63,
+        1.26,
+        1.02,
+        0.86,
+        0.71,
+        0.62,
+        0.54,
+        0.44,
+        0.37
+      ],
+      "extrapolated_below_10v": false,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ],
+      "corroboration": {
+        "matched_sources": 3,
+        "source_tables": [
+          "latency_sheet1_holley75",
+          "latency_sheet2_holley_788cc",
+          "latency_xlsx_delphi_75lb_788cc"
+        ],
+        "exact_overlap_10v_15v_ms": true,
+        "exact_full_6v_16v_ms": true
+      }
+    },
+    {
+      "preset_id": "injector_785cc_s",
+      "label": "785 cc/min (S) / 75 lb/hr",
+      "rated_flow_cc_min": 785.0,
+      "rated_flow_lb_hr": 74.76,
+      "flow_at_55psi_lb_hr": 84.063,
+      "impedance_ohm": null,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0
+        ],
+        "deadtime_ms": [
+          2.55,
+          2.55,
+          2.2,
+          1.74,
+          1.41,
+          1.21,
+          1.03,
+          0.87,
+          0.76,
+          0.68,
+          0.6
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0
+      ],
+      "measured_deadtime_ms": [
+        2.55,
+        2.55,
+        2.2,
+        1.74,
+        1.41,
+        1.21,
+        1.03,
+        0.87,
+        0.76,
+        0.68,
+        0.6
+      ],
+      "extrapolated_below_10v": false,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "msd_72lb_756cc",
+      "label": "MSD 72 lb/hr (756 cc/min)",
+      "rated_flow_cc_min": 756.0,
+      "rated_flow_lb_hr": 72.0,
+      "flow_at_55psi_lb_hr": 80.96,
+      "impedance_ohm": null,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0,
+          16.0
+        ],
+        "deadtime_ms": [
+          2.55,
+          2.55,
+          2.19,
+          1.72,
+          1.4,
+          1.17,
+          0.97,
+          0.81,
+          0.69,
+          0.58,
+          0.49
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        16.0
+      ],
+      "measured_deadtime_ms": [
+        2.55,
+        2.55,
+        2.19,
+        1.72,
+        1.4,
+        1.17,
+        0.97,
+        0.81,
+        0.69,
+        0.58,
+        0.49
+      ],
+      "extrapolated_below_10v": false,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "civic_92_00_lx_dx_hx_190cc_12ohm",
+      "label": "civic 92-00 (lx/dx/hx)",
+      "rated_flow_cc_min": 190.0,
+      "rated_flow_lb_hr": 18.0,
+      "flow_at_55psi_lb_hr": 20.24,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.178,
+          1.632,
+          1.17,
+          0.96,
+          0.8,
+          0.6,
+          0.46,
+          0.34
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.17,
+        0.96,
+        0.8,
+        0.6,
+        0.46,
+        0.34
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ford_mustang_84_95_200cc_15ohm",
+      "label": "Ford mustang (84-95)",
+      "rated_flow_cc_min": 200.0,
+      "rated_flow_lb_hr": 19.0,
+      "flow_at_55psi_lb_hr": 21.364,
+      "impedance_ohm": 15.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.772,
+          1.278,
+          0.86,
+          0.67,
+          0.56,
+          0.43,
+          0.34,
+          0.2
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.86,
+        0.67,
+        0.56,
+        0.43,
+        0.34,
+        0.2
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "mustang_gt_96_03_200cc_15ohm",
+      "label": "Mustang GT (96-03)",
+      "rated_flow_cc_min": 200.0,
+      "rated_flow_lb_hr": 19.0,
+      "flow_at_55psi_lb_hr": 21.364,
+      "impedance_ohm": 15.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.158,
+          1.612,
+          1.15,
+          0.94,
+          0.8,
+          0.67,
+          0.54,
+          0.46
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.15,
+        0.94,
+        0.8,
+        0.67,
+        0.54,
+        0.46
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "toyota_00_1_5l_xb_xa_prius_echo_200cc_14ohm",
+      "label": "Toyota (00+ 1.5L) xB/xA/Prius/Echo",
+      "rated_flow_cc_min": 200.0,
+      "rated_flow_lb_hr": 19.0,
+      "flow_at_55psi_lb_hr": 21.364,
+      "impedance_ohm": 14.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.03,
+          1.51,
+          1.07,
+          0.87,
+          0.68,
+          0.55,
+          0.44,
+          0.37
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.07,
+        0.87,
+        0.68,
+        0.55,
+        0.44,
+        0.37
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "civic_01_lx_dx_hx_215cc_12ohm",
+      "label": "civic 01+ (lx/dx/hx)",
+      "rated_flow_cc_min": 215.0,
+      "rated_flow_lb_hr": 20.0,
+      "flow_at_55psi_lb_hr": 22.489,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.14,
+          1.62,
+          1.18,
+          0.98,
+          0.81,
+          0.72,
+          0.6,
+          0.5
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.18,
+        0.98,
+        0.81,
+        0.72,
+        0.6,
+        0.5
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "vw_passat_98_99_audi_a4_97_99_220cc_12ohm",
+      "label": "VW Passat (98-99) Audi A4 (97-99)",
+      "rated_flow_cc_min": 220.0,
+      "rated_flow_lb_hr": 21.0,
+      "flow_at_55psi_lb_hr": 23.613,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.78,
+          1.26,
+          0.82,
+          0.62,
+          0.46,
+          0.34,
+          0.24,
+          0.19
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.82,
+        0.62,
+        0.46,
+        0.34,
+        0.24,
+        0.19
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_240sx_89_90_230cc_12ohm",
+      "label": "Nissan 240SX (89-90)",
+      "rated_flow_cc_min": 230.0,
+      "rated_flow_lb_hr": 22.0,
+      "flow_at_55psi_lb_hr": 24.738,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.852,
+          1.358,
+          0.94,
+          0.75,
+          0.62,
+          0.55,
+          0.47,
+          0.42
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.94,
+        0.75,
+        0.62,
+        0.55,
+        0.47,
+        0.42
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "acura_nsx_240cc_2ohm",
+      "label": "Acura NSX",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.43,
+          1.04,
+          0.71,
+          0.56,
+          0.45,
+          0.36,
+          0.27,
+          0.21
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.71,
+        0.56,
+        0.45,
+        0.36,
+        0.27,
+        0.21
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "honda_acura_cl_240cc_2ohm",
+      "label": "Honda Acura CL",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.234,
+          0.961,
+          0.73,
+          0.64,
+          0.52,
+          0.43,
+          0.36,
+          0.25
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.73,
+        0.64,
+        0.52,
+        0.43,
+        0.36,
+        0.25
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "honda_civic_crx_prelude_integra_86_91_240cc_3ohm",
+      "label": "Honda civic/crx/prelude/integra (86-91)",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.564,
+          1.096,
+          0.7,
+          0.52,
+          0.42,
+          0.33,
+          0.27,
+          0.2
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.7,
+        0.52,
+        0.42,
+        0.33,
+        0.27,
+        0.2
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "civic_92_00_ex_si_240cc_12ohm",
+      "label": "civic 92-00 (ex/si)",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.326,
+          1.754,
+          1.27,
+          1.05,
+          0.92,
+          0.8,
+          0.66,
+          0.5
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.27,
+        1.05,
+        0.92,
+        0.8,
+        0.66,
+        0.5
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "civic_01_ex_240cc_11ohm",
+      "label": "civic 01+ (EX)",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 11.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.096,
+          1.524,
+          1.04,
+          0.82,
+          0.64,
+          0.53,
+          0.43,
+          0.36
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.04,
+        0.82,
+        0.64,
+        0.53,
+        0.43,
+        0.36
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "mitsubishi_lancer_eclipse_2_4l_240cc_15ohm",
+      "label": "Mitsubishi Lancer/eclipse (2.4L)",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 15.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.15,
+          2.37,
+          1.71,
+          1.41,
+          1.13,
+          0.86,
+          0.64,
+          0.54
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.71,
+        1.41,
+        1.13,
+        0.86,
+        0.64,
+        0.54
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_240cc_16ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 16.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.318,
+          1.772,
+          1.31,
+          1.1,
+          0.97,
+          0.77,
+          0.62,
+          0.46
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.31,
+        1.1,
+        0.97,
+        0.77,
+        0.62,
+        0.46
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "vw_passat_2000_240cc_12ohm",
+      "label": "VW Passat (2000)",
+      "rated_flow_cc_min": 240.0,
+      "rated_flow_lb_hr": 23.0,
+      "flow_at_55psi_lb_hr": 25.862,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.058,
+          1.512,
+          1.05,
+          0.84,
+          0.69,
+          0.6,
+          0.52,
+          0.43
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.05,
+        0.84,
+        0.69,
+        0.6,
+        0.52,
+        0.43
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ford_mustang_cobra_252cc_15ohm",
+      "label": "Ford Mustang Cobra",
+      "rated_flow_cc_min": 252.0,
+      "rated_flow_lb_hr": 24.0,
+      "flow_at_55psi_lb_hr": 26.987,
+      "impedance_ohm": 15.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.774,
+          1.306,
+          0.91,
+          0.73,
+          0.59,
+          0.46,
+          0.36,
+          0.25
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.91,
+        0.73,
+        0.59,
+        0.46,
+        0.36,
+        0.25
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_240sx_91_98_altima_93_01_250cc_11ohm",
+      "label": "Nissan 240sx (91-98) / Altima (93-01)",
+      "rated_flow_cc_min": 250.0,
+      "rated_flow_lb_hr": 24.0,
+      "flow_at_55psi_lb_hr": 26.987,
+      "impedance_ohm": 11.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.816,
+          1.374,
+          1.0,
+          0.83,
+          0.69,
+          0.57,
+          0.47,
+          0.4
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.0,
+        0.83,
+        0.69,
+        0.57,
+        0.47,
+        0.4
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_sentra_200sx_nx_g20_2_0l_only_259cc_11ohm",
+      "label": "Nissan Sentra/200sx/NX/G20 (2.0L ONLY)",
+      "rated_flow_cc_min": 259.0,
+      "rated_flow_lb_hr": 25.0,
+      "flow_at_55psi_lb_hr": 28.111,
+      "impedance_ohm": 11.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.62,
+          1.23,
+          0.9,
+          0.75,
+          0.64,
+          0.56,
+          0.47,
+          0.42
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.9,
+        0.75,
+        0.64,
+        0.56,
+        0.47,
+        0.42
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "dodge_4_7_273cc_12ohm",
+      "label": "Dodge 4.7",
+      "rated_flow_cc_min": 273.0,
+      "rated_flow_lb_hr": 26.0,
+      "flow_at_55psi_lb_hr": 29.235,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.238,
+          2.432,
+          1.75,
+          1.44,
+          1.22,
+          1.03,
+          0.89,
+          0.73
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.75,
+        1.44,
+        1.22,
+        1.03,
+        0.89,
+        0.73
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_180_sx_88_93_skyline_86_88_270cc_2ohm",
+      "label": "Nissan 180 sx (88-93) / Skyline (86-88)",
+      "rated_flow_cc_min": 270.0,
+      "rated_flow_lb_hr": 26.0,
+      "flow_at_55psi_lb_hr": 29.235,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.022,
+          1.528,
+          1.11,
+          0.92,
+          0.75,
+          0.6,
+          0.49,
+          0.42
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.11,
+        0.92,
+        0.75,
+        0.6,
+        0.49,
+        0.42
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_270cc_16ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 270.0,
+      "rated_flow_lb_hr": 26.0,
+      "flow_at_55psi_lb_hr": 29.235,
+      "impedance_ohm": 16.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.562,
+          1.198,
+          0.89,
+          0.76,
+          0.61,
+          0.49,
+          0.32,
+          0.23
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.89,
+        0.76,
+        0.61,
+        0.49,
+        0.32,
+        0.23
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "acura_rsx_290cc_12ohm",
+      "label": "Acura RSX",
+      "rated_flow_cc_min": 290.0,
+      "rated_flow_lb_hr": 28.0,
+      "flow_at_55psi_lb_hr": 31.484,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.288,
+          1.742,
+          1.28,
+          1.07,
+          0.86,
+          0.7,
+          0.57,
+          0.46
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.28,
+        1.07,
+        0.86,
+        0.7,
+        0.57,
+        0.46
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "civic_03_crv_02_290cc_12ohm",
+      "label": "civic 03+ / CRV 02+",
+      "rated_flow_cc_min": 290.0,
+      "rated_flow_lb_hr": 28.0,
+      "flow_at_55psi_lb_hr": 31.484,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.31,
+          1.79,
+          1.35,
+          1.15,
+          0.98,
+          0.84,
+          0.71,
+          0.61
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.35,
+        1.15,
+        0.98,
+        0.84,
+        0.71,
+        0.61
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "honda_prelude_97_02_290cc_12ohm",
+      "label": "Honda Prelude 97-02",
+      "rated_flow_cc_min": 290.0,
+      "rated_flow_lb_hr": 28.0,
+      "flow_at_55psi_lb_hr": 31.484,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.296,
+          1.724,
+          1.24,
+          1.02,
+          0.85,
+          0.74,
+          0.63,
+          0.54
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.24,
+        1.02,
+        0.85,
+        0.74,
+        0.63,
+        0.54
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "mustang_turbo_315cc_15ohm",
+      "label": "Mustang Turbo",
+      "rated_flow_cc_min": 315.0,
+      "rated_flow_lb_hr": 30.0,
+      "flow_at_55psi_lb_hr": 33.733,
+      "impedance_ohm": 15.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.84,
+          1.32,
+          0.88,
+          0.68,
+          0.56,
+          0.43,
+          0.33,
+          0.23
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.88,
+        0.68,
+        0.56,
+        0.43,
+        0.33,
+        0.23
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_310cc_16ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 310.0,
+      "rated_flow_lb_hr": 30.0,
+      "flow_at_55psi_lb_hr": 33.733,
+      "impedance_ohm": 16.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.34,
+          1.69,
+          1.14,
+          0.89,
+          0.72,
+          0.55,
+          0.43,
+          0.33
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.14,
+        0.89,
+        0.72,
+        0.55,
+        0.43,
+        0.33
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "acura_rsx_type_s_330cc_12ohm",
+      "label": "Acura RSX Type-S",
+      "rated_flow_cc_min": 330.0,
+      "rated_flow_lb_hr": 31.0,
+      "flow_at_55psi_lb_hr": 34.858,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.474,
+          1.876,
+          1.37,
+          1.14,
+          0.95,
+          0.81,
+          0.67,
+          0.55
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.37,
+        1.14,
+        0.95,
+        0.81,
+        0.67,
+        0.55
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "honda_civic_06_si_330cc_10ohm",
+      "label": "Honda Civic 06+ Si",
+      "rated_flow_cc_min": 330.0,
+      "rated_flow_lb_hr": 31.0,
+      "flow_at_55psi_lb_hr": 34.858,
+      "impedance_ohm": 10.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.064,
+          1.596,
+          1.2,
+          1.02,
+          0.86,
+          0.69,
+          0.56,
+          0.46
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.2,
+        1.02,
+        0.86,
+        0.69,
+        0.56,
+        0.46
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "honda_prelude_92_96_vtec_330cc_2ohm",
+      "label": "Honda Prelude 92-96 VTEC",
+      "rated_flow_cc_min": 330.0,
+      "rated_flow_lb_hr": 31.0,
+      "flow_at_55psi_lb_hr": 34.858,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.488,
+          1.072,
+          0.72,
+          0.56,
+          0.45,
+          0.35,
+          0.27,
+          0.24
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.72,
+        0.56,
+        0.45,
+        0.35,
+        0.27,
+        0.24
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "toyota_04_2_4l_tc_solaris_camry_rav4_330cc_12ohm",
+      "label": "Toyota (04+ 2.4L) tC/Solaris/Camry/RAV4",
+      "rated_flow_cc_min": 330.0,
+      "rated_flow_lb_hr": 31.0,
+      "flow_at_55psi_lb_hr": 34.858,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.188,
+          1.642,
+          1.18,
+          0.97,
+          0.79,
+          0.64,
+          0.51,
+          0.42
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.18,
+        0.97,
+        0.79,
+        0.64,
+        0.51,
+        0.42
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "audi_s4_tt_340cc_14ohm",
+      "label": "Audi S4/TT",
+      "rated_flow_cc_min": 340.0,
+      "rated_flow_lb_hr": 32.0,
+      "flow_at_55psi_lb_hr": 35.982,
+      "impedance_ohm": 14.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.128,
+          1.582,
+          1.12,
+          0.91,
+          0.75,
+          0.62,
+          0.52,
+          0.42
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.12,
+        0.91,
+        0.75,
+        0.62,
+        0.52,
+        0.42
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "dodge_viper_96_2002_336cc_13ohm",
+      "label": "Dodge Viper (96-2002)",
+      "rated_flow_cc_min": 336.0,
+      "rated_flow_lb_hr": 32.0,
+      "flow_at_55psi_lb_hr": 35.982,
+      "impedance_ohm": 13.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.684,
+          2.826,
+          2.1,
+          1.77,
+          1.5,
+          1.26,
+          1.09,
+          0.96
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        2.1,
+        1.77,
+        1.5,
+        1.26,
+        1.09,
+        0.96
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "honda_s2000_360cc_12ohm",
+      "label": "Honda S2000",
+      "rated_flow_cc_min": 360.0,
+      "rated_flow_lb_hr": 34.0,
+      "flow_at_55psi_lb_hr": 38.231,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.038,
+          1.622,
+          1.27,
+          1.11,
+          0.95,
+          0.81,
+          0.71,
+          0.62
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.27,
+        1.11,
+        0.95,
+        0.81,
+        0.71,
+        0.62
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "mitsubishi_3000gt_stealth_370cc_3ohm",
+      "label": "Mitsubishi 3000GT (Stealth)",
+      "rated_flow_cc_min": 370.0,
+      "rated_flow_lb_hr": 35.0,
+      "flow_at_55psi_lb_hr": 39.355,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.694,
+          1.356,
+          1.07,
+          0.94,
+          0.81,
+          0.73,
+          0.64,
+          0.54
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.07,
+        0.94,
+        0.81,
+        0.73,
+        0.64,
+        0.54
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_300zx_95_96_sr20det_370cc_11ohm",
+      "label": "Nissan 300zx(95-96) / SR20DET",
+      "rated_flow_cc_min": 370.0,
+      "rated_flow_lb_hr": 35.0,
+      "flow_at_55psi_lb_hr": 39.355,
+      "impedance_ohm": 11.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.082,
+          1.588,
+          1.17,
+          0.98,
+          0.86,
+          0.75,
+          0.64,
+          0.57
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.17,
+        0.98,
+        0.86,
+        0.75,
+        0.64,
+        0.57
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_370cc_16ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 370.0,
+      "rated_flow_lb_hr": 35.0,
+      "flow_at_55psi_lb_hr": 39.355,
+      "impedance_ohm": 16.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.858,
+          1.312,
+          0.85,
+          0.64,
+          0.47,
+          0.35,
+          0.21,
+          0.12
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.85,
+        0.64,
+        0.47,
+        0.35,
+        0.21,
+        0.12
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ford_motorsport_378cc_15ohm",
+      "label": "Ford Motorsport",
+      "rated_flow_cc_min": 378.0,
+      "rated_flow_lb_hr": 36.0,
+      "flow_at_55psi_lb_hr": 40.48,
+      "impedance_ohm": 15.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.398,
+          1.722,
+          1.15,
+          0.89,
+          0.69,
+          0.53,
+          0.41,
+          0.32
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.15,
+        0.89,
+        0.69,
+        0.53,
+        0.41,
+        0.32
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_skyline_gts_t_380cc_11ohm",
+      "label": "Nissan Skyline GTS-T",
+      "rated_flow_cc_min": 380.0,
+      "rated_flow_lb_hr": 36.0,
+      "flow_at_55psi_lb_hr": 40.48,
+      "impedance_ohm": 11.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.156,
+          1.584,
+          1.1,
+          0.88,
+          0.73,
+          0.61,
+          0.52,
+          0.42
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.1,
+        0.88,
+        0.73,
+        0.61,
+        0.52,
+        0.42
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ford_motorsport_441cc_14ohm",
+      "label": "Ford Motorsport",
+      "rated_flow_cc_min": 441.0,
+      "rated_flow_lb_hr": 42.0,
+      "flow_at_55psi_lb_hr": 47.227,
+      "impedance_ohm": 14.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.196,
+          1.624,
+          1.14,
+          0.92,
+          0.75,
+          0.64,
+          0.56,
+          0.49
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.14,
+        0.92,
+        0.75,
+        0.64,
+        0.56,
+        0.49
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_pulsar_gti_r_444cc_2ohm",
+      "label": "Nissan Pulsar Gti-R",
+      "rated_flow_cc_min": 444.0,
+      "rated_flow_lb_hr": 42.0,
+      "flow_at_55psi_lb_hr": 47.227,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.004,
+          1.536,
+          1.14,
+          0.96,
+          0.83,
+          0.71,
+          0.6,
+          0.54
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.14,
+        0.96,
+        0.83,
+        0.71,
+        0.6,
+        0.54
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nissan_skyline_gt_r_440cc_2ohm",
+      "label": "Nissan Skyline GT-R",
+      "rated_flow_cc_min": 440.0,
+      "rated_flow_lb_hr": 42.0,
+      "flow_at_55psi_lb_hr": 47.227,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.454,
+          1.856,
+          1.35,
+          1.12,
+          0.96,
+          0.85,
+          0.76,
+          0.65
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.35,
+        1.12,
+        0.96,
+        0.85,
+        0.76,
+        0.65
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_440cc_13ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 440.0,
+      "rated_flow_lb_hr": 42.0,
+      "flow_at_55psi_lb_hr": 47.227,
+      "impedance_ohm": 13.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.182,
+          1.688,
+          1.27,
+          1.08,
+          0.91,
+          0.74,
+          0.63,
+          0.53
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.27,
+        1.08,
+        0.91,
+        0.74,
+        0.63,
+        0.53
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_440cc_16ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 440.0,
+      "rated_flow_lb_hr": 42.0,
+      "flow_at_55psi_lb_hr": 47.227,
+      "impedance_ohm": 16.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.72,
+          1.2,
+          0.76,
+          0.56,
+          0.42,
+          0.29,
+          0.14,
+          0.03
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.76,
+        0.56,
+        0.42,
+        0.29,
+        0.14,
+        0.03
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "subaru_impreza_wrx_440cc_13ohm",
+      "label": "Subaru Impreza WRX",
+      "rated_flow_cc_min": 440.0,
+      "rated_flow_lb_hr": 42.0,
+      "flow_at_55psi_lb_hr": 47.227,
+      "impedance_ohm": 13.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.402,
+          1.778,
+          1.25,
+          1.01,
+          0.87,
+          0.74,
+          0.62,
+          0.53
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.25,
+        1.01,
+        0.87,
+        0.74,
+        0.62,
+        0.53
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ultimate_racing_440cc_16ohm",
+      "label": "Ultimate Racing",
+      "rated_flow_cc_min": 440.0,
+      "rated_flow_lb_hr": 42.0,
+      "flow_at_55psi_lb_hr": 47.227,
+      "impedance_ohm": 16.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.556,
+          1.114,
+          0.74,
+          0.57,
+          0.42,
+          0.3,
+          0.19,
+          0.11
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.74,
+        0.57,
+        0.42,
+        0.3,
+        0.19,
+        0.11
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "dsm_90_94_blue_450cc_3ohm",
+      "label": "DSM 90-94 Blue",
+      "rated_flow_cc_min": 450.0,
+      "rated_flow_lb_hr": 43.0,
+      "flow_at_55psi_lb_hr": 48.351,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.878,
+          1.462,
+          1.11,
+          0.95,
+          0.82,
+          0.67,
+          0.53,
+          0.42
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.11,
+        0.95,
+        0.82,
+        0.67,
+        0.53,
+        0.42
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "dsm_95_99_black_450cc_3ohm",
+      "label": "DSM 95-99 Black",
+      "rated_flow_cc_min": 450.0,
+      "rated_flow_lb_hr": 43.0,
+      "flow_at_55psi_lb_hr": 48.351,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.912,
+          1.418,
+          1.0,
+          0.81,
+          0.67,
+          0.55,
+          0.45,
+          0.32
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.0,
+        0.81,
+        0.67,
+        0.55,
+        0.45,
+        0.32
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "dodge_srt_4_2003_525cc_13ohm",
+      "label": "Dodge SRT-4 (2003)",
+      "rated_flow_cc_min": 525.0,
+      "rated_flow_lb_hr": 50.0,
+      "flow_at_55psi_lb_hr": 56.222,
+      "impedance_ohm": 13.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.072,
+          1.448,
+          0.92,
+          0.68,
+          0.5,
+          0.35,
+          0.22,
+          0.13
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.92,
+        0.68,
+        0.5,
+        0.35,
+        0.22,
+        0.13
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "msd_525cc_12ohm",
+      "label": "MSD",
+      "rated_flow_cc_min": 525.0,
+      "rated_flow_lb_hr": 50.0,
+      "flow_at_55psi_lb_hr": 56.222,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.39,
+          1.74,
+          1.19,
+          0.94,
+          0.75,
+          0.61,
+          0.49,
+          0.41
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.19,
+        0.94,
+        0.75,
+        0.61,
+        0.49,
+        0.41
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "precision_turbo_rochester_525cc_12ohm",
+      "label": "Precision Turbo (Rochester)",
+      "rated_flow_cc_min": 525.0,
+      "rated_flow_lb_hr": 50.0,
+      "flow_at_55psi_lb_hr": 56.222,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.674,
+          1.946,
+          1.33,
+          1.05,
+          0.84,
+          0.66,
+          0.54,
+          0.45
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.33,
+        1.05,
+        0.84,
+        0.66,
+        0.54,
+        0.45
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "denso_550cc_2ohm",
+      "label": "Denso",
+      "rated_flow_cc_min": 550.0,
+      "rated_flow_lb_hr": 52.0,
+      "flow_at_55psi_lb_hr": 58.471,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.2,
+          1.68,
+          1.24,
+          1.04,
+          0.87,
+          0.75,
+          0.64,
+          0.55
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.24,
+        1.04,
+        0.87,
+        0.75,
+        0.64,
+        0.55
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "mitsubishi_evo_viii_550cc_3ohm",
+      "label": "Mitsubishi Evo VIII",
+      "rated_flow_cc_min": 550.0,
+      "rated_flow_lb_hr": 52.0,
+      "flow_at_55psi_lb_hr": 58.471,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.898,
+          1.482,
+          1.13,
+          0.97,
+          0.85,
+          0.75,
+          0.66,
+          0.58
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.13,
+        0.97,
+        0.85,
+        0.75,
+        0.66,
+        0.58
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_550cc_3ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 550.0,
+      "rated_flow_lb_hr": 52.0,
+      "flow_at_55psi_lb_hr": 58.471,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.496,
+          1.184,
+          0.92,
+          0.81,
+          0.68,
+          0.59,
+          0.51,
+          0.4
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.92,
+        0.81,
+        0.68,
+        0.59,
+        0.51,
+        0.4
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_550cc_13ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 550.0,
+      "rated_flow_lb_hr": 52.0,
+      "flow_at_55psi_lb_hr": 58.471,
+      "impedance_ohm": 13.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.982,
+          1.488,
+          1.07,
+          0.88,
+          0.78,
+          0.67,
+          0.55,
+          0.46
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.07,
+        0.88,
+        0.78,
+        0.67,
+        0.55,
+        0.46
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "subaru_impreza_sti_top_feed_550cc_13ohm",
+      "label": "Subaru Impreza STI (top feed)",
+      "rated_flow_cc_min": 550.0,
+      "rated_flow_lb_hr": 52.0,
+      "flow_at_55psi_lb_hr": 58.471,
+      "impedance_ohm": 13.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.142,
+          1.648,
+          1.23,
+          1.04,
+          0.87,
+          0.74,
+          0.62,
+          0.53
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.23,
+        1.04,
+        0.87,
+        0.74,
+        0.62,
+        0.53
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "accel_578cc_3ohm",
+      "label": "Accel",
+      "rated_flow_cc_min": 578.0,
+      "rated_flow_lb_hr": 55.0,
+      "flow_at_55psi_lb_hr": 61.844,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.248,
+          1.702,
+          1.24,
+          1.03,
+          0.87,
+          0.73,
+          0.63,
+          0.53
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.24,
+        1.03,
+        0.87,
+        0.73,
+        0.63,
+        0.53
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "dodge_srt_4_2004_577cc_13ohm",
+      "label": "Dodge SRT-4 (2004+)",
+      "rated_flow_cc_min": 577.0,
+      "rated_flow_lb_hr": 55.0,
+      "flow_at_55psi_lb_hr": 61.844,
+      "impedance_ohm": 13.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.252,
+          2.368,
+          1.62,
+          1.28,
+          1.0,
+          0.79,
+          0.61,
+          0.48
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.62,
+        1.28,
+        1.0,
+        0.79,
+        0.61,
+        0.48
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "siemens_deka_578cc_12ohm",
+      "label": "Siemens Deka",
+      "rated_flow_cc_min": 578.0,
+      "rated_flow_lb_hr": 55.0,
+      "flow_at_55psi_lb_hr": 61.844,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.174,
+          1.706,
+          1.31,
+          1.13,
+          0.96,
+          0.83,
+          0.71,
+          0.61
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.31,
+        1.13,
+        0.96,
+        0.83,
+        0.71,
+        0.61
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "edelbrock_630cc_12ohm",
+      "label": "Edelbrock",
+      "rated_flow_cc_min": 630.0,
+      "rated_flow_lb_hr": 60.0,
+      "flow_at_55psi_lb_hr": 67.466,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.768,
+          1.222,
+          0.76,
+          0.55,
+          0.39,
+          0.25,
+          0.15,
+          0.04
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.76,
+        0.55,
+        0.39,
+        0.25,
+        0.15,
+        0.04
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "hahn_racecraft_625cc_3ohm",
+      "label": "Hahn Racecraft",
+      "rated_flow_cc_min": 625.0,
+      "rated_flow_lb_hr": 60.0,
+      "flow_at_55psi_lb_hr": 67.466,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.246,
+          1.674,
+          1.19,
+          0.97,
+          0.79,
+          0.69,
+          0.57,
+          0.5
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.19,
+        0.97,
+        0.79,
+        0.69,
+        0.57,
+        0.5
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "siemens_deka_630cc_12ohm",
+      "label": "Siemens Deka",
+      "rated_flow_cc_min": 630.0,
+      "rated_flow_lb_hr": 60.0,
+      "flow_at_55psi_lb_hr": 67.466,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.742,
+          1.248,
+          0.83,
+          0.64,
+          0.5,
+          0.38,
+          0.28,
+          0.17
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.83,
+        0.64,
+        0.5,
+        0.38,
+        0.28,
+        0.17
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "fuel_injector_clinic_650cc_2ohm",
+      "label": "Fuel Injector Clinic",
+      "rated_flow_cc_min": 650.0,
+      "rated_flow_lb_hr": 62.0,
+      "flow_at_55psi_lb_hr": 69.715,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.97,
+          1.515,
+          1.13,
+          0.96,
+          0.78,
+          0.66,
+          0.54,
+          0.45
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.13,
+        0.96,
+        0.78,
+        0.66,
+        0.54,
+        0.45
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_650cc_12ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 650.0,
+      "rated_flow_lb_hr": 62.0,
+      "flow_at_55psi_lb_hr": 69.715,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.136,
+          1.564,
+          1.08,
+          0.86,
+          0.69,
+          0.54,
+          0.41,
+          0.31
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.08,
+        0.86,
+        0.69,
+        0.54,
+        0.41,
+        0.31
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "denso_660cc_2ohm",
+      "label": "Denso",
+      "rated_flow_cc_min": 660.0,
+      "rated_flow_lb_hr": 63.0,
+      "flow_at_55psi_lb_hr": 70.84,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.918,
+          1.502,
+          1.15,
+          0.99,
+          0.86,
+          0.74,
+          0.64,
+          0.55
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.15,
+        0.99,
+        0.86,
+        0.74,
+        0.64,
+        0.55
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "precision_turbo_rochester_680cc_2ohm",
+      "label": "Precision Turbo (Rochester)",
+      "rated_flow_cc_min": 680.0,
+      "rated_flow_lb_hr": 65.0,
+      "flow_at_55psi_lb_hr": 73.089,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.52,
+          2.0,
+          1.56,
+          1.36,
+          1.22,
+          1.13,
+          1.05,
+          0.96
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.56,
+        1.36,
+        1.22,
+        1.13,
+        1.05,
+        0.96
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "sard_700cc_2ohm",
+      "label": "Sard",
+      "rated_flow_cc_min": 700.0,
+      "rated_flow_lb_hr": 67.0,
+      "flow_at_55psi_lb_hr": 75.338,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.844,
+          1.376,
+          0.98,
+          0.8,
+          0.67,
+          0.54,
+          0.44,
+          0.35
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.98,
+        0.8,
+        0.67,
+        0.54,
+        0.44,
+        0.35
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "denso_720cc_2ohm",
+      "label": "Denso",
+      "rated_flow_cc_min": 720.0,
+      "rated_flow_lb_hr": 69.0,
+      "flow_at_55psi_lb_hr": 77.586,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.358,
+          1.812,
+          1.35,
+          1.14,
+          0.99,
+          0.86,
+          0.75,
+          0.67
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.35,
+        1.14,
+        0.99,
+        0.86,
+        0.75,
+        0.67
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_720cc_3ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 720.0,
+      "rated_flow_lb_hr": 69.0,
+      "flow_at_55psi_lb_hr": 77.586,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.756,
+          2.184,
+          1.7,
+          1.48,
+          1.31,
+          1.16,
+          1.06,
+          0.94
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.7,
+        1.48,
+        1.31,
+        1.16,
+        1.06,
+        0.94
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "nismo_740cc_11ohm",
+      "label": "Nismo",
+      "rated_flow_cc_min": 740.0,
+      "rated_flow_lb_hr": 70.0,
+      "flow_at_55psi_lb_hr": 78.711,
+      "impedance_ohm": 11.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.158,
+          1.612,
+          1.15,
+          0.94,
+          0.79,
+          0.66,
+          0.55,
+          0.44
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.15,
+        0.94,
+        0.79,
+        0.66,
+        0.55,
+        0.44
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "msd_750cc_2ohm",
+      "label": "MSD",
+      "rated_flow_cc_min": 750.0,
+      "rated_flow_lb_hr": 71.0,
+      "flow_at_55psi_lb_hr": 79.835,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.504,
+          1.906,
+          1.4,
+          1.17,
+          0.97,
+          0.81,
+          0.69,
+          0.58
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.4,
+        1.17,
+        0.97,
+        0.81,
+        0.69,
+        0.58
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_750cc_3ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 750.0,
+      "rated_flow_lb_hr": 71.0,
+      "flow_at_55psi_lb_hr": 79.835,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.936,
+          1.364,
+          0.88,
+          0.66,
+          0.48,
+          0.32,
+          0.18,
+          0.05
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.88,
+        0.66,
+        0.48,
+        0.32,
+        0.18,
+        0.05
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_750cc_12ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 750.0,
+      "rated_flow_lb_hr": 71.0,
+      "flow_at_55psi_lb_hr": 79.835,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.512,
+          1.888,
+          1.36,
+          1.12,
+          0.92,
+          0.76,
+          0.63,
+          0.5
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.36,
+        1.12,
+        0.92,
+        0.76,
+        0.63,
+        0.5
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rochester_756cc_2ohm",
+      "label": "Rochester",
+      "rated_flow_cc_min": 756.0,
+      "rated_flow_lb_hr": 72.0,
+      "flow_at_55psi_lb_hr": 80.96,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.132,
+          1.638,
+          1.22,
+          1.03,
+          0.87,
+          0.74,
+          0.63,
+          0.54
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.22,
+        1.03,
+        0.87,
+        0.74,
+        0.63,
+        0.54
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "siemens_deka_756cc_3ohm",
+      "label": "Siemens Deka",
+      "rated_flow_cc_min": 756.0,
+      "rated_flow_lb_hr": 72.0,
+      "flow_at_55psi_lb_hr": 80.96,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.37,
+          1.85,
+          1.41,
+          1.21,
+          1.03,
+          0.87,
+          0.76,
+          0.68
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.41,
+        1.21,
+        1.03,
+        0.87,
+        0.76,
+        0.68
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "sard_800cc_3ohm",
+      "label": "Sard",
+      "rated_flow_cc_min": 800.0,
+      "rated_flow_lb_hr": 76.0,
+      "flow_at_55psi_lb_hr": 85.458,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.62,
+          1.23,
+          0.9,
+          0.75,
+          0.62,
+          0.52,
+          0.42,
+          0.33
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        0.9,
+        0.75,
+        0.62,
+        0.52,
+        0.42,
+        0.33
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ford_motorsport_809cc_15ohm",
+      "label": "Ford Motorsport",
+      "rated_flow_cc_min": 809.0,
+      "rated_flow_lb_hr": 77.0,
+      "flow_at_55psi_lb_hr": 86.582,
+      "impedance_ohm": 15.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.932,
+          2.308,
+          1.78,
+          1.54,
+          1.33,
+          1.17,
+          1.05,
+          0.96
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.78,
+        1.54,
+        1.33,
+        1.17,
+        1.05,
+        0.96
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "blitz_850cc_14ohm",
+      "label": "Blitz",
+      "rated_flow_cc_min": 850.0,
+      "rated_flow_lb_hr": 81.0,
+      "flow_at_55psi_lb_hr": 91.08,
+      "impedance_ohm": 14.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.772,
+          2.018,
+          1.38,
+          1.09,
+          0.88,
+          0.71,
+          0.58,
+          0.49
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.38,
+        1.09,
+        0.88,
+        0.71,
+        0.58,
+        0.49
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "fuel_injector_clinic_850cc_2ohm",
+      "label": "Fuel Injector Clinic",
+      "rated_flow_cc_min": 850.0,
+      "rated_flow_lb_hr": 81.0,
+      "flow_at_55psi_lb_hr": 91.08,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          1.74,
+          1.35,
+          1.02,
+          0.87,
+          0.74,
+          0.62,
+          0.51,
+          0.43
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.02,
+        0.87,
+        0.74,
+        0.62,
+        0.51,
+        0.43
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "accel_872cc_3ohm",
+      "label": "Accel",
+      "rated_flow_cc_min": 872.0,
+      "rated_flow_lb_hr": 83.0,
+      "flow_at_55psi_lb_hr": 93.329,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.708,
+          2.032,
+          1.46,
+          1.2,
+          1.0,
+          0.85,
+          0.73,
+          0.62
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.46,
+        1.2,
+        1.0,
+        0.85,
+        0.73,
+        0.62
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "siemens_deka_872cc_3ohm",
+      "label": "Siemens Deka",
+      "rated_flow_cc_min": 872.0,
+      "rated_flow_lb_hr": 83.0,
+      "flow_at_55psi_lb_hr": 93.329,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.708,
+          2.032,
+          1.46,
+          1.2,
+          1.0,
+          0.85,
+          0.73,
+          0.62
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.46,
+        1.2,
+        1.0,
+        0.85,
+        0.73,
+        0.62
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "vennom_880cc_12ohm",
+      "label": "Vennom",
+      "rated_flow_cc_min": 880.0,
+      "rated_flow_lb_hr": 84.0,
+      "flow_at_55psi_lb_hr": 94.453,
+      "impedance_ohm": 12.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.566,
+          1.864,
+          1.27,
+          1.0,
+          0.77,
+          0.64,
+          0.51,
+          0.45
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.27,
+        1.0,
+        0.77,
+        0.64,
+        0.51,
+        0.45
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_900cc_3ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 900.0,
+      "rated_flow_lb_hr": 86.0,
+      "flow_at_55psi_lb_hr": 96.702,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.756,
+          2.184,
+          1.7,
+          1.48,
+          1.31,
+          1.16,
+          1.06,
+          0.94
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.7,
+        1.48,
+        1.31,
+        1.16,
+        1.06,
+        0.94
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "fuel_injector_clinic_950cc_2ohm",
+      "label": "Fuel Injector Clinic",
+      "rated_flow_cc_min": 950.0,
+      "rated_flow_lb_hr": 90.0,
+      "flow_at_55psi_lb_hr": 101.2,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.5,
+          1.85,
+          1.3,
+          1.05,
+          0.88,
+          0.75,
+          0.65,
+          0.57
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.3,
+        1.05,
+        0.88,
+        0.75,
+        0.65,
+        0.57
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "hks_1000cc_2ohm",
+      "label": "HKS",
+      "rated_flow_cc_min": 1000.0,
+      "rated_flow_lb_hr": 95.0,
+      "flow_at_55psi_lb_hr": 106.822,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.126,
+          1.684,
+          1.31,
+          1.14,
+          1.04,
+          0.97,
+          0.89,
+          0.79
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.31,
+        1.14,
+        1.04,
+        0.97,
+        0.89,
+        0.79
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "precision_turbo_rochester_1000cc_2ohm",
+      "label": "Precision Turbo (Rochester)",
+      "rated_flow_cc_min": 1000.0,
+      "rated_flow_lb_hr": 95.0,
+      "flow_at_55psi_lb_hr": 106.822,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.484,
+          1.886,
+          1.38,
+          1.15,
+          0.96,
+          0.81,
+          0.7,
+          0.6
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.38,
+        1.15,
+        0.96,
+        0.81,
+        0.7,
+        0.6
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_1000cc_3ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 1000.0,
+      "rated_flow_lb_hr": 95.0,
+      "flow_at_55psi_lb_hr": 106.822,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.226,
+          1.654,
+          1.17,
+          0.95,
+          0.8,
+          0.67,
+          0.56,
+          0.46
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.17,
+        0.95,
+        0.8,
+        0.67,
+        0.56,
+        0.46
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rochester_1008cc_2ohm",
+      "label": "Rochester",
+      "rated_flow_cc_min": 1008.0,
+      "rated_flow_lb_hr": 96.0,
+      "flow_at_55psi_lb_hr": 107.946,
+      "impedance_ohm": 2.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          2.484,
+          1.886,
+          1.38,
+          1.15,
+          0.96,
+          0.81,
+          0.7,
+          0.6
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.38,
+        1.15,
+        0.96,
+        0.81,
+        0.7,
+        0.6
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_1200cc_3ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 1200.0,
+      "rated_flow_lb_hr": 114.0,
+      "flow_at_55psi_lb_hr": 128.186,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.87,
+          3.155,
+          2.55,
+          2.28,
+          2.0,
+          1.79,
+          1.62,
+          1.46
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        2.55,
+        2.28,
+        2.0,
+        1.79,
+        1.62,
+        1.46
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "bosch_1545cc_5ohm",
+      "label": "Bosch",
+      "rated_flow_cc_min": 1545.0,
+      "rated_flow_lb_hr": 147.0,
+      "flow_at_55psi_lb_hr": 165.293,
+      "impedance_ohm": 5.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.294,
+          2.436,
+          1.71,
+          1.38,
+          1.13,
+          0.97,
+          0.82,
+          0.71
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.71,
+        1.38,
+        1.13,
+        0.97,
+        0.82,
+        0.71
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ford_motorsport_1600cc_5ohm",
+      "label": "Ford Motorsport",
+      "rated_flow_cc_min": 1600.0,
+      "rated_flow_lb_hr": 152.0,
+      "flow_at_55psi_lb_hr": 170.915,
+      "impedance_ohm": 5.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.002,
+          2.248,
+          1.61,
+          1.32,
+          1.11,
+          0.96,
+          0.83,
+          0.72
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.61,
+        1.32,
+        1.11,
+        0.96,
+        0.83,
+        0.72
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "rc_engineering_1600cc_3ohm",
+      "label": "RC Engineering",
+      "rated_flow_cc_min": 1600.0,
+      "rated_flow_lb_hr": 152.0,
+      "flow_at_55psi_lb_hr": 170.915,
+      "impedance_ohm": 3.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.432,
+          2.548,
+          1.8,
+          1.46,
+          1.23,
+          1.05,
+          0.92,
+          0.81
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.8,
+        1.46,
+        1.23,
+        1.05,
+        0.92,
+        0.81
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    },
+    {
+      "preset_id": "ford_motorsport_1680cc_5ohm",
+      "label": "Ford Motorsport",
+      "rated_flow_cc_min": 1680.0,
+      "rated_flow_lb_hr": 160.0,
+      "flow_at_55psi_lb_hr": 179.911,
+      "impedance_ohm": 5.0,
+      "rated_pressure_psi": 43.5,
+      "batoff_deadtime_ms": {
+        "voltage_points_v": [
+          6.0,
+          8.0,
+          10.0,
+          11.0,
+          12.0,
+          13.0,
+          14.0,
+          15.0
+        ],
+        "deadtime_ms": [
+          3.192,
+          2.438,
+          1.8,
+          1.51,
+          1.28,
+          1.09,
+          0.94,
+          0.8
+        ],
+        "pressure_slope_ms_per_psi": 0.0065,
+        "short_pulse_knee_ms": 1.05,
+        "min_linear_pw_ms": 1.35
+      },
+      "measured_voltage_points_v": [
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "measured_deadtime_ms": [
+        1.8,
+        1.51,
+        1.28,
+        1.09,
+        0.94,
+        0.8
+      ],
+      "extrapolated_below_10v": true,
+      "nominal_defaults_applied": true,
+      "nominal_default_fields": [
+        "pressure_slope_ms_per_psi",
+        "short_pulse_knee_ms",
+        "min_linear_pw_ms"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "holset_hx40_b8554m",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Holset",
+  "family_name": "X Series",
+  "product_name": "HX40-B8554M",
+  "source_product_id": 125,
+  "figure_sha256": "5ca7180003e9ad61c3a397e210334d5bd1ffd1dc76fe8857df3925edfc246fb2",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/holset/HX40-B8554M.jpg",
+  "legacy_map_path": "maps/holset/HX40-B8554M.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 70.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 70.0,
+    "pr_min": 1.0,
+    "pr_max": 4.5,
+    "pixel_x_start": 34,
+    "pixel_y_start": 144,
+    "pixel_width": 378,
+    "pixel_height": 467
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.18518518518518517,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007494646680942184
+      ]
+    ],
+    "b": [
+      -6.296296296296296,
+      5.579229122055675
+    ],
+    "A_kg_s": [
+      [
+        0.001399976450617284,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007494646680942184
+      ]
+    ],
+    "b_kg_s": [
+      -0.04759919932098765,
+      5.579229122055675
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        34,
+        144
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 4.5
+    },
+    "top_right": {
+      "pixel": [
+        412,
+        144
+      ],
+      "flow_lb_min": 70.0,
+      "flow_kg_s": 0.529191,
+      "pressure_ratio": 4.5
+    },
+    "bottom_left": {
+      "pixel": [
+        34,
+        611
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        412,
+        611
+      ],
+      "flow_lb_min": 70.0,
+      "flow_kg_s": 0.529191,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

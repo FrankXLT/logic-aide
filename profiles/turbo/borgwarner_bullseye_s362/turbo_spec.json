@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "borgwarner_bullseye_s362",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "BorgWarner Turbo Systems",
+  "family_name": "S Series: Bullseye-Power",
+  "product_name": "S362",
+  "source_product_id": 180,
+  "figure_sha256": "2ff7f32c4a721ce6535a956d403b8e7133ce22f693d76f8b040a4282ede27019",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/bw/BW S362.jpg",
+  "legacy_map_path": "maps/bw/bullseye-power/BW S362.jpg",
+  "figure_match_method": "basename_case_insensitive",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 10.0,
+    "airflow_max_raw": 80.0,
+    "airflow_min_lb_min": 10.0,
+    "airflow_max_lb_min": 80.0,
+    "pr_min": 1.0,
+    "pr_max": 3.8,
+    "pixel_x_start": 84,
+    "pixel_y_start": 21,
+    "pixel_width": 537,
+    "pixel_height": 479
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.1303538175046555,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0058455114822546965
+      ]
+    ],
+    "b": [
+      -0.949720670391061,
+      3.9227557411273484
+    ],
+    "A_kg_s": [
+      [
+        0.0009854582836747363,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0058455114822546965
+      ]
+    ],
+    "b_kg_s": [
+      -0.007179767495344503,
+      3.9227557411273484
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        84,
+        21
+      ],
+      "flow_lb_min": 10.0,
+      "flow_kg_s": 0.075599,
+      "pressure_ratio": 3.8
+    },
+    "top_right": {
+      "pixel": [
+        621,
+        21
+      ],
+      "flow_lb_min": 80.0,
+      "flow_kg_s": 0.60479,
+      "pressure_ratio": 3.8
+    },
+    "bottom_left": {
+      "pixel": [
+        84,
+        500
+      ],
+      "flow_lb_min": 10.0,
+      "flow_kg_s": 0.075599,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        621,
+        500
+      ],
+      "flow_lb_min": 80.0,
+      "flow_kg_s": 0.60479,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "Borg Warner",
+        "model": "S300 S362",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 2.441,
+          "inducer_mm": 62.0,
+          "exducer_in": 3.331,
+          "exducer_mm": 84.6,
+          "trim": null,
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": 3.004,
+          "major_dia_mm": 76.3,
+          "exducer_in": 2.661,
+          "exducer_mm": 67.6,
+          "trim": null,
+          "ar": null,
+          "housing_type": null
+        },
+        "hp_rating": null
+      }
+    ]
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

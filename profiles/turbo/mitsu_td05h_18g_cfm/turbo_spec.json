@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "mitsu_td05h_18g_cfm",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "mitsu",
+  "family_name": null,
+  "product_name": "td05h-18g-cfm",
+  "figure_sha256": "7f0ee68be72d10041c8a879f6662e799c0362cf7b70eb39b7b32374ddc87aa7b",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/mitsu/td05h-18g-cfm.gif",
+  "legacy_map_path": "maps/mitsu/td05h-18g-cfm.gif",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

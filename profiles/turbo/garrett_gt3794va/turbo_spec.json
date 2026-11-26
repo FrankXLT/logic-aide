@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gt3794va",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GT-R Series",
+  "product_name": "GT3794VA",
+  "source_product_id": 191,
+  "figure_sha256": "6491509a9c1be8d8dca1f583d4bd59d648d48ee4276489001dc2e4dd783f3bbd",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/Duramax_AVNT_Stage_1.jpg",
+  "legacy_map_path": "maps/garrett/Duramax_AVNT_Stage_1.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 80.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 80.0,
+    "pr_min": 1.0,
+    "pr_max": 4.5,
+    "pixel_x_start": 46,
+    "pixel_y_start": 44,
+    "pixel_width": 374,
+    "pixel_height": 451
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.21390374331550802,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007760532150776054
+      ]
+    ],
+    "b": [
+      -9.83957219251337,
+      4.841463414634147
+    ],
+    "A_kg_s": [
+      [
+        0.0016170850980392157,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007760532150776054
+      ]
+    ],
+    "b_kg_s": [
+      -0.07438591450980392,
+      4.841463414634147
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        46,
+        44
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 4.5
+    },
+    "top_right": {
+      "pixel": [
+        420,
+        44
+      ],
+      "flow_lb_min": 80.0,
+      "flow_kg_s": 0.60479,
+      "pressure_ratio": 4.5
+    },
+    "bottom_left": {
+      "pixel": [
+        46,
+        495
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        420,
+        495
+      ],
+      "flow_lb_min": 80.0,
+      "flow_kg_s": 0.60479,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": "48",
+    "ar": ".58",
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": null,
+  "source_notes": "Duramax AVNT -Stage I"
+}

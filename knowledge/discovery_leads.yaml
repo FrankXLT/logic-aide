@@ -1,0 +1,355 @@
+schema_version: '1.0'
+wave: A
+generated_utc: '2026-11-26T16:30:07Z'
+vault_sha256_count: 159
+leads:
+- lead_id: wave-a-uncalibrated-compressor-map-garrett-703457-2comp-e-jpg
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: garrett/703457-2comp_e.jpg
+  query_pattern: squirrelpf.com/turbocalc/maps/garrett/703457-2comp_e.jpg
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fgarrett%2F703457-2comp_e.jpg&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 866567cb89de89c8cf589652bd87b00aefea6ceab87b123add54e60b0bf14f26
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (garrett_703457_2comp_e).
+- lead_id: wave-a-uncalibrated-compressor-map-garrett-740759-2-comp-e-jpg
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: garrett/740759_2_comp_e.jpg
+  query_pattern: squirrelpf.com/turbocalc/maps/garrett/740759_2_comp_e.jpg
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fgarrett%2F740759_2_comp_e.jpg&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 2021c7072efe55825456659dfe78debc85fba44d5e6a6236194633ba228e18ca
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (garrett_740759_2_comp_e).
+- lead_id: wave-a-uncalibrated-compressor-map-garrett-740759-4-comp-e-jpg
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: garrett/740759_4_comp_e.jpg
+  query_pattern: squirrelpf.com/turbocalc/maps/garrett/740759_4_comp_e.jpg
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fgarrett%2F740759_4_comp_e.jpg&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 6d86ad29e496ad8ee77598c8056bb2d343a6dd0a183428ed5b3fea1949f75fef
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (garrett_740759_4_comp_e).
+- lead_id: wave-a-uncalibrated-compressor-map-garrett-t3-60-28411147-jpg-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: garrett/T3_60_28411147.jpg.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/garrett/T3_60_28411147.jpg.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fgarrett%2FT3_60_28411147.jpg.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - a66697e7df6b29b7e28b680f851d4af3e057f144bf6c8a8ff08c3116153331d1
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (garrett_t3_60_28411147_jpg).
+- lead_id: wave-a-uncalibrated-compressor-map-holset-hx40-jpg
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: holset/hx40.jpg
+  query_pattern: squirrelpf.com/turbocalc/maps/holset/hx40.jpg
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fholset%2Fhx40.jpg&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - e9064b4255e490a80df79de8cde91bd3112660d0174529cb70bb7e049fcbcef6
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (holset_hx40).
+- lead_id: wave-a-uncalibrated-compressor-map-holset-hx50-map-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: holset/hx50_map.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/holset/hx50_map.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fholset%2Fhx50_map.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 535e0ab409043528ce858ae25fffa701948befc3ec3a85d5e6cf58ff12b2dd22
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (holset_hx50_map).
+- lead_id: wave-a-uncalibrated-compressor-map-holset-hx60-jpg
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: holset/hx60.jpg
+  query_pattern: squirrelpf.com/turbocalc/maps/holset/hx60.jpg
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fholset%2Fhx60.jpg&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - dedf7bc68d60533b26c308ddd6b31f7eb3e14d786dd0c9fb3aba2132a0900cc7
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (holset_hx60).
+- lead_id: wave-a-uncalibrated-compressor-map-ihi-ihi-family-jpg
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: ihi/IHI_Family.jpg
+  query_pattern: squirrelpf.com/turbocalc/maps/ihi/IHI_Family.jpg
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fihi%2FIHI_Family.jpg&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 9842528095b506d3e8c8e1758390f917e049b5a5be66efe385eafa8e939ee7a5
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (ihi_ihi_family).
+- lead_id: wave-a-uncalibrated-compressor-map-kkk-k16-2467-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: kkk/K16-2467.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/kkk/K16-2467.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fkkk%2FK16-2467.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 7ddf2aa1b48f5a20c08bc38e30a30af4937f9cc9ea719dcf6e726136729781d9
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (kkk_k16_2467).
+- lead_id: wave-a-uncalibrated-compressor-map-kkk-k26-2470r-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: kkk/K26-2470R.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/kkk/K26-2470R.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fkkk%2FK26-2470R.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - b274b748acfc01ca89b46b39dec9e46623907f84c17db65d7ebb60979d6c17df
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (kkk_k26_2470r).
+- lead_id: wave-a-uncalibrated-compressor-map-mitsu-td04h-16t-cfm-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: mitsu/td04h-16t-cfm.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/mitsu/td04h-16t-cfm.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fmitsu%2Ftd04h-16t-cfm.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - a0392528ab5672b418b2a54b72a2e7fb5b10c5704911aeac5d8d78d0e89800f1
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (mitsu_td04h_16t_cfm).
+- lead_id: wave-a-uncalibrated-compressor-map-mitsu-td04h-19t-cfm-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: mitsu/td04h-19t-cfm.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/mitsu/td04h-19t-cfm.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fmitsu%2Ftd04h-19t-cfm.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 5bf525801fe7b8a876f3b87de3100f979107b40e3d42a81e7317bbbc5bac6087
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (mitsu_td04h_19t_cfm).
+- lead_id: wave-a-uncalibrated-compressor-map-mitsu-td05h-18g-cfm-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: mitsu/td05h-18g-cfm.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/mitsu/td05h-18g-cfm.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fmitsu%2Ftd05h-18g-cfm.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 7f0ee68be72d10041c8a879f6662e799c0362cf7b70eb39b7b32374ddc87aa7b
+  already_in_vault: true
+  status: already_covered
+  target_destination: profiles/turbo/
+  rationale: High-priority Wave A recovery for uncalibrated stub (mitsu_td05h_18g_cfm).
+- lead_id: wave-a-uncalibrated-compressor-map-garrett-gt3071r-700382-3-com-e-gif
+  wave: A
+  category: uncalibrated_compressor_map
+  fingerprint: garrett/GT3071R_700382_3_com_e.gif
+  query_pattern: squirrelpf.com/turbocalc/maps/garrett/GT3071R_700382_3_com_e.gif
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2Fmaps%2Fgarrett%2FGT3071R_700382_3_com_e.gif&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches:
+  - 315a8f650863dcfba766565d124b3c4918cf7553133dda01024b03055d50e95c
+  already_in_vault: true
+  status: already_covered
+  target_destination: data/heritage_raw/figures/turbo_maps/
+  rationale: High-priority Wave A recovery for uncalibrated compressor map raster.
+- lead_id: wave-a-legacy-tool-domain-squirrelpf-com
+  wave: A
+  category: legacy_tool_domain
+  fingerprint: squirrelpf.com
+  query_pattern: squirrelpf.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: data/heritage_raw/warc/
+  rationale: Legacy TurboCalc host domain holding archival compressor maps and PHP
+    airflow tools. Confirmed in read-only corpus scan.
+- lead_id: wave-a-legacy-tool-domain-sqrl-tools
+  wave: A
+  category: legacy_tool_domain
+  fingerprint: sqrl_tools
+  query_pattern: squirrelpf.com/turbocalc/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2Fturbocalc%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: Legacy TurboCalc database identifier associated with calibrated map coordinate
+    records. Confirmed in read-only corpus scan.
+- lead_id: wave-a-legacy-tool-domain-turbocalc
+  wave: A
+  category: legacy_tool_domain
+  fingerprint: turbocalc
+  query_pattern: squirrelpf.com/*turbocalc*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=squirrelpf.com%2F%2Aturbocalc%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: Legacy TurboCalc v3-v5 application tree for compressor map axis metadata
+    recovery. Confirmed in read-only corpus scan.
+- lead_id: wave-a-oem-chrysler-turbo-t03-garrett
+  wave: A
+  category: oem_chrysler_turbo
+  fingerprint: T03 Garrett
+  query_pattern: thedodgegarage.com/turbo_*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2Fturbo_%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: OEM 1984-1987 Chrysler Turbo I/II T03 Garrett wheel and compressor map
+    reference. Confirmed in read-only corpus scan.
+- lead_id: wave-a-oem-chrysler-turbo-tb03-garrett
+  wave: A
+  category: oem_chrysler_turbo
+  fingerprint: TB03 Garrett
+  query_pattern: minimopar.net/perf/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2Fperf%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: OEM Chrysler TB03 Garrett T-III wheel dimension and housing reference.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-a-oem-chrysler-turbo-te04h
+  wave: A
+  category: oem_chrysler_turbo
+  fingerprint: TE04H
+  query_pattern: thedodgegarage.com/*te04*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Ate04%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: OEM Mitsubishi TE04H Chrysler Turbo I/IV compressor flow and trim reference.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-a-oem-chrysler-turbo-vnt25
+  wave: A
+  category: oem_chrysler_turbo
+  fingerprint: VNT25
+  query_pattern: shelbydodge.com/turbonator-wiki/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=shelbydodge.com%2Fturbonator-wiki%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: OEM Garrett VNT25 variable nozzle turbine geometry and boost control
+    documentation. Confirmed in read-only corpus scan.
+- lead_id: wave-a-oem-chrysler-turbo-td04lr
+  wave: A
+  category: oem_chrysler_turbo
+  fingerprint: TD04LR
+  query_pattern: turbododge.com/*td04lr*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Atd04lr%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: OEM Mitsubishi TD04LR reverse-rotation compressor map and trim reference.
+- lead_id: wave-a-head-casting-and-ecu-token-782
+  wave: A
+  category: head_casting_and_ecu_token
+  fingerprint: '#782'
+  query_pattern: thedodgegarage.com/*782*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A782%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/engine/
+  rationale: 'Chrysler 2.2L/2.5L #782 cylinder head casting port and flowbench archival
+    data.'
+- lead_id: wave-a-head-casting-and-ecu-token-445
+  wave: A
+  category: head_casting_and_ecu_token
+  fingerprint: '#445'
+  query_pattern: thedodgegarage.com/*445*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A445%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/engine/
+  rationale: 'Chrysler 2.2L/2.5L #445 swirl-port head casting specs and flow comparison
+    records.'
+- lead_id: wave-a-head-casting-and-ecu-token-g-head
+  wave: A
+  category: head_casting_and_ecu_token
+  fingerprint: G-Head
+  query_pattern: minimopar.net/*head*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Ahead%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/engine/
+  rationale: Chrysler common-port G-Head airflow CFM curves and valve lift benchmarks.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-a-head-casting-and-ecu-token-88-90-smec-52-way
+  wave: A
+  category: head_casting_and_ecu_token
+  fingerprint: 88-90 SMEC 52-way
+  query_pattern: minimopar.net/*smec*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Asmec%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: 1988-1990 SMEC connector pinout lineage (cross-check against FSM before
+    Pin 11 use).
+- lead_id: wave-a-head-casting-and-ecu-token-sbec
+  wave: A
+  category: head_casting_and_ecu_token
+  fingerprint: SBEC
+  query_pattern: chryslerccdsci.wordpress.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=chryslerccdsci.wordpress.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: 1990-1993 SBEC 60-way wiring, SCI telemetry, and ROM layout archival
+    documentation. Confirmed in read-only corpus scan.

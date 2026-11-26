@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "holset_hx50_map",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "holset",
+  "family_name": null,
+  "product_name": "hx50_map",
+  "figure_sha256": "535e0ab409043528ce858ae25fffa701948befc3ec3a85d5e6cf58ff12b2dd22",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/holset/hx50_map.gif",
+  "legacy_map_path": "maps/holset/hx50_map.gif",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

@@ -1,0 +1,268 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gt3076r",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GT-R Series",
+  "product_name": "GT3076R",
+  "source_product_id": 109,
+  "figure_sha256": "13c28f10413f8282b4bde4aa005361678cf95a865101167b227b8ad442d47c6a",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/GT3076R_700382_12_comp_e.gif",
+  "legacy_map_path": "maps/garrett/GT3076R_700382_12_comp_e.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 60.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 60.0,
+    "pr_min": 1.0,
+    "pr_max": 4.5,
+    "pixel_x_start": 44,
+    "pixel_y_start": 39,
+    "pixel_width": 388,
+    "pixel_height": 503
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.15463917525773196,
+        0.0
+      ],
+      [
+        0.0,
+        -0.006958250497017893
+      ]
+    ],
+    "b": [
+      -6.804123711340207,
+      4.7713717693836974
+    ],
+    "A_kg_s": [
+      [
+        0.0011690525,
+        0.0
+      ],
+      [
+        0.0,
+        -0.006958250497017893
+      ]
+    ],
+    "b_kg_s": [
+      -0.05143831000000001,
+      4.7713717693836974
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        44,
+        39
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 4.5
+    },
+    "top_right": {
+      "pixel": [
+        432,
+        39
+      ],
+      "flow_lb_min": 60.0,
+      "flow_kg_s": 0.453592,
+      "pressure_ratio": 4.5
+    },
+    "bottom_left": {
+      "pixel": [
+        44,
+        542
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        432,
+        542
+      ],
+      "flow_lb_min": 60.0,
+      "flow_kg_s": 0.453592,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [
+    {
+      "flow_lb_min": 8.0,
+      "flow_kg_s": 0.060479,
+      "pressure_ratio": 1.3
+    },
+    {
+      "flow_lb_min": 39.0,
+      "flow_kg_s": 0.294835,
+      "pressure_ratio": 3.94
+    },
+    {
+      "flow_lb_min": 55.0,
+      "flow_kg_s": 0.415793,
+      "pressure_ratio": 3.25
+    },
+    {
+      "flow_lb_min": 33.0,
+      "flow_kg_s": 0.249476,
+      "pressure_ratio": 1.3
+    }
+  ],
+  "surge_line": [
+    {
+      "flow_lb_min": 8.0,
+      "flow_kg_s": 0.060479,
+      "pressure_ratio": 1.3
+    },
+    {
+      "flow_lb_min": 39.0,
+      "flow_kg_s": 0.294835,
+      "pressure_ratio": 3.94
+    }
+  ],
+  "choke_boundary": [
+    {
+      "flow_lb_min": 33.0,
+      "flow_kg_s": 0.249476,
+      "pressure_ratio": 1.3
+    },
+    {
+      "flow_lb_min": 55.0,
+      "flow_kg_s": 0.415793,
+      "pressure_ratio": 3.25
+    }
+  ],
+  "efficiency_spine_points": [
+    {
+      "flow_lb_min": 18.0,
+      "flow_kg_s": 0.136078,
+      "pressure_ratio": 1.4
+    },
+    {
+      "flow_lb_min": 40.0,
+      "flow_kg_s": 0.302395,
+      "pressure_ratio": 2.7
+    }
+  ],
+  "efficiency_islands": [
+    {
+      "id": "efficiency_spine",
+      "efficiency": null,
+      "label": "Peak efficiency spine",
+      "spine_points": [
+        {
+          "flow_lb_min": 18.0,
+          "flow_kg_s": 0.136078,
+          "pressure_ratio": 1.4
+        },
+        {
+          "flow_lb_min": 40.0,
+          "flow_kg_s": 0.302395,
+          "pressure_ratio": 2.7
+        }
+      ]
+    }
+  ],
+  "geometry": {
+    "wheel_size": "76.2mm",
+    "trim": "56",
+    "ar": "0.60",
+    "docx_wheel_dimensions": [
+      {
+        "section": "GARRETT",
+        "model": "GT3076R",
+        "part_number": "700382-12",
+        "compressor": {
+          "inducer_in": 2.244,
+          "inducer_mm": 57.0,
+          "exducer_in": 3.0,
+          "exducer_mm": 76.2,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": 2.362,
+          "major_dia_mm": 60.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "0.63",
+          "housing_type": null
+        },
+        "hp_rating": "310-525"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT3076R",
+        "part_number": "700382-12",
+        "compressor": {
+          "inducer_in": 2.244,
+          "inducer_mm": 57.0,
+          "exducer_in": 3.0,
+          "exducer_mm": 76.2,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": 2.362,
+          "major_dia_mm": 60.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "0.82",
+          "housing_type": null
+        },
+        "hp_rating": "310-525"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT3076R",
+        "part_number": "700382-12",
+        "compressor": {
+          "inducer_in": 2.244,
+          "inducer_mm": 57.0,
+          "exducer_in": 3.0,
+          "exducer_mm": 76.2,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": 2.362,
+          "major_dia_mm": 60.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "1.06",
+          "housing_type": null
+        },
+        "hp_rating": "310-525"
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

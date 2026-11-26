@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "holset_hx40",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "holset",
+  "family_name": null,
+  "product_name": "hx40",
+  "figure_sha256": "e9064b4255e490a80df79de8cde91bd3112660d0174529cb70bb7e049fcbcef6",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/holset/hx40.jpg",
+  "legacy_map_path": "maps/holset/hx40.jpg",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

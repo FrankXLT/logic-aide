@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "mitsubishi_td05_16g_large",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Mitsubishi",
+  "family_name": "TD05 Series",
+  "product_name": "16G Large",
+  "source_product_id": 88,
+  "figure_sha256": "fb2d1daff98bb548a469f978806c904686a13383e00df3756c2b91ca54d507e3",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/mitsu/TD05HR-16G6.jpg",
+  "legacy_map_path": "maps/mitsu/TD05HR-16G6.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "m^3/sec",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 0.31,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 48.551081,
+    "pr_min": 1.1,
+    "pr_max": 3.4,
+    "pixel_x_start": 28,
+    "pixel_y_start": 49,
+    "pixel_width": 391,
+    "pixel_height": 568
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.12417156324143856,
+        0.0
+      ],
+      [
+        0.0,
+        -0.004049295774647887
+      ]
+    ],
+    "b": [
+      -3.47680377076028,
+      3.5984154929577463
+    ],
+    "A_kg_s": [
+      [
+        0.0009387212276214833,
+        0.0
+      ],
+      [
+        0.0,
+        -0.004049295774647887
+      ]
+    ],
+    "b_kg_s": [
+      -0.026284194373401536,
+      3.5984154929577463
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        28,
+        49
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.4
+    },
+    "top_right": {
+      "pixel": [
+        419,
+        49
+      ],
+      "flow_lb_min": 48.551081,
+      "flow_kg_s": 0.36704,
+      "pressure_ratio": 3.4
+    },
+    "bottom_left": {
+      "pixel": [
+        28,
+        617
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.1
+    },
+    "bottom_right": {
+      "pixel": [
+        419,
+        617
+      ],
+      "flow_lb_min": 48.551081,
+      "flow_kg_s": 0.36704,
+      "pressure_ratio": 1.1
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": {
+    "xml_units": "m^3/sec",
+    "units_match": true
+  },
+  "source_notes": ""
+}

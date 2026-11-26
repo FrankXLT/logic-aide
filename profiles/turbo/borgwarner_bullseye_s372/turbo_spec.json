@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "borgwarner_bullseye_s372",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "BorgWarner Turbo Systems",
+  "family_name": "S Series: Bullseye-Power",
+  "product_name": "S372",
+  "source_product_id": 182,
+  "figure_sha256": "19bd0476e6be390a1e2314322f22a00113d25846468308917eef831e77f5de1a",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/bw/BW S372.jpg",
+  "legacy_map_path": "maps/bw/bullseye-power/BW S372.jpg",
+  "figure_match_method": "basename_case_insensitive",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 10.0,
+    "airflow_max_raw": 100.0,
+    "airflow_min_lb_min": 10.0,
+    "airflow_max_lb_min": 100.0,
+    "pr_min": 1.0,
+    "pr_max": 5.5,
+    "pixel_x_start": 70,
+    "pixel_y_start": 24,
+    "pixel_width": 545,
+    "pixel_height": 420
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.1651376146788991,
+        0.0
+      ],
+      [
+        0.0,
+        -0.010714285714285714
+      ]
+    ],
+    "b": [
+      -1.5596330275229366,
+      5.757142857142857
+    ],
+    "A_kg_s": [
+      [
+        0.001248419366972477,
+        0.0
+      ],
+      [
+        0.0,
+        -0.010714285714285714
+      ]
+    ],
+    "b_kg_s": [
+      -0.011790627354740067,
+      5.757142857142857
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        70,
+        24
+      ],
+      "flow_lb_min": 10.0,
+      "flow_kg_s": 0.075599,
+      "pressure_ratio": 5.5
+    },
+    "top_right": {
+      "pixel": [
+        615,
+        24
+      ],
+      "flow_lb_min": 100.0,
+      "flow_kg_s": 0.755987,
+      "pressure_ratio": 5.5
+    },
+    "bottom_left": {
+      "pixel": [
+        70,
+        444
+      ],
+      "flow_lb_min": 10.0,
+      "flow_kg_s": 0.075599,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        615,
+        444
+      ],
+      "flow_lb_min": 100.0,
+      "flow_kg_s": 0.755987,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "Borg Warner",
+        "model": "S300 S372",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 2.827,
+          "inducer_mm": 71.8,
+          "exducer_in": 4.012,
+          "exducer_mm": 101.9,
+          "trim": null,
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": 3.283,
+          "major_dia_mm": 83.4,
+          "exducer_in": 2.925,
+          "exducer_mm": 74.3,
+          "trim": null,
+          "ar": null,
+          "housing_type": null
+        },
+        "hp_rating": null
+      }
+    ]
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

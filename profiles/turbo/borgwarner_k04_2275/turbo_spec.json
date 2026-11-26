@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "borgwarner_k04_2275",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "BorgWarner Turbo Systems",
+  "family_name": "K Series",
+  "product_name": "K04-2275",
+  "source_product_id": 102,
+  "figure_sha256": "4dc1abe0db18c9134d1d60f3ebb3e9103ae456e7ea42e07f855a8b17a75b9fa5",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/bw/k04-2275.jpg",
+  "legacy_map_path": "maps/bw/k_series/k04-2275.jpg",
+  "figure_match_method": "basename_case_insensitive",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 30.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 30.0,
+    "pr_min": 1.0,
+    "pr_max": 3.4,
+    "pixel_x_start": 44,
+    "pixel_y_start": 12,
+    "pixel_width": 395,
+    "pixel_height": 375
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.0759493670886076,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0063999999999999994
+      ]
+    ],
+    "b": [
+      -3.3417721518987342,
+      3.4768
+    ],
+    "A_kg_s": [
+      [
+        0.0005741675569620253,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0063999999999999994
+      ]
+    ],
+    "b_kg_s": [
+      -0.025263372506329113,
+      3.4768
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        44,
+        12
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.4
+    },
+    "top_right": {
+      "pixel": [
+        439,
+        12
+      ],
+      "flow_lb_min": 30.0,
+      "flow_kg_s": 0.226796,
+      "pressure_ratio": 3.4
+    },
+    "bottom_left": {
+      "pixel": [
+        44,
+        387
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        439,
+        387
+      ],
+      "flow_lb_min": 30.0,
+      "flow_kg_s": 0.226796,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

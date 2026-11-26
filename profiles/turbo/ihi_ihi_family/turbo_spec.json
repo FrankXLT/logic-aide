@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "ihi_ihi_family",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "ihi",
+  "family_name": null,
+  "product_name": "IHI_Family",
+  "figure_sha256": "9842528095b506d3e8c8e1758390f917e049b5a5be66efe385eafa8e939ee7a5",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/ihi/IHI_Family.jpg",
+  "legacy_map_path": "maps/ihi/IHI_Family.jpg",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

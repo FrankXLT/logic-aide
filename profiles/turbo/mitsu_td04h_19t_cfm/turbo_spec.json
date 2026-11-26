@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "mitsu_td04h_19t_cfm",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "mitsu",
+  "family_name": null,
+  "product_name": "td04h-19t-cfm",
+  "figure_sha256": "5bf525801fe7b8a876f3b87de3100f979107b40e3d42a81e7317bbbc5bac6087",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/mitsu/td04h-19t-cfm.gif",
+  "legacy_map_path": "maps/mitsu/td04h-19t-cfm.gif",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

@@ -15,6 +15,10 @@
 - **Python Behavioral Twin**: Readable Python model (`rom/models/*_twin.py`) implementing exact 8-bit/16-bit Q-format math and saturation clamps, verified bit-for-bit against 68HC11 `.asm` before staging.
 - **Drivetrain & Turbo Profile**: Vehicle hardware manifest (`profiles/schema/vehicle_build.schema.json` Draft 2020-12, `profiles/examples/*.json`, and `turbo_spec.json`) defining block, head, 3-tier compatibility status, transaxle, fuel (`93 E10` vs `E85`), injector pressure/SG/deadtime scaling, and compressor map.
 - **Staging Pen**: `staging/candidates/<build_id>/`, the sole destination for candidate `.bin` builds and `REPORT.md` safety audits awaiting manual human flashing.
+- **Living Heritage Wiki**: Repo-resident Markdown encyclopedia under `wiki/` with validated YAML frontmatter, shared `data/heritage_index.sqlite` RAG indexing, and outbound `.wiki.git` / static-site dual publishing via `uv run logicaide heritage sync-wiki`.
+- **Wave Discovery Harvester**: CLI workflow (`uv run logicaide heritage discover --wave A`) extracting read-only high-entropy heritage fingerprints, SHA-256 deduplicating against the vault, and emitting cleanroom `knowledge/discovery_leads.yaml`.
+- **TurboCalc v5 Compressor Catalog**: Digitized catalog (`profiles/turbo/catalog.json`, `145` calibrated turbos + `13` pending stubs across `157` SHA-256 deduplicated maps) normalized via 4-point affine matrices and `NIST SP 811` dry-air units (`lb/min` & `kg/s`).
+- **Wayback CDX Sweep**: Polite, digest-collapsed Internet Archive CDX metadata query (`fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest`) generating raw `id_` memento queues under gitignored `data/heritage_raw/discovery_queue/`.
 
 ---
 
@@ -89,8 +93,8 @@
 ## `WF-05` — Heritage Hybrid RAG
 
 - **What User Sees & Taps**:
-  - Querying `uv run logicaide heritage query ...` or `uv run logicaide heritage diagram ...` renders `.va-split-reader-gallery` (`>= 60%` clean attributed prose and header-repeated/stitched pipe tables on the left; `<= 40%` verified Mermaid schematic / connector viewer on the right).
-  - Every retrieved claim displays `Tier 1`/`Tier 2`/`Tier 3` provenance pills (`Tier 1: Factory/OEM`, `Tier 2: Verified Disassembly`, `Tier 3: Community Notes`), `ECU` scope badges (`SMEC_88_89` vs. `SBEC_90_93`), exact source `page_ref` / `warc_capture_date`, and Pin 11 continuity / Pin 2, 3, 25, 45 variant callouts when 60-way wiring is queried.
+  - Querying `uv run logicaide heritage query ...` or `uv run logicaide heritage diagram ...` renders `.va-split-reader-gallery` (`>= 60%` clean attributed prose and header-repeated/stitched pipe tables on the left; `<= 40%` verified Mermaid schematic / connector viewer on the right), unifying `knowledge/**/*.md` and `wiki/**/*.md` inside the shared `data/heritage_index.sqlite` (`FTS5` + `sqlite-vec`) corpus.
+  - Every retrieved claim displays `Tier 1`/`Tier 2`/`Tier 3` provenance pills (`Tier 1: Factory/OEM`, `Tier 2: Verified Disassembly`, `Tier 3: Community Notes`), `ECU` scope badges (`SMEC_88_89` vs. `SBEC_90_93`), exact source `page_ref` / `warc_capture_date`, Wave A Tier-2 digests (e.g., `knowledge/tier2_verified/g_head_flowbench.md`), `knowledge/discovery_leads.yaml` status surfacing (`queued_cdx` / `already_covered` / `needs_manual_capture`), and Pin 11 continuity / Pin 2, 3, 25, 45 variant callouts when 60-way wiring is queried.
 - **Viewport Behavior**:
   - `390x844`: Single-column reader (`>= 44px` filter/tier chips, readable line length, `0px` overflow).
   - `900x1000`: Reader column with collapsible schematic drawer.
@@ -103,8 +107,8 @@
 ## `WF-06` — Drivetrain & Compressor Map
 
 - **What User Sees & Taps**:
-  - Semantic `<optgroup>` hardware selectors (`Engine Block`, `Cylinder Head`, `Transaxle`, `Fuel`) backed by Draft 2020-12 `profiles/schema/vehicle_build.schema.json` and turbo selection (`turbo_spec.json`).
-  - Interactive `NIST SP 811` digitized compressor map (`PR / 1` vs `Corrected Airflow / lb·min⁻¹`) with `68%`/`74%` efficiency islands, surge line, choke boundary, and overlaid operating points from `load_cell_rollups`.
+  - Semantic `<optgroup>` hardware selectors (`Engine Block`, `Cylinder Head`, `Transaxle`, `Fuel`, `Injector Preset`, `Turbocharger`) backed by Draft 2020-12 `profiles/schema/vehicle_build.schema.json` and Wave A catalog artifacts: `145` calibrated + `13` `axis_calibration_pending` `turbo_spec.json` entries imported via `uv run logicaide turbo import-turbocalc` (`profiles/turbo/catalog.json` across `157` SHA-256 deduplicated maps), `95` validated BATOFF injector deadtime presets (`profiles/presets/injectors_batoff.json`), and anonymized flowbench curves (`profiles/presets/cylinder_head_flowbench.json`).
+  - Interactive `NIST SP 811` digitized compressor map (`PR / 1` vs `Corrected Airflow / lb·min⁻¹` & `kg/s`) seeded by 4-point affine matrices with `68%`/`74%` efficiency islands, surge line, choke boundary, and overlaid operating points from `load_cell_rollups`.
 - **Viewport Behavior**:
   - `390x844`: Stacked `<optgroup>` selectors (`>= 44px` height) and dynamic 3-tier compatibility advisory above responsive `quiet-evidence` compressor SVG (`0px` overflow).
   - `900x1000`: Compact selector strip above full-width compressor island chart.
@@ -113,4 +117,20 @@
   - **`BOLT_ON_NATIVE` (`ISA-101` Nominal)**: `2.2L`/`2.5L` K-block paired with `8V #445` Open, `8V #782` Swirl, `1991–1993` Lotus `16V` DOHC (`Turbo III`), or `1988–1991` Maserati `16V` DOHC (`Chrysler TC`), displaying `10 mm` vs. `11 mm` head-bolt and cross-drilled gasket notes.
   - **`HYBRID_MACHINING_REQUIRED` (`ISA-101` Amber Advisory)**: `2.2L`/`2.5L` K-block paired with `Neon ECC 2.0L DOHC` or `2.4L EDZ`/SRT-4 `16V` DOHC head (or full `2.4L EDZ` swaps into SMEC/SBEC cars, sharing `4.00 in` / `101.6 mm` bore spacing and `87.5 mm` standard bore). Displays the 7-item **Swap Advisory Checklist**: oil/coolant deck passage plugging, external head oil feed & oil-pan drainback routing, head-bolt/stud sleeve alignment, custom timing-belt tensioner geometry, piston valve reliefs, SMEC/SBEC crank/cam Hall-effect trigger sync, and counter-clockwise `PEFTBL` cam-peak rotation.
   - **`INCOMPATIBLE` (`ISA-101` Crimson Block)**: Non-viable pairings (e.g., `8V #445`/`#782` SOHC or K-car `Lotus`/`Maserati 16V` heads onto a `2.4L EDZ` block) block profile compilation and simulation export with a mechanical explanation.
-  - **Compressor Surge / Choke**: Operating points crossing the surge line or choke limit highlight in `ISA-101` amber/crimson with mass-flow margin readout.
+  - **Compressor Surge / Choke / Pending Stub**: Operating points crossing the surge line or choke limit highlight in `ISA-101` amber/crimson with mass-flow margin readout; selecting one of the `13` `axis_calibration_pending: true` stubs surfaces a `CALIBRATION PENDING` banner and locks simulation export until axis landmarks are verified.
+
+## `WF-07` — Living Heritage Wiki & Wave Discovery Harvester
+
+- **What User Sees & Taps**:
+  - **Living Heritage Wiki Publisher (`uv run logicaide heritage sync-wiki --dry-run`)**: Category browser over repo-resident `wiki/` (`Home.md`, `_Sidebar.md`, `_Footer.md`, and 6 flat-namespace topic trees), showing YAML frontmatter validation badges, relative link integrity, Mermaid AST status, and dual-publish preview targets (flattened `strip_frontmatter=True` mirror for outbound `.wiki.git` vs. hierarchical static-site stage under `data/heritage_raw/wiki_stage/`).
+  - **Wave Discovery Harvester (`uv run logicaide heritage discover --wave A`)**: Read-only `private_references/` fingerprint census (`squirrelpf.com`, `sqrl_tools`, `turbocalc`, `T03`/`TB03`/`TE04H`/`VNT25`/`TD04LR`, `#782`/`#445`/`G-Head`, `88-90 SMEC 52-way`/`SBEC`), SHA-256 vault deduplication badge (`vault_sha256_count`), cleanroom `knowledge/discovery_leads.yaml` status table (`queued_cdx` / `already_covered` / `needs_manual_capture`), and offline/polite `1.5s`-paced Wayback CDX `id_` memento queue (`data/heritage_raw/discovery_queue/wave_a_queue.json`).
+- **Viewport Behavior**:
+  - `390x844` (Mobile): Single-column wiki reader and stacked discovery lead cards with `>= 44px` status filter chips and horizontal scroll wrappers (right-edge fade + `Scroll ->` badge on wide lead tables, `0px` page overflow).
+  - `900x1000` (Tablet Split): Collapsible `_Sidebar.md` category drawer alongside wiki prose/frontmatter card and compact lead status summary.
+  - `1280x800` (Laptop): Side-by-side `.va-split-reader-gallery` pairing rendered `wiki/` page + provenance header on the left with dual-publish diff/queue telemetry on the right.
+  - `1440x900` (Desktop Wide): Full `.va-stage[data-width="workbench"]` 3-pane layout: N1 `wiki/` topic tree (`>= 1100px`), central Markdown/Mermaid preview, and right-hand Wave Discovery Harvester & `.wiki.git` mirror status rail.
+- **Empty, Quarantine & Hardware Deadbolt States**:
+  - **`axis_calibration_pending: true` Leads**: Uncalibrated compressor map stubs surface as high-priority `queued_cdx` / `needs_manual_capture` `ISA-101` amber recovery leads until digitized into `profiles/turbo/`.
+  - **`QUARANTINE_PII_DO_NOT_INGEST` & PII Scrubbing**: Any personal names, emails, local home paths, UNC hostnames, or vendor order receipts are blocked pre-publish (`WikiValidationError`) and stripped via `scrub_pii()`; quarantined raw files never enter `wiki/`, `knowledge/discovery_leads.yaml`, or `data/heritage_index.sqlite`.
+  - **Hardware Deadbolt Boundary**: Live ECU write/flash routines remain strictly forbidden across `wiki/` content gates and discovery outputs; `sync-wiki` never mutates `wiki/` in place, and missing `private_references/` falls back cleanly to `profiles/turbo/` stubs and cleanroom seeds without raising errors.
+

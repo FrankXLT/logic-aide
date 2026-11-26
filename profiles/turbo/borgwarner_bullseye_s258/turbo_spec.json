@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "borgwarner_bullseye_s258",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "BorgWarner Turbo Systems",
+  "family_name": "S Series: Bullseye-Power",
+  "product_name": "S258",
+  "source_product_id": 179,
+  "figure_sha256": "a60fd0ba3e287a2622a560b17e2526cfc51e7ef52f3178531d71feaa810ce2cb",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/bw/BW S258.jpg",
+  "legacy_map_path": "maps/bw/bullseye-power/BW S258.jpg",
+  "figure_match_method": "basename_case_insensitive",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 10.0,
+    "airflow_max_raw": 70.0,
+    "airflow_min_lb_min": 10.0,
+    "airflow_max_lb_min": 70.0,
+    "pr_min": 1.0,
+    "pr_max": 4.5,
+    "pixel_x_start": 40,
+    "pixel_y_start": 11,
+    "pixel_width": 583,
+    "pixel_height": 328
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.10291595197255575,
+        0.0
+      ],
+      [
+        0.0,
+        -0.010670731707317074
+      ]
+    ],
+    "b": [
+      5.88336192109777,
+      4.617378048780488
+    ],
+    "A_kg_s": [
+      [
+        0.0007780315094339623,
+        0.0
+      ],
+      [
+        0.0,
+        -0.010670731707317074
+      ]
+    ],
+    "b_kg_s": [
+      0.04447746795597485,
+      4.617378048780488
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        40,
+        11
+      ],
+      "flow_lb_min": 10.0,
+      "flow_kg_s": 0.075599,
+      "pressure_ratio": 4.5
+    },
+    "top_right": {
+      "pixel": [
+        623,
+        11
+      ],
+      "flow_lb_min": 70.0,
+      "flow_kg_s": 0.529191,
+      "pressure_ratio": 4.5
+    },
+    "bottom_left": {
+      "pixel": [
+        40,
+        339
+      ],
+      "flow_lb_min": 10.0,
+      "flow_kg_s": 0.075599,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        623,
+        339
+      ],
+      "flow_lb_min": 70.0,
+      "flow_kg_s": 0.529191,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

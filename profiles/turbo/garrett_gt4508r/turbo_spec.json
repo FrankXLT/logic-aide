@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gt4508r",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GT-R Series",
+  "product_name": "GT4508R",
+  "source_product_id": 51,
+  "figure_sha256": "0a1877043ab4856285af38aa495e808655f2c29b91d99cf87cd12ec35dd8e972",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/GT4508R.jpg",
+  "legacy_map_path": "maps/garrett/GT4508R.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 130.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 130.0,
+    "pr_min": 1.0,
+    "pr_max": 5.0,
+    "pixel_x_start": 47,
+    "pixel_y_start": 45,
+    "pixel_width": 371,
+    "pixel_height": 495
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.3504043126684636,
+        0.0
+      ],
+      [
+        0.0,
+        -0.00808080808080808
+      ]
+    ],
+    "b": [
+      -16.46900269541779,
+      5.363636363636363
+    ],
+    "A_kg_s": [
+      [
+        0.0026490120440251573,
+        0.0
+      ],
+      [
+        0.0,
+        -0.00808080808080808
+      ]
+    ],
+    "b_kg_s": [
+      -0.12450356606918238,
+      5.363636363636363
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        47,
+        45
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 5.0
+    },
+    "top_right": {
+      "pixel": [
+        418,
+        45
+      ],
+      "flow_lb_min": 130.0,
+      "flow_kg_s": 0.982783,
+      "pressure_ratio": 5.0
+    },
+    "bottom_left": {
+      "pixel": [
+        47,
+        540
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        418,
+        540
+      ],
+      "flow_lb_min": 130.0,
+      "flow_kg_s": 0.982783,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "GARRETT",
+        "model": "GT4508R",
+        "part_number": "742581-4",
+        "compressor": {
+          "inducer_in": 3.181,
+          "inducer_mm": 80.8,
+          "exducer_in": 4.252,
+          "exducer_mm": 108.0,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.425,
+          "major_dia_mm": 87.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "85",
+          "ar": "1.01",
+          "housing_type": null
+        },
+        "hp_rating": "700-1100"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4508R",
+        "part_number": "742581-4",
+        "compressor": {
+          "inducer_in": 3.181,
+          "inducer_mm": 80.8,
+          "exducer_in": 4.252,
+          "exducer_mm": 108.0,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.425,
+          "major_dia_mm": 87.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "85",
+          "ar": "1.15",
+          "housing_type": null
+        },
+        "hp_rating": "700-1100"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4508R",
+        "part_number": "742581-4",
+        "compressor": {
+          "inducer_in": 3.181,
+          "inducer_mm": 80.8,
+          "exducer_in": 4.252,
+          "exducer_mm": 108.0,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.425,
+          "major_dia_mm": 87.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "85",
+          "ar": "1.28",
+          "housing_type": null
+        },
+        "hp_rating": "700-1100"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4508R",
+        "part_number": "742581-4",
+        "compressor": {
+          "inducer_in": 3.181,
+          "inducer_mm": 80.8,
+          "exducer_in": 4.252,
+          "exducer_mm": 108.0,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.425,
+          "major_dia_mm": 87.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "85",
+          "ar": "1.44",
+          "housing_type": null
+        },
+        "hp_rating": "700-1100"
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

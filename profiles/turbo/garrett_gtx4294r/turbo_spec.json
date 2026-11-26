@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gtx4294r",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GTX-R Series",
+  "product_name": "GTX4294R",
+  "source_product_id": 193,
+  "figure_sha256": "f5b3cbe38bfd7f7d4246d09e01f0124b4b1df70f84f4fdcf39118475c4a18f67",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/GTX4294R-Compressor-Map.gif",
+  "legacy_map_path": "maps/garrett/GTX4294R-Compressor-Map.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 110.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 110.0,
+    "pr_min": 1.0,
+    "pr_max": 5.0,
+    "pixel_x_start": 45,
+    "pixel_y_start": 43,
+    "pixel_width": 397,
+    "pixel_height": 515
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.2770780856423174,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007766990291262136
+      ]
+    ],
+    "b": [
+      -12.468513853904282,
+      5.333980582524272
+    ],
+    "A_kg_s": [
+      [
+        0.002094675092359362,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007766990291262136
+      ]
+    ],
+    "b_kg_s": [
+      -0.09426037915617129,
+      5.333980582524272
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        45,
+        43
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 5.0
+    },
+    "top_right": {
+      "pixel": [
+        442,
+        43
+      ],
+      "flow_lb_min": 110.0,
+      "flow_kg_s": 0.831586,
+      "pressure_ratio": 5.0
+    },
+    "bottom_left": {
+      "pixel": [
+        45,
+        558
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        442,
+        558
+      ],
+      "flow_lb_min": 110.0,
+      "flow_kg_s": 0.831586,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": "56",
+    "ar": ".60",
+    "docx_wheel_dimensions": [
+      {
+        "section": "GARRETT",
+        "model": "GTX4294R",
+        "part_number": "800269-1",
+        "compressor": {
+          "inducer_in": 2.768,
+          "inducer_mm": 70.3,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": 3.228,
+          "major_dia_mm": 82.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "1.01",
+          "housing_type": null
+        },
+        "hp_rating": "500-850"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GTX4294R",
+        "part_number": "800269-1",
+        "compressor": {
+          "inducer_in": 2.768,
+          "inducer_mm": 70.3,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": 3.228,
+          "major_dia_mm": 82.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "1.15",
+          "housing_type": null
+        },
+        "hp_rating": "500-850"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GTX4294R",
+        "part_number": "800269-1",
+        "compressor": {
+          "inducer_in": 2.768,
+          "inducer_mm": 70.3,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": 3.228,
+          "major_dia_mm": 82.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "1.28",
+          "housing_type": null
+        },
+        "hp_rating": "500-850"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GTX4294R",
+        "part_number": "800269-1",
+        "compressor": {
+          "inducer_in": 2.768,
+          "inducer_mm": 70.3,
+          "exducer_in": 3.701,
+          "exducer_mm": 94.0,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": 3.228,
+          "major_dia_mm": 82.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "1.44",
+          "housing_type": null
+        },
+        "hp_rating": "500-850"
+      }
+    ]
+  },
+  "xml_crosscheck": null,
+  "source_notes": "New GTX Series - CNC Version of GT4294R"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_t3_60_28411147_jpg",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "garrett",
+  "family_name": null,
+  "product_name": "T3_60_28411147.jpg",
+  "figure_sha256": "a66697e7df6b29b7e28b680f851d4af3e057f144bf6c8a8ff08c3116153331d1",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/T3_60_28411147.jpg.gif",
+  "legacy_map_path": "maps/garrett/T3_60_28411147.jpg.gif",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

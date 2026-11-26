@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_t04e_60_trim",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "T04E Series",
+  "product_name": "60 Trim",
+  "source_product_id": 61,
+  "figure_sha256": "538415e9998f0bb1de4185cb1616c466c1ebb19e5965fdf2cc1589ad422aaa60",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/T04E_60trim.gif",
+  "legacy_map_path": "maps/garrett/T04E_60trim.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 60.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 60.0,
+    "pr_min": 1.0,
+    "pr_max": 3.0,
+    "pixel_x_start": 46,
+    "pixel_y_start": 7,
+    "pixel_width": 362,
+    "pixel_height": 455
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.16574585635359115,
+        0.0
+      ],
+      [
+        0.0,
+        -0.004395604395604396
+      ]
+    ],
+    "b": [
+      -7.624309392265193,
+      3.0307692307692307
+    ],
+    "A_kg_s": [
+      [
+        0.0012530175966850828,
+        0.0
+      ],
+      [
+        0.0,
+        -0.004395604395604396
+      ]
+    ],
+    "b_kg_s": [
+      -0.05763880944751381,
+      3.0307692307692307
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        46,
+        7
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.0
+    },
+    "top_right": {
+      "pixel": [
+        408,
+        7
+      ],
+      "flow_lb_min": 60.0,
+      "flow_kg_s": 0.453592,
+      "pressure_ratio": 3.0
+    },
+    "bottom_left": {
+      "pixel": [
+        46,
+        462
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        408,
+        462
+      ],
+      "flow_lb_min": 60.0,
+      "flow_kg_s": 0.453592,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "TURBONETICS",
+        "model": "T04E-60",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 2.29,
+          "inducer_mm": 58.17,
+          "exducer_in": 2.95,
+          "exducer_mm": 74.93,
+          "trim": "60",
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": null,
+          "major_dia_mm": null,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": null,
+          "ar": null,
+          "housing_type": "T04"
+        },
+        "hp_rating": null
+      },
+      {
+        "section": "TURBONETICS",
+        "model": "T04E-60",
+        "part_number": "11013-BB",
+        "compressor": {
+          "inducer_in": 2.29,
+          "inducer_mm": 58.17,
+          "exducer_in": 2.95,
+          "exducer_mm": 74.93,
+          "trim": null,
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": 2.795,
+          "major_dia_mm": 70.99,
+          "exducer_in": 2.441,
+          "exducer_mm": 62.0,
+          "trim": null,
+          "ar": "0.58",
+          "housing_type": "T04"
+        },
+        "hp_rating": "500"
+      },
+      {
+        "section": "TURBONETICS",
+        "model": "T04E-60",
+        "part_number": "11236",
+        "compressor": {
+          "inducer_in": 2.29,
+          "inducer_mm": 58.17,
+          "exducer_in": 2.95,
+          "exducer_mm": 74.93,
+          "trim": null,
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": 3.111,
+          "major_dia_mm": 79.02,
+          "exducer_in": 2.677,
+          "exducer_mm": 68.0,
+          "trim": null,
+          "ar": "0.81",
+          "housing_type": "T04"
+        },
+        "hp_rating": "500"
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_t04e_40_trim",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "T04E Series",
+  "product_name": "40 Trim",
+  "source_product_id": 55,
+  "figure_sha256": "10fe0525d4ba080f19dd68374a3de04112e9f5ff1e2769a18680f5968bb0eafc",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/T04E_40trim.gif",
+  "legacy_map_path": "maps/garrett/T04E_40trim.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 45.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 45.0,
+    "pr_min": 1.0,
+    "pr_max": 3.8,
+    "pixel_x_start": 56,
+    "pixel_y_start": 5,
+    "pixel_width": 349,
+    "pixel_height": 448
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.12893982808022922,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0062499999999999995
+      ]
+    ],
+    "b": [
+      -7.2206303724928365,
+      3.83125
+    ],
+    "A_kg_s": [
+      [
+        0.0009747687034383954,
+        0.0
+      ],
+      [
+        0.0,
+        -0.0062499999999999995
+      ]
+    ],
+    "b_kg_s": [
+      -0.054587047392550145,
+      3.83125
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        56,
+        5
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.8
+    },
+    "top_right": {
+      "pixel": [
+        405,
+        5
+      ],
+      "flow_lb_min": 45.0,
+      "flow_kg_s": 0.340194,
+      "pressure_ratio": 3.8
+    },
+    "bottom_left": {
+      "pixel": [
+        56,
+        453
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        405,
+        453
+      ],
+      "flow_lb_min": 45.0,
+      "flow_kg_s": 0.340194,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "TURBONETICS",
+        "model": "T04E-40",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 1.87,
+          "inducer_mm": 47.5,
+          "exducer_in": 3.0,
+          "exducer_mm": 76.2,
+          "trim": "39",
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": null,
+          "major_dia_mm": null,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": null,
+          "ar": null,
+          "housing_type": "T04"
+        },
+        "hp_rating": null
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

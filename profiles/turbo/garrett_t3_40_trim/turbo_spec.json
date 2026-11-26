@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_t3_40_trim",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "T3 Series",
+  "product_name": "40 Trim",
+  "source_product_id": 75,
+  "figure_sha256": "e6014a4a22625eadfdd67941455500443d5e7eb905b4ae12410036b02781e705",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/T3_40trim.gif",
+  "legacy_map_path": "maps/garrett/T3_40trim.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 22.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 22.0,
+    "pr_min": 0.9,
+    "pr_max": 3.0,
+    "pixel_x_start": 76,
+    "pixel_y_start": 4,
+    "pixel_width": 324,
+    "pixel_height": 404
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.06790123456790123,
+        0.0
+      ],
+      [
+        0.0,
+        -0.005198019801980198
+      ]
+    ],
+    "b": [
+      -5.160493827160494,
+      3.020792079207921
+    ],
+    "A_kg_s": [
+      [
+        0.0005133246985596707,
+        0.0
+      ],
+      [
+        0.0,
+        -0.005198019801980198
+      ]
+    ],
+    "b_kg_s": [
+      -0.03901267709053498,
+      3.020792079207921
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        76,
+        4
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.0
+    },
+    "top_right": {
+      "pixel": [
+        400,
+        4
+      ],
+      "flow_lb_min": 22.0,
+      "flow_kg_s": 0.166317,
+      "pressure_ratio": 3.0
+    },
+    "bottom_left": {
+      "pixel": [
+        76,
+        408
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 0.9
+    },
+    "bottom_right": {
+      "pixel": [
+        400,
+        408
+      ],
+      "flow_lb_min": 22.0,
+      "flow_kg_s": 0.166317,
+      "pressure_ratio": 0.9
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "TURBONETICS",
+        "model": "T03-40",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 1.484,
+          "inducer_mm": 37.69,
+          "exducer_in": 2.367,
+          "exducer_mm": 60.12,
+          "trim": "40",
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": null,
+          "major_dia_mm": null,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": null,
+          "ar": null,
+          "housing_type": "T03"
+        },
+        "hp_rating": null
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_t61",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "T Series",
+  "product_name": "T61",
+  "source_product_id": 68,
+  "figure_sha256": "ed16e2c9a3f41cc92d19c42932052bdd5d1b862711aef7a45c77b0b48f46f8a8",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/T_61.gif",
+  "legacy_map_path": "maps/garrett/T_61.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 5.0,
+    "airflow_max_raw": 100.0,
+    "airflow_min_lb_min": 5.0,
+    "airflow_max_lb_min": 100.0,
+    "pr_min": 1.0,
+    "pr_max": 4.2,
+    "pixel_x_start": 82,
+    "pixel_y_start": 17,
+    "pixel_width": 308,
+    "pixel_height": 422
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.30844155844155846,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007582938388625593
+      ]
+    ],
+    "b": [
+      -20.292207792207794,
+      4.328909952606635
+    ],
+    "A_kg_s": [
+      [
+        0.0023317789583333333,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007582938388625593
+      ]
+    ],
+    "b_kg_s": [
+      -0.15340651041666667,
+      4.328909952606635
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        82,
+        17
+      ],
+      "flow_lb_min": 5.0,
+      "flow_kg_s": 0.037799,
+      "pressure_ratio": 4.2
+    },
+    "top_right": {
+      "pixel": [
+        390,
+        17
+      ],
+      "flow_lb_min": 100.0,
+      "flow_kg_s": 0.755987,
+      "pressure_ratio": 4.2
+    },
+    "bottom_left": {
+      "pixel": [
+        82,
+        439
+      ],
+      "flow_lb_min": 5.0,
+      "flow_kg_s": 0.037799,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        390,
+        439
+      ],
+      "flow_lb_min": 100.0,
+      "flow_kg_s": 0.755987,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

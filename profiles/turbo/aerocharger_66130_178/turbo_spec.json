@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "aerocharger_66130_178",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Aerocharger",
+  "family_name": "66130",
+  "product_name": "178",
+  "source_product_id": 151,
+  "figure_sha256": "a7f4c7f3cd944dfbaa23d121786822d2764ffd7696c0c4b4c0d521206b956817",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/aerocharger/66130-178.jpg",
+  "legacy_map_path": "maps/aerocharger/66130-178.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "cfm",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 512.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 35.328,
+    "pr_min": 1.0,
+    "pr_max": 2.9,
+    "pixel_x_start": 23,
+    "pixel_y_start": 94,
+    "pixel_width": 344,
+    "pixel_height": 314
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.10269767441860465,
+        0.0
+      ],
+      [
+        0.0,
+        -0.006050955414012738
+      ]
+    ],
+    "b": [
+      -2.362046511627907,
+      3.4687898089171973
+    ],
+    "A_kg_s": [
+      [
+        0.000776381358883721,
+        0.0
+      ],
+      [
+        0.0,
+        -0.006050955414012738
+      ]
+    ],
+    "b_kg_s": [
+      -0.017856771254325582,
+      3.4687898089171973
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        23,
+        94
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 2.9
+    },
+    "top_right": {
+      "pixel": [
+        367,
+        94
+      ],
+      "flow_lb_min": 35.328,
+      "flow_kg_s": 0.267075,
+      "pressure_ratio": 2.9
+    },
+    "bottom_left": {
+      "pixel": [
+        23,
+        408
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        367,
+        408
+      ],
+      "flow_lb_min": 35.328,
+      "flow_kg_s": 0.267075,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": []
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

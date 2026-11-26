@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_740759_4_comp_e",
+  "calibrated": false,
+  "axis_calibration_pending": true,
+  "is_alias": false,
+  "company_name": "garrett",
+  "family_name": null,
+  "product_name": "740759_4_comp_e",
+  "figure_sha256": "6d86ad29e496ad8ee77598c8056bb2d343a6dd0a183428ed5b3fea1949f75fef",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/740759_4_comp_e.jpg",
+  "legacy_map_path": "maps/garrett/740759_4_comp_e.jpg",
+  "affine_matrix_2x3": null,
+  "calibration_corners": null,
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

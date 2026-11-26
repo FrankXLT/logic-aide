@@ -1,9 +1,9 @@
-# Compiled & raw ECU binaries (copyrighted OEM ROMs and candidate flash outputs)
-*.bin
-*.s19
-*.rom
-*.hex
-*.srec
+# Compiled & raw ECU binaries (copyrighted OEM ROMs and candidate flash outputs; case-insensitive)
+*.[bB][iI][nN]
+*.[sS]19
+*.[rR][oO][mM]
+*.[hH][eE][xX]
+*.[sS][rR][eE][cC]
 
 # Live & logged vehicle telemetry / simulation Parquet lakes and SQLite/DuckDB stores
 data/drives/*.parquet
@@ -23,9 +23,19 @@ data/lake/**
 **/*.db-wal
 **/*.db-shm
 
-# Raw copyright/private heritage archives (curated cleanroom digests live in knowledge/)
+# Raw copyright/private heritage archives, stock ROM inputs/baselines & user dumps (curated cleanroom digests live in knowledge/)
 data/heritage_raw/**
 !data/heritage_raw/.gitkeep
+rom/inputs/**
+!rom/inputs/.gitkeep
+!rom/inputs/README.md
+rom/stock_baselines/**
+!rom/stock_baselines/.gitkeep
+!rom/stock_baselines/README.md
+private_references/
+private_references/**
+Private References/
+Private References/**
 
 # Secrets, local env overrides, and personal local Claude instructions
 .env

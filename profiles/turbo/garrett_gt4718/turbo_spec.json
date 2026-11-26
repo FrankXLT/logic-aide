@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gt4718",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GT-R Series",
+  "product_name": "GT4718",
+  "source_product_id": 123,
+  "figure_sha256": "ce0da90e7b8b568b620f5f639ec5ae957dbe06cd6a913ee72a1d13afc4449aad",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/GT4718 compmap_large.gif.jpg",
+  "legacy_map_path": "maps/garrett/GT4718 compmap_large.gif.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 160.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 160.0,
+    "pr_min": 1.0,
+    "pr_max": 5.0,
+    "pixel_x_start": 42,
+    "pixel_y_start": 42,
+    "pixel_width": 379,
+    "pixel_height": 491
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.42216358839050133,
+        0.0
+      ],
+      [
+        0.0,
+        -0.008146639511201629
+      ]
+    ],
+    "b": [
+      -17.730870712401057,
+      5.3421588594704685
+    ],
+    "A_kg_s": [
+      [
+        0.0031915030430958663,
+        0.0
+      ],
+      [
+        0.0,
+        -0.008146639511201629
+      ]
+    ],
+    "b_kg_s": [
+      -0.1340431278100264,
+      5.3421588594704685
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        42,
+        42
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 5.0
+    },
+    "top_right": {
+      "pixel": [
+        421,
+        42
+      ],
+      "flow_lb_min": 160.0,
+      "flow_kg_s": 1.20958,
+      "pressure_ratio": 5.0
+    },
+    "bottom_left": {
+      "pixel": [
+        42,
+        533
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        421,
+        533
+      ],
+      "flow_lb_min": 160.0,
+      "flow_kg_s": 1.20958,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "GARRETT",
+        "model": "GT4718",
+        "part_number": "763740-7",
+        "compressor": {
+          "inducer_in": 3.465,
+          "inducer_mm": 88.0,
+          "exducer_in": 4.63,
+          "exducer_mm": 117.6,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.65,
+          "major_dia_mm": 92.7,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "82",
+          "ar": "0.96",
+          "housing_type": null
+        },
+        "hp_rating": "850-1400"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4718",
+        "part_number": "763740-8",
+        "compressor": {
+          "inducer_in": 3.465,
+          "inducer_mm": 88.0,
+          "exducer_in": 4.63,
+          "exducer_mm": 117.6,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.65,
+          "major_dia_mm": 92.7,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "82",
+          "ar": "1.08",
+          "housing_type": null
+        },
+        "hp_rating": "850-1400"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4718",
+        "part_number": "763740-9",
+        "compressor": {
+          "inducer_in": 3.465,
+          "inducer_mm": 88.0,
+          "exducer_in": 4.63,
+          "exducer_mm": 117.6,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.65,
+          "major_dia_mm": 92.7,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "82",
+          "ar": "1.23",
+          "housing_type": null
+        },
+        "hp_rating": "850-1400"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT4718",
+        "part_number": "763740-10",
+        "compressor": {
+          "inducer_in": 3.465,
+          "inducer_mm": 88.0,
+          "exducer_in": 4.63,
+          "exducer_mm": 117.6,
+          "trim": "56",
+          "ar": "0.69"
+        },
+        "turbine": {
+          "major_dia_in": 3.65,
+          "major_dia_mm": 92.7,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "82",
+          "ar": "1.39",
+          "housing_type": null
+        },
+        "hp_rating": "850-1400"
+      }
+    ]
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}

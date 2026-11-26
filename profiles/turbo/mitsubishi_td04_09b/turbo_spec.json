@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "mitsubishi_td04_09b",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Mitsubishi",
+  "family_name": "TD04 Series",
+  "product_name": "09B",
+  "source_product_id": 81,
+  "figure_sha256": "296b2de484618588593eeccc3e44ced756f80256118b16ab95850106b158f627",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/mitsu/TD04-09B.gif",
+  "legacy_map_path": "maps/mitsu/TD04-09B.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "m^3/sec",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 0.16,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 25.058623,
+    "pr_min": 1.0,
+    "pr_max": 3.1,
+    "pixel_x_start": 66,
+    "pixel_y_start": 47,
+    "pixel_width": 309,
+    "pixel_height": 401
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.08109586591903535,
+        0.0
+      ],
+      [
+        0.0,
+        -0.005236907730673317
+      ]
+    ],
+    "b": [
+      -5.3523271506563335,
+      3.3461346633416458
+    ],
+    "A_kg_s": [
+      [
+        0.0006130744336569579,
+        0.0
+      ],
+      [
+        0.0,
+        -0.005236907730673317
+      ]
+    ],
+    "b_kg_s": [
+      -0.040462912621359225,
+      3.3461346633416458
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        66,
+        47
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 3.1
+    },
+    "top_right": {
+      "pixel": [
+        375,
+        47
+      ],
+      "flow_lb_min": 25.058623,
+      "flow_kg_s": 0.18944,
+      "pressure_ratio": 3.1
+    },
+    "bottom_left": {
+      "pixel": [
+        66,
+        448
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        375,
+        448
+      ],
+      "flow_lb_min": 25.058623,
+      "flow_kg_s": 0.18944,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "Mitsubishi",
+        "model": "TD04-09B",
+        "part_number": null,
+        "compressor": {
+          "inducer_in": 1.365,
+          "inducer_mm": 34.67,
+          "exducer_in": 1.93,
+          "exducer_mm": 49.02,
+          "trim": "50",
+          "ar": null
+        },
+        "turbine": {
+          "major_dia_in": 1.86,
+          "major_dia_mm": 47.24,
+          "exducer_in": 1.55,
+          "exducer_mm": 39.37,
+          "trim": null,
+          "ar": null,
+          "housing_type": null
+        },
+        "hp_rating": null
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "m^3/sec",
+    "units_match": true
+  },
+  "source_notes": ""
+}

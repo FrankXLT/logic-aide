@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gt4294",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GT-R Series",
+  "product_name": "GT4294",
+  "source_product_id": 49,
+  "figure_sha256": "0cb03b8c63af519f0171ca97010d79227ab0cfb47dd20e590ab99477ee4884c9",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/GT4294_731376_1_comp_e.gif",
+  "legacy_map_path": "maps/garrett/GT4294_731376_1_comp_e.gif",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 110.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 110.0,
+    "pr_min": 1.0,
+    "pr_max": 5.0,
+    "pixel_x_start": 44,
+    "pixel_y_start": 32,
+    "pixel_width": 387,
+    "pixel_height": 511
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.2842377260981912,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007827788649706457
+      ]
+    ],
+    "b": [
+      -12.506459948320412,
+      5.250489236790607
+    ],
+    "A_kg_s": [
+      [
+        0.0021488010637381568,
+        0.0
+      ],
+      [
+        0.0,
+        -0.007827788649706457
+      ]
+    ],
+    "b_kg_s": [
+      -0.09454724680447889,
+      5.250489236790607
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        44,
+        32
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 5.0
+    },
+    "top_right": {
+      "pixel": [
+        431,
+        32
+      ],
+      "flow_lb_min": 110.0,
+      "flow_kg_s": 0.831586,
+      "pressure_ratio": 5.0
+    },
+    "bottom_left": {
+      "pixel": [
+        44,
+        543
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        431,
+        543
+      ],
+      "flow_lb_min": 110.0,
+      "flow_kg_s": 0.831586,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "GARRETT",
+        "model": "GT4294",
+        "part_number": "731376-1",
+        "compressor": {
+          "inducer_in": null,
+          "inducer_mm": 70.3,
+          "exducer_in": null,
+          "exducer_mm": 94.0,
+          "trim": "56",
+          "ar": "0.60"
+        },
+        "turbine": {
+          "major_dia_in": null,
+          "major_dia_mm": 82.0,
+          "exducer_in": null,
+          "exducer_mm": null,
+          "trim": "84",
+          "ar": "1.15",
+          "housing_type": null
+        },
+        "hp_rating": "500-850"
+      }
+    ]
+  },
+  "xml_crosscheck": {
+    "xml_units": "lb/min",
+    "units_match": true
+  },
+  "source_notes": ""
+}

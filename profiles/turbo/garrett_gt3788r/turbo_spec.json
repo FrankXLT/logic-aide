@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0.0",
+  "turbo_id": "garrett_gt3788r",
+  "calibrated": true,
+  "axis_calibration_pending": false,
+  "is_alias": false,
+  "company_name": "Garrett/Honeywell",
+  "family_name": "GT-R Series",
+  "product_name": "GT3788R",
+  "source_product_id": 176,
+  "figure_sha256": "a3a65887242452f63398a4e4a2d1e00ac27112eff94f03928c14b589af89b9d0",
+  "figure_path": "data/heritage_raw/figures/turbo_maps/garrett/GT3788R-allcomp_e.jpg",
+  "legacy_map_path": "maps/garrett/GT3788R-allcomp_e.jpg",
+  "figure_match_method": "exact_path",
+  "nist_sp811_normalization": {
+    "source_airflow_unit": "lb/min",
+    "target_airflow_unit": "lb/min",
+    "secondary_airflow_unit": "kg/s",
+    "rho_ref_kg_m3": 1.184,
+    "t_ref_k": 298.15,
+    "p_ref_kpa": 101.325,
+    "legacy_cfm_to_lb_min_factor": 0.069,
+    "nist_298k_volumetric_factor": 0.073915
+  },
+  "source_bounds": {
+    "airflow_min_raw": 0.0,
+    "airflow_max_raw": 80.0,
+    "airflow_min_lb_min": 0.0,
+    "airflow_max_lb_min": 80.0,
+    "pr_min": 1.0,
+    "pr_max": 4.0,
+    "pixel_x_start": 48,
+    "pixel_y_start": 45,
+    "pixel_width": 375,
+    "pixel_height": 507
+  },
+  "affine_matrix_2x3": {
+    "A": [
+      [
+        0.21333333333333335,
+        0.0
+      ],
+      [
+        0.0,
+        -0.005917159763313609
+      ]
+    ],
+    "b": [
+      -10.24,
+      4.266272189349112
+    ],
+    "A_kg_s": [
+      [
+        0.0016127728711111111,
+        0.0
+      ],
+      [
+        0.0,
+        -0.005917159763313609
+      ]
+    ],
+    "b_kg_s": [
+      -0.07741309781333333,
+      4.266272189349112
+    ],
+    "input_frame": "image_pixels_top_left_origin",
+    "output_units": [
+      "lb/min",
+      "PR/1"
+    ]
+  },
+  "calibration_corners": {
+    "top_left": {
+      "pixel": [
+        48,
+        45
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 4.0
+    },
+    "top_right": {
+      "pixel": [
+        423,
+        45
+      ],
+      "flow_lb_min": 80.0,
+      "flow_kg_s": 0.60479,
+      "pressure_ratio": 4.0
+    },
+    "bottom_left": {
+      "pixel": [
+        48,
+        552
+      ],
+      "flow_lb_min": 0.0,
+      "flow_kg_s": 0.0,
+      "pressure_ratio": 1.0
+    },
+    "bottom_right": {
+      "pixel": [
+        423,
+        552
+      ],
+      "flow_lb_min": 80.0,
+      "flow_kg_s": 0.60479,
+      "pressure_ratio": 1.0
+    }
+  },
+  "envelope_points": [],
+  "surge_line": [],
+  "choke_boundary": [],
+  "efficiency_spine_points": [],
+  "efficiency_islands": [],
+  "geometry": {
+    "wheel_size": null,
+    "trim": null,
+    "ar": null,
+    "docx_wheel_dimensions": [
+      {
+        "section": "GARRETT",
+        "model": "GT3788R",
+        "part_number": "772719 - 1",
+        "compressor": {
+          "inducer_in": 2.5,
+          "inducer_mm": 63.5,
+          "exducer_in": 3.465,
+          "exducer_mm": 88.0,
+          "trim": "52",
+          "ar": "0.72"
+        },
+        "turbine": {
+          "major_dia_in": 2.854,
+          "major_dia_mm": 72.5,
+          "exducer_in": 2.614,
+          "exducer_mm": 66.4,
+          "trim": "78",
+          "ar": "0.89",
+          "housing_type": null
+        },
+        "hp_rating": "440-675"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT3788R",
+        "part_number": "772719 - 2",
+        "compressor": {
+          "inducer_in": 2.5,
+          "inducer_mm": 63.5,
+          "exducer_in": 3.465,
+          "exducer_mm": 88.0,
+          "trim": "52",
+          "ar": "0.72"
+        },
+        "turbine": {
+          "major_dia_in": 2.854,
+          "major_dia_mm": 72.5,
+          "exducer_in": 2.614,
+          "exducer_mm": 66.4,
+          "trim": "78",
+          "ar": "0.99",
+          "housing_type": null
+        },
+        "hp_rating": "440-675"
+      },
+      {
+        "section": "GARRETT",
+        "model": "GT3788R",
+        "part_number": "772719 - 3",
+        "compressor": {
+          "inducer_in": 2.5,
+          "inducer_mm": 63.5,
+          "exducer_in": 3.465,
+          "exducer_mm": 88.0,
+          "trim": "52",
+          "ar": "0.72"
+        },
+        "turbine": {
+          "major_dia_in": 2.854,
+          "major_dia_mm": 72.5,
+          "exducer_in": 2.614,
+          "exducer_mm": 66.4,
+          "trim": "78",
+          "ar": "1.11",
+          "housing_type": null
+        },
+        "hp_rating": "440-675"
+      }
+    ]
+  },
+  "xml_crosscheck": null,
+  "source_notes": ""
+}
