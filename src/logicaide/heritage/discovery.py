@@ -1,4 +1,4 @@
-"""Wave A heritage discovery, SHA-256 vault deduplication, and polite CDX queue builder."""
+"""Wave A/B heritage discovery, SHA-256 vault deduplication, and polite CDX queue builder."""
 
 from __future__ import annotations
 
@@ -89,24 +89,21 @@ def _slugify(value: str) -> str:
 
 def build_cdx_query_url(url_pattern: str, limit: int = 50) -> str:
     """Build a canonical Wayback Machine CDX JSON query URL with digest collapsing."""
-    encoded_url = urllib.parse.quote(url_pattern, safe="")
+    encoded = urllib.parse.quote(url_pattern, safe="")
     return (
-        f"{CDX_BASE_URL}?url={encoded_url}&output=json"
-        "&fl=timestamp,original,mimetype,statuscode,digest"
+        f"{CDX_BASE_URL}?url={encoded}&output=json&fl=timestamp,original,mimetype,statuscode,digest"
         f"&filter=statuscode:200&collapse=digest&limit={int(limit)}"
     )
 
 
 def build_memento_url(timestamp: str, original_url: str, raw: bool = True) -> str:
     """Build a Wayback Machine memento URL using the raw id_ modifier by default."""
-    ts = str(timestamp).strip()
-    orig = str(original_url).strip()
+    ts, orig = str(timestamp).strip(), str(original_url).strip()
     if not re.fullmatch(r"\d{4,14}", ts):
         raise ValueError(f"Invalid Wayback memento timestamp: {timestamp!r}")
     if not orig.startswith(("http://", "https://")):
         raise ValueError(f"Invalid memento target URL scheme: {original_url!r}")
-    flag = "id_" if raw else ""
-    return f"{WAYBACK_WEB_BASE}/{ts}{flag}/{orig}"
+    return f"{WAYBACK_WEB_BASE}/{ts}{'id_' if raw else ''}/{orig}"
 
 
 def _sha256_file(path: Path) -> str:
@@ -118,19 +115,29 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest().lower()
 
 
-def collect_vault_sha256(manifest_path: Path | str | None, raw_root: Path | str | None) -> set[str]:
-    """Collect existing SHA-256 digests from the routing manifest and raw heritage vault."""
+def collect_vault_sha256(
+    manifest_path: Path | str | None, raw_root: Path | str | None, rom_root: Path | str | None = None
+) -> set[str]:
+    """Collect existing SHA-256 digests from manifest, rom/ JSONs, and raw heritage vault."""
     vault_hashes: set[str] = set()
     if manifest_path is not None and Path(manifest_path).is_file():
-        content = Path(manifest_path).read_text(encoding="utf-8", errors="ignore")
-        vault_hashes.update(m.lower() for m in SHA256_HEX_RE.findall(content))
+        text = Path(manifest_path).read_text(encoding="utf-8", errors="ignore")
+        vault_hashes.update(m.lower() for m in SHA256_HEX_RE.findall(text))
 
-    if raw_root is not None and Path(raw_root).is_dir():
-        for root, dirs, files in os.walk(Path(raw_root), followlinks=False):
+    for base_dir, json_only in ((rom_root, True), (raw_root, False)):
+        if base_dir is None or not Path(base_dir).is_dir():
+            continue
+        for root, dirs, files in os.walk(Path(base_dir), followlinks=False):
             dirs[:] = sorted(d for d in dirs if not d.startswith("."))
             for name in sorted(files):
                 fpath = Path(root) / name
-                if fpath.is_file():
+                if not fpath.is_file():
+                    continue
+                if json_only:
+                    if fpath.suffix.lower() == ".json":
+                        text = fpath.read_text(encoding="utf-8", errors="ignore")
+                        vault_hashes.update(m.lower() for m in SHA256_HEX_RE.findall(text))
+                else:
                     vault_hashes.add(_sha256_file(fpath))
     return vault_hashes
 
@@ -191,9 +198,7 @@ def _scan_private_tokens(private_root: Path, tokens: Sequence[str]) -> set[str]:
         dirs[:] = sorted(d for d in dirs if not d.endswith("_files") and not d.startswith("."))
         for name in sorted(files):
             lower_name = name.lower()
-            for tok, tok_low in lowered_tokens.items():
-                if tok_low in lower_name:
-                    found.add(tok)
+            found.update(tok for tok, tok_low in lowered_tokens.items() if tok_low in lower_name)
             if scanned >= MAX_TEXT_SCAN_FILES:
                 continue
             fpath = Path(root) / name
@@ -206,46 +211,34 @@ def _scan_private_tokens(private_root: Path, tokens: Sequence[str]) -> set[str]:
             except OSError:
                 continue
             scanned += 1
-            for tok, tok_low in lowered_tokens.items():
-                if tok_low in text_low:
-                    found.add(tok)
+            found.update(tok for tok, tok_low in lowered_tokens.items() if tok_low in text_low)
     return found
 
 
-def _make_map_record(
-    brand: str, basename: str, target_dest: str, rationale: str, local_sha256: str
-) -> dict[str, Any]:
+def _make_map_record(brand: str, basename: str, target_dest: str, rationale: str, local_sha256: str) -> dict[str, Any]:
     """Build a normalized uncalibrated compressor map fingerprint record."""
     fingerprint = f"{brand}/{basename}" if brand else basename
     pattern = f"squirrelpf.com/turbocalc/maps/{fingerprint}" if brand else f"squirrelpf.com/turbocalc/maps/*{basename}"
     return {
-        "category": "uncalibrated_compressor_map",
-        "fingerprint": fingerprint,
-        "query_pattern": pattern,
-        "target_destination": target_dest,
-        "rationale": rationale,
-        "local_sha256": local_sha256,
+        "category": "uncalibrated_compressor_map", "fingerprint": fingerprint, "query_pattern": pattern,
+        "target_destination": target_dest, "rationale": rationale, "local_sha256": local_sha256,
     }
 
 
 def _collect_uncalibrated_maps(
-    private_root: Path | None,
-    calibrated_basenames: set[str],
-    pending_stubs: list[dict[str, str]],
+    private_root: Path | None, calibrated_basenames: set[str], pending_stubs: list[dict[str, str]]
 ) -> list[dict[str, Any]]:
     """Gather uncalibrated compressor map leads from profiles/turbo stubs and beta 4 maps."""
     records: list[dict[str, Any]] = []
     seen_keys: set[str] = set()
     for stub in pending_stubs:
         stub_key = stub["basename"].lower()
-        if stub_key in seen_keys:
-            continue
-        seen_keys.add(stub_key)
-        records.append(_make_map_record(
-            stub["brand"], stub["basename"], "profiles/turbo/",
-            f"High-priority Wave A recovery for uncalibrated stub ({stub['turbo_id']}).", stub["sha256"],
-        ))
-
+        if stub_key not in seen_keys:
+            seen_keys.add(stub_key)
+            records.append(_make_map_record(
+                stub["brand"], stub["basename"], "profiles/turbo/",
+                f"High-priority Wave A recovery for uncalibrated stub ({stub['turbo_id']}).", stub["sha256"],
+            ))
     if private_root is None or not private_root.is_dir():
         return records
     maps_dir = _find_beta4_maps_dir(private_root)
@@ -269,9 +262,7 @@ def _collect_uncalibrated_maps(
     return records
 
 
-def _normalize_extra_fingerprints(
-    extra_fingerprints: Sequence[dict[str, Any] | str] | None,
-) -> list[dict[str, Any]]:
+def _normalize_extra_fingerprints(extra_fingerprints: Sequence[dict[str, Any] | str] | None) -> list[dict[str, Any]]:
     """Normalize caller-supplied fallback or supplemental fingerprints into lead records."""
     normalized: list[dict[str, Any]] = []
     for raw_entry in extra_fingerprints or ():
@@ -285,11 +276,14 @@ def _normalize_extra_fingerprints(
         default_pat = fp if "*" in fp else (f"{fp}*" if ("." in fp or "/" in fp) else f"*{_slugify(fp)}*")
         sha_val = str(entry.get("sha256") or entry.get("local_sha256") or "").strip().lower()
         normalized.append({
+            "source_kind": str(entry.get("source_kind") or "wayback_cdx").strip().lower(),
+            "forge": scrub_pii(str(entry.get("forge") or "").strip().lower()),
+            "code_forge_query_url": scrub_pii(str(entry.get("code_forge_query_url") or "").strip()),
             "category": scrub_pii(str(entry.get("category") or "extra_fingerprint")),
             "fingerprint": fp,
             "query_pattern": scrub_pii(raw_pat) if raw_pat else default_pat,
             "target_destination": scrub_pii(str(entry.get("target_destination") or "data/heritage_raw/discovery_queue/")),
-            "rationale": scrub_pii(str(entry.get("rationale") or "Supplemental Wave A recovery fingerprint.")),
+            "rationale": scrub_pii(str(entry.get("rationale") or "Supplemental heritage recovery fingerprint.")),
             "local_sha256": sha_val if SHA256_HEX_RE.fullmatch(sha_val) else "",
             "explicit_status": str(entry.get("status") or ""),
         })
@@ -305,17 +299,12 @@ def extract_wave_a_fingerprints(
     proot = Path(private_root) if private_root is not None else None
     calibrated_basenames, pending_stubs = _load_turbo_profile_state(profiles_turbo_dir)
     map_records = _collect_uncalibrated_maps(proot, calibrated_basenames, pending_stubs)
-
-    seed_tokens = [spec[1] for spec in WAVE_A_SEED_SPECS]
-    observed_tokens = _scan_private_tokens(proot, seed_tokens) if (proot and proot.is_dir()) else set()
+    observed = _scan_private_tokens(proot, [spec[1] for spec in WAVE_A_SEED_SPECS]) if (proot and proot.is_dir()) else set()
     seed_records = [
         {
-            "category": cat,
-            "fingerprint": fp,
-            "query_pattern": qpat,
-            "target_destination": dest,
-            "rationale": f"{rat}{' Confirmed in read-only corpus scan.' if fp in observed_tokens else ''}",
-            "local_sha256": "",
+            "source_kind": "wayback_cdx", "category": cat, "fingerprint": fp, "query_pattern": qpat,
+            "target_destination": dest, "local_sha256": "",
+            "rationale": f"{rat}{' Confirmed in read-only corpus scan.' if fp in observed else ''}",
         }
         for cat, fp, qpat, dest, rat in WAVE_A_SEED_SPECS
     ]
@@ -323,68 +312,61 @@ def extract_wave_a_fingerprints(
 
 
 def _build_lead_entry(
-    wave: str,
-    raw_record: dict[str, Any],
-    vault_sha256_set: set[str],
-    seen_ids: set[str],
+    wave: str, raw_record: dict[str, Any], vault_sha256_set: set[str], seen_ids: set[str]
 ) -> dict[str, Any]:
     """Build and PII-sanitize a single discovery lead dictionary."""
-    fingerprint = scrub_pii(str(raw_record["fingerprint"]))
-    category = scrub_pii(str(raw_record["category"]))
-    query_pattern = scrub_pii(str(raw_record["query_pattern"]))
+    fp, cat = scrub_pii(str(raw_record["fingerprint"])), scrub_pii(str(raw_record["category"]))
+    qpat = scrub_pii(str(raw_record["query_pattern"]))
+    source_kind = str(raw_record.get("source_kind") or "wayback_cdx").strip().lower()
     local_sha = str(raw_record.get("local_sha256") or "").lower()
     matches = [local_sha] if (local_sha and local_sha in vault_sha256_set) else []
     already_in_vault = bool(matches)
-
     explicit_status = str(raw_record.get("explicit_status") or "")
-    if already_in_vault:
-        status = "already_covered"
-    elif explicit_status in {"queued_cdx", "already_covered", "needs_manual_capture"}:
-        status = explicit_status
-    elif not query_pattern:
-        status = "needs_manual_capture"
-    else:
-        status = "queued_cdx"
 
-    base_id = f"wave-{wave.lower()}-{_slugify(category)}-{_slugify(fingerprint)}"
+    base_id = f"wave-{wave.lower()}-{_slugify(cat)}-{_slugify(fp)}"
     lead_id, suffix = base_id, 2
     while lead_id in seen_ids:
         lead_id = f"{base_id}-{suffix}"
         suffix += 1
     seen_ids.add(lead_id)
 
-    return {
-        "lead_id": lead_id,
-        "wave": wave.upper(),
-        "category": category,
-        "fingerprint": fingerprint,
-        "query_pattern": query_pattern,
-        "cdx_query_url": build_cdx_query_url(query_pattern),
-        "sample_memento_url_template": f"{WAYBACK_WEB_BASE}/{{timestamp}}id_/{{original}}",
-        "vault_dedup_sha256_matches": matches,
-        "already_in_vault": already_in_vault,
-        "status": status,
+    default_status = "queued_code_forge" if source_kind == "code_forge" else (
+        "queued_cdx" if qpat else "needs_manual_capture"
+    )
+    allowed_explicit = {"already_covered", "needs_manual_capture", "queued_code_forge", "queued_cdx"}
+    status = "already_covered" if already_in_vault else (
+        explicit_status if explicit_status in allowed_explicit else default_status
+    )
+
+    lead: dict[str, Any] = {
+        "lead_id": lead_id, "wave": wave.upper(), "source_kind": source_kind,
+        "category": cat, "fingerprint": fp, "query_pattern": qpat,
+    }
+    if source_kind == "code_forge":
+        lead["forge"] = scrub_pii(str(raw_record.get("forge") or ""))
+        lead["code_forge_query_url"] = scrub_pii(str(raw_record.get("code_forge_query_url") or ""))
+        lead["cdx_query_url"] = None
+    else:
+        lead["cdx_query_url"] = build_cdx_query_url(qpat) if qpat else None
+        lead["sample_memento_url_template"] = f"{WAYBACK_WEB_BASE}/{{timestamp}}id_/{{original}}"
+
+    lead.update({
+        "vault_dedup_sha256_matches": matches, "already_in_vault": already_in_vault, "status": status,
         "target_destination": scrub_pii(str(raw_record["target_destination"])),
         "rationale": scrub_pii(str(raw_record["rationale"])),
-    }
+    })
+    return lead
 
 
-def fetch_cdx_snapshots(
-    cdx_url: str,
-    user_agent: str = DEFAULT_USER_AGENT,
-    timeout: float = 20.0,
-) -> list[dict[str, str]]:
+def fetch_cdx_snapshots(cdx_url: str, user_agent: str = DEFAULT_USER_AGENT, timeout: float = 20.0) -> list[dict[str, str]]:
     """Query Wayback Machine CDX JSON endpoint and deduplicate rows by CDX digest."""
     req = urllib.request.Request(cdx_url, headers={"User-Agent": user_agent})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         payload = json.loads(resp.read().decode("utf-8"))
-
     if not isinstance(payload, list) or len(payload) < 2:
         return []
-
     headers = [str(col) for col in payload[0]]
-    snapshots: list[dict[str, str]] = []
-    seen_digests: set[str] = set()
+    snapshots, seen_digests = [], set()
     for row in payload[1:]:
         if not isinstance(row, list) or len(row) != len(headers):
             continue
@@ -403,24 +385,21 @@ def fetch_cdx_snapshots(
 
 
 _QUEUE_KEYS = (
-    "lead_id", "wave", "category", "fingerprint", "query_pattern",
-    "cdx_query_url", "sample_memento_url_template", "already_in_vault", "target_destination",
+    "lead_id", "wave", "source_kind", "forge", "category", "fingerprint", "query_pattern",
+    "code_forge_query_url", "cdx_query_url", "sample_memento_url_template",
+    "already_in_vault", "status", "target_destination",
 )
 
 
 def _populate_queue_items(leads: list[dict[str, Any]], fetch_cdx: bool) -> list[dict[str, Any]]:
-    """Build offline or live-fetched CDX queue items excluding vault-covered leads."""
-    queue_items: list[dict[str, Any]] = []
-    global_digests: set[str] = set()
-    cdx_cache: dict[str, list[dict[str, str]]] = {}
-    request_count = 0
-
+    """Build offline or live-fetched queue items excluding vault-covered leads."""
+    queue_items, global_digests, cdx_cache, request_count = [], set(), {}, 0
     for lead in leads:
-        if lead["already_in_vault"] or lead["status"] != "queued_cdx":
+        if lead["already_in_vault"] or lead["status"] not in {"queued_cdx", "queued_code_forge"}:
             continue
-        item: dict[str, Any] = {k: lead[k] for k in _QUEUE_KEYS}
-        if fetch_cdx:
-            cdx_url = lead["cdx_query_url"]
+        item: dict[str, Any] = {k: lead[k] for k in _QUEUE_KEYS if k in lead}
+        cdx_url = lead.get("cdx_query_url")
+        if fetch_cdx and cdx_url:
             if cdx_url not in cdx_cache:
                 if request_count > 0:
                     time.sleep(POLITE_REQUEST_DELAY_S)
@@ -433,11 +412,10 @@ def _populate_queue_items(leads: list[dict[str, Any]], fetch_cdx: bool) -> list[
             deduped = []
             for snap in cdx_cache[cdx_url]:
                 dig = snap.get("digest", "")
-                if dig and dig in global_digests:
-                    continue
-                if dig:
-                    global_digests.add(dig)
-                deduped.append(snap)
+                if not dig or dig not in global_digests:
+                    if dig:
+                        global_digests.add(dig)
+                    deduped.append(snap)
             item["cdx_snapshots"] = deduped
         queue_items.append(item)
     return queue_items
@@ -448,33 +426,36 @@ def run_discover(
     private_root: Path | str | None = Path("private_references"),
     manifest_path: Path | str | None = Path("private_references/_INDEX_AND_ROUTING_MANIFEST.md"),
     queue_dir: Path | str = Path("data/heritage_raw/discovery_queue"),
-    output_yaml: Path | str = Path("knowledge/discovery_leads.yaml"),
+    output_yaml: Path | str | None = None,
     fetch_cdx: bool = False,
     raw_root: Path | str | None = None,
     profiles_turbo_dir: Path | str | None = Path("profiles/turbo"),
     extra_fingerprints: Sequence[dict[str, Any] | str] | None = None,
+    rom_root: Path | str | None = Path("rom"),
 ) -> dict[str, Any]:
     """Run Wave discovery, SHA-256 vault deduplication, and emit cleanroom YAML + queue JSON."""
     wave_norm = wave.strip().upper() or "A"
     if not re.fullmatch(r"[A-Za-z0-9_-]+", wave_norm):
         raise ValueError(f"Invalid wave identifier: {wave!r}")
     qdir = Path(queue_dir).resolve()
-    out_yaml_path = Path(output_yaml)
-    effective_raw_root = (
-        Path(raw_root) if raw_root is not None else (qdir.parent if qdir.name == "discovery_queue" else qdir)
+    out_yaml_path = Path(output_yaml) if output_yaml is not None else (
+        Path("knowledge/discovery_leads.yaml") if wave_norm == "A"
+        else Path(f"knowledge/discovery_leads_wave_{wave_norm.lower()}.yaml")
     )
+    eff_raw = Path(raw_root) if raw_root is not None else (qdir.parent if qdir.name == "discovery_queue" else qdir)
+    vault_sha256_set = collect_vault_sha256(manifest_path=manifest_path, raw_root=eff_raw, rom_root=rom_root)
 
-    vault_sha256_set = collect_vault_sha256(manifest_path=manifest_path, raw_root=effective_raw_root)
-    raw_records = extract_wave_a_fingerprints(
-        private_root=private_root,
-        profiles_turbo_dir=profiles_turbo_dir,
-        extra_fingerprints=extra_fingerprints,
-    )
+    if wave_norm == "A":
+        raw_records = extract_wave_a_fingerprints(private_root, profiles_turbo_dir, extra_fingerprints)
+    elif wave_norm == "B":
+        from logicaide.heritage import discovery_wave_b
+        raw_records = discovery_wave_b.extract_wave_b_fingerprints(private_root, manifest_path, extra_fingerprints)
+    else:
+        raise ValueError(f"Unsupported wave identifier: {wave!r}")
 
     seen_ids: set[str] = set()
     leads = [_build_lead_entry(wave_norm, rec, vault_sha256_set, seen_ids) for rec in raw_records]
     generated_utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
     leads_payload: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION, "wave": wave_norm, "generated_utc": generated_utc,
         "vault_sha256_count": len(vault_sha256_set), "leads": leads,
@@ -487,7 +468,7 @@ def run_discover(
     queue_file = (qdir / f"wave_{wave_norm.lower()}_queue.json").resolve()
     if not queue_file.is_relative_to(qdir):
         raise ValueError(f"Queue path escapes queue directory: {queue_file}")
-    queue_payload: dict[str, Any] = {
+    queue_payload = {
         "schema_version": SCHEMA_VERSION, "wave": wave_norm, "generated_utc": generated_utc,
         "fetch_cdx": bool(fetch_cdx), "vault_sha256_count": len(vault_sha256_set),
         "queued_count": len(queue_items),

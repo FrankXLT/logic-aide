@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import pytest
+import yaml
 
 from logicaide.heritage.wiki_sync import (
     WikiValidationError,
@@ -170,3 +171,22 @@ def test_validate_wiki_tree_rejects_bad_frontmatter_broken_links_and_forbidden_t
         with pytest.raises(WikiValidationError, match="forbidden"):
             validate_wiki_tree(wiki)
         bad_file.unlink()
+
+
+def test_wave_b_ecu_and_sci_pages_verified() -> None:
+    overviews = ("ecu-families/ecu-families-overview.md", "rom-and-sci/rom-and-sci-overview.md")
+    wave_b = (
+        "ecu-families/lm-pm-6803.md", "ecu-families/smec-68hc11.md", "ecu-families/sbec-68hc11.md",
+        "ecu-families/pin-11-safety-matrix.md", "rom-and-sci/sci-7812-and-62500-protocol.md",
+        "rom-and-sci/drb-ii-commands-and-prompts.md", "rom-and-sci/fuel-and-spark-math-peftbl-wottbl.md",
+    )
+    for rel in (*overviews, *wave_b):
+        text = (REPO_WIKI / rel).read_text(encoding="utf-8")
+        meta = yaml.safe_load(text.split("---\n", 2)[1])
+        assert meta["status"] == "verified", f"{rel} expected verified, got {meta.get('status')!r}"
+    home_text = (REPO_WIKI / "Home.md").read_text(encoding="utf-8")
+    for ov in overviews:
+        assert ov in home_text
+    sidebar_text = (REPO_WIKI / "_Sidebar.md").read_text(encoding="utf-8")
+    for page in wave_b:
+        assert page in sidebar_text

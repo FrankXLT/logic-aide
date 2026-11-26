@@ -1,0 +1,97 @@
+{
+  "manifest_count": 4,
+  "manifests": [
+    {
+      "address_range": "0x8000-0xFFFF",
+      "base_address": "0x8000",
+      "ecu_family": "SMEC_DUAL_BOARD",
+      "manifest_ref": "rom/manifests/smec_88_89_v19/rom_manifest.json",
+      "mcu": "68HC11",
+      "rom_id": "smec_88_89_v19",
+      "rom_size_bytes": 32768,
+      "sci_baud": 62500,
+      "sci_tables": [
+        "0xF2"
+      ],
+      "summary": {
+        "baseline_count": 3,
+        "baselines_present_count": 0,
+        "calibration_table_count": 19,
+        "fast_data_slot_count": 0,
+        "unverified_candidate_count": 47,
+        "verified_ram_count": 258
+      },
+      "xref_protocol": "SMEC T1"
+    },
+    {
+      "address_range": "0x8000-0xFFFF",
+      "base_address": "0x8000",
+      "ecu_family": "SBEC_SINGLE_BOARD",
+      "manifest_ref": "rom/manifests/sbec_90_93_v3_1/rom_manifest.json",
+      "mcu": "68HC11",
+      "rom_id": "sbec_90_93_v3_1",
+      "rom_size_bytes": 32768,
+      "sci_baud": 62500,
+      "sci_tables": [
+        "0xF2",
+        "0xF6"
+      ],
+      "summary": {
+        "baseline_count": 1,
+        "baselines_present_count": 0,
+        "calibration_table_count": 19,
+        "fast_data_slot_count": 15,
+        "unverified_candidate_count": 44,
+        "verified_ram_count": 269
+      },
+      "xref_protocol": "SBEC T1"
+    },
+    {
+      "address_range": "0xC000-0xFFFF",
+      "base_address": "0xC000",
+      "ecu_family": "LM_PM",
+      "manifest_ref": "rom/manifests/lm_86_87_v13/rom_manifest.json",
+      "mcu": "6803",
+      "rom_id": "lm_86_87_v13",
+      "rom_size_bytes": 16384,
+      "sci_baud": 7680,
+      "sci_tables": [
+        "LM_DIRECT_RAM",
+        "LM_IO"
+      ],
+      "summary": {
+        "baseline_count": 2,
+        "baselines_present_count": 0,
+        "calibration_table_count": 3,
+        "fast_data_slot_count": 0,
+        "unverified_candidate_count": 43,
+        "verified_ram_count": 250
+      },
+      "xref_protocol": "LM"
+    },
+    {
+      "address_range": "0xE000-0xFFFF",
+      "base_address": "0xE000",
+      "ecu_family": "LM_PM",
+      "manifest_ref": "rom/manifests/lm_86_glhs_v1/rom_manifest.json",
+      "mcu": "6803",
+      "rom_id": "lm_86_glhs_v1",
+      "rom_size_bytes": 8192,
+      "sci_baud": 7680,
+      "sci_tables": [
+        "LM_DIRECT_RAM",
+        "LM_IO"
+      ],
+      "summary": {
+        "baseline_count": 1,
+        "baselines_present_count": 0,
+        "calibration_table_count": 3,
+        "fast_data_slot_count": 0,
+        "unverified_candidate_count": 162,
+        "verified_ram_count": 247
+      },
+      "xref_protocol": "LM"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

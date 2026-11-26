@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 
@@ -112,16 +113,19 @@ def discover(
     """Discover heritage documents and build wave crawl queues."""
     from logicaide.heritage.discovery import run_discover
 
-    run_discover(
-        wave=wave,
-        fetch_cdx=fetch_cdx,
-        **_compact_kwargs(
-            private_root=private_root,
-            manifest=manifest,
-            queue_dir=queue_dir,
-            output_yaml=output_yaml,
-        ),
-    )
+    try:
+        run_discover(
+            wave=wave,
+            fetch_cdx=fetch_cdx,
+            **_compact_kwargs(
+                private_root=private_root,
+                manifest=manifest,
+                queue_dir=queue_dir,
+                output_yaml=output_yaml,
+            ),
+        )
+    except (ValueError, OSError) as exc:
+        raise click.ClickException(str(exc)) from exc
 
 
 @heritage.command(name="sync-wiki")
@@ -185,24 +189,163 @@ def _register_stub_group(
     return _stub_group
 
 
-profile = _register_stub_group(
-    "profile",
-    "M1",
-    "Vehicle profile compiler and SQLite catalog commands",
-    ("compile",),
-)
+@main.group(help="Vehicle profile compiler and SQLite catalog commands.")
+def profile() -> None:
+    """Vehicle profile compiler and SQLite catalog commands."""
+
+
+@profile.command(name="compile")
+@click.argument("profile_path", type=click.Path(path_type=Path))
+@click.option("--repo-root", type=click.Path(path_type=Path), default=None, help="Repository root containing schema, catalogs, and ROM manifests.")
+@click.option("--db-path", type=click.Path(path_type=Path), default=None, help="Override SQLite catalog database path.")
+@click.option("--persist/--no-persist", default=True, show_default=True, help="Persist compiled vehicle and revision to the SQLite catalog.")
+@click.option("--require-rom-manifest/--no-require-rom-manifest", default=True, show_default=True, help="Fail if rom_manifest_ref cannot be resolved.")
+@click.option("--json", "as_json", is_flag=True, help="Emit compiled report as JSON.")
+def profile_compile(
+    profile_path: Path,
+    repo_root: Path | None,
+    db_path: Path | None,
+    persist: bool,
+    require_rom_manifest: bool,
+    as_json: bool,
+) -> None:
+    """Validate, gate-check, and optionally persist a vehicle build profile."""
+    from logicaide.profiles.compiler import ProfileCompilationError, compile_profile
+
+    try:
+        report = compile_profile(
+            profile_path,
+            repo_root=repo_root,
+            db_path=db_path,
+            persist=persist,
+            require_rom_manifest=require_rom_manifest,
+        )
+    except ProfileCompilationError as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    if as_json:
+        click.echo(json.dumps(report, indent=2, sort_keys=True))
+        return
+
+    rom_id = report["rom_manifest"].get("rom_id") or "unresolved"
+    revision_id = (report.get("catalog_record") or {}).get("revision_id") or "not-persisted"
+    eff_flow = report["fuel_scaling"]["declared_effective_flow_lb_hr"]
+    click.echo(
+        f"Compiled {report['car_id']} | tier={report['compatibility_tier']} "
+        f"| swap_checklist={len(report['swap_checklist'])} "
+        f"| eff_flow={eff_flow:.2f} lb/hr "
+        f"| turbo={report['turbo']['canonical_turbo_id']} "
+        f"| rom_id={rom_id} | revision_id={revision_id}"
+    )
+
+
 telemetry = _register_stub_group(
     "telemetry",
     "M2",
     "62.5k SCI telemetry poller and DuckDB lake commands",
     ("watch", "export-fixture"),
 )
-sim = _register_stub_group(
-    "sim",
-    "M3",
-    "68HC11 emulator, behavioral twins, and safety gate commands",
-    ("manifest-sync",),
-)
+
+
+@main.group(help="68HC11/6803 ROM manifests, behavioral twins, and safety gate commands.")
+def sim() -> None:
+    """68HC11/6803 ROM manifests, behavioral twins, and safety gate commands."""
+
+
+@sim.command(name="manifest-sync")
+@click.option("--rom-id", default=None, help="Restrict CTAGS generation to one ROM ID.")
+@click.option("--catalog", "catalog_path", type=click.Path(path_type=Path), default=Path("rom/manifests/catalog.json"), show_default=True)
+@click.option("--tags-path", type=click.Path(path_type=Path), default=Path("tags"), show_default=True)
+@click.option("--rom-dir", type=click.Path(path_type=Path), default=Path("rom"), show_default=True)
+@click.option("--json", "as_json", is_flag=True, help="Emit sync summary as JSON.")
+def sim_manifest_sync(
+    rom_id: str | None,
+    catalog_path: Path,
+    tags_path: Path,
+    rom_dir: Path,
+    as_json: bool,
+) -> None:
+    """Synchronize Exuberant CTAGS from partitioned ROM manifests and twin ASTs."""
+    from logicaide.rom.manifest import sync_manifests
+
+    try:
+        summary = sync_manifests(
+            catalog_path=catalog_path,
+            rom_id=rom_id,
+            tags_path=tags_path,
+            rom_dir=rom_dir,
+        )
+    except (FileNotFoundError, KeyError, ValueError, OSError) as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    if as_json:
+        click.echo(json.dumps(summary, indent=2, sort_keys=True))
+        return
+
+    rom_list = ", ".join(summary["rom_ids"]) or "none"
+    click.echo(f"Synced {summary['tag_count']} ctags ({rom_list}) -> {summary['tags_path']}")
+
+
+@sim.command(name="lookup-sci")
+@click.option("--rom-id", required=True, help="Target ROM manifest ID (e.g., smec_88_89_v19, sbec_90_93_v3_1, lm_86_87_v13, lm_86_glhs_v1).")
+@click.option("--sci-table", default=None, help="Optional SCI table selector (0xF2, 0xF6, LM_DIRECT_RAM, LM_IO).")
+@click.option("--offset", default=None, help="Hex (0x63/$63) or decimal (99) RAM/I/O offset.")
+@click.option("--var", "var_name", default=None, help="Symbol, short name, or long name.")
+@click.option("--catalog", "catalog_path", type=click.Path(path_type=Path), default=Path("rom/manifests/catalog.json"), show_default=True)
+@click.option("--strict/--no-strict", default=True, show_default=True, help="Require source-verified watchlist corroboration.")
+@click.option("--json", "as_json", is_flag=True, help="Emit lookup result as JSON.")
+def sim_lookup_sci(
+    rom_id: str,
+    sci_table: str | None,
+    offset: str | None,
+    var_name: str | None,
+    catalog_path: Path,
+    strict: bool,
+    as_json: bool,
+) -> None:
+    """Look up a source-verified SCI offset or variable in a partitioned ROM manifest."""
+    if var_name is not None and not var_name.strip():
+        raise click.UsageError("--var must not be empty.")
+    if offset is None and var_name is None:
+        raise click.UsageError("Specify at least one of --offset or --var.")
+
+    from logicaide.rom.manifest import lookup_sci
+
+    try:
+        result = lookup_sci(
+            rom_id,
+            offset=offset,
+            var_name=var_name,
+            sci_table=sci_table,
+            strict=strict,
+            catalog_path=catalog_path,
+        )
+    except (FileNotFoundError, KeyError, ValueError) as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    if as_json:
+        click.echo(json.dumps(result, indent=2, sort_keys=True))
+        return
+
+    if not result["matched"]:
+        click.echo(result.get("message", "No Verified Source Match"))
+        return
+
+    entry = result.get("entry") or {}
+    settings = entry.get("settings") or {}
+    units = settings.get("units") or "n/a"
+    d_min, d_max = settings.get("display_min"), settings.get("display_max")
+    e_min, e_max = settings.get("ecu_min"), settings.get("ecu_max")
+    range_str = (
+        f"{d_min}..{d_max}" if d_min is not None and d_max is not None
+        else (f"{e_min}..{e_max}" if e_min is not None and e_max is not None else "n/a")
+    )
+    source_verified = bool(entry.get("source_verified", result.get("status") == "VERIFIED_SOURCE_MATCH"))
+    click.echo(
+        f"{result.get('var_name')} | offset={result.get('offset')} "
+        f"| table={result.get('sci_table')} | units={units} "
+        f"| range={range_str} | source_verified={source_verified}"
+    )
 
 
 if __name__ == "__main__":

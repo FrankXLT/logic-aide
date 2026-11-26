@@ -5,7 +5,14 @@
 #### Topic Overviews
 
 - [ECU Families](ecu-families/ecu-families-overview.md)
+  - [LM / PM 6803 (1984–1987)](ecu-families/lm-pm-6803.md)
+  - [SMEC 68HC11 (1988–1989)](ecu-families/smec-68hc11.md)
+  - [SBEC & SBEC-II 68HC11 (1990–1993+)](ecu-families/sbec-68hc11.md)
+  - [Pin 11 Safety Matrix](ecu-families/pin-11-safety-matrix.md)
 - [ROM & SCI Protocol](rom-and-sci/rom-and-sci-overview.md)
+  - [SCI 7812.5 & 62,500 Baud Protocol](rom-and-sci/sci-7812-and-62500-protocol.md)
+  - [DRB-II Commands & 10-Protocol XREF](rom-and-sci/drb-ii-commands-and-prompts.md)
+  - [Fuel & Spark Math (PEFTBL / WOTTBL)](rom-and-sci/fuel-and-spark-math-peftbl-wottbl.md)
 - [Turbo & Airflow](turbo-and-airflow/turbo-and-airflow-overview.md)
   - [OEM Chrysler Turbos](turbo-and-airflow/oem-chrysler-turbos.md)
   - [TurboCalc Compressor Catalog](turbo-and-airflow/turbocalc-compressor-catalog.md)

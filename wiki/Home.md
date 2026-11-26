@@ -22,8 +22,8 @@ Welcome to the cleanroom Chrysler `2.2L` / `2.5L` / `2.0L` / `2.4L` powertrain k
 
 | Category | Status | Trust Tier | Overview |
 | :--- | :--- | :--- | :--- |
-| **ECU Families** | `stub` | `Tier 1` | [ECU Families Overview](ecu-families/ecu-families-overview.md) |
-| **ROM & SCI Protocol** | `stub` | `Tier 1` | [ROM & SCI Overview](rom-and-sci/rom-and-sci-overview.md) |
+| **ECU Families** | `verified` | `Tier 1` | [ECU Families Overview](ecu-families/ecu-families-overview.md) |
+| **ROM & SCI Protocol** | `verified` | `Tier 2` | [ROM & SCI Overview](rom-and-sci/rom-and-sci-overview.md) |
 | **Turbo & Airflow** | `verified` | `Tier 2` | [Turbo & Airflow Overview](turbo-and-airflow/turbo-and-airflow-overview.md) |
 | **Drivetrain & Swaps** | `stub` | `Tier 1` | [Drivetrain & Swaps Overview](drivetrain-and-swaps/drivetrain-and-swaps-overview.md) |
 | **Wiring & Diagnostics** | `stub` | `Tier 1` | [Wiring & Diagnostics Overview](wiring-and-diagnostics/wiring-and-diagnostics-overview.md) |
@@ -34,6 +34,16 @@ Welcome to the cleanroom Chrysler `2.2L` / `2.5L` / `2.0L` / `2.4L` powertrain k
 - [OEM Chrysler Turbos](turbo-and-airflow/oem-chrysler-turbos.md) — Factory Garrett `T03`/`TB03`/`VNT25` and Mitsubishi `TE04H`/`TD04LR` baselines
 - [TurboCalc Compressor Catalog](turbo-and-airflow/turbocalc-compressor-catalog.md) — `145` calibrated turbos, 4-point affine equations, and `NIST SP 811` conversions
 - [Cylinder Head Flowbench Atlas](turbo-and-airflow/cylinder-head-flowbench-atlas.md) — `#445`, `#782`, `G-Head`, and `16V` DOHC flowbench curves
+
+### Wave B Verified Reference Articles
+
+- [Chrysler LM / PM 6803 Reference](ecu-families/lm-pm-6803.md) — `1984–1987` dual-box `6803`, `27128` vs. split `2x 2764` (`GLHS`), `MC146823`/`ADC0808`, and `976 -> 7812.5` baud polling
+- [Chrysler SMEC 68HC11 Reference](ecu-families/smec-68hc11.md) — `1988–1989` dual-board `68HC11`, `27C256` `$B600`–`$B7FF` EEPROM hole, `DRBFunctionTable`, and `90 °C` IAT reference
+- [Chrysler SBEC & SBEC-II 68HC11 Architecture](ecu-families/sbec-68hc11.md) — `1990–1993+` single-board `68HC11`, `0xF2`/`0xF6` SCI dispatch, and `60 °C` IAT transition
+- [60-Way Harness Pin 11 Safety Matrix](ecu-families/pin-11-safety-matrix.md) — Pre-connect DMM ohmmeter gate separating SMEC blank Pin 11 from SBEC grounded Pin 11
+- [Chrysler SCI 7812.5 & 62,500 Baud Protocol](rom-and-sci/sci-7812-and-62500-protocol.md) — `0x12` handshake, `0xF2`/`0xF4`/`0xF6` RAM reads, and Dead-Cell Quarantine contract
+- [DRB-II Commands, 10-Protocol XREF & Fault Registers](rom-and-sci/drb-ii-commands-and-prompts.md) — `0x10`–`0x1C` dispatcher, `26`-entry `DRBMemoryTable`, `402`-variable XREF, and `ERR0`–`ERR3` bitfields
+- [68HC11 / 6803 Fuel & Spark Math: BATOFF, PEFTBL, WOTTBL & MAP Scaling](rom-and-sci/fuel-and-spark-math-peftbl-wottbl.md) — Fixed-point `BATOFF` deadtime, `PEFTBL`/`WOTTBL` lookups, `2-bar`/`3-bar` scaling, and `<= 11 ms` twin parity
 
 ## Topic Map
 

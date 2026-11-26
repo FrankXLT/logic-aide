@@ -1,0 +1,6832 @@
+{
+  "address_range": "0xE000-0xFFFF",
+  "base_address": "0xE000",
+  "calibration_tables": [
+    {
+      "asm_line": 530,
+      "kind": "reference",
+      "rom_address": null,
+      "short_name": "BATOFF",
+      "source_verified": true,
+      "symbol": "BATOFF_FuelBatteryOffset",
+      "tpl_table_addr": "0xE2EF"
+    },
+    {
+      "asm_line": 1005,
+      "kind": "reference",
+      "rom_address": null,
+      "short_name": "WOTTBL",
+      "source_verified": true,
+      "symbol": "WOTTBL_FuelFullThrottle",
+      "tpl_table_addr": "0xE25D"
+    },
+    {
+      "asm_line": 2580,
+      "kind": "reference",
+      "rom_address": null,
+      "short_name": "PEFTBL",
+      "source_verified": true,
+      "symbol": "PEFTBL_PumpingEfficiency_FromRpm",
+      "tpl_table_addr": "0xE2DC"
+    }
+  ],
+  "drb_function_table": [],
+  "drb_memory_table": [],
+  "ecu_family": "LM_PM",
+  "fast_data_output_addresses": [],
+  "mcu": "6803",
+  "origins": {
+    "directives": [
+      {
+        "address": 40960,
+        "directive": ".org",
+        "hex": "0xA000",
+        "line_number": 487,
+        "target": "LowerChipOrg"
+      },
+      {
+        "address": 48896,
+        "directive": ".org",
+        "hex": "0xBF00",
+        "line_number": 2889,
+        "target": "0xbf00"
+      },
+      {
+        "address": 49056,
+        "directive": ".org",
+        "hex": "0xBFA0",
+        "line_number": 2897,
+        "target": "0xbfa0"
+      },
+      {
+        "address": 57344,
+        "directive": ".org",
+        "hex": "0xE000",
+        "line_number": 2904,
+        "target": "DataOrg"
+      },
+      {
+        "address": 58880,
+        "directive": ".org",
+        "hex": "0xE600",
+        "line_number": 2916,
+        "target": "UpperChipCodeOrg"
+      },
+      {
+        "address": 65280,
+        "directive": ".org",
+        "hex": "0xFF00",
+        "line_number": 6222,
+        "target": "0xff00"
+      },
+      {
+        "address": 65440,
+        "directive": ".org",
+        "hex": "0xFFA0",
+        "line_number": 6230,
+        "target": "0xffa0"
+      },
+      {
+        "address": 65520,
+        "directive": ".org",
+        "hex": "0xFFF0",
+        "line_number": 6236,
+        "target": "0xfff0"
+      }
+    ],
+    "named": {
+      "DataOrg": {
+        "hex": "0xE000",
+        "line_number": 54,
+        "value": 57344
+      },
+      "LowerChipOrg": {
+        "hex": "0xA000",
+        "line_number": 53,
+        "value": 40960
+      },
+      "UpperChipCodeOrg": {
+        "hex": "0xE600",
+        "line_number": 55,
+        "value": 58880
+      }
+    }
+  },
+  "ram_watchlist": [
+    {
+      "asm_line": 60,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 0,
+      "offset_hex": "0x00",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Port1_DataDirection",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 61,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 1,
+      "offset_hex": "0x01",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Port2_DataDirection",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 62,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 2,
+      "offset_hex": "0x02",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Port1_ControlRegister",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 82,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 3,
+      "offset_hex": "0x03",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Port2_ControlRegister",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 102,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 4,
+      "offset_hex": "0x04",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_PortX_DataDirection",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 103,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 5,
+      "offset_hex": "0x05",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_PortY_DataDirection",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 104,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 6,
+      "offset_hex": "0x06",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_PortX_ControlRegister",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 105,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 7,
+      "offset_hex": "0x07",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_PortY_ControlRegister",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 106,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 8,
+      "offset_hex": "0x08",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_TimerControlStatReg",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 107,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 9,
+      "offset_hex": "0x09",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Counter_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 108,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 10,
+      "offset_hex": "0x0A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Counter_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 109,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 11,
+      "offset_hex": "0x0B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_OCR_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 110,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 12,
+      "offset_hex": "0x0C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_OCR_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 111,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 13,
+      "offset_hex": "0x0D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_ICR_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 112,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 14,
+      "offset_hex": "0x0E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_ICR_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 113,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 15,
+      "offset_hex": "0x0F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_PortX_ControlStatReg",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 114,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 16,
+      "offset_hex": "0x10",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_SCI_ModeControlReg",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 115,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 17,
+      "offset_hex": "0x11",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_SCI_TxRxCntrlReg",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 116,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 18,
+      "offset_hex": "0x12",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_SCI_RxDataReg",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 117,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 19,
+      "offset_hex": "0x13",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_SCI_TxDataReg",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 118,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 20,
+      "offset_hex": "0x14",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_RAM_ControlReg",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 119,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 21,
+      "offset_hex": "0x15",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Count_Alt_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 120,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 22,
+      "offset_hex": "0x16",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_Count_Alt_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 121,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 23,
+      "offset_hex": "0x17",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_TimerControl1",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 122,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 24,
+      "offset_hex": "0x18",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_TimerControl2",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 123,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 25,
+      "offset_hex": "0x19",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_TimerStatus",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 124,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 26,
+      "offset_hex": "0x1A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_OCR2_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 125,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 27,
+      "offset_hex": "0x1B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_OCR2_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 126,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 28,
+      "offset_hex": "0x1C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_OCR3_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 127,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 29,
+      "offset_hex": "0x1D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_OCR3_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 128,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 30,
+      "offset_hex": "0x1E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_ICR2_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 129,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 31,
+      "offset_hex": "0x1F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CPU_ICR2_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 138,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 64,
+      "offset_hex": "0x40",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "MINTHR_LowestSessionTPS",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 139,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 65,
+      "offset_hex": "0x41",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": {
+        "decimals": 0,
+        "display_max": 255,
+        "display_min": 0,
+        "divisor": 1,
+        "ecu_max": 255,
+        "ecu_min": 0,
+        "major_interval": 255,
+        "minor_interval": 255,
+        "size_bytes": 1,
+        "units": "units"
+      },
+      "short_name": "TIMDACAL",
+      "source_verified": true,
+      "symbol": "Timer_DacalCountdown",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 140,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 66,
+      "offset_hex": "0x42",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": {
+        "decimals": 0,
+        "display_max": 255,
+        "display_min": 0,
+        "divisor": 1,
+        "ecu_max": 255,
+        "ecu_min": 0,
+        "major_interval": 255,
+        "minor_interval": 255,
+        "size_bytes": 1,
+        "units": "units"
+      },
+      "short_name": "AISPOS",
+      "source_verified": true,
+      "symbol": "CurrentAisPosition",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 141,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 67,
+      "offset_hex": "0x43",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "DCCOR1_AdaptiveWastegateCellBelowMAPPT",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 142,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 68,
+      "offset_hex": "0x44",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "DCCOR2_AdaptiveWastegateCellAboveMAPPT",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 143,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 69,
+      "offset_hex": "0x45",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": {
+        "decimals": 2,
+        "display_max": 5,
+        "display_min": 0,
+        "divisor": 1,
+        "ecu_max": 5,
+        "ecu_min": 0,
+        "major_interval": 1,
+        "minor_interval": 0.5,
+        "size_bytes": 1,
+        "units": "volts"
+      },
+      "short_name": "LOWTPS",
+      "source_verified": true,
+      "symbol": "LowestHistoricalTPS",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 144,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 70,
+      "offset_hex": "0x46",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell0",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 145,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 71,
+      "offset_hex": "0x47",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell1",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 146,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 72,
+      "offset_hex": "0x48",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell2",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 147,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 73,
+      "offset_hex": "0x49",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell3",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 148,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 74,
+      "offset_hex": "0x4A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell4",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 149,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 75,
+      "offset_hex": "0x4B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell5",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 150,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 76,
+      "offset_hex": "0x4C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell6",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 151,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 77,
+      "offset_hex": "0x4D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell7",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 152,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 78,
+      "offset_hex": "0x4E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell8",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 153,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 79,
+      "offset_hex": "0x4F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell9",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 154,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 80,
+      "offset_hex": "0x50",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell10",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 155,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 81,
+      "offset_hex": "0x51",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell11",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 156,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 82,
+      "offset_hex": "0x52",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AutoCalCell12",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 157,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 83,
+      "offset_hex": "0x53",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegister0",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 166,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 84,
+      "offset_hex": "0x54",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegister1",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 175,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 85,
+      "offset_hex": "0x55",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegister2",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 184,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 86,
+      "offset_hex": "0x56",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegister3",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 193,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 87,
+      "offset_hex": "0x57",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegisterStored0",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 194,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 88,
+      "offset_hex": "0x58",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegisterStored1",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 195,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 89,
+      "offset_hex": "0x59",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegisterStored2",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 196,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 90,
+      "offset_hex": "0x5A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ErrorBitRegisterStored3",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 197,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 91,
+      "offset_hex": "0x5B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "SlowCounter",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 198,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 92,
+      "offset_hex": "0x5C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AISMotorBits",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 199,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 93,
+      "offset_hex": "0x5D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_5D",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 200,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 94,
+      "offset_hex": "0x5E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_AIS",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 210,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 95,
+      "offset_hex": "0x5F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ClearTheErrorTimer_0",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 214,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 96,
+      "offset_hex": "0x60",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ClearTheErrorTimer_1",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 215,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 97,
+      "offset_hex": "0x61",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "VehicleSpeed_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 216,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 98,
+      "offset_hex": "0x62",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "VehicleSpeed_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 217,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 99,
+      "offset_hex": "0x63",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "StackPtrTemp_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 218,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 100,
+      "offset_hex": "0x64",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "StackPtrTemp_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 219,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 101,
+      "offset_hex": "0x65",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "TimerOverflowsBetweenDistPulses",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 220,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 102,
+      "offset_hex": "0x66",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "DistributorFallingEdgePulsewidth_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 221,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 103,
+      "offset_hex": "0x67",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "DistributorFallingEdgePulsewidth_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 222,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 104,
+      "offset_hex": "0x68",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_TimerPastHalfwayBetweenDistPulses",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 223,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 105,
+      "offset_hex": "0x69",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_FuelMonitorOutputTimer_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 224,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 106,
+      "offset_hex": "0x6A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_FuelMonitorOutputTimer_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 225,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 107,
+      "offset_hex": "0x6B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "LastDistributorFallingEdgeTime_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 226,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 108,
+      "offset_hex": "0x6C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "LastDistributorFallingEdgeTime_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 227,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 109,
+      "offset_hex": "0x6D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_6d",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 237,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 110,
+      "offset_hex": "0x6E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_6e",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 246,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 111,
+      "offset_hex": "0x6F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_6f",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 255,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 112,
+      "offset_hex": "0x70",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_70",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 256,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 113,
+      "offset_hex": "0x71",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_71",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 265,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 114,
+      "offset_hex": "0x72",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_72",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 274,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 115,
+      "offset_hex": "0x73",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "TargetIdleSpeed_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 275,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 116,
+      "offset_hex": "0x74",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "TargetIdleSpeed_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 276,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 117,
+      "offset_hex": "0x75",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "KeyOnOrEngineRunningTime",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 277,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 118,
+      "offset_hex": "0x76",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_MainLoop",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 278,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 119,
+      "offset_hex": "0x77",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "SumOfFuelModifiers_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 279,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 120,
+      "offset_hex": "0x78",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "SumOfFuelModifiers_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 280,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 121,
+      "offset_hex": "0x79",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "InjectorPulsewidth_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 281,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 122,
+      "offset_hex": "0x7A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "InjectorPulsewidth_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 282,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 123,
+      "offset_hex": "0x7B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Pulsewidth_PartThrottleEnrichment_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 283,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 124,
+      "offset_hex": "0x7C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Pulsewidth_PartThrottleEnrichment_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 284,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 125,
+      "offset_hex": "0x7D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer16bitCopyA_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 285,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 126,
+      "offset_hex": "0x7E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer16bitCopyA_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 286,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 127,
+      "offset_hex": "0x7F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer16bitCopyB_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 287,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 128,
+      "offset_hex": "0x80",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer16bitCopyB_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 288,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 129,
+      "offset_hex": "0x81",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "EngineRpm_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 289,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 130,
+      "offset_hex": "0x82",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "EngineRpm_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 291,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 131,
+      "offset_hex": "0x83",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "MapVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 292,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 132,
+      "offset_hex": "0x84",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AverageMAPValue",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 293,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 133,
+      "offset_hex": "0x85",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "MapScratch",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 294,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 134,
+      "offset_hex": "0x86",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "MapValue",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 295,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 135,
+      "offset_hex": "0x87",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Factor_LeanoutOrEnrichTime_MAP",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 297,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 136,
+      "offset_hex": "0x88",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AverageTPSVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 298,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 137,
+      "offset_hex": "0x89",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "TpsScratch",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 299,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 138,
+      "offset_hex": "0x8A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "TpsVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 300,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 139,
+      "offset_hex": "0x8B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Factor_LeanoutOrEnrichTime_TPS",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 302,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 140,
+      "offset_hex": "0x8C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CoolantTemp",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 303,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 141,
+      "offset_hex": "0x8D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AmbientAirTempVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 304,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 142,
+      "offset_hex": "0x8E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "O2SensorVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 305,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 143,
+      "offset_hex": "0x8F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "LastChargeTempVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 306,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 144,
+      "offset_hex": "0x90",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "LastCoolantTempVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 307,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 145,
+      "offset_hex": "0x91",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "TPSVolts_11msUpdate",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 308,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 146,
+      "offset_hex": "0x92",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "KnockVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 309,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 147,
+      "offset_hex": "0x93",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BatteryVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 310,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 148,
+      "offset_hex": "0x94",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "TargetBatteryVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 311,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 149,
+      "offset_hex": "0x95",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_VoltageRegSignal",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 312,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 150,
+      "offset_hex": "0x96",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_DelayBeforeUpdating_MINTHR",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 313,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 151,
+      "offset_hex": "0x97",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Factor_ACVDCY_CurveACurveCDecayAfterRunModeReached",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 314,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 152,
+      "offset_hex": "0x98",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_Leanout",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 315,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 153,
+      "offset_hex": "0x99",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_PrimaryAndSecondaryRamp",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 316,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 154,
+      "offset_hex": "0x9A",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "PointerIntoAdaptiveMemory",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 317,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 155,
+      "offset_hex": "0x9B",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_CountdownFromStartRunForAisFeedback",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 318,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 156,
+      "offset_hex": "0x9C",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "MinimumTimerCountBeforeMainloopCanContinue",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 319,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 157,
+      "offset_hex": "0x9D",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_CLTIME_ClosedLoopTimer",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 320,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 158,
+      "offset_hex": "0x9E",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_AdaptiveMem_Erase",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 321,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 159,
+      "offset_hex": "0x9F",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_O2CNTR_CountdownFromAbove196FtoEnableClosedLoop",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 322,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 160,
+      "offset_hex": "0xA0",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_A2DScan2",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 323,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 161,
+      "offset_hex": "0xA1",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_AisChanges",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 324,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 162,
+      "offset_hex": "0xA2",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AdaptiveCellUpdateTimer_IncrementedEveryDistRisingEdge",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 325,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 163,
+      "offset_hex": "0xA3",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "SparkScatter",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 326,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 164,
+      "offset_hex": "0xA4",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp0",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 327,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 165,
+      "offset_hex": "0xA5",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp1",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 328,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 166,
+      "offset_hex": "0xA6",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp2",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 329,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 167,
+      "offset_hex": "0xA7",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp3",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 330,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 168,
+      "offset_hex": "0xA8",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp4",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 331,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 169,
+      "offset_hex": "0xA9",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp5",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 332,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 170,
+      "offset_hex": "0xAA",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp6",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 333,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 171,
+      "offset_hex": "0xAB",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp7",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 334,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 172,
+      "offset_hex": "0xAC",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp8",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 335,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 173,
+      "offset_hex": "0xAD",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Temp9",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 336,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 174,
+      "offset_hex": "0xAE",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "FuelBaselineResult_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 337,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 175,
+      "offset_hex": "0xAF",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "FuelBaselineResult_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 338,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 176,
+      "offset_hex": "0xB0",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "DwellTime_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 339,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 177,
+      "offset_hex": "0xB1",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "DwellTime_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 340,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 178,
+      "offset_hex": "0xB2",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "PreviousMAP",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 341,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 179,
+      "offset_hex": "0xB3",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "LeanoutFactor_HB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 342,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 180,
+      "offset_hex": "0xB4",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "LeanoutFactor_LB",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 343,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 181,
+      "offset_hex": "0xB5",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ADScanIndex",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 344,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 182,
+      "offset_hex": "0xB6",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Cylinder2Retard",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 345,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 183,
+      "offset_hex": "0xB7",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Cylinder1Retard",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 346,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 184,
+      "offset_hex": "0xB8",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Cylinder3Retard",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 347,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 185,
+      "offset_hex": "0xB9",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Cylinder4Retard",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 348,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 186,
+      "offset_hex": "0xBA",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "MaxRetardFromMAP",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 349,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 187,
+      "offset_hex": "0xBB",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Z83_CPU_Port1_copy",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 350,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 188,
+      "offset_hex": "0xBC",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BaroPressure",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 351,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 189,
+      "offset_hex": "0xBD",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CalculatedSparkAdvance",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 352,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 190,
+      "offset_hex": "0xBE",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ChargeTempVolts",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 353,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 191,
+      "offset_hex": "0xBF",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_OutOfClosedLoopMode",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 354,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 192,
+      "offset_hex": "0xC0",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "InjectorLatency",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 355,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 193,
+      "offset_hex": "0xC1",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_OpenLoopFraction",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 356,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 194,
+      "offset_hex": "0xC2",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_O2ToggleDuration",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 357,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 195,
+      "offset_hex": "0xC3",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_FallingEdgeEPP_MaxFF",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 358,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 196,
+      "offset_hex": "0xC4",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "DesiredNewAisPosition",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 359,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 197,
+      "offset_hex": "0xC5",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_AisOrO2Sensor",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 360,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 198,
+      "offset_hex": "0xC6",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Delta_MAP",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 361,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 199,
+      "offset_hex": "0xC7",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BoostTarget",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 362,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 200,
+      "offset_hex": "0xC8",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_BoostTimer",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 363,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 201,
+      "offset_hex": "0xC9",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "CurrentWastegateDutyCycle",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 364,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 202,
+      "offset_hex": "0xCA",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BankEnrichmentFactor",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 365,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 203,
+      "offset_hex": "0xCB",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_Over5psiBoost",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 366,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 204,
+      "offset_hex": "0xCC",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_Over5PSIBoost",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 367,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 205,
+      "offset_hex": "0xCD",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Counter_BaroReadTime",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 368,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 206,
+      "offset_hex": "0xCE",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "IncrementalMAP",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 369,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 207,
+      "offset_hex": "0xCF",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "WastegateDutyCycleIncreaseFromKnock",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 370,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 208,
+      "offset_hex": "0xD0",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_BoostErrTimer",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 371,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 209,
+      "offset_hex": "0xD1",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "VerySlowCounter2point6seconds",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 372,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 210,
+      "offset_hex": "0xD2",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_FuelShutoff",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 373,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 211,
+      "offset_hex": "0xD3",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BitFlags_D3",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 374,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 212,
+      "offset_hex": "0xD4",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BaseFuelModifier",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 375,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 213,
+      "offset_hex": "0xD5",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "KnockLookup",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 376,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 214,
+      "offset_hex": "0xD6",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "FuelSubtractedFromStartToRun",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 377,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 215,
+      "offset_hex": "0xD7",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_RadSteamingCountdown",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 378,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 216,
+      "offset_hex": "0xD8",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": {
+        "decimals": 2,
+        "display_max": 60,
+        "display_min": 0,
+        "divisor": 1,
+        "ecu_max": 65.5,
+        "ecu_min": 0,
+        "major_interval": 10,
+        "minor_interval": 2,
+        "size_bytes": 1,
+        "units": "mSec"
+      },
+      "short_name": "TMNAV",
+      "source_verified": true,
+      "symbol": "Timer_NavigatorFuelPulsewidth",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 379,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 217,
+      "offset_hex": "0xD9",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_NormalDwell",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 380,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 218,
+      "offset_hex": "0xDA",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Timer_ThermostatDiagnostics",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 381,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 219,
+      "offset_hex": "0xDB",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "BaroReadTimeEngineWithinReadRange",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 382,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 220,
+      "offset_hex": "0xDC",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "AntiLagRetard",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 383,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 221,
+      "offset_hex": "0xDD",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused13",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 384,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 222,
+      "offset_hex": "0xDE",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused12",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 385,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 223,
+      "offset_hex": "0xDF",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused11",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 386,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 224,
+      "offset_hex": "0xE0",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused10",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 387,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 225,
+      "offset_hex": "0xE1",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused9",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 388,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 226,
+      "offset_hex": "0xE2",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused8",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 389,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 227,
+      "offset_hex": "0xE3",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused7",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 390,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 228,
+      "offset_hex": "0xE4",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused6",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 391,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 229,
+      "offset_hex": "0xE5",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused5",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 392,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 230,
+      "offset_hex": "0xE6",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused4",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 393,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 231,
+      "offset_hex": "0xE7",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused3",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 394,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 232,
+      "offset_hex": "0xE8",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused2",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "asm_line": 395,
+      "bit_flags": null,
+      "error_codes": null,
+      "function_set": null,
+      "lst_address": null,
+      "offset": 233,
+      "offset_hex": "0xE9",
+      "sample_cpp_mask": null,
+      "sci_table": "LM_DIRECT_RAM",
+      "settings": null,
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "Unused1",
+      "verified_sources": [
+        "T-GLHSv1.asm"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 4,
+        "chip_pin": 8,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 19,
+        "lm_pin": 3,
+        "port": "a",
+        "signal_85_t1": "ac clutch out",
+        "signal_87_t2": "ac clutch out"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ac_clutch_out",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 5,
+        "chip_pin": 9,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 20,
+        "lm_pin": 4,
+        "port": "a",
+        "signal_85_t1": "power loss light",
+        "signal_87_t2": "cruise solenoid"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "cruise_solenoid",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 6,
+        "chip_pin": 10,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 21,
+        "lm_pin": 5,
+        "port": "a",
+        "signal_85_t1": "purge",
+        "signal_87_t2": "egr"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "egr",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 7,
+        "chip_pin": 11,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 22,
+        "lm_pin": 6,
+        "port": "a",
+        "signal_85_t1": "egr",
+        "signal_87_t2": "cruise vent"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "cruise_vent",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 0,
+        "chip_pin": 3,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 31,
+        "lm_pin": 9,
+        "port": "c",
+        "signal_85_t1": "unused",
+        "signal_87_t2": "cruise set"
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "cruise_set",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 1,
+        "chip_pin": 2,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 32,
+        "lm_pin": 10,
+        "port": "c",
+        "signal_85_t1": "unused",
+        "signal_87_t2": "cruise resume"
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "cruise_resume",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 2,
+        "chip_pin": 1,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 33,
+        "lm_pin": 11,
+        "port": "c",
+        "signal_85_t1": "ac clutch in",
+        "signal_87_t2": "ac clutch in"
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "ac_clutch_in",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 3,
+        "chip_pin": 39,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 34,
+        "lm_pin": 12,
+        "port": "c",
+        "signal_85_t1": "park / neutral",
+        "signal_87_t2": "park / neutral"
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "park_neutral",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 4,
+        "chip_pin": 38,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": "CA1",
+        "io_chip": "146823",
+        "line": 35,
+        "lm_pin": 13,
+        "port": "c",
+        "signal_85_t1": "brake",
+        "signal_87_t2": "brake"
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "brake",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 5,
+        "chip_pin": 37,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": "CA2",
+        "io_chip": "146823",
+        "line": 36,
+        "lm_pin": 14,
+        "port": "c",
+        "signal_85_t1": "speed sensor",
+        "signal_87_t2": ""
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "speed_sensor",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 6,
+        "chip_pin": 36,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": "CB1",
+        "io_chip": "146823",
+        "line": 37,
+        "lm_pin": 15,
+        "port": "c",
+        "signal_85_t1": "Throttle closed ( Not used)",
+        "signal_87_t2": "cruise enable"
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "cruise_enable",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2004",
+        "alt_addresses": [],
+        "bit_or_input": 7,
+        "chip_pin": 35,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": "CB2",
+        "io_chip": "146823",
+        "line": 38,
+        "lm_pin": 17,
+        "port": "c",
+        "signal_85_t1": "dist sync",
+        "signal_87_t2": "dist sync"
+      },
+      "offset": 8196,
+      "offset_hex": "0x2004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "dist_sync",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8002",
+        "alt_addresses": [],
+        "bit_or_input": 2,
+        "chip_pin": 28,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 42,
+        "lm_pin": 18,
+        "port": null,
+        "signal_85_t1": "o2",
+        "signal_87_t2": "o2"
+      },
+      "offset": 32770,
+      "offset_hex": "0x8002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "o2",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8000",
+        "alt_addresses": [],
+        "bit_or_input": 0,
+        "chip_pin": 26,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 40,
+        "lm_pin": 19,
+        "port": null,
+        "signal_85_t1": "map",
+        "signal_87_t2": "map"
+      },
+      "offset": 32768,
+      "offset_hex": "0x8000",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "map",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8001",
+        "alt_addresses": [],
+        "bit_or_input": 1,
+        "chip_pin": 27,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 41,
+        "lm_pin": 20,
+        "port": null,
+        "signal_85_t1": "batt temp",
+        "signal_87_t2": "batt temp"
+      },
+      "offset": 32769,
+      "offset_hex": "0x8001",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "batt_temp",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8005",
+        "alt_addresses": [],
+        "bit_or_input": 5,
+        "chip_pin": 3,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 45,
+        "lm_pin": 21,
+        "port": null,
+        "signal_85_t1": "tps",
+        "signal_87_t2": "tps"
+      },
+      "offset": 32773,
+      "offset_hex": "0x8005",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "tps",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8007",
+        "alt_addresses": [],
+        "bit_or_input": 7,
+        "chip_pin": 5,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 47,
+        "lm_pin": 22,
+        "port": null,
+        "signal_85_t1": "battery voltage",
+        "signal_87_t2": "battery voltage"
+      },
+      "offset": 32775,
+      "offset_hex": "0x8007",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "battery_voltage",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8004",
+        "alt_addresses": [],
+        "bit_or_input": 4,
+        "chip_pin": 2,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 44,
+        "lm_pin": 23,
+        "port": null,
+        "signal_85_t1": "coolant temp",
+        "signal_87_t2": "coolant temp"
+      },
+      "offset": 32772,
+      "offset_hex": "0x8004",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "coolant_temp",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8006",
+        "alt_addresses": [],
+        "bit_or_input": 6,
+        "chip_pin": 4,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 46,
+        "lm_pin": 24,
+        "port": null,
+        "signal_85_t1": "knock",
+        "signal_87_t2": "knock"
+      },
+      "offset": 32774,
+      "offset_hex": "0x8006",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "knock",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x8003",
+        "alt_addresses": [],
+        "bit_or_input": 3,
+        "chip_pin": 1,
+        "connector": "blue",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "adc0808",
+        "line": 43,
+        "lm_pin": 25,
+        "port": null,
+        "signal_85_t1": "air temp",
+        "signal_87_t2": "air temp"
+      },
+      "offset": 32771,
+      "offset_hex": "0x8003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "air_temp",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 2,
+        "chip_pin": 10,
+        "connector": "internal",
+        "internal_function": "watchdog",
+        "interrupt": null,
+        "io_chip": "6803",
+        "line": 5,
+        "lm_pin": null,
+        "port": "port2",
+        "signal_85_t1": "",
+        "signal_87_t2": ""
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "watchdog",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 4,
+        "chip_pin": 17,
+        "connector": "internal",
+        "internal_function": "cts bias",
+        "interrupt": null,
+        "io_chip": "6803",
+        "line": 10,
+        "lm_pin": null,
+        "port": "port1",
+        "signal_85_t1": "",
+        "signal_87_t2": ""
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "cts_bias",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 6,
+        "chip_pin": 19,
+        "connector": "internal",
+        "internal_function": "injector / dwell error",
+        "interrupt": null,
+        "io_chip": "6803",
+        "line": 12,
+        "lm_pin": null,
+        "port": "port1",
+        "signal_85_t1": "",
+        "signal_87_t2": ""
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "injector_dwell_error",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 7,
+        "chip_pin": 20,
+        "connector": "internal",
+        "internal_function": "knock kill",
+        "interrupt": null,
+        "io_chip": "6803",
+        "line": 13,
+        "lm_pin": null,
+        "port": "port1",
+        "signal_85_t1": "",
+        "signal_87_t2": ""
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "knock_kill",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x200C",
+          "0x200D"
+        ],
+        "bit_or_input": 4,
+        "chip_pin": 30,
+        "connector": "internal",
+        "internal_function": "alt fault",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 27,
+        "lm_pin": null,
+        "port": "b",
+        "signal_85_t1": "",
+        "signal_87_t2": ""
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "alt_fault",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x200C",
+          "0x200D"
+        ],
+        "bit_or_input": 7,
+        "chip_pin": 27,
+        "connector": "internal",
+        "internal_function": "a/d conversion done",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 30,
+        "lm_pin": null,
+        "port": "b",
+        "signal_85_t1": "",
+        "signal_87_t2": ""
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "a_d_conversion_done",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 1,
+        "chip_pin": 14,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": "TOC3",
+        "io_chip": "6803",
+        "line": 7,
+        "lm_pin": 2,
+        "port": "port1",
+        "signal_85_t1": "inj 1-2",
+        "signal_87_t2": "inj 1-2"
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "inj_1_2",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 2,
+        "chip_pin": 15,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": "TOC3",
+        "io_chip": "6803",
+        "line": 8,
+        "lm_pin": 3,
+        "port": "port1",
+        "signal_85_t1": "inj 3-4",
+        "signal_87_t2": "inj 3-4"
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "inj_3_4",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 5,
+        "chip_pin": 18,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "6803",
+        "line": 11,
+        "lm_pin": 4,
+        "port": "port1",
+        "signal_85_t1": "fuel pacer",
+        "signal_87_t2": "power loss"
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "power_loss",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 3,
+        "chip_pin": 16,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "6803",
+        "line": 9,
+        "lm_pin": 5,
+        "port": "port1",
+        "signal_85_t1": "voltage reg",
+        "signal_87_t2": "voltage reg"
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "voltage_reg",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0003",
+        "alt_addresses": [],
+        "bit_or_input": 1,
+        "chip_pin": 9,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": "TOC1",
+        "io_chip": "6803",
+        "line": 1,
+        "lm_pin": 6,
+        "port": "port2",
+        "signal_85_t1": "anti dwell",
+        "signal_87_t2": "anti dwell"
+      },
+      "offset": 3,
+      "offset_hex": "0x0003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "anti_dwell",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0002",
+        "alt_addresses": [],
+        "bit_or_input": 0,
+        "chip_pin": 13,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": "TIC2",
+        "io_chip": "6803",
+        "line": 6,
+        "lm_pin": 9,
+        "port": "port1",
+        "signal_85_t1": "not used",
+        "signal_87_t2": "speed sensor"
+      },
+      "offset": 2,
+      "offset_hex": "0x0002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "speed_sensor",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0003",
+        "alt_addresses": [],
+        "bit_or_input": 0,
+        "chip_pin": 8,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": "TIC1",
+        "io_chip": "6803",
+        "line": 2,
+        "lm_pin": 10,
+        "port": "port2",
+        "signal_85_t1": "dist referance",
+        "signal_87_t2": "dist referance"
+      },
+      "offset": 3,
+      "offset_hex": "0x0003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "dist_referance",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0003",
+        "alt_addresses": [],
+        "bit_or_input": 4,
+        "chip_pin": 12,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": "SCI",
+        "io_chip": "6803",
+        "line": 4,
+        "lm_pin": 11,
+        "port": "port2",
+        "signal_85_t1": "sci tx",
+        "signal_87_t2": "sci tx"
+      },
+      "offset": 3,
+      "offset_hex": "0x0003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "sci_tx",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x200C",
+          "0x200D"
+        ],
+        "bit_or_input": 5,
+        "chip_pin": 29,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 28,
+        "lm_pin": 12,
+        "port": "b",
+        "signal_85_t1": "tach out",
+        "signal_87_t2": "tach out"
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "tach_out",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x0003",
+        "alt_addresses": [],
+        "bit_or_input": 3,
+        "chip_pin": 11,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": "SCI",
+        "io_chip": "6803",
+        "line": 3,
+        "lm_pin": 13,
+        "port": "port2",
+        "signal_85_t1": "sci rx",
+        "signal_87_t2": "sci rx"
+      },
+      "offset": 3,
+      "offset_hex": "0x0003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "sci_rx",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x200C",
+          "0x200D"
+        ],
+        "bit_or_input": 6,
+        "chip_pin": 28,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 29,
+        "lm_pin": 14,
+        "port": "b",
+        "signal_85_t1": "fuel monitor",
+        "signal_87_t2": "fuel monitor"
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "fuel_monitor",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 0,
+        "chip_pin": 4,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 15,
+        "lm_pin": 15,
+        "port": "a",
+        "signal_85_t1": "barometer",
+        "signal_87_t2": "barometer"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "barometer",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x200C",
+          "0x200D"
+        ],
+        "bit_or_input": 2,
+        "chip_pin": 32,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 25,
+        "lm_pin": 16,
+        "port": "b",
+        "signal_85_t1": "idle",
+        "signal_87_t2": "idle"
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "idle",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 1,
+        "chip_pin": 5,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 16,
+        "lm_pin": 17,
+        "port": "a",
+        "signal_85_t1": "fuel pump",
+        "signal_87_t2": "fuel pump"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "fuel_pump",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x200C",
+          "0x200D"
+        ],
+        "bit_or_input": 1,
+        "chip_pin": 33,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 24,
+        "lm_pin": 18,
+        "port": "b",
+        "signal_85_t1": "idle",
+        "signal_87_t2": "idle"
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "idle",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 2,
+        "chip_pin": 6,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 17,
+        "lm_pin": 19,
+        "port": "a",
+        "signal_85_t1": "wastegate",
+        "signal_87_t2": "wastegate"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "wastegate",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 0,
+        "chip_pin": 34,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 23,
+        "lm_pin": 20,
+        "port": "b",
+        "signal_85_t1": "idle",
+        "signal_87_t2": "idle"
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "idle",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2002",
+        "alt_addresses": [
+          "0x2000",
+          "0x2001"
+        ],
+        "bit_or_input": 3,
+        "chip_pin": 7,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 18,
+        "lm_pin": 21,
+        "port": "a",
+        "signal_85_t1": "fan",
+        "signal_87_t2": "fan"
+      },
+      "offset": 8194,
+      "offset_hex": "0x2002",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "fan",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    },
+    {
+      "io_pinout": {
+        "address": "0x2003",
+        "alt_addresses": [
+          "0x200C",
+          "0x200D"
+        ],
+        "bit_or_input": 3,
+        "chip_pin": 31,
+        "connector": "red",
+        "internal_function": "",
+        "interrupt": null,
+        "io_chip": "146823",
+        "line": 26,
+        "lm_pin": 22,
+        "port": "b",
+        "signal_85_t1": "idle",
+        "signal_87_t2": "idle"
+      },
+      "offset": 8195,
+      "offset_hex": "0x2003",
+      "sci_table": "LM_IO",
+      "short_name": null,
+      "source_verified": true,
+      "symbol": "idle",
+      "verified_sources": [
+        "LM IO pinout - address.xls"
+      ]
+    }
+  ],
+  "reference_baselines": [
+    {
+      "baseline_present": false,
+      "filename": "86_22_t2_mtx_016_GLHS_ROM2.bin",
+      "sha256": "fb3663d17d40c05626305370d6517afe1d6e6bb5e459a5388368335e823250b5",
+      "size_bytes": 8192
+    }
+  ],
+  "rom_id": "lm_86_glhs_v1",
+  "rom_size_bytes": 8192,
+  "schema_version": "1.0.0",
+  "sci_baud": 7680,
+  "sci_baud_nominal": 7812.5,
+  "sci_tables": [
+    "LM_DIRECT_RAM",
+    "LM_IO"
+  ],
+  "source_files": [
+    "ECU/T-GLHSv1/T-GLHSv1.asm",
+    "ECU/T-GLHSv1/T-GLHS_t2_mtx_017_stock.tpl",
+    "ECU/LM IO pinout - address.xls"
+  ],
+  "split_chip_topology": "2x_8KB_2764",
+  "summary": {
+    "baseline_count": 1,
+    "baselines_present_count": 0,
+    "calibration_table_count": 3,
+    "fast_data_slot_count": 0,
+    "unverified_candidate_count": 162,
+    "verified_ram_count": 247
+  },
+  "unverified_xref_candidates": [
+    {
+      "asm_symbol_at_offset": "CPU_Port1_DataDirection",
+      "item_num": 0,
+      "long_name": "DefaultGauge",
+      "offset": 0,
+      "offset_hex": "0x00",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "DEFAULT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "LeanoutFactor_LB",
+      "item_num": 2,
+      "long_name": "AdaptiveCellUpdateTimer_IncrementedEverySyncRisingEdge",
+      "offset": 180,
+      "offset_hex": "0xB4",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMADPCL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BoostTarget",
+      "item_num": 4,
+      "long_name": "ADScanIndex",
+      "offset": 199,
+      "offset_hex": "0xC7",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "A2DSCAN",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ClearTheErrorTimer_0",
+      "item_num": 10,
+      "long_name": "AISMotorBits",
+      "offset": 95,
+      "offset_hex": "0x5F",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AISMOT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_CountdownFromStartRunForAisFeedback",
+      "item_num": 12,
+      "long_name": "AmbientAirTemp",
+      "offset": 155,
+      "offset_hex": "0x9B",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AMBVAL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_CountdownFromStartRunForAisFeedback",
+      "item_num": 13,
+      "long_name": "AmbientAirTempVolts",
+      "offset": 155,
+      "offset_hex": "0x9B",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AMBVLT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp4",
+      "item_num": 15,
+      "long_name": "AntiLagRetard",
+      "offset": 168,
+      "offset_hex": "0xA8",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ANTILAG",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell10",
+      "item_num": 17,
+      "long_name": "AutoCalCell0",
+      "offset": 80,
+      "offset_hex": "0x50",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL0",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell11",
+      "item_num": 18,
+      "long_name": "AutoCalCell1",
+      "offset": 81,
+      "offset_hex": "0x51",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegisterStored3",
+      "item_num": 19,
+      "long_name": "AutoCalCell10",
+      "offset": 90,
+      "offset_hex": "0x5A",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL10",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "SlowCounter",
+      "item_num": 20,
+      "long_name": "AutoCalCell11",
+      "offset": 91,
+      "offset_hex": "0x5B",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL11",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AISMotorBits",
+      "item_num": 21,
+      "long_name": "AutoCalCell12idle",
+      "offset": 92,
+      "offset_hex": "0x5C",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL12ID",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell12",
+      "item_num": 22,
+      "long_name": "AutoCalCell2",
+      "offset": 82,
+      "offset_hex": "0x52",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegister0",
+      "item_num": 23,
+      "long_name": "AutoCalCell3",
+      "offset": 83,
+      "offset_hex": "0x53",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL3",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegister1",
+      "item_num": 24,
+      "long_name": "AutoCalCell4",
+      "offset": 84,
+      "offset_hex": "0x54",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL4",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegister2",
+      "item_num": 25,
+      "long_name": "AutoCalCell5",
+      "offset": 85,
+      "offset_hex": "0x55",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL5",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegister3",
+      "item_num": 26,
+      "long_name": "AutoCalCell6",
+      "offset": 86,
+      "offset_hex": "0x56",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL6",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegisterStored0",
+      "item_num": 27,
+      "long_name": "AutoCalCell7",
+      "offset": 87,
+      "offset_hex": "0x57",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL7",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegisterStored1",
+      "item_num": 28,
+      "long_name": "AutoCalCell8",
+      "offset": 88,
+      "offset_hex": "0x58",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL8",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ErrorBitRegisterStored2",
+      "item_num": 29,
+      "long_name": "AutoCalCell9",
+      "offset": 89,
+      "offset_hex": "0x59",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CELL9",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "KnockVolts",
+      "item_num": 31,
+      "long_name": "AverageMAPValue",
+      "offset": 146,
+      "offset_hex": "0x92",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AVGMAPV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_DelayBeforeUpdating_MINTHR",
+      "item_num": 33,
+      "long_name": "AverageTPSVolts",
+      "offset": 150,
+      "offset_hex": "0x96",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AVTPS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused2",
+      "item_num": 34,
+      "long_name": "BankEnrichmentFactor",
+      "offset": 232,
+      "offset_hex": "0xE8",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BANK",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TargetIdleSpeed_HB",
+      "item_num": 37,
+      "long_name": "BaroPressure",
+      "offset": 115,
+      "offset_hex": "0x73",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BARO",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused12",
+      "item_num": 38,
+      "long_name": "BaroReadTimeEngineWithinReadRange",
+      "offset": 222,
+      "offset_hex": "0xDE",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BAROTIM",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused1",
+      "item_num": 39,
+      "long_name": "BaseFuelModifier",
+      "offset": 233,
+      "offset_hex": "0xE9",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BASFULMOD",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_AisChanges",
+      "item_num": 44,
+      "long_name": "BatteryVolts",
+      "offset": 161,
+      "offset_hex": "0xA1",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BATV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused4",
+      "item_num": 61,
+      "long_name": "Bits_WhichInjector",
+      "offset": 230,
+      "offset_hex": "0xE6",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BF_INJ",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp3",
+      "item_num": 66,
+      "long_name": "BoostTarget",
+      "offset": 167,
+      "offset_hex": "0xA7",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BSTT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_72",
+      "item_num": 67,
+      "long_name": "CalculatedSparkAdvance",
+      "offset": 114,
+      "offset_hex": "0x72",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ADV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_5D",
+      "item_num": 81,
+      "long_name": "ChargeTempVolts",
+      "offset": 93,
+      "offset_hex": "0x5D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CHGVLT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TargetIdleSpeed_LB",
+      "item_num": 82,
+      "long_name": "ClearTheErrorTimer_0",
+      "offset": 116,
+      "offset_hex": "0x74",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERT0",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "KeyOnOrEngineRunningTime",
+      "item_num": 83,
+      "long_name": "ClearTheErrorTimer_1",
+      "offset": 117,
+      "offset_hex": "0x75",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERT1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "PointerIntoAdaptiveMemory",
+      "item_num": 84,
+      "long_name": "CoolantTemp",
+      "offset": 154,
+      "offset_hex": "0x9A",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "COOL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused7",
+      "item_num": 86,
+      "long_name": "Counter_A2DScan2",
+      "offset": 227,
+      "offset_hex": "0xE3",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTA2D2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "DwellTime_LB",
+      "item_num": 88,
+      "long_name": "Counter_AdaptiveMem_Erase",
+      "offset": 177,
+      "offset_hex": "0xB1",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AMERS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "KnockLookup",
+      "item_num": 91,
+      "long_name": "Counter_BaroReadTime",
+      "offset": 213,
+      "offset_hex": "0xD5",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTBAR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_O2ToggleDuration",
+      "item_num": 99,
+      "long_name": "Counter_ErrorCodeFlasher",
+      "offset": 194,
+      "offset_hex": "0xC2",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTERFL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_Over5PSIBoost",
+      "item_num": 100,
+      "long_name": "Counter_FallingEdgeEPP_MaxFF",
+      "offset": 204,
+      "offset_hex": "0xCC",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CTFEEPP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TpsVolts",
+      "item_num": 104,
+      "long_name": "Counter_MainLoop",
+      "offset": 138,
+      "offset_hex": "0x8A",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTLOOP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "InjectorLatency",
+      "item_num": 108,
+      "long_name": "Counter_Port1ControlRegLoop",
+      "offset": 192,
+      "offset_hex": "0xC0",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTPORT1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp7",
+      "item_num": 109,
+      "long_name": "Counter_PrimaryAndSecondaryRamp",
+      "offset": 171,
+      "offset_hex": "0xAB",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTRMP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "FuelBaselineResult_LB",
+      "item_num": 111,
+      "long_name": "Counter_SomethingWithCamSensor",
+      "offset": 175,
+      "offset_hex": "0xAF",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTSYNC",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "InjectorPulsewidth_LB",
+      "item_num": 115,
+      "long_name": "Counter_TimerPastHalfwayBetweenCamPulses",
+      "offset": 122,
+      "offset_hex": "0x7A",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTHALF",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "StackPtrTemp_HB",
+      "item_num": 116,
+      "long_name": "Counter_TimerRegHalfOverflowBetweenSpeedoPulses",
+      "offset": 99,
+      "offset_hex": "0x63",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CNTOFLOW",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_6d",
+      "item_num": 121,
+      "long_name": "CruiseControlVar1",
+      "offset": 109,
+      "offset_hex": "0x6D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CCVAR1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_6e",
+      "item_num": 122,
+      "long_name": "CruiseControlVar2",
+      "offset": 110,
+      "offset_hex": "0x6E",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CCVAR2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_6f",
+      "item_num": 123,
+      "long_name": "CruiseControlVar3",
+      "offset": 111,
+      "offset_hex": "0x6F",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CCVAR3",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused11",
+      "item_num": 124,
+      "long_name": "CruiseControlVar4",
+      "offset": 223,
+      "offset_hex": "0xDF",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CCVAR4",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "LastDistributorFallingEdgeTime_LB",
+      "item_num": 126,
+      "long_name": "CruiseSpeedSetpoint",
+      "offset": 108,
+      "offset_hex": "0x6C",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CCSETPT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "VehicleSpeed_LB",
+      "item_num": 127,
+      "long_name": "CruiseStatus_1",
+      "offset": 98,
+      "offset_hex": "0x62",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CRSTAT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp6",
+      "item_num": 130,
+      "long_name": "CurrentWastegateDutyCycle",
+      "offset": 170,
+      "offset_hex": "0xAA",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "WGDCC",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "WastegateDutyCycleIncreaseFromKnock",
+      "item_num": 136,
+      "long_name": "Cylinder1Retard",
+      "offset": 207,
+      "offset_hex": "0xCF",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "RET1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "IncrementalMAP",
+      "item_num": 137,
+      "long_name": "Cylinder2Retard",
+      "offset": 206,
+      "offset_hex": "0xCE",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "RET2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_BoostErrTimer",
+      "item_num": 138,
+      "long_name": "Cylinder3Retard",
+      "offset": 208,
+      "offset_hex": "0xD0",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "RET3",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "VerySlowCounter2point6seconds",
+      "item_num": 139,
+      "long_name": "Cylinder4Retard",
+      "offset": 209,
+      "offset_hex": "0xD1",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "RET4",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "DCCOR1_AdaptiveWastegateCellBelowMAPPT",
+      "item_num": 145,
+      "long_name": "DCCOR1_AdaptiveWGCell1",
+      "offset": 67,
+      "offset_hex": "0x43",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "WGCELL1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "DCCOR2_AdaptiveWastegateCellAboveMAPPT",
+      "item_num": 146,
+      "long_name": "DCCOR2_AdaptiveWGCell2",
+      "offset": 68,
+      "offset_hex": "0x44",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "WGCELL2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_AIS",
+      "item_num": 152,
+      "long_name": "Delta_MAP",
+      "offset": 94,
+      "offset_hex": "0x5E",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "DELMAP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused8",
+      "item_num": 153,
+      "long_name": "DesiredNewAisPosition",
+      "offset": 226,
+      "offset_hex": "0xE2",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "NEWAIS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "SumOfFuelModifiers_LB",
+      "item_num": 154,
+      "long_name": "DistributorFallingEdgePulsewidth_HB",
+      "offset": 120,
+      "offset_hex": "0x78",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "DISTPW",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_OpenLoopFraction",
+      "item_num": 161,
+      "long_name": "DwellTime_HB",
+      "offset": 193,
+      "offset_hex": "0xC1",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "DWELL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell0",
+      "item_num": 174,
+      "long_name": "ErrorBitRegister0",
+      "offset": 70,
+      "offset_hex": "0x46",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERR0",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell1",
+      "item_num": 175,
+      "long_name": "ErrorBitRegister1",
+      "offset": 71,
+      "offset_hex": "0x47",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERR1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell2",
+      "item_num": 176,
+      "long_name": "ErrorBitRegister2",
+      "offset": 72,
+      "offset_hex": "0x48",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERR2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell3",
+      "item_num": 177,
+      "long_name": "ErrorBitRegister3",
+      "offset": 73,
+      "offset_hex": "0x49",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERR3",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell4",
+      "item_num": 178,
+      "long_name": "ErrorBitRegisterStored0",
+      "offset": 74,
+      "offset_hex": "0x4A",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERS0",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell5",
+      "item_num": 179,
+      "long_name": "ErrorBitRegisterStored1",
+      "offset": 75,
+      "offset_hex": "0x4B",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERS1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell6",
+      "item_num": 180,
+      "long_name": "ErrorBitRegisterStored2",
+      "offset": 76,
+      "offset_hex": "0x4C",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERS2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell7",
+      "item_num": 181,
+      "long_name": "ErrorBitRegisterStored3",
+      "offset": 77,
+      "offset_hex": "0x4D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ERS3",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "SparkScatter",
+      "item_num": 187,
+      "long_name": "Factor_ACVDCY_CurveACurveCDecayAfterRunModeReached",
+      "offset": 163,
+      "offset_hex": "0xA3",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ACVDCY",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_VoltageRegSignal",
+      "item_num": 190,
+      "long_name": "Factor_LeanoutOrEnrichTime_MAP",
+      "offset": 149,
+      "offset_hex": "0x95",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FACTMAP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Counter_PrimaryAndSecondaryRamp",
+      "item_num": 191,
+      "long_name": "Factor_LeanoutOrEnrichTime_TPS",
+      "offset": 153,
+      "offset_hex": "0x99",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FACTTPS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ClearTheErrorTimer_1",
+      "item_num": 207,
+      "long_name": "Flags_AIS",
+      "offset": 96,
+      "offset_hex": "0x60",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BF_AIS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "EngineRpm_HB",
+      "item_num": 212,
+      "long_name": "Flags_F",
+      "offset": 129,
+      "offset_hex": "0x81",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FLAGF",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer16bitCopyB_HB",
+      "item_num": 221,
+      "long_name": "Flags_N",
+      "offset": 127,
+      "offset_hex": "0x7F",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FLAGN",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer16bitCopyB_LB",
+      "item_num": 222,
+      "long_name": "Flags_O",
+      "offset": 128,
+      "offset_hex": "0x80",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FLAGO",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "EngineRpm_LB",
+      "item_num": 223,
+      "long_name": "Flags_P",
+      "offset": 130,
+      "offset_hex": "0x82",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FLAGP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "MapVolts",
+      "item_num": 224,
+      "long_name": "Flags_Q",
+      "offset": 131,
+      "offset_hex": "0x83",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FLAGQ",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AverageMAPValue",
+      "item_num": 225,
+      "long_name": "Flags_R",
+      "offset": 132,
+      "offset_hex": "0x84",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FLAGR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "MapScratch",
+      "item_num": 226,
+      "long_name": "Flags_S",
+      "offset": 133,
+      "offset_hex": "0x85",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FLAGS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_OutOfClosedLoopMode",
+      "item_num": 234,
+      "long_name": "FuelBaselineResult",
+      "offset": 191,
+      "offset_hex": "0xBF",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BASSFUL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused9",
+      "item_num": 235,
+      "long_name": "FuelSubtractedFromStartToRun",
+      "offset": 225,
+      "offset_hex": "0xE1",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FULSTRUN",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused5",
+      "item_num": 236,
+      "long_name": "IncrementalMAP",
+      "offset": 229,
+      "offset_hex": "0xE5",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MAPINC",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BaseFuelModifier",
+      "item_num": 237,
+      "long_name": "InjectorLatencyPW",
+      "offset": 212,
+      "offset_hex": "0xD4",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "INJLATE",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AmbientAirTempVolts",
+      "item_num": 238,
+      "long_name": "InjectorPulsewidth_HB",
+      "offset": 141,
+      "offset_hex": "0x8D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "INJPW",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TpsScratch",
+      "item_num": 241,
+      "long_name": "KeyOnOrEngineRunningTime",
+      "offset": 137,
+      "offset_hex": "0x89",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "ENGRUNT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused13",
+      "item_num": 243,
+      "long_name": "KnockSensorThreshold",
+      "offset": 221,
+      "offset_hex": "0xDD",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "KNKTHR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Counter_A2DScan2",
+      "item_num": 244,
+      "long_name": "KnockVolts",
+      "offset": 160,
+      "offset_hex": "0xA0",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "KNKV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_CLTIME_ClosedLoopTimer",
+      "item_num": 245,
+      "long_name": "LastChargeTempVolts",
+      "offset": 157,
+      "offset_hex": "0x9D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "LSTCHGV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Counter_AdaptiveMem_Erase",
+      "item_num": 246,
+      "long_name": "LastCoolantTempVolts",
+      "offset": 158,
+      "offset_hex": "0x9E",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "LSTCLTV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer16bitCopyA_HB",
+      "item_num": 247,
+      "long_name": "LastSyncFallingEdgeTime",
+      "offset": 125,
+      "offset_hex": "0x7D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "LSTFETIME",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp0",
+      "item_num": 249,
+      "long_name": "LeanoutFactor_HB",
+      "offset": 164,
+      "offset_hex": "0xA4",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "LOFACT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BatteryVolts",
+      "item_num": 251,
+      "long_name": "MapAverageValue_HB",
+      "offset": 147,
+      "offset_hex": "0x93",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AVGMAP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused2",
+      "item_num": 252,
+      "long_name": "MapCorrectionForWasteGate",
+      "offset": 232,
+      "offset_hex": "0xE8",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MAPCORWG",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TargetBatteryVolts",
+      "item_num": 257,
+      "long_name": "MapValue",
+      "offset": 148,
+      "offset_hex": "0x94",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MAP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TPSVolts_11msUpdate",
+      "item_num": 259,
+      "long_name": "MapVolts",
+      "offset": 145,
+      "offset_hex": "0x91",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MAPV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_FuelShutoff",
+      "item_num": 260,
+      "long_name": "MaxRetardFromMAP",
+      "offset": 210,
+      "offset_hex": "0xD2",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MAXRETM",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "FuelBaselineResult_HB",
+      "item_num": 261,
+      "long_name": "MinimumTimerCountBeforeMainloopCanContinue",
+      "offset": 174,
+      "offset_hex": "0xAE",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MINLOOP",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "MINTHR_LowestSessionTPS",
+      "item_num": 262,
+      "long_name": "LowestSessionTPS",
+      "offset": 64,
+      "offset_hex": "0x40",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MINTHR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "MinimumTimerCountBeforeMainloopCanContinue",
+      "item_num": 265,
+      "long_name": "O2SensorVolts",
+      "offset": 156,
+      "offset_hex": "0x9C",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "O2V",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp8",
+      "item_num": 280,
+      "long_name": "PointerIntoAdaptiveMemory",
+      "offset": 172,
+      "offset_hex": "0xAC",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AMPNT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "MapValue",
+      "item_num": 288,
+      "long_name": "PreviousMAP",
+      "offset": 134,
+      "offset_hex": "0x86",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "PREVMAP1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "StackPtrTemp_LB",
+      "item_num": 289,
+      "long_name": "PreviousVehicleSpeed_HB",
+      "offset": 100,
+      "offset_hex": "0x64",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "PRVSPD",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_BoostTimer",
+      "item_num": 290,
+      "long_name": "PTEPWOver32",
+      "offset": 200,
+      "offset_hex": "0xC8",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "PTEPW32",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Counter_FallingEdgeEPP_MaxFF",
+      "item_num": 293,
+      "long_name": "Pulsewidth_PartThrottleEnrichment_HB",
+      "offset": 195,
+      "offset_hex": "0xC3",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "PTEPW",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AutoCalCell8",
+      "item_num": 299,
+      "long_name": "SlowCounter",
+      "offset": 78,
+      "offset_hex": "0x4E",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "SLOWCNT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ADScanIndex",
+      "item_num": 300,
+      "long_name": "SparkScatter",
+      "offset": 181,
+      "offset_hex": "0xB5",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "SPKSCTR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "DistributorFallingEdgePulsewidth_LB",
+      "item_num": 303,
+      "long_name": "SpeedoSensorPulsewidth_HB",
+      "offset": 103,
+      "offset_hex": "0x67",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "SDSPW",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_70",
+      "item_num": 304,
+      "long_name": "StackPtrTemp_HB",
+      "offset": 112,
+      "offset_hex": "0x70",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "STKPTR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Factor_LeanoutOrEnrichTime_TPS",
+      "item_num": 315,
+      "long_name": "SumOfFuelModifiers_HB",
+      "offset": 139,
+      "offset_hex": "0x8B",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "FULMOD",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AdaptiveCellUpdateTimer_IncrementedEveryDistRisingEdge",
+      "item_num": 316,
+      "long_name": "TargetBatteryVolts",
+      "offset": 162,
+      "offset_hex": "0xA2",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TGTBAT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Factor_LeanoutOrEnrichTime_MAP",
+      "item_num": 317,
+      "long_name": "TargetIdleSpeed_HB",
+      "offset": 135,
+      "offset_hex": "0x87",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TGTIDL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "LeanoutFactor_HB",
+      "item_num": 325,
+      "long_name": "Timer_AisChanges",
+      "offset": 179,
+      "offset_hex": "0xB3",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TIMAIS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused6",
+      "item_num": 326,
+      "long_name": "Timer_AisOrO2Sensor",
+      "offset": 228,
+      "offset_hex": "0xE4",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TIMAIO2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BaroReadTimeEngineWithinReadRange",
+      "item_num": 330,
+      "long_name": "Timer_BoostErrTimer",
+      "offset": 219,
+      "offset_hex": "0xDB",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TIMBSTER",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp5",
+      "item_num": 333,
+      "long_name": "Timer_BoostTimer",
+      "offset": 169,
+      "offset_hex": "0xA9",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TIMBST",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "DwellTime_HB",
+      "item_num": 334,
+      "long_name": "Timer_ClosedLoopTimer",
+      "offset": 176,
+      "offset_hex": "0xB0",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "CLTIME",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp9",
+      "item_num": 335,
+      "long_name": "Timer_CountdownFromStartRunForAisFeedback",
+      "offset": 173,
+      "offset_hex": "0xAD",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TIMAISFB",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "LastDistributorFallingEdgeTime_HB",
+      "item_num": 336,
+      "long_name": "Timer_CruiseDecelerate",
+      "offset": 107,
+      "offset_hex": "0x6B",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TIMCRDCL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Counter_BaroReadTime",
+      "item_num": 338,
+      "long_name": "Timer_DelayBeforeUpdating_MINTHR",
+      "offset": 205,
+      "offset_hex": "0xCD",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MINTHRDLY",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Pulsewidth_PartThrottleEnrichment_HB",
+      "item_num": 342,
+      "long_name": "Timer_FuelMonitorOutputTimer_HB",
+      "offset": 123,
+      "offset_hex": "0x7B",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMFLMON",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_NormalDwell",
+      "item_num": 343,
+      "long_name": "Timer_FuelShutoff",
+      "offset": 217,
+      "offset_hex": "0xD9",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMSHUOF",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp2",
+      "item_num": 344,
+      "long_name": "Timer_Leanout",
+      "offset": 166,
+      "offset_hex": "0xA6",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMLEAN",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused3",
+      "item_num": 345,
+      "long_name": "Timer_MinimumFanRun",
+      "offset": 231,
+      "offset_hex": "0xE7",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMFANR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_RadSteamingCountdown",
+      "item_num": 347,
+      "long_name": "Timer_NormalDwell",
+      "offset": 215,
+      "offset_hex": "0xD7",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TIMDWL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "PreviousMAP",
+      "item_num": 348,
+      "long_name": "Timer_CountdownFromAbove196FtoEnableClosedLoop",
+      "offset": 178,
+      "offset_hex": "0xB2",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "O2CNTR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Counter_Over5psiBoost",
+      "item_num": 351,
+      "long_name": "Timer_O2ToggleDuration",
+      "offset": 203,
+      "offset_hex": "0xCB",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMO2TGL",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BankEnrichmentFactor",
+      "item_num": 353,
+      "long_name": "Timer_OpenLoopFraction",
+      "offset": 202,
+      "offset_hex": "0xCA",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMOPLPFR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Counter_MainLoop",
+      "item_num": 354,
+      "long_name": "Timer_OutOfClosedLoopMode",
+      "offset": 118,
+      "offset_hex": "0x76",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMOUTCLMD",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_AisOrO2Sensor",
+      "item_num": 355,
+      "long_name": "Timer_Over5psiBoost",
+      "offset": 197,
+      "offset_hex": "0xC5",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TM5PSI1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Delta_MAP",
+      "item_num": 356,
+      "long_name": "Timer_Over5PSIBoost",
+      "offset": 198,
+      "offset_hex": "0xC6",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TM5PSI2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "FuelSubtractedFromStartToRun",
+      "item_num": 358,
+      "long_name": "Timer_RadSteamingCountdown",
+      "offset": 214,
+      "offset_hex": "0xD6",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMRADSTM",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Unused10",
+      "item_num": 359,
+      "long_name": "Timer_ThermostatDiagnostics",
+      "offset": 224,
+      "offset_hex": "0xE0",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMTSTATDG",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_D3",
+      "item_num": 360,
+      "long_name": "Timer_VoltageRegSignal",
+      "offset": 211,
+      "offset_hex": "0xD3",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMVREG",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "ChargeTempVolts",
+      "item_num": 361,
+      "long_name": "TimerControlStatReg_Mirror",
+      "offset": 190,
+      "offset_hex": "0xBE",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMCTRLST",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "DistributorFallingEdgePulsewidth_HB",
+      "item_num": 362,
+      "long_name": "TimerOverflowsBetweenSpeedoPulses",
+      "offset": 102,
+      "offset_hex": "0x66",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMOFSDS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "SumOfFuelModifiers_HB",
+      "item_num": 363,
+      "long_name": "TimerOverflowsBetweenSyncPulses",
+      "offset": 119,
+      "offset_hex": "0x77",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TMOFSYNC",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Factor_ACVDCY_CurveACurveCDecayAfterRunModeReached",
+      "item_num": 364,
+      "long_name": "TpsAverageValue_HB",
+      "offset": 151,
+      "offset_hex": "0x97",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AVGTPS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_Leanout",
+      "item_num": 366,
+      "long_name": "TpsVolts",
+      "offset": 152,
+      "offset_hex": "0x98",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TPSV",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_O2CNTR_CountdownFromAbove196FtoEnableClosedLoop",
+      "item_num": 367,
+      "long_name": "TPSVolts_11msUpdate",
+      "offset": 159,
+      "offset_hex": "0x9F",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TPS11ms",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_FuelMonitorOutputTimer_HB",
+      "item_num": 370,
+      "long_name": "VehicleSpeed_HB",
+      "offset": 105,
+      "offset_hex": "0x69",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "VSPD",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "AntiLagRetard",
+      "item_num": 372,
+      "long_name": "VerySlowCounter2point6seconds",
+      "offset": 220,
+      "offset_hex": "0xDC",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "VSLOWCNT",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_ThermostatDiagnostics",
+      "item_num": 377,
+      "long_name": "WastegateDutyCycleIncreaseFromKnock",
+      "offset": 218,
+      "offset_hex": "0xDA",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "WGDCK",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "VehicleSpeed_HB",
+      "item_num": 378,
+      "long_name": "Z83_CPU_Port1_copy",
+      "offset": 97,
+      "offset_hex": "0x61",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "Z83",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TargetBatteryVolts",
+      "item_num": 379,
+      "long_name": "MapValue3Bar",
+      "offset": 148,
+      "offset_hex": "0x94",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MAP3BAR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "TargetBatteryVolts",
+      "item_num": 380,
+      "long_name": "MapValue4Bar",
+      "offset": 148,
+      "offset_hex": "0x94",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "MAP4BAR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "MinimumTimerCountBeforeMainloopCanContinue",
+      "item_num": 381,
+      "long_name": "AFR_o2v",
+      "offset": 156,
+      "offset_hex": "0x9C",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "AFRwb",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 390,
+      "long_name": "Analog_Port_1",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Timer_Leanout",
+      "item_num": 392,
+      "long_name": "TpsPos",
+      "offset": 152,
+      "offset_hex": "0x98",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "TPSPOS",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "LastChargeTempVolts",
+      "item_num": 393,
+      "long_name": "EngineRpm_LM",
+      "offset": 143,
+      "offset_hex": "0x8F",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "RPMLM",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_5D",
+      "item_num": 394,
+      "long_name": "GenericInput1",
+      "offset": 93,
+      "offset_hex": "0x5D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "GENINP1",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "BitFlags_5D",
+      "item_num": 395,
+      "long_name": "GenericInput2",
+      "offset": 93,
+      "offset_hex": "0x5D",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "GENINP2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp3",
+      "item_num": 396,
+      "long_name": "BoostTarget3Bar",
+      "offset": 167,
+      "offset_hex": "0xA7",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BSTT3BR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": "Temp3",
+      "item_num": 397,
+      "long_name": "BoostTarget4Bar",
+      "offset": 167,
+      "offset_hex": "0xA7",
+      "reason": "symbol_mismatch_at_offset",
+      "short_name": "BSTT4BR",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 399,
+      "long_name": "Analog_Port_2",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A2",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 400,
+      "long_name": "Analog_Port_3",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A3",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 401,
+      "long_name": "Analog_Port_4",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A4",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 402,
+      "long_name": "Analog_Port_5",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A5",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 403,
+      "long_name": "Analog_Port_6",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A6",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 404,
+      "long_name": "Analog_Port_7",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A7",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    },
+    {
+      "asm_symbol_at_offset": null,
+      "item_num": 405,
+      "long_name": "Analog_Port_8",
+      "offset": 255,
+      "offset_hex": "0xFF",
+      "reason": "offset_absent_in_ecu_asm",
+      "short_name": "A8",
+      "source_verified": false,
+      "xref_protocol": "LM"
+    }
+  ],
+  "xmit_command_modes": [],
+  "xref_protocol": "LM"
+}

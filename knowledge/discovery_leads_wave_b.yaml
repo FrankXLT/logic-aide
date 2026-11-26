@@ -1,0 +1,306 @@
+schema_version: '1.0'
+wave: B
+generated_utc: '2026-11-26T18:19:19Z'
+vault_sha256_count: 167
+leads:
+- lead_id: wave-b-rom-toolchain-chemasmlm
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_toolchain
+  fingerprint: ChemAsmLM
+  query_pattern: mptune.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=mptune.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: MPTune 16 KB 6803 LM assembler, templates, and calibration archival tree.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-rom-toolchain-chemasmsmec
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_toolchain
+  fingerprint: ChemAsmSMEC
+  query_pattern: boostbutton.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=boostbutton.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: 32 KB 68HC11 SMEC assembler, linker, and checksum toolchain archival
+    tree. Confirmed in read-only corpus scan.
+- lead_id: wave-b-rom-toolchain-d-cal-120
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_toolchain
+  fingerprint: D-Cal_120
+  query_pattern: thedodgegarage.com/*ecu*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Aecu%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: D-Cal_120 calibration documentation and legacy Chrysler ECU reference
+    archive. Confirmed in read-only corpus scan.
+- lead_id: wave-b-sci-protocol-symbol-drbmemorytable
+  wave: B
+  source_kind: wayback_cdx
+  category: sci_protocol_symbol
+  fingerprint: DRBMemoryTable
+  query_pattern: minimopar.net/*sbec*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Asbec%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: SBEC/SMEC DRBMemoryTable RAM watchlist pointers and ECU pinout archive.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-sci-logger-tool-dualogger-prc
+  wave: B
+  source_kind: wayback_cdx
+  category: sci_logger_tool
+  fingerprint: DuaLogger.prc
+  query_pattern: chryslerccdsci.wordpress.com/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=chryslerccdsci.wordpress.com%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Chrysler SCI/CCD protocol notes and DuaLogger.prc PalmOS read-only logger.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-rom-disassembly-symbol-peftbl-pumpingefficiency
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_disassembly_symbol
+  fingerprint: PEFTBL_PumpingEfficiency
+  query_pattern: turbododge.com/*disassembly*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Adisassembly%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: TurboDodge ROM disassembly threads covering PEFTBL_PumpingEfficiency
+    tables. Confirmed in read-only corpus scan.
+- lead_id: wave-b-rom-toolchain-zchem
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_toolchain
+  fingerprint: zChEM
+  query_pattern: boostbutton.com/*zChEM*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=boostbutton.com%2F%2AzChEM%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: zChEM Chrysler ROM assembly packaging and calibration build archive.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-rom-baseline-source-blueberry60
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_baseline_source
+  fingerprint: Blueberry60
+  query_pattern: turbododge.com/*Blueberry60*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2ABlueberry60%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: Blueberry60 16 KB 6803 LM community disassembly and baseline source.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-rom-baseline-source-ladybug60
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_baseline_source
+  fingerprint: Ladybug60
+  query_pattern: turbododge.com/*Ladybug60*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2ALadybug60%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: Ladybug60 32 KB 68HC11 SMEC community disassembly and baseline source.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-rom-toolchain-tbl2calx
+  wave: B
+  source_kind: wayback_cdx
+  category: rom_toolchain
+  fingerprint: tbl2calx
+  query_pattern: mptune.com/*tbl2calx*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=mptune.com%2F%2Atbl2calx%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: Legacy .tbl to .calx calibration table converter source and format notes.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-sci-protocol-symbol-drbfunctiontable
+  wave: B
+  source_kind: wayback_cdx
+  category: sci_protocol_symbol
+  fingerprint: DRBFunctionTable
+  query_pattern: chryslerccdsci.wordpress.com/*DRBFunctionTable*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=chryslerccdsci.wordpress.com%2F%2ADRBFunctionTable%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: SMEC/SBEC DRBFunctionTable SCI diagnostic dispatch table disassembly.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-sci-protocol-symbol-xmitrequestedramlocation
+  wave: B
+  source_kind: wayback_cdx
+  category: sci_protocol_symbol
+  fingerprint: XmitRequestedRamLocation
+  query_pattern: chryslerccdsci.wordpress.com/*XmitRequestedRamLocation*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=chryslerccdsci.wordpress.com%2F%2AXmitRequestedRamLocation%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: rom/src/
+  rationale: SMEC/SBEC 0xf2/0xfe SCI RAM location transmit routine disassembly. Confirmed
+    in read-only corpus scan.
+- lead_id: wave-b-sci-protocol-symbol-fastdataoutputaddresstable
+  wave: B
+  source_kind: code_forge
+  category: sci_protocol_symbol
+  fingerprint: FastDataOutputAddressTable
+  query_pattern: FastDataOutputAddressTable
+  forge: github
+  code_forge_query_url: https://github.com/search?q=FastDataOutputAddressTable&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: rom/src/
+  rationale: SBEC 0xf6 high-speed SCI FastDataOutputAddressTable references on GitHub.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-sci-protocol-symbol-setuphispeeddatatransfer
+  wave: B
+  source_kind: code_forge
+  category: sci_protocol_symbol
+  fingerprint: SetupHiSpeedDataTransfer
+  query_pattern: SetupHiSpeedDataTransfer
+  forge: github
+  code_forge_query_url: https://github.com/search?q=SetupHiSpeedDataTransfer&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: rom/src/
+  rationale: SBEC SetupHiSpeedDataTransfer 62.5 kbaud SCI setup references on GitHub.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-cross-assembler-emulator-as11
+  wave: B
+  source_kind: code_forge
+  category: cross_assembler_emulator
+  fingerprint: as11
+  query_pattern: as11 68hc11 assembler
+  forge: github
+  code_forge_query_url: https://github.com/search?q=as11+68hc11+assembler&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: scripts/
+  rationale: Motorola 68HC11 cross-assembler (as11) for deterministic ROM round-trip.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-cross-assembler-emulator-blackfoot
+  wave: B
+  source_kind: code_forge
+  category: cross_assembler_emulator
+  fingerprint: blackfoot
+  query_pattern: blackfoot 68hc11 6803
+  forge: github
+  code_forge_query_url: https://github.com/search?q=blackfoot+68hc11+6803&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: scripts/
+  rationale: Blackfoot 68HC11/6803 cross-assembler and cleanroom disassembly tooling.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-cross-assembler-emulator-m68hc11
+  wave: B
+  source_kind: code_forge
+  category: cross_assembler_emulator
+  fingerprint: m68hc11
+  query_pattern: m68hc11 6803 simulator
+  forge: sourceforge
+  code_forge_query_url: https://sourceforge.net/directory/?q=m68hc11+6803+simulator
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: scripts/
+  rationale: Cycle-accurate 68HC11/6803 simulator and GNU binutils toolchain on SourceForge.
+    Confirmed in read-only corpus scan.
+- lead_id: wave-b-disassembler-sleigh-ghidra-sleigh-68hc11-6803
+  wave: B
+  source_kind: code_forge
+  category: disassembler_sleigh
+  fingerprint: Ghidra SLEIGH 68HC11 / 6803
+  query_pattern: ghidra sleigh 68hc11 6803
+  forge: github
+  code_forge_query_url: https://github.com/search?q=ghidra+sleigh+68hc11+6803&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: scripts/
+  rationale: Ghidra SLEIGH processor definitions for Motorola 68HC11 and 6803 instruction
+    sets.
+- lead_id: wave-b-sci-ccd-drb-repo-chrysler-sci-logger
+  wave: B
+  source_kind: code_forge
+  category: sci_ccd_drb_repo
+  fingerprint: Chrysler SCI logger
+  query_pattern: chrysler sci datalogger 7812.5
+  forge: github
+  code_forge_query_url: https://github.com/search?q=chrysler+sci+datalogger+7812.5&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/ecu/
+  rationale: Read-only Chrysler SCI 7812.5/62500 baud telemetry and RAM logger repositories.
+- lead_id: wave-b-sci-ccd-drb-repo-chrysler-ccd-drb-ii
+  wave: B
+  source_kind: code_forge
+  category: sci_ccd_drb_repo
+  fingerprint: Chrysler CCD DRB-II
+  query_pattern: chrysler ccd drb-ii
+  forge: gitlab
+  code_forge_query_url: https://gitlab.com/search?search=chrysler+ccd+drb-ii
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/ecu/
+  rationale: Chrysler CCD bus and DRB-II cartridge prompt protocol repositories on
+    GitLab.
+- lead_id: wave-b-cross-assembler-emulator-6803-cross-assembler
+  wave: B
+  source_kind: code_forge
+  category: cross_assembler_emulator
+  fingerprint: 6803 cross-assembler
+  query_pattern: 6803 68hc11 cross assembler
+  forge: gitlab
+  code_forge_query_url: https://gitlab.com/search?search=6803+68hc11+cross+assembler
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: scripts/
+  rationale: 6803/68HC11 cross-assembler and cycle-accurate emulator mirrors on GitLab.
