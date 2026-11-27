@@ -326,6 +326,50 @@ def diagram_heritage_cmd(
     _print_diagram_human(result)
 
 
+def emit_sync_wiki_result(result: dict[str, Any], as_json: bool) -> None:
+    """Emit ``heritage sync-wiki`` output as JSON or concise status lines."""
+    if as_json:
+        _emit_json(result)
+        return
+    mermaid_checked = next(
+        (
+            result[key]
+            for key in (
+                "mermaid_blocks_checked",
+                "checked_mermaid",
+                "mermaid_checked",
+                "mermaid_diagrams_checked",
+                "checked_mermaid_diagrams",
+                "mermaid_count",
+            )
+            if key in result and result[key] is not None
+        ),
+        0,
+    )
+    target = result.get("target_dir")
+    destination = "validate-only" if result.get("validate_only") else (target or "validate-only")
+    click.echo(
+        f"Validated {result.get('validated_files', 0)} wiki files, "
+        f"checked {mermaid_checked} Mermaid diagrams -> {destination}"
+    )
+    if result.get("push_github_wiki"):
+        click.echo(
+            f"GitHub Wiki mirror: status={result.get('github_wiki_status')}, "
+            f"remote={result.get('wiki_remote')}, "
+            f"branch={result.get('wiki_branch')}, "
+            f"synced={result.get('synced_files', 0)}, "
+            f"pruned={result.get('pruned_files', 0)}"
+        )
+        if result.get("pushed_commit"):
+            click.echo(f"Pushed commit: {result['pushed_commit']}")
+        elif result.get("staged_commit"):
+            click.echo(f"Staged commit: {result['staged_commit']}")
+        if result.get("action_required"):
+            click.echo(f"Action required: {result['action_required']}")
+        return
+    click.echo(f"Synced {result.get('synced_files', 0)} files -> {target or 'validate-only'}")
+
+
 def register_heritage_commands(heritage_group: click.Group) -> None:
     """Register Wave D heritage subcommands onto ``heritage_group``."""
     for cmd in (parse_docs_cmd, build_index_cmd, index_alias_cmd, query_heritage_cmd, diagram_heritage_cmd):

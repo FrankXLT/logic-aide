@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+
 import pytest
 import yaml
 
@@ -267,5 +268,3 @@ def test_sync_wiki_rejects_target_symlink(tmp_path: Path) -> None:
     with pytest.raises(WikiValidationError):
         sync_wiki(wiki, target_dir=out, dry_run=False)
     assert outside_target.read_text(encoding="utf-8") == "original\n"
-
-

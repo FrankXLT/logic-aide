@@ -16,6 +16,7 @@ CHROME_PARTIALS = frozenset({"_Sidebar.md", "_Footer.md"})
 VALID_TIERS = frozenset({"Tier 1", "Tier 2", "Tier 3"})
 VALID_STATUSES = frozenset({"verified", "needs_human_review", "stub"})
 DEFAULT_STAGE_DIR = Path("data/heritage_raw/wiki_stage")
+DEFAULT_GITHUB_WIKI_STAGE_DIR = Path("data/heritage_raw/wiki_github_mirror")
 REQUIRED_FRONTMATTER_FIELDS = (
     "title", "slug", "category", "tier", "provenance",
     "ecu_scope", "engine_scope", "status", "last_verified", "tags",
@@ -412,11 +413,25 @@ def run_sync_wiki(
     wiki_dir: str | Path, target_dir: str | Path | None = None, dry_run: bool = False,
     validate_only: bool = False, *, strip_frontmatter: bool = True,
     flatten_for_github_wiki: bool = True, use_external_linter: bool = False,
+    push_github_wiki: bool = False, wiki_remote: str | None = None,
+    repo_root: str | Path | None = None,
 ) -> dict[str, Any]:
-    """Run wiki validation and optional dual-publish sync."""
+    """Run wiki validation and optional dual-publish or GitHub .wiki.git mirror sync."""
+    if validate_only and (push_github_wiki or wiki_remote is not None):
+        raise WikiValidationError("validate_only cannot be combined with push_github_wiki or wiki_remote")
+    if wiki_remote is not None and not push_github_wiki:
+        raise WikiValidationError("--wiki-remote requires push_github_wiki=True.")
     if validate_only:
         summary = validate_wiki_tree(wiki_dir, use_external_linter=use_external_linter)
         return {**summary, "synced_files": 0, "dry_run": dry_run, "validate_only": True}
+    if push_github_wiki:
+        from logicaide.heritage.github_wiki import push_github_wiki_mirror
+
+        return push_github_wiki_mirror(
+            wiki_dir=wiki_dir, target_dir=target_dir, dry_run=dry_run,
+            strip_frontmatter=strip_frontmatter, flatten_for_github_wiki=flatten_for_github_wiki,
+            use_external_linter=use_external_linter, wiki_remote=wiki_remote, repo_root=repo_root,
+        )
     result = sync_wiki(
         wiki_dir=wiki_dir, target_dir=target_dir, dry_run=dry_run, strip_frontmatter=strip_frontmatter,
         flatten_for_github_wiki=flatten_for_github_wiki, use_external_linter=use_external_linter,

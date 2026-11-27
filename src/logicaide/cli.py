@@ -131,18 +131,15 @@ def discover(
 
 
 @heritage.command(name="sync-wiki")
-@click.option(
-    "--wiki-dir",
-    type=click.Path(path_type=Path),
-    default=Path("wiki"),
-    show_default=True,
-    help="Source wiki directory to synchronize.",
-)
+@click.option("--wiki-dir", type=click.Path(path_type=Path), default=Path("wiki"), show_default=True, help="Source wiki directory to synchronize.")
 @click.option("--target-dir", type=click.Path(path_type=Path), default=None, help="Target directory for synchronized wiki outputs.")
 @click.option("--dry-run", is_flag=True, default=False, help="Preview wiki synchronization changes without writing files.")
 @click.option("--validate-only", is_flag=True, default=False, help="Validate wiki pages without copying or modifying targets.")
 @click.option("--strip-frontmatter/--no-strip-frontmatter", default=True, show_default=True, help="Strip YAML frontmatter on outbound .wiki.git copies.")
 @click.option("--flatten/--no-flatten", default=True, show_default=True, help="Flatten subdirectories for GitHub .wiki.git or preserve tree for static sites.")
+@click.option("--push-github-wiki", is_flag=True, default=False, help="Validate, flatten, commit, and mirror wiki pages to GitHub .wiki.git.")
+@click.option("--wiki-remote", type=str, default=None, help="Override GitHub Wiki git remote URL (defaults to origin .wiki.git).")
+@click.option("--json", "as_json", is_flag=True, default=False, help="Emit wiki sync summary as JSON.")
 def sync_wiki(
     wiki_dir: Path,
     target_dir: Path | None,
@@ -150,21 +147,34 @@ def sync_wiki(
     validate_only: bool,
     strip_frontmatter: bool,
     flatten: bool,
+    push_github_wiki: bool,
+    wiki_remote: str | None,
+    as_json: bool,
 ) -> None:
     """Validate and synchronize heritage wiki pages."""
-    from logicaide.heritage.wiki_sync import run_sync_wiki
+    from logicaide.heritage.wiki_sync import WikiValidationError, run_sync_wiki
 
-    run_sync_wiki(
-        wiki_dir=wiki_dir,
-        dry_run=dry_run,
-        validate_only=validate_only,
-        strip_frontmatter=strip_frontmatter,
-        flatten_for_github_wiki=flatten,
-        **_compact_kwargs(target_dir=target_dir),
-    )
+    if validate_only and (push_github_wiki or wiki_remote is not None):
+        raise click.UsageError("--validate-only cannot be combined with --push-github-wiki or --wiki-remote.")
+    if wiki_remote is not None and not push_github_wiki:
+        raise click.UsageError("--wiki-remote requires --push-github-wiki.")
+    try:
+        result = run_sync_wiki(
+            wiki_dir=wiki_dir,
+            dry_run=dry_run,
+            validate_only=validate_only,
+            strip_frontmatter=strip_frontmatter,
+            flatten_for_github_wiki=flatten,
+            push_github_wiki=push_github_wiki,
+            wiki_remote=wiki_remote,
+            **_compact_kwargs(target_dir=target_dir),
+        )
+    except (WikiValidationError, OSError, ValueError) as exc:
+        raise click.ClickException(str(exc)) from exc
+    emit_sync_wiki_result(result, as_json)
 
 
-from logicaide.heritage.cli_commands import register_heritage_commands
+from logicaide.heritage.cli_commands import emit_sync_wiki_result, register_heritage_commands
 
 register_heritage_commands(heritage)
 
