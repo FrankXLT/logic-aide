@@ -207,7 +207,7 @@ def _build_action_required(remote_url: str, display_remote: str, lower_err: str)
     if wiki_disabled:
         msg = f"GitHub Wiki is disabled for {owner_repo or display_remote}. Enable Wikis under Settings -> Features -> Wikis, {action_tail}"
     elif owner_repo and gh_info is not None and gh_info.get("hasWikiEnabled") is True:
-        msg = f"GitHub Wiki is enabled for {owner_repo} but .wiki.git is not initialized yet. {action_tail.capitalize()}"
+        msg = f"GitHub Wiki is enabled for {owner_repo} but .wiki.git is not initialized yet. {action_tail[:1].upper()}{action_tail[1:]}"
     else:
         msg = f"Wiki remote {display_remote} is uninitialized or not yet created. Ensure Wikis are enabled under Settings -> Features -> Wikis, {action_tail}"
     return _redact_credentials(msg)

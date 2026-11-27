@@ -129,9 +129,12 @@ def test_sync_wiki_github_flat_strips_frontmatter_and_rewrites_links(tmp_path: P
     sidebar_out = (out / "_Sidebar.md").read_text(encoding="utf-8")
 
     assert not home_out.startswith("---")
-    assert "[Guide](guide.md#pinout)" in home_out
-    assert "[Home](Home.md)" in guide_out
-    assert "[Guide](guide.md)" in sidebar_out
+    assert "[Guide](guide#pinout)" in home_out
+    assert "[Home](Home)" in guide_out
+    assert "[Guide](guide)" in sidebar_out
+    assert ".md)" not in home_out
+    assert ".md)" not in guide_out
+    assert ".md)" not in sidebar_out
     assert (out / "_Footer.md").read_text(encoding="utf-8") == "Cleanroom Heritage Footer\n"
 
 
@@ -141,8 +144,10 @@ def test_sync_wiki_static_site_preserves_subdirs_and_frontmatter(tmp_path: Path)
     res = sync_wiki(wiki, target_dir=out, strip_frontmatter=False, flatten_for_github_wiki=False)
 
     assert res["synced_files"] == 4
+    home_out = (out / "Home.md").read_text(encoding="utf-8")
     guide_out = (out / "topic" / "guide.md").read_text(encoding="utf-8")
     assert guide_out.startswith("---")
+    assert "[Guide](topic/guide.md#pinout)" in home_out
     assert "[Home](../Home.md)" in guide_out
 
 
@@ -268,3 +273,50 @@ def test_sync_wiki_rejects_target_symlink(tmp_path: Path) -> None:
     with pytest.raises(WikiValidationError):
         sync_wiki(wiki, target_dir=out, dry_run=False)
     assert outside_target.read_text(encoding="utf-8") == "original\n"
+
+
+def test_sync_wiki_flattens_backtick_labels_and_preserves_inline_code_spans(tmp_path: Path) -> None:
+    wiki = _build_sample_wiki(tmp_path)
+    (wiki / "Home.md").write_text(
+        _frontmatter_block(title="Home", slug="home", category="portal")
+        + "# Home\n\n"
+        + "See [Guide](topic/guide.md#pinout), [`60-Way` `SMEC`](topic/guide.md#pinout), and [`_Sidebar.md`](_Sidebar.md).\n\n"
+        + "Inline examples `[not-a-link](topic/missing.md)` and `[keep-me](topic/guide.md)` must stay literal.\n",
+        encoding="utf-8",
+    )
+
+    validated = validate_wiki_tree(wiki)
+    assert validated["validated_files"] == 4
+
+    flat_out = tmp_path / "flat_wiki"
+    sync_wiki(wiki, target_dir=flat_out, strip_frontmatter=True, flatten_for_github_wiki=True)
+    flat_home = (flat_out / "Home.md").read_text(encoding="utf-8")
+    assert "[Guide](guide#pinout)" in flat_home
+    assert "[`60-Way` `SMEC`](guide#pinout)" in flat_home
+    assert "[`_Sidebar.md`](_Sidebar)" in flat_home
+    assert "`[not-a-link](topic/missing.md)`" in flat_home
+    assert "`[keep-me](topic/guide.md)`" in flat_home
+
+    unflat_out = tmp_path / "unflat_wiki"
+    sync_wiki(wiki, target_dir=unflat_out, strip_frontmatter=False, flatten_for_github_wiki=False)
+    unflat_home = (unflat_out / "Home.md").read_text(encoding="utf-8")
+    unflat_guide = (unflat_out / "topic" / "guide.md").read_text(encoding="utf-8")
+    assert "[`60-Way` `SMEC`](topic/guide.md#pinout)" in unflat_home
+    assert "[`_Sidebar.md`](_Sidebar.md)" in unflat_home
+    assert "`[not-a-link](topic/missing.md)`" in unflat_home
+    assert "[Home](../Home.md)" in unflat_guide
+
+
+def test_sync_wiki_repo_wiki_flattens_links_and_backtick_labels(tmp_path: Path) -> None:
+    out = tmp_path / "repo_github_wiki"
+    res = sync_wiki(REPO_WIKI, target_dir=out, strip_frontmatter=True, flatten_for_github_wiki=True)
+    assert res["synced_files"] >= 12
+
+    home_out = (out / "Home.md").read_text(encoding="utf-8")
+    sidebar_out = (out / "_Sidebar.md").read_text(encoding="utf-8")
+
+    assert ".md)" not in home_out
+    assert ".md)" not in sidebar_out
+    assert "[`60-Way` `SMEC` & `SBEC` Connector Atlas](60-way-connector-atlas)" in sidebar_out
+    assert "[`60-Way` `SMEC` & `SBEC` Connector Atlas (`1988–1993`)](60-way-connector-atlas)" in home_out
+

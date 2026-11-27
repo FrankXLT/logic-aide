@@ -24,8 +24,19 @@ REQUIRED_FRONTMATTER_FIELDS = (
 
 _FRONTMATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---(?:\r?\n|\Z)", re.DOTALL)
 _FENCE_OPEN_RE = re.compile(r"^([`~]{3,})(.*)$")
-_INLINE_CODE_RE = re.compile(r"`+[^`]*`+")
-_MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[([^\]]*)\]\(([^)]+)\)")
+def _code_span_pattern(group_name: str) -> str:
+    """Return a non-backtracking regex pattern for single- or multi-backtick inline code spans."""
+    return (
+        rf"(?<!`)(?P<{group_name}>`+)(?!`)"
+        rf"[^`\r\n]*(?:(?!(?P={group_name})(?!`))`+(?!`)[^`\r\n]*)*"
+        rf"(?P={group_name})(?!`)"
+    )
+
+
+_WIKI_LINK_TOKEN_RE = re.compile(
+    rf"(?P<code>{_code_span_pattern('code_ticks')})"
+    rf"|(?P<link>(?<!!)\[(?P<label>[^\[\]`\r\n]*(?:{_code_span_pattern('label_ticks')}[^\[\]`\r\n]*)*)\]\((?P<target>[^)\r\n]+)\))"
+)
 _EXTERNAL_URL_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://")
 _FORBIDDEN_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("Windows user path", re.compile(r"C:\\Users\\", re.IGNORECASE)),
@@ -219,8 +230,10 @@ def _validate_page_links(
     for line, is_code in _iter_code_aware_lines(page.raw_text):
         if is_code:
             continue
-        for match in _MARKDOWN_LINK_RE.finditer(_INLINE_CODE_RE.sub("", line)):
-            raw_target = match.group(2).strip()
+        for match in _WIKI_LINK_TOKEN_RE.finditer(line):
+            if match.group("code") is not None:
+                continue
+            raw_target = match.group("target").strip()
             path_part, anchor = _parse_link_target(raw_target)
             if (not path_part and anchor) or _EXTERNAL_URL_RE.match(path_part):
                 continue
@@ -323,30 +336,22 @@ def validate_wiki_tree(wiki_dir: str | Path, *, use_external_linter: bool = Fals
 def _rewrite_links_for_flat_wiki(
     text: str, page: _WikiPage, wiki_root: Path, flat_name_index: dict[str, list[Path]], slug_index: dict[str, list[Path]]
 ) -> str:
-    """Rewrite relative directory links to flattened filenames outside code spans/fences."""
+    """Rewrite relative wiki page links to flattened extensionless slugs outside code spans/fences."""
     def _replace_match(match: re.Match[str]) -> str:
-        label, raw_target = match.group(1), match.group(2)
+        if match.group("code") is not None:
+            return match.group(0)
+        label, raw_target = match.group("label"), match.group("target")
         path_part, anchor = _parse_link_target(raw_target)
         if not path_part or _EXTERNAL_URL_RE.match(path_part):
             return match.group(0)
         resolved = _resolve_wiki_target(page.abs_path, wiki_root, raw_target, flat_name_index, slug_index)
         if resolved is None or resolved.suffix.lower() != ".md":
             return match.group(0)
-        new_path = resolved.name if path_part.lower().endswith(".md") else resolved.stem
-        return f"[{label}]({new_path}{anchor})"
+        return f"[{label}]({resolved.stem}{anchor})"
 
     out_lines: list[str] = []
     for line, is_code in _iter_code_aware_lines(text):
-        if is_code:
-            out_lines.append(line)
-            continue
-        parts, last = [], 0
-        for code_match in _INLINE_CODE_RE.finditer(line):
-            parts.append(_MARKDOWN_LINK_RE.sub(_replace_match, line[last : code_match.start()]))
-            parts.append(code_match.group(0))
-            last = code_match.end()
-        parts.append(_MARKDOWN_LINK_RE.sub(_replace_match, line[last:]))
-        out_lines.append("".join(parts))
+        out_lines.append(line if is_code else _WIKI_LINK_TOKEN_RE.sub(_replace_match, line))
     return "".join(out_lines)
 
 

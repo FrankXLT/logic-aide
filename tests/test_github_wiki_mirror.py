@@ -13,6 +13,7 @@ import pytest
 from logicaide.cli import main as cli_main
 from logicaide.heritage import github_wiki
 from logicaide.heritage.github_wiki import (
+    _build_action_required,
     _prune_stale_pages,
     derive_github_wiki_remote,
     push_github_wiki_mirror,
@@ -33,10 +34,14 @@ def _frontmatter(title: str = "Sample", slug: str = "sample", category: str = "t
 def _build_sample_wiki(root: Path) -> Path:
     wiki = root / "wiki"
     (wiki / "topic").mkdir(parents=True)
-    (wiki / "_Sidebar.md").write_text("- [Home](Home.md)\n- [Guide](topic/guide.md)\n", encoding="utf-8")
+    (wiki / "_Sidebar.md").write_text(
+        "- [Home](Home.md)\n- [Guide](topic/guide.md)\n- [`60-Way` `SMEC`](topic/guide.md)\n",
+        encoding="utf-8",
+    )
     (wiki / "_Footer.md").write_text("Cleanroom Heritage Footer\n", encoding="utf-8")
     (wiki / "Home.md").write_text(
-        _frontmatter("Home", "home", "portal") + "# Home\n\nSee [Guide](topic/guide.md#pinout).\n",
+        _frontmatter("Home", "home", "portal")
+        + "# Home\n\nSee [Guide](topic/guide.md#pinout) and [`60-Way` `SMEC`](topic/guide.md#pinout).\n",
         encoding="utf-8",
     )
     (wiki / "topic" / "guide.md").write_text(
@@ -105,8 +110,17 @@ def test_push_github_wiki_bare_repo_push_incremental_and_prunes_stale_pages(tmp_
     assert res1["commit_created"] is True
     expected_pages = {"Home.md", "guide.md", "_Sidebar.md", "_Footer.md"}
     assert set(_git(wiki_bare, "ls-tree", "-r", "--name-only", "master").splitlines()) == expected_pages
-    assert not _git(wiki_bare, "show", "master:Home.md").startswith("---")
-    assert not _git(wiki_bare, "show", "master:guide.md").startswith("---")
+    pushed_home = _git(wiki_bare, "show", "master:Home.md")
+    pushed_guide = _git(wiki_bare, "show", "master:guide.md")
+    pushed_sidebar = _git(wiki_bare, "show", "master:_Sidebar.md")
+    assert not pushed_home.startswith("---")
+    assert not pushed_guide.startswith("---")
+    assert "[Guide](guide#pinout)" in pushed_home
+    assert "[`60-Way` `SMEC`](guide#pinout)" in pushed_home
+    assert "[Home](Home)" in pushed_guide
+    assert "[Guide](guide)" in pushed_sidebar
+    assert "[`60-Way` `SMEC`](guide)" in pushed_sidebar
+    assert ".md)" not in pushed_home and ".md)" not in pushed_guide and ".md)" not in pushed_sidebar
 
     res2 = run_sync_wiki(
         wiki, target_dir=mirror, push_github_wiki=True, wiki_remote=str(wiki_bare), repo_root=tmp_path
@@ -437,3 +451,27 @@ def test_cli_sync_wiki_guards_and_human_output(tmp_path: Path) -> None:
     mermaid_match = re.search(r"checked (\d+) Mermaid diagrams", human.output)
     assert mermaid_match is not None and int(mermaid_match.group(1)) > 0
     assert "GitHub Wiki mirror: status=pushed" in human.output
+
+
+def test_build_action_required_preserves_mixed_case_owner_repo(monkeypatch: pytest.MonkeyPatch) -> None:
+    captured_cmds: list[list[str]] = []
+
+    def _mock_gh_run(cmd: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
+        captured_cmds.append(list(cmd))
+        return subprocess.CompletedProcess(
+            cmd,
+            0,
+            json.dumps({"hasWikiEnabled": True, "isPrivate": False}),
+            "",
+        )
+
+    monkeypatch.setattr(github_wiki.subprocess, "run", _mock_gh_run)
+    remote = "https://github.com/FrankXLT/logic-aide.wiki.git"
+    msg = _build_action_required(remote, remote, "repository not found")
+
+    assert captured_cmds == [["gh", "repo", "view", "FrankXLT/logic-aide", "--json", "hasWikiEnabled,isPrivate"]]
+    assert "FrankXLT/logic-aide" in msg
+    assert "https://github.com/FrankXLT/logic-aide/wiki" in msg
+    assert "frankxlt" not in msg
+    assert "Create the first page" in msg
+
