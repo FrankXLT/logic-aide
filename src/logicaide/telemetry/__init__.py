@@ -1,7 +1,39 @@
-"""Telemetry log parsers, 30s Zstd Parquet chunker, and DuckDB analytical rollups."""
+"""Telemetry log parsers, 30s Zstd Parquet chunker, DuckDB rollups, and 62.5k SCI poller."""
 
 from __future__ import annotations
 
+from logicaide.telemetry.dead_cell import (
+    DEFAULT_PROBE_TIMEOUT_MS,
+    REASON_RUNTIME_TIMEOUT,
+    REASON_STARTUP_TIMEOUT,
+    RUNTIME_TIMEOUT_THRESHOLD,
+    STARTUP_MISS_THRESHOLD,
+    STATE_ACTIVE,
+    STATE_PROBING,
+    STATE_QUARANTINED,
+    CellHealth,
+    DeadCellQuarantineManager,
+)
+from logicaide.telemetry.deadbolt import (
+    ALLOWED_SINGLE_BYTE_TX,
+    FORBIDDEN_TX_OPCODES,
+    HardwareDeadboltError,
+    NoVerifiedSourceMatchError,
+    SciTxGate,
+    open_read_only_serial,
+    validate_serial_target,
+)
+from logicaide.telemetry.fixtures import (
+    GPS_FORBIDDEN_COLUMNS,
+    export_stimulus_fixture,
+)
+from logicaide.telemetry.issues import (
+    VALID_BOOKMARK_SOURCES,
+    VALID_ISSUE_SEVERITIES,
+    bookmark_tuning_issue,
+    list_bookmarks,
+    list_tuning_issues,
+)
 from logicaide.telemetry.log_parsers import (
     AFR_MAX,
     AFR_MIN,
@@ -16,10 +48,6 @@ from logicaide.telemetry.log_parsers import (
     discover_private_logs,
     parse_telemetry_file,
 )
-from logicaide.telemetry.fixtures import (
-    GPS_FORBIDDEN_COLUMNS,
-    export_stimulus_fixture,
-)
 from logicaide.telemetry.parquet_chunker import (
     CANONICAL_COLUMNS,
     CANONICAL_PARQUET_SCHEMA,
@@ -32,28 +60,94 @@ from logicaide.telemetry.rollups import (
     query_load_cell_rollups,
     summarize_telemetry_lake,
 )
+from logicaide.telemetry.sci_channels import (
+    HIGH_SPEED_SCI_BAUD,
+    WatchedChannel,
+    build_telemetry_sample,
+    decode_channel_value,
+    encode_channel_bytes,
+    resolve_manifest_watchlist,
+)
+from logicaide.telemetry.sci_loopback import (
+    HostLoopbackPort,
+    LoopbackUartPair,
+    MockSciEcuResponder,
+    OperatingPoint,
+    default_chrysler_turbo_cycle,
+    load_fixture_operating_points,
+)
+from logicaide.telemetry.sci_poller import (
+    SciPoller,
+    SciWatchConfig,
+    SciWatchResult,
+)
+from logicaide.telemetry.watch_cli import (
+    DEFAULT_LAKE_DIR,
+    register_telemetry_watch_command,
+    run_telemetry_watch,
+)
 
 __all__ = [
     "AFR_MAX",
     "AFR_MIN",
+    "ALLOWED_SINGLE_BYTE_TX",
     "BUS_STALL_THRESHOLD_S",
     "CANONICAL_COLUMNS",
     "CANONICAL_PARQUET_SCHEMA",
+    "CellHealth",
+    "DEFAULT_LAKE_DIR",
+    "DEFAULT_PROBE_TIMEOUT_MS",
+    "DeadCellQuarantineManager",
     "EGT_RAIL_THRESHOLD_F",
     "FORBIDDEN_GPS_COLUMNS",
+    "FORBIDDEN_TX_OPCODES",
     "GPS_FORBIDDEN_COLUMNS",
+    "HIGH_SPEED_SCI_BAUD",
+    "HardwareDeadboltError",
+    "HostLoopbackPort",
     "LOAD_CELL_ROLLUPS_SQL",
+    "LoopbackUartPair",
+    "MockSciEcuResponder",
+    "NoVerifiedSourceMatchError",
+    "OperatingPoint",
     "PARQUET_STATISTICS_COLUMNS",
     "PSI_TO_KPA",
     "ParsedTelemetrySession",
+    "REASON_RUNTIME_TIMEOUT",
+    "REASON_STARTUP_TIMEOUT",
     "RELATIVE_LOG_BASE_EPOCH_NS",
+    "RUNTIME_TIMEOUT_THRESHOLD",
     "STANDARD_BARO_KPA",
+    "STARTUP_MISS_THRESHOLD",
+    "STATE_ACTIVE",
+    "STATE_PROBING",
+    "STATE_QUARANTINED",
+    "SciPoller",
+    "SciTxGate",
+    "SciWatchConfig",
+    "SciWatchResult",
     "TelemetrySample",
+    "VALID_BOOKMARK_SOURCES",
+    "VALID_ISSUE_SEVERITIES",
     "VALID_RUN_KINDS",
+    "WatchedChannel",
+    "bookmark_tuning_issue",
+    "build_telemetry_sample",
+    "decode_channel_value",
+    "default_chrysler_turbo_cycle",
     "discover_private_logs",
+    "encode_channel_bytes",
     "export_stimulus_fixture",
+    "list_bookmarks",
+    "list_tuning_issues",
+    "load_fixture_operating_points",
+    "open_read_only_serial",
     "parse_telemetry_file",
     "query_load_cell_rollups",
+    "register_telemetry_watch_command",
+    "resolve_manifest_watchlist",
+    "run_telemetry_watch",
     "summarize_telemetry_lake",
+    "validate_serial_target",
     "write_session_parquet_chunks",
 ]

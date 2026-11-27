@@ -315,8 +315,17 @@ def test_telemetry_cli_and_ingest_script(tmp_path: Path) -> None:
     exp = json.loads(r_exp.output)
     assert exp["row_count"] == 25 and exp["gps_stripped"] is True and out_fix.is_file()
 
-    r_watch = runner.invoke(cli_main, ["telemetry", "watch"])
-    assert r_watch.exit_code == 0 and "Milestone M2" in r_watch.output
+    r_watch = runner.invoke(
+        cli_main,
+        ["telemetry", "watch", "--no-persist", "--max-frames", "5", "--json"],
+    )
+    assert r_watch.exit_code == 0, r_watch.output
+    watch_payload = json.loads(r_watch.output)
+    assert watch_payload["handshake_ok"] is True
+    assert watch_payload["exit_reset_sent"] is True
+    assert watch_payload["frame_count"] == 5
+    assert watch_payload["persisted"] is False
+    assert watch_payload["parquet_chunks"] == []
 
     script_mod = _load_ingest_script()
     s_lake, s_db = tmp_path / "script_lake", tmp_path / "script.sqlite"

@@ -381,10 +381,9 @@ def telemetry_export_fixture(
     )
 
 
-@telemetry.command(name="watch")
-def telemetry_watch() -> None:
-    """Stream live 62.5k SCI telemetry frames (Milestone M2)."""
-    click.echo("`logicaide telemetry watch` live 62.5k SCI poller is scheduled for Milestone M2 (read-only loop:// mode).")
+from logicaide.telemetry.watch_cli import register_telemetry_watch_command
+
+register_telemetry_watch_command(telemetry)
 
 
 
