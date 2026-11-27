@@ -6,12 +6,11 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
 import re
-import shutil
-import subprocess
-import tempfile
 from typing import Any
 
 import yaml
+
+from logicaide.heritage.mermaid_gate import MermaidGateError, check_mermaid_syntax_strict
 
 CHROME_PARTIALS = frozenset({"_Sidebar.md", "_Footer.md"})
 VALID_TIERS = frozenset({"Tier 1", "Tier 2", "Tier 3"})
@@ -27,18 +26,6 @@ _FENCE_OPEN_RE = re.compile(r"^([`~]{3,})(.*)$")
 _INLINE_CODE_RE = re.compile(r"`+[^`]*`+")
 _MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[([^\]]*)\]\(([^)]+)\)")
 _EXTERNAL_URL_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://")
-_FLOW_HEADER_RE = re.compile(r"^(flowchart|graph)(?:\s+(TD|TB|BT|RL|LR))?$")
-_SINGLE_HEADER_RE = re.compile(r"^(sequenceDiagram|stateDiagram-v2|erDiagram|classDiagram)$")
-_ER_REL_RE = re.compile(r"[|}o]{1,2}(?:--|\.\.)[|{o]{1,2}")
-_FLOW_DANGLING_END_RE = re.compile(
-    r"(?:--|==|-\.|<--|-->|---|==>|<->|<-->|o--o|x--x|-\.->)\s*(?:\|[^|]*\|)?\s*$"
-)
-_FLOW_DANGLING_START_RE = re.compile(
-    r"^\s*(?:-->|---|==>|<--|-\.->|-\.-|--x|--o|<-->|o--o|x--x)"
-)
-_FLOW_BAD_SINGLE_ARROW_RE = re.compile(r"(?<![-.])->(?![->])")
-_SEQ_ARROW_RE = re.compile(r"(?:-->>|->>|-->|->|--x|-x|--\)|-\))")
-_CLASS_ARROW_RE = re.compile(r"(?:<\|--|--\|>|\*--|o--|\.\.\|>|\.\.>|<--|-->|--)")
 _FORBIDDEN_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("Windows user path", re.compile(r"C:\\Users\\", re.IGNORECASE)),
     ("POSIX home path", re.compile(r"/home/")),
@@ -146,115 +133,12 @@ def _extract_mermaid_blocks(rel_path: Path, text: str) -> list[str]:
     return blocks
 
 
-def _parse_mermaid_header(lines: list[str]) -> tuple[str, list[str]]:
-    if not lines:
-        raise WikiValidationError("Mermaid block has an empty body")
-    match = _FLOW_HEADER_RE.match(lines[0]) or _SINGLE_HEADER_RE.match(lines[0])
-    if not match:
-        raise WikiValidationError(f"Unsupported or invalid Mermaid diagram header: {lines[0]!r}")
-    if len(lines) < 2:
-        raise WikiValidationError(f"Mermaid '{match.group(1)}' block has no statements after header")
-    return match.group(1), lines[1:]
-
-
-def _check_mermaid_delimiters(body_lines: list[str], diagram_type: str) -> None:
-    """Verify balanced quotes, brackets/parens/braces, and block end keywords."""
-    pairs = {")": "(", "]": "[", "}": "{"}
-    openers = set(pairs.values())
-    seq_blocks = {"alt", "loop", "opt", "par", "critical", "break", "rect", "box"}
-    stack: list[str] = []
-    in_quotes = False
-    block_depth = 0
-
-    for line in body_lines:
-        scan_line = _ER_REL_RE.sub(" ", line) if diagram_type == "erDiagram" else line
-        escaped = False
-        for ch in scan_line:
-            if escaped:
-                escaped = False
-            elif ch == "\\":
-                escaped = True
-            elif ch == '"':
-                in_quotes = not in_quotes
-            elif not in_quotes and ch in openers:
-                stack.append(ch)
-            elif not in_quotes and ch in pairs:
-                if not stack or stack[-1] != pairs[ch]:
-                    raise WikiValidationError(f"Unbalanced Mermaid delimiter {ch!r} in line: {line!r}")
-                stack.pop()
-        if in_quotes:
-            raise WikiValidationError(f"Unclosed double quote in Mermaid line: {line!r}")
-
-        first_tok = line.split()[0]
-        if (diagram_type in {"flowchart", "graph"} and first_tok == "subgraph") or (
-            diagram_type == "sequenceDiagram" and first_tok in seq_blocks
-        ):
-            block_depth += 1
-        elif line == "end":
-            block_depth -= 1
-            if block_depth < 0:
-                raise WikiValidationError("Unexpected 'end' in Mermaid block")
-
-    if stack:
-        raise WikiValidationError(f"Unclosed Mermaid delimiter(s): {''.join(stack)!r}")
-    if block_depth != 0:
-        raise WikiValidationError("Unclosed Mermaid block (missing 'end')")
-
-
-def _check_mermaid_edges(body_lines: list[str], diagram_type: str) -> None:
-    """Run diagram-specific edge syntax validation."""
-    for raw_line in body_lines:
-        line = re.sub(r'"(?:\\.|[^"\\])*"', '"STR"', raw_line)
-        if diagram_type in {"flowchart", "graph"}:
-            if _FLOW_DANGLING_START_RE.match(line):
-                raise WikiValidationError(f"Dangling Mermaid edge start: {raw_line!r}")
-            if _FLOW_DANGLING_END_RE.search(line):
-                raise WikiValidationError(f"Dangling Mermaid edge end: {raw_line!r}")
-            if _FLOW_BAD_SINGLE_ARROW_RE.search(line):
-                raise WikiValidationError(f"Invalid single-dash arrow '->' in {diagram_type}: {raw_line!r}")
-            if line.count("|") % 2 != 0:
-                raise WikiValidationError(f"Unclosed edge label pipe '|' in Mermaid line: {raw_line!r}")
-        elif diagram_type == "sequenceDiagram":
-            match = _SEQ_ARROW_RE.search(line)
-            if match:
-                before, after = line[: match.start()].strip(), line[match.end() :].strip()
-                if not before or not after or after.startswith(":"):
-                    raise WikiValidationError(f"Malformed sequenceDiagram arrow in line: {raw_line!r}")
-        elif diagram_type == "stateDiagram-v2" and "-->" in line:
-            lhs, rhs = line.split("-->", 1)
-            if not lhs.strip() or not rhs.strip() or rhs.strip().startswith(":"):
-                raise WikiValidationError(f"Malformed stateDiagram-v2 transition: {raw_line!r}")
-        elif diagram_type == "erDiagram" and ("--" in line or ".." in line):
-            if not _ER_REL_RE.search(line) or ":" not in line:
-                raise WikiValidationError(f"Malformed erDiagram relationship: {raw_line!r}")
-        elif diagram_type == "classDiagram":
-            match = _CLASS_ARROW_RE.search(line)
-            if match and (not line[: match.start()].strip() or not line[match.end() :].strip()):
-                raise WikiValidationError(f"Malformed classDiagram relationship: {raw_line!r}")
-
-
-def _run_external_mermaid_linter(block: str) -> None:
-    mmdc = shutil.which("mmdc")
-    if not mmdc:
-        raise WikiValidationError("External Mermaid linter 'mmdc' requested but not found on PATH")
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        in_file, out_file = Path(tmp_dir) / "diagram.mmd", Path(tmp_dir) / "diagram.svg"
-        in_file.write_text(block, encoding="utf-8")
-        proc = subprocess.run([mmdc, "-i", str(in_file), "-o", str(out_file)], capture_output=True, text=True, check=False)
-        if proc.returncode != 0:
-            raise WikiValidationError(f"mmdc rejected Mermaid block: {(proc.stderr or proc.stdout).strip() or proc.returncode}")
-
-
 def validate_mermaid_block(block: str, use_external_linter: bool = False) -> None:
-    """Validate Mermaid block structure deterministically and optionally run mmdc."""
-    if not isinstance(block, str) or not block.strip():
-        raise WikiValidationError("Mermaid block must be a non-empty string")
-    lines = [line for raw in block.splitlines() if (line := raw.split("%%", 1)[0].strip())]
-    diagram_type, body_lines = _parse_mermaid_header(lines)
-    _check_mermaid_delimiters(body_lines, diagram_type)
-    _check_mermaid_edges(body_lines, diagram_type)
-    if use_external_linter:
-        _run_external_mermaid_linter(block)
+    """Validate Mermaid block structure deterministically and optionally run an external linter."""
+    try:
+        check_mermaid_syntax_strict(block, use_external_linter=use_external_linter)
+    except MermaidGateError as exc:
+        raise WikiValidationError(str(exc)) from exc
 
 
 def _parse_link_target(raw_target: str) -> tuple[str, str]:
@@ -344,6 +228,20 @@ def _validate_page_links(
     return errors
 
 
+def _has_symlink_under(root: Path, path: Path) -> bool:
+    """Return True if path or any component strictly below root is a symlink."""
+    try:
+        rel_parts = path.relative_to(root).parts
+    except ValueError:
+        return True
+    cur = root
+    for part in rel_parts:
+        cur = cur / part
+        if cur.is_symlink():
+            return True
+    return False
+
+
 def _load_and_validate_tree(
     wiki_dir: str | Path, use_external_linter: bool = False
 ) -> tuple[Path, list[_WikiPage], dict[str, list[Path]], dict[str, list[Path]], dict[str, Any]]:
@@ -351,7 +249,18 @@ def _load_and_validate_tree(
     wiki_root = Path(wiki_dir).resolve()
     if not wiki_root.is_dir():
         raise WikiValidationError(f"{wiki_dir}: wiki directory does not exist")
-    md_files = sorted(p.resolve() for p in wiki_root.rglob("*.md") if p.is_file())
+    md_files: list[Path] = []
+    for p in sorted(wiki_root.rglob("*.md")):
+        if p.is_symlink() or _has_symlink_under(wiki_root, p):
+            raise WikiValidationError(f"{p.name}: symlink or out-of-tree markdown file is not allowed")
+        try:
+            resolved_p = p.resolve()
+        except OSError as exc:
+            raise WikiValidationError(f"{p.name}: symlink or out-of-tree markdown file is not allowed") from exc
+        if not resolved_p.is_relative_to(wiki_root):
+            raise WikiValidationError(f"{p.name}: symlink or out-of-tree markdown file is not allowed")
+        if p.is_file():
+            md_files.append(resolved_p)
     if not md_files:
         raise WikiValidationError(f"{wiki_dir}: no markdown files found")
 
@@ -361,7 +270,10 @@ def _load_and_validate_tree(
     mermaid_count = 0
 
     for abs_path in md_files:
-        rel_path = abs_path.relative_to(wiki_root)
+        try:
+            rel_path = abs_path.relative_to(wiki_root)
+        except ValueError as exc:
+            raise WikiValidationError(f"{abs_path.name}: symlink or out-of-tree markdown file is not allowed") from exc
         raw_text = abs_path.read_text(encoding="utf-8").replace("\r\n", "\n")
         errors.extend(_scan_forbidden_tokens(rel_path, raw_text))
         is_chrome = abs_path.name in CHROME_PARTIALS
@@ -446,8 +358,11 @@ def sync_wiki(
     wiki_root, pages, flat_name_index, slug_index, summary = _load_and_validate_tree(
         wiki_dir, use_external_linter=use_external_linter
     )
-    resolved_target = Path(target_dir).resolve() if target_dir is not None else DEFAULT_STAGE_DIR.resolve()
-    if resolved_target == wiki_root or resolved_target.is_relative_to(wiki_root):
+    target_path = Path(target_dir) if target_dir is not None else DEFAULT_STAGE_DIR
+    if target_path.is_symlink():
+        raise WikiValidationError(f"Target wiki directory must not be a symlink: {target_path}")
+    resolved_target = target_path.resolve()
+    if resolved_target == wiki_root or resolved_target.is_relative_to(wiki_root) or wiki_root.is_relative_to(resolved_target):
         raise WikiValidationError(f"Refusing to sync into source wiki directory: {resolved_target}")
 
     staged_outputs: list[tuple[Path, str]] = []
@@ -470,6 +385,20 @@ def sync_wiki(
     synced_count = 0
     if not dry_run:
         for dest_path, content in staged_outputs:
+            try:
+                resolved_dest = dest_path.resolve(strict=False)
+            except OSError as exc:
+                raise WikiValidationError(
+                    f"Refusing to write to symlink or out-of-tree destination: {dest_path}"
+                ) from exc
+            if (
+                dest_path.is_symlink()
+                or _has_symlink_under(resolved_target, dest_path)
+                or not resolved_dest.is_relative_to(resolved_target)
+            ):
+                raise WikiValidationError(
+                    f"Refusing to write to symlink or out-of-tree destination: {dest_path}"
+                )
             dest_path.parent.mkdir(parents=True, exist_ok=True)
             dest_path.write_text(content, encoding="utf-8", newline="\n")
             synced_count += 1

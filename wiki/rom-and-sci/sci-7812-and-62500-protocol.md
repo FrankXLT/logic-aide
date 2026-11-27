@@ -58,7 +58,7 @@ Before reading any RAM cell, `XmitRequestedRamLocation` inspects `CPU_SerialStat
 
 | Controller | Mode Entry / Selector | Address Resolution | Exit Command |
 | :--- | :--- | :--- | :--- |
-| **SMEC (`T-SMEC_v19.asm`, `L1417–L1436`)** | `0xF2` echoes `0xF2` as logger-mode confirmation (always zero-page direct). | Host sends 1-byte `<offset>` (`0x00`–`0xFF`, excluding `0xF2`/`0xFE`); ECU loads `X = #0x0000 + offset` and transmits `$00xx` with **zero echo**. | `0xFE` clears `DRBSerialMode` (`FastSerial \| TestType3 \| TestType2`) to return to `7812.5` baud DRB mode (falling through once to transmit `$00FE`). |
+| **SMEC (`T-SMEC_v19.asm`, `L1417–L1436`)** | `0xF2` echoes `0xF2` as logger-mode confirmation (always zero-page direct). | Host sends 1-byte `<offset>` (`0x00`–`0xFF`, excluding `0xF2`/`0xFE`); ECU loads `X = #0x0000 + offset` and transmits `$00xx` with **zero echo** (for example, offset `0xAA` returns RAM cell `$00AA`). | `0xFE` clears `DRBSerialMode` (`FastSerial \| TestType3 \| TestType2`) to return to `7812.5` baud DRB mode (falling through once to transmit `$00FE`). |
 | **SBEC (`T-SBEC_v3_1.asm`, `L1181–L1225`)** | `0xF2` clears `b6c_DRBModeFlag` (zero-page `$00xx` mode) and echoes `0xF2`. `0xF6` sets `b6c_DRBModeFlag` (`FastDataOutputAddressTable` mode) and echoes `0xF6`. | In `0xF2` mode: `X = #0x0000 + offset`. In `0xF6` mode: checks `idx < FastDataOutputCommandByte` (else returns `0xFF`), indexes `16-bit .word` pointer `FastDataOutputAddressTable[idx * 2]`, and transmits `[X]`. | `0xFE` clears `DRBSerialMode` (`0xB0`) and `b6c_DRBModeFlag`, exiting cleanly back to `7812.5` baud. LogicAIDE also supports `0xF4` virtual table selectors where mapped by `rom_manifest.json`. |
 
 ---

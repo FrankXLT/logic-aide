@@ -121,7 +121,7 @@ def discover(
             fetch_cdx=fetch_cdx,
             **_compact_kwargs(
                 private_root=private_root,
-                manifest=manifest,
+                manifest_path=manifest,
                 queue_dir=queue_dir,
                 output_yaml=output_yaml,
             ),
@@ -162,6 +162,11 @@ def sync_wiki(
         flatten_for_github_wiki=flatten,
         **_compact_kwargs(target_dir=target_dir),
     )
+
+
+from logicaide.heritage.cli_commands import register_heritage_commands
+
+register_heritage_commands(heritage)
 
 
 _CAR_ID_BY_FORMAT: dict[str, str] = {

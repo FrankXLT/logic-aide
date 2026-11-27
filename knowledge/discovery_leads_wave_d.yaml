@@ -1,0 +1,491 @@
+schema_version: '1.0'
+wave: D
+generated_utc: '2026-11-27T06:56:44Z'
+vault_sha256_count: 491
+leads:
+- lead_id: wave-d-oem-fsm-wiring-pdf-88-t2-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 88 T2.pdf
+  query_pattern: turbododge.com/*88*t2*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2A88%2At2%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1988 Turbo II 52p SMEC FSM PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-87list-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 87List.pdf
+  query_pattern: turbododge.com/*87list*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2A87list%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1987 49p OEM fault list FSM PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-87-k-e-complete-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 87 K & E complete.pdf
+  query_pattern: minimopar.net/*87*wiring*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2A87%2Awiring%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1987 K/E-body 126p wiring PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-87-p-turbo-engine-wiring-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 87 P Turbo engine wiring.pdf
+  query_pattern: thedodgegarage.com/*87*turbo*wiring*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A87%2Aturbo%2Awiring%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1987 P-body turbo wiring PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-88-p-turbo-engine-wiring-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 88 P turbo engine wiring.pdf
+  query_pattern: thedodgegarage.com/*88*turbo*wiring*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A88%2Aturbo%2Awiring%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1988 P-body turbo wiring PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-89-mini-wiring-complete-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 89 mini wiring complete.pdf
+  query_pattern: minimopar.net/*89*wiring*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2A89%2Awiring%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1989 minivan 120p wiring PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-84-l-engine-side-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 84 L engine side.pdf
+  query_pattern: turbododge.com/*84*l*engine*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2A84%2Al%2Aengine%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1984 L-body 40-way (8-612) bulkhead PDF. Confirmed in read-only corpus
+    scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-87-g-50-way-engine-side-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 87 G 50 way engine side.pdf
+  query_pattern: thedodgegarage.com/*87*50*way*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A87%2A50%2Away%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1987 G-body 50-way bulkhead PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-aries-reliant-50-way-bulkhead
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: Aries Reliant 50 way bulkhead
+  query_pattern: minimopar.net/*50*way*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2A50%2Away%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: Aries/Reliant 50-way pinout PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-oem-fsm-wiring-pdf-89-g-50-way
+  wave: D
+  source_kind: wayback_cdx
+  category: oem_fsm_wiring_pdf
+  fingerprint: 89 G 50 way
+  query_pattern: thedodgegarage.com/*89*50*way*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A89%2A50%2Away%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 1989 G-body 50-way bulkhead PDFs. Confirmed in read-only corpus scan.
+- lead_id: wave-d-atsg-transaxle-manual-atsg-a404-a413-a415-a470
+  wave: D
+  source_kind: wayback_cdx
+  category: atsg_transaxle_manual
+  fingerprint: ATSG A404 A413 A415 A470
+  query_pattern: minimopar.net/*a413*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Aa413%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: ATSG A404/A413/A415/A470 95p PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-atsg-transaxle-manual-atsg-a520
+  wave: D
+  source_kind: wayback_cdx
+  category: atsg_transaxle_manual
+  fingerprint: ATSG A520
+  query_pattern: turbododge.com/*a520*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Aa520%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: ATSG A520 5-speed service PDF.
+- lead_id: wave-d-atsg-transaxle-manual-atsg-a555
+  wave: D
+  source_kind: wayback_cdx
+  category: atsg_transaxle_manual
+  fingerprint: ATSG A555
+  query_pattern: turbododge.com/*atsg*a555*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Aatsg%2Aa555%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: ATSG A555 5-speed service PDF.
+- lead_id: wave-d-atsg-transaxle-manual-atsg-a568
+  wave: D
+  source_kind: wayback_cdx
+  category: atsg_transaxle_manual
+  fingerprint: ATSG A568
+  query_pattern: thedodgegarage.com/*atsg*a568*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Aatsg%2Aa568%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: ATSG A568 Getrag service PDF.
+- lead_id: wave-d-atsg-transaxle-manual-atsg-a604
+  wave: D
+  source_kind: wayback_cdx
+  category: atsg_transaxle_manual
+  fingerprint: ATSG A604
+  query_pattern: minimopar.net/*a604*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Aa604%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: ATSG A604 Ultradrive manual PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-atsg-transaxle-manual-partnumbers-a604
+  wave: D
+  source_kind: wayback_cdx
+  category: atsg_transaxle_manual
+  fingerprint: PartNumbers_A604
+  query_pattern: minimopar.net/*41te*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2A41te%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: A604/41TE/42LE part numbers PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ic-datasheet-pdf-74ls193
+  wave: D
+  source_kind: wayback_cdx
+  category: ic_datasheet_pdf
+  fingerprint: 74LS193
+  query_pattern: moparchem.com/*74ls193*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=moparchem.com%2F%2A74ls193%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: 74LS193 counter IC datasheet PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ic-datasheet-pdf-sst27sf
+  wave: D
+  source_kind: wayback_cdx
+  category: ic_datasheet_pdf
+  fingerprint: SST27SF
+  query_pattern: boostbutton.com/*sst27sf*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=boostbutton.com%2F%2Asst27sf%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: SST27SF MTP Flash datasheet PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ic-datasheet-pdf-lm2907n
+  wave: D
+  source_kind: wayback_cdx
+  category: ic_datasheet_pdf
+  fingerprint: LM2907N
+  query_pattern: turbo-mopar.com/*lm2907*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2F%2Alm2907%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: LM2907N F/V IC datasheet PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ic-datasheet-pdf-njm4151
+  wave: D
+  source_kind: wayback_cdx
+  category: ic_datasheet_pdf
+  fingerprint: NJM4151
+  query_pattern: turbo-mopar.com/*njm4151*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2F%2Anjm4151%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: NJM4151 V/F IC datasheet PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ecu-ignition-logger-pdf-msd-dis-2-pn6212
+  wave: D
+  source_kind: wayback_cdx
+  category: ecu_ignition_logger_pdf
+  fingerprint: MSD DIS-2 pn6212
+  query_pattern: turbododge.com/*pn6212*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbododge.com%2F%2Apn6212%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: MSD DIS-2 pn6212 28p manual PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ecu-ignition-logger-pdf-chem2-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: ecu_ignition_logger_pdf
+  fingerprint: ChEM2.pdf
+  query_pattern: boostbutton.com/*chem2*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=boostbutton.com%2F%2Achem2%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: ChEM2 22p ECU guide PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ecu-ignition-logger-pdf-flashable-smec-add-a-pin-pdf
+  wave: D
+  source_kind: wayback_cdx
+  category: ecu_ignition_logger_pdf
+  fingerprint: flashable smec Add a pin.pdf
+  query_pattern: minimopar.net/*smec*pin*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Asmec%2Apin%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: SMEC Pin 11 add-a-pin guide PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ecu-ignition-logger-pdf-89t1vs89t2sparkadvance
+  wave: D
+  source_kind: wayback_cdx
+  category: ecu_ignition_logger_pdf
+  fingerprint: 89T1vs89T2sparkadvance
+  query_pattern: thedodgegarage.com/*89t1*89t2*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A89t1%2A89t2%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: 1989 T1 vs T2 spark advance PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-ecu-ignition-logger-pdf-knock-listen-device
+  wave: D
+  source_kind: wayback_cdx
+  category: ecu_ignition_logger_pdf
+  fingerprint: Knock Listen Device
+  query_pattern: turbo-mopar.com/*knock*listen*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2F%2Aknock%2Alisten%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/hardware/
+  rationale: Knock Listen Device schematic PDF. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-k22
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: K22
+  query_pattern: minimopar.net/*k22*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Ak22%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: Bulkhead circuit K22 pinout ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-z12
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: Z12
+  query_pattern: minimopar.net/*z12*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Az12%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: Bulkhead ground circuit Z12 ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-d20
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: D20
+  query_pattern: chryslerccdsci.wordpress.com/*d20*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=chryslerccdsci.wordpress.com%2F%2Ad20%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: SCI TX bulkhead circuit D20 ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-d21
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: D21
+  query_pattern: chryslerccdsci.wordpress.com/*d21*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=chryslerccdsci.wordpress.com%2F%2Ad21%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: SCI RX bulkhead circuit D21 ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-dk20
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: DK20
+  query_pattern: thedodgegarage.com/*dk20*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Adk20%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 50/60-way SCI circuit DK20 ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-dk21
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: DK21
+  query_pattern: thedodgegarage.com/*dk21*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Adk21%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 50/60-way SCI circuit DK21 ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-a14
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: A14
+  query_pattern: minimopar.net/*a14*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Aa14%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 50/60-way B+ circuit A14 ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-bulkhead-circuit-code-c20
+  wave: D
+  source_kind: wayback_cdx
+  category: bulkhead_circuit_code
+  fingerprint: C20
+  query_pattern: minimopar.net/*c20*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Ac20%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: 50/60-way bulkhead C20 ref. Confirmed in read-only corpus scan.
+- lead_id: wave-d-drb-diagnostic-tree-drb-ii-code-11-55
+  wave: D
+  source_kind: code_forge
+  category: drb_diagnostic_tree
+  fingerprint: DRB-II Code 11-55
+  query_pattern: chrysler drb-ii code 11-55 smec sbec
+  forge: github
+  code_forge_query_url: https://github.com/search?q=chrysler+drb-ii+code+11-55+smec+sbec&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/ecu/
+  rationale: DRB-II Code 11-55 tree archive.
+- lead_id: wave-d-drb-diagnostic-tree-smec-drb-fault-tree
+  wave: D
+  source_kind: code_forge
+  category: drb_diagnostic_tree
+  fingerprint: SMEC DRB fault tree
+  query_pattern: chrysler smec drb-ii fault tree 68hc11
+  forge: gitlab
+  code_forge_query_url: https://gitlab.com/search?search=chrysler+smec+drb-ii+fault+tree+68hc11
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: knowledge/ecu/
+  rationale: SMEC DRB-II 68HC11 fault tree.
+- lead_id: wave-d-fsm-ocr-mermaid-tooling-chrysler-fsm-ocr
+  wave: D
+  source_kind: code_forge
+  category: fsm_ocr_mermaid_tooling
+  fingerprint: Chrysler FSM OCR
+  query_pattern: docling marker surya chrysler fsm pdf
+  forge: github
+  code_forge_query_url: https://github.com/search?q=docling+marker+surya+chrysler+fsm+pdf&type=repositories
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: scripts/
+  rationale: Docling/Marker FSM PDF OCR tools.
+- lead_id: wave-d-fsm-ocr-mermaid-tooling-atsg-68hc11-mermaid
+  wave: D
+  source_kind: code_forge
+  category: fsm_ocr_mermaid_tooling
+  fingerprint: ATSG 68HC11 Mermaid
+  query_pattern: chrysler atsg 68hc11 mermaid schematic
+  forge: sourceforge
+  code_forge_query_url: https://sourceforge.net/directory/?q=chrysler+atsg+68hc11+mermaid+schematic
+  cdx_query_url: null
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_code_forge
+  target_destination: scripts/
+  rationale: ATSG/68HC11 Mermaid diagram tools.

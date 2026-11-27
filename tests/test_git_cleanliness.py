@@ -14,7 +14,11 @@ MUST_IGNORE_PATHS = (
     "private_references/_probe.bin",
     "Private References/_probe.md",
     "data/heritage_raw/figures/turbo_maps/probe.gif",
+    "data/heritage_raw/figures/probe.png",
+    "data/heritage_raw/pdfs_md/probe.md",
     "data/heritage_raw/discovery_queue/probe.json",
+    "data/heritage_index.sqlite",
+    "data/heritage_index.sqlite-wal",
     "data/drives/catalog.sqlite",
     "data/drives/probe.parquet",
     "data/drives/run_kind=VEHICLE_SCI/chunk_0000.parquet",
@@ -39,10 +43,10 @@ FORBIDDEN_INDEX_PREFIXES = (
     "data/heritage_raw/",
     "data/drives/",
 )
-FORBIDDEN_INDEX_SUFFIXES = (".bin", ".s19", ".parquet", ".sqlite", ".sqlite3")
+FORBIDDEN_INDEX_SUFFIXES = (".bin", ".s19", ".parquet", ".sqlite", ".sqlite3", ".sqlite-wal", ".sqlite-shm")
 
 CLEANROOM_ONLY_DIRS = ("profiles", "knowledge", "wiki", "scripts", "tests/fixtures")
-CODE_DIRS = ("src/logicaide",)
+CODE_DIRS = ("src/logicaide", "mcp_servers")
 SCAN_EXTENSIONS = frozenset({".py", ".md", ".yaml", ".yml", ".json", ".toml", ".txt", ".csv", ".dlg"})
 
 EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
@@ -141,6 +145,7 @@ def test_code_and_cleanroom_enforce_hardware_deadbolt() -> None:
     blocklist_sources = frozenset({
         "src/logicaide/heritage/wiki_sync.py",
         "src/logicaide/heritage/discovery.py",
+        "mcp_servers/README.md",  # Documents the Hardware Deadbolt /dev/ttyUSB* prohibition.
     })
     for fpath in _iter_scan_files(*CODE_DIRS, *CLEANROOM_ONLY_DIRS):
         rel = fpath.relative_to(REPO_ROOT).as_posix()

@@ -213,8 +213,6 @@ def test_wave_c_drivetrain_and_hardware_pages_verified() -> None:
     home_text = (REPO_WIKI / "Home.md").read_text(encoding="utf-8")
     assert "| **Drivetrain & Swaps** | `verified` |" in home_text
     assert "| **Hardware Bench** | `verified` |" in home_text
-    assert "| **Wiring & Diagnostics** | `stub` |" in home_text
-    assert home_text.count("| `stub` |") == 1
     for rel in (*overviews, *wave_c):
         assert rel in home_text
 
@@ -222,8 +220,52 @@ def test_wave_c_drivetrain_and_hardware_pages_verified() -> None:
     for page in wave_c:
         assert page in sidebar_text
 
-    warnings = validate_wiki_tree(REPO_WIKI)["warnings"]
-    assert [w.split(":", 1)[0] for w in warnings] == [
-        "wiring-and-diagnostics/wiring-and-diagnostics-overview.md"
-    ]
+
+def test_wave_d_wiring_and_diagnostics_verified_and_zero_stubs() -> None:
+    wave_d = (
+        "wiring-and-diagnostics/wiring-and-diagnostics-overview.md",
+        "wiring-and-diagnostics/60-way-connector-atlas.md",
+        "wiring-and-diagnostics/50-way-bulkhead-atlas.md",
+        "wiring-and-diagnostics/drb-ii-fault-trees.md",
+    )
+    for rel in wave_d:
+        text = (REPO_WIKI / rel).read_text(encoding="utf-8")
+        meta = yaml.safe_load(text.split("---\n", 2)[1])
+        assert meta["status"] == "verified", f"{rel} expected verified, got {meta.get('status')!r}"
+
+    home_text = (REPO_WIKI / "Home.md").read_text(encoding="utf-8")
+    assert "| **Wiring & Diagnostics** | `verified` |" in home_text
+    assert home_text.count("| `stub` |") == 0
+    for rel in wave_d:
+        assert rel in home_text
+
+    sidebar_text = (REPO_WIKI / "_Sidebar.md").read_text(encoding="utf-8")
+    for rel in wave_d:
+        assert rel in sidebar_text
+
+    assert validate_wiki_tree(REPO_WIKI)["warnings"] == []
+
+
+def test_validate_wiki_tree_rejects_out_of_tree_symlink(tmp_path: Path) -> None:
+    wiki = _build_sample_wiki(tmp_path)
+    outside = tmp_path / "outside_secret.md"
+    outside.write_text(_frontmatter_block(slug="outside") + "# Secret\n", encoding="utf-8")
+    (wiki / "escape.md").symlink_to(outside)
+
+    with pytest.raises(WikiValidationError):
+        validate_wiki_tree(wiki)
+
+
+def test_sync_wiki_rejects_target_symlink(tmp_path: Path) -> None:
+    wiki = _build_sample_wiki(tmp_path)
+    out = tmp_path / "github_wiki"
+    out.mkdir()
+    outside_target = tmp_path / "outside_target.md"
+    outside_target.write_text("original\n", encoding="utf-8")
+    (out / "Home.md").symlink_to(outside_target)
+
+    with pytest.raises(WikiValidationError):
+        sync_wiki(wiki, target_dir=out, dry_run=False)
+    assert outside_target.read_text(encoding="utf-8") == "original\n"
+
 

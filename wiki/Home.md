@@ -26,7 +26,7 @@ Welcome to the cleanroom Chrysler `2.2L` / `2.5L` / `2.0L` / `2.4L` powertrain k
 | **ROM & SCI Protocol** | `verified` | `Tier 2` | [ROM & SCI Overview](rom-and-sci/rom-and-sci-overview.md) |
 | **Turbo & Airflow** | `verified` | `Tier 2` | [Turbo & Airflow Overview](turbo-and-airflow/turbo-and-airflow-overview.md) |
 | **Drivetrain & Swaps** | `verified` | `Tier 1` | [Drivetrain & Swaps Overview](drivetrain-and-swaps/drivetrain-and-swaps-overview.md) |
-| **Wiring & Diagnostics** | `stub` | `Tier 1` | [Wiring & Diagnostics Overview](wiring-and-diagnostics/wiring-and-diagnostics-overview.md) |
+| **Wiring & Diagnostics** | `verified` | `Tier 1` | [Wiring & Diagnostics Overview](wiring-and-diagnostics/wiring-and-diagnostics-overview.md) |
 | **Hardware Bench** | `verified` | `Tier 2` | [Hardware Bench Overview](hardware-bench/hardware-bench-overview.md) |
 
 ### Wave A Verified Reference Articles
@@ -51,6 +51,12 @@ Welcome to the cleanroom Chrysler `2.2L` / `2.5L` / `2.0L` / `2.4L` powertrain k
 - [Chrysler FWD Transaxles: A555, A568, A413 Ratios, Rollout Math & Helical LSD QC](drivetrain-and-swaps/a555-a568-a413-transaxles.md) — Assembly-tag gearset matrix, tire rollout RPM-to-MPH inference, `A525` girdle `P4349444`, and helical LSD teardown QC
 - [SMEC 28C256 & Bank-Switched Socket Read-Only Hardware Notes](hardware-bench/smec-28c256-read-only-socket-notes.md) — `Pin 11` DMM isolation, `SST27SF020` / Ostrich 2.0 `28-pin` vs. `32-pin` alignment, and `28C256` + `74HC00` BOM
 - [SCI, Knock Box Conditioning & Waste-Spark DIS Adaptor Hardware Notes](hardware-bench/knock-and-dis-conditioning.md) — `4N25` / `1N4733A-TR` opto-isolated SCI/knock BOM, `Knock_Board` review, and `PIC12F629`/`PIC16F690` DIS adaptor notes
+
+### Wave D Verified Reference Articles
+
+- [`60-Way` `SMEC` & `SBEC` Connector Atlas (`1988–1993`)](wiring-and-diagnostics/60-way-connector-atlas.md) — `1988 P-Body SMEC` (`1-xx` + `14-Way` `2-xx`) vs. `1990–1993 SBEC`, plus `Pin 2/3`, `Pin 11/12`, `Pin 25/51`, `Pin 45` safety gates
+- [`50-Way` Bulkhead & `1984` `40-Way` Firewall Disconnect Atlas](wiring-and-diagnostics/50-way-bulkhead-atlas.md) — `87 G`, `88 K/P/D`, `89 G`, and `89 S-Body` (`CCD Bus`) `50-Way` cavity matrix vs. `1984 L-Body` `40-Way` (`8-612`)
+- [Chrysler `DRB-II` Error Registers & Fault Isolation Trees (`Code 11`–`Code 55`)](wiring-and-diagnostics/drb-ii-fault-trees.md) — `Code 11`–`Code 55` register map (`SMEC` `$001E–$0025` vs. `SBEC` `$001F–$0026`), `DRB` `0x10`–`0x17`, and diagnostic decision tree
 
 ## Topic Map
 

@@ -453,6 +453,9 @@ def run_discover(
     elif wave_norm == "C":
         from logicaide.heritage import discovery_wave_c
         raw_records = discovery_wave_c.extract_wave_c_fingerprints(private_root, manifest_path, extra_fingerprints)
+    elif wave_norm == "D":
+        from logicaide.heritage import discovery_wave_d
+        raw_records = discovery_wave_d.extract_wave_d_fingerprints(private_root, manifest_path, extra_fingerprints)
     else:
         raise ValueError(f"Unsupported wave identifier: {wave!r}")
 
@@ -463,6 +466,8 @@ def run_discover(
         "schema_version": SCHEMA_VERSION, "wave": wave_norm, "generated_utc": generated_utc,
         "vault_sha256_count": len(vault_sha256_set), "leads": leads,
     }
+    if out_yaml_path.is_symlink():
+        raise ValueError(f"Output YAML path must not be a symlink: {out_yaml_path}")
     out_yaml_path.parent.mkdir(parents=True, exist_ok=True)
     out_yaml_path.write_text(yaml.safe_dump(leads_payload, sort_keys=False, allow_unicode=False), encoding="utf-8")
 
