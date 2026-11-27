@@ -396,7 +396,9 @@ def test_hardening_60way_bounds_corrupt_db_and_jsonrpc_validation(hybrid_corpus_
     from logicaide.heritage import rag_query
 
     mcp_mod, db = _load_mcp_module(), hybrid_corpus_and_db["db"]
-    assert rag_query.lookup_60way_pin(14, db_path=db)["matched"] is False
+    # Cavity 44 is unassigned across 60-way SMEC & TBI SBEC Tier 1/2 specs; cavity 14 is now verified via MiniMopar (R31).
+    assert rag_query.lookup_60way_pin(44, db_path=db)["matched"] is False
+    assert rag_query.lookup_60way_pin(14, db_path=db)["matched"] is True
     assert rag_query.lookup_60way_pin(18, db_path=db)["matched"] is True
 
     empty_db = tmp_path / "empty.sqlite"

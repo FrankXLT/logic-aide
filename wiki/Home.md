@@ -7,7 +7,7 @@ provenance: "Cleanroom distillation of Chrysler factory diagnostic supplements a
 ecu_scope: ["LM_6803", "SMEC_88_89", "SBEC_90_93", "SBEC_II_94_95"]
 engine_scope: ["2.2L_K", "2.5L_K", "2.0L_ECC", "2.4L_EDZ"]
 status: "verified"
-last_verified: "2026-11-26"
+last_verified: "2026-11-27"
 tags: ["heritage", "wiki", "portal", "mopar", "68hc11"]
 ---
 
@@ -57,6 +57,14 @@ Welcome to the cleanroom Chrysler `2.2L` / `2.5L` / `2.0L` / `2.4L` powertrain k
 - [`60-Way` `SMEC` & `SBEC` Connector Atlas (`1988–1993`)](wiring-and-diagnostics/60-way-connector-atlas.md) — `1988 P-Body SMEC` (`1-xx` + `14-Way` `2-xx`) vs. `1990–1993 SBEC`, plus `Pin 2/3`, `Pin 11/12`, `Pin 25/51`, `Pin 45` safety gates
 - [`50-Way` Bulkhead & `1984` `40-Way` Firewall Disconnect Atlas](wiring-and-diagnostics/50-way-bulkhead-atlas.md) — `87 G`, `88 K/P/D`, `89 G`, and `89 S-Body` (`CCD Bus`) `50-Way` cavity matrix vs. `1984 L-Body` `40-Way` (`8-612`)
 - [Chrysler `DRB-II` Error Registers & Fault Isolation Trees (`Code 11`–`Code 55`)](wiring-and-diagnostics/drb-ii-fault-trees.md) — `Code 11`–`Code 55` register map (`SMEC` `$001E–$0025` vs. `SBEC` `$001F–$0026`), `DRB` `0x10`–`0x17`, and diagnostic decision tree
+
+### Wave E Verified Reference Articles (Cleanroom Web Harvest)
+
+- [LM, SMEC & SBEC Connector Evolution and MPSciLink Interface](lm-smec-sbec-connector-evolution) — `1984–1993+` `LM`/`PM` -> `SMEC` -> `SBEC` signal migration (`MiniMopar`) and `MPSciLink`/`MPScandroid` `SCI` wiring notes (`Turbo-Mopar (pre-2017 Wayback archive)`)
+- [Key-Dance Fault Codes, Switch Tests & 2.2L/2.5L Ignition Bench](key-dance-fault-codes-and-ignition-bench) — `ON-OFF-ON-OFF-ON` `Code 11`–`Code 55` blink retrieval, switch tests, `0.025–0.035 in` gap/`MSD` rules, and `Gus Mahon` plug reading
+- [8V Cylinder Heads, Camshafts & 2.2L/2.5L Turbo Builds](eight-valve-heads-camshafts-and-turbo-builds) — `#445`/`#782` castings, `112 vs 114 mm` valves, `OSJ` & `1989` cam-cap oiling guards, `20+ psi` roller vs. slider cams, and `Gus Mahon` strip progressions
+- [Chrysler OEM Turbocharger Reference (Wave E Enriched)](oem-chrysler-turbos) — `1984–1993` flange/wastegate spotter's guide, `M26`/`M3`/`M4`/`N` nickel markings, Grainger valves, and `TI -> TII` swaps
+- [Chrysler FWD Transaxles: A555, A568, A413 (Wave E Enriched)](a555-a568-a413-transaxles) — `A460`–`A568` hardware evolution, `6`/`8`-bolt flywheels, `1991+` spline split, and `A413` transfer gears & clutch-pack clearances
 
 ## Topic Map
 

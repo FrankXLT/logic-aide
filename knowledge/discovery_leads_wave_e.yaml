@@ -1,0 +1,469 @@
+schema_version: '1.0'
+wave: E
+generated_utc: '2026-11-27T20:28:44Z'
+vault_sha256_count: 517
+leads:
+- lead_id: wave-e-allpar-archival-mopar-allpar-mopar-smec-sbec
+  wave: E
+  source_kind: wayback_cdx
+  category: allpar_archival_mopar
+  fingerprint: allpar/mopar SMEC SBEC
+  query_pattern: allpar.com/mopar/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=allpar.com%2Fmopar%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&filter=!original:.*/forums/.*&collapse=digest&limit=50&to=20170531
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: allpar.com
+  wayback_only: true
+  to_timestamp: '20170531'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Pre-sale Allpar Mopar tech archive (cutoff 2017-05-31, forums excluded).
+    Seeded (SMEC, SBEC, 68HC11, 6803) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-allpar-archival-omni-allpar-omni-6803-glhs
+  wave: E
+  source_kind: wayback_cdx
+  category: allpar_archival_omni
+  fingerprint: allpar/omni 6803 GLHS
+  query_pattern: allpar.com/omni/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=allpar.com%2Fomni%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&filter=!original:.*/forums/.*&collapse=digest&limit=50&to=20170531
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: allpar.com
+  wayback_only: true
+  to_timestamp: '20170531'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Pre-sale Allpar Omni/Charger/GLHS 6803 Logic Module and transaxle archive.
+    Seeded (6803, TE04H, A555, A568) via wiki, rom_manifests, private_references.
+- lead_id: wave-e-allpar-archival-model-allpar-model-shelby-vnt25
+  wave: E
+  source_kind: wayback_cdx
+  category: allpar_archival_model
+  fingerprint: allpar/model Shelby VNT25
+  query_pattern: allpar.com/model/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=allpar.com%2Fmodel%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&filter=!original:.*/forums/.*&collapse=digest&limit=50&to=20170531
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: allpar.com
+  wayback_only: true
+  to_timestamp: '20170531'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: Pre-sale Allpar Chrysler/Dodge turbo model archive (VNT25, TD04LR, DOHC).
+    Seeded (VNT25, TD04LR, DOHC, A555) via wiki, private_references.
+- lead_id: wave-e-allpar-archival-cars-allpar-cars-2-2l-2-5l-heads
+  wave: E
+  source_kind: wayback_cdx
+  category: allpar_archival_cars
+  fingerprint: allpar/cars 2.2L 2.5L heads
+  query_pattern: allpar.com/cars/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=allpar.com%2Fcars%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&filter=!original:.*/forums/.*&collapse=digest&limit=50&to=20170531
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: allpar.com
+  wayback_only: true
+  to_timestamp: '20170531'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/engine/
+  rationale: 'Pre-sale Allpar 2.2L/2.5L platform archive (#782/#445 heads, DOHC swaps).
+    Seeded (#782, #445, DOHC, TE04H) via wiki, private_references.'
+- lead_id: wave-e-allpar-archival-fix-allpar-fix-drb-ii-diagnostics
+  wave: E
+  source_kind: wayback_cdx
+  category: allpar_archival_fix
+  fingerprint: allpar/fix DRB-II diagnostics
+  query_pattern: allpar.com/fix/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=allpar.com%2Ffix%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&filter=!original:.*/forums/.*&collapse=digest&limit=50&to=20170531
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: allpar.com
+  wayback_only: true
+  to_timestamp: '20170531'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: Pre-sale Allpar repair & DRB-II/SCI 62500 diagnostic notes. Seeded (DRB-II,
+    62500, Pin 11, SMEC) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-allpar-archival-history-allpar-history-chrysler-turbo-ecu
+  wave: E
+  source_kind: wayback_cdx
+  category: allpar_archival_history
+  fingerprint: allpar/history Chrysler turbo ECU
+  query_pattern: allpar.com/history/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=allpar.com%2Fhistory%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&filter=!original:.*/forums/.*&collapse=digest&limit=50&to=20170531
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: allpar.com
+  wayback_only: true
+  to_timestamp: '20170531'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Pre-sale Allpar Chrysler turbo electronics history across 6803, SMEC,
+    and SBEC. Seeded (SMEC, SBEC, 6803, 68HC11) via wiki, rom_manifests, sci_crossref,
+    private_references.
+- lead_id: wave-e-allpar-archival-corporate-allpar-corporate-powertrain-specs
+  wave: E
+  source_kind: wayback_cdx
+  category: allpar_archival_corporate
+  fingerprint: allpar/corporate powertrain specs
+  query_pattern: allpar.com/corporate/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=allpar.com%2Fcorporate%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&filter=!original:.*/forums/.*&collapse=digest&limit=50&to=20170531
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: allpar.com
+  wayback_only: true
+  to_timestamp: '20170531'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: Pre-sale Allpar corporate powertrain engineering specs archive. Seeded
+    (A555, A568, DOHC, TurboCalc) via wiki, private_references.
+- lead_id: wave-e-turbo-mopar-forums-index-turbo-mopar-forums-archive
+  wave: E
+  source_kind: wayback_cdx
+  category: turbo_mopar_forums_index
+  fingerprint: turbo-mopar forums archive
+  query_pattern: turbo-mopar.com/forums/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2Fforums%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=urlkey&limit=50&to=20161231
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: turbo-mopar.com
+  wayback_only: true
+  to_timestamp: '20161231'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Pre-hijack Wayback CDX urlkey index of turbo-mopar.com/forums (cutoff
+    2016-12-31). Seeded (SMEC, SBEC, 68HC11, 6803) via wiki, rom_manifests, sci_crossref,
+    private_references.
+- lead_id: wave-e-turbo-mopar-smec-sbec-turbo-mopar-smec-sbec-pin11
+  wave: E
+  source_kind: wayback_cdx
+  category: turbo_mopar_smec_sbec
+  fingerprint: turbo-mopar SMEC SBEC Pin11
+  query_pattern: turbo-mopar.com/forums/*smec*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2Fforums%2F%2Asmec%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=urlkey&limit=50&to=20161231
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: turbo-mopar.com
+  wayback_only: true
+  to_timestamp: '20161231'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Pre-hijack Wayback archive of SMEC/SBEC Pin 11, 28C256, and Blueberry60/Ladybug60.
+    Seeded (SMEC, SBEC, Pin 11, 28C256) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-turbo-mopar-chem-cal-turbo-mopar-chemasm-zchem-d-cal
+  wave: E
+  source_kind: wayback_cdx
+  category: turbo_mopar_chem_cal
+  fingerprint: turbo-mopar ChemAsm zChEM D-Cal
+  query_pattern: turbo-mopar.com/forums/*chem*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2Fforums%2F%2Achem%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=urlkey&limit=50&to=20161231
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: turbo-mopar.com
+  wayback_only: true
+  to_timestamp: '20161231'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Pre-hijack Wayback archive of ChemAsm, zChEM, D-Cal, PEFTBL, and WOTTBL
+    threads. Seeded (ChemAsm, zChEM, D-Cal, PEFTBL) via wiki, rom_manifests, private_references.
+- lead_id: wave-e-turbo-mopar-sci-diag-turbo-mopar-mpscan-sci-0xf2
+  wave: E
+  source_kind: wayback_cdx
+  category: turbo_mopar_sci_diag
+  fingerprint: turbo-mopar MPScan SCI 0xF2
+  query_pattern: turbo-mopar.com/forums/*sci*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=turbo-mopar.com%2Fforums%2F%2Asci%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=urlkey&limit=50&to=20161231
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: turbo-mopar.com
+  wayback_only: true
+  to_timestamp: '20161231'
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Pre-hijack Wayback archive of MPScan, mpscilink, 62500 baud, and 0xF2/0xF4
+    threads. Seeded (MPScan, 62500, 0xF2, 0xF4) via wiki, rom_manifests, sci_crossref,
+    private_references.
+- lead_id: wave-e-mpscilink-archive-sites-google-com-site-mpscilink
+  wave: E
+  source_kind: wayback_cdx
+  category: mpscilink_archive
+  fingerprint: sites.google.com/site/mpscilink
+  query_pattern: sites.google.com/site/mpscilink/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=sites.google.com%2Fsite%2Fmpscilink%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: sites.google.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: Archived mpscilink site hosting Chrysler SCI 62500/0xF2/0xF4 logger docs.
+    Seeded (MPScan, 62500, 0xF2, 0xF4) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-minimopar-perf-turbo-minimopar-perf-turbo-heads
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_perf_turbo
+  fingerprint: minimopar/perf turbo & heads
+  query_pattern: minimopar.net/perf/*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2Fperf%2F%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: 'MiniMopar performance archive (#782/#445 heads, TE04H, VNT25, TD04LR,
+    TurboCalc). Seeded (#782, #445, TE04H, VNT25) via wiki, private_references.'
+- lead_id: wave-e-minimopar-smec-minimopar-smec-68hc11-28c256
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_smec
+  fingerprint: minimopar SMEC 68HC11 28C256
+  query_pattern: minimopar.net/*smec*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Asmec%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: MiniMopar SMEC 68HC11 archive (Pin 11, 28C256 EEPROM, BatOff notes).
+    Seeded (SMEC, 68HC11, Pin 11, 28C256) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-minimopar-sbec-minimopar-sbec-blueberry60-ladybug60
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_sbec
+  fingerprint: minimopar SBEC Blueberry60 Ladybug60
+  query_pattern: minimopar.net/*sbec*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Asbec%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: MiniMopar SBEC archive (68HC11 ROMs, Blueberry60, Ladybug60, D-Cal).
+    Seeded (SBEC, 68HC11, Blueberry60, Ladybug60) via wiki, rom_manifests, sci_crossref,
+    private_references.
+- lead_id: wave-e-minimopar-6803-minimopar-6803-logic-module
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_6803
+  fingerprint: minimopar 6803 Logic Module
+  query_pattern: minimopar.net/*6803*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2A6803%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: MiniMopar 6803 Logic/Power Module archive covering PEFTBL/WOTTBL tables.
+    Seeded (6803, PEFTBL, WOTTBL) via wiki, rom_manifests, private_references.
+- lead_id: wave-e-minimopar-drb-faults-minimopar-drb-ii-fault-codes
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_drb_faults
+  fingerprint: minimopar DRB-II fault codes
+  query_pattern: minimopar.net/*drb*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Adrb%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/wiring/
+  rationale: MiniMopar DRB-II diagnostic code reference and fault tree archive. Seeded
+    (DRB-II, SMEC, SBEC) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-minimopar-sci-protocol-minimopar-sci-62500-0xf2-0xf4
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_sci_protocol
+  fingerprint: minimopar SCI 62500 0xF2 0xF4
+  query_pattern: minimopar.net/*sci*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Asci%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: MiniMopar SCI bus archive (62500 baud, 0xF2/0xF4 tables, MPScan, mpscilink).
+    Seeded (62500, 0xF2, 0xF4, MPScan) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-minimopar-chem-cal-minimopar-chemasm-zchem-peftbl
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_chem_cal
+  fingerprint: minimopar ChemAsm zChEM PEFTBL
+  query_pattern: minimopar.net/*chem*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Achem%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: MiniMopar calibration disassembly archive (ChemAsm, zChEM, D-Cal, PEFTBL).
+    Seeded (ChemAsm, zChEM, PEFTBL, WOTTBL) via wiki, rom_manifests, private_references.
+- lead_id: wave-e-minimopar-drivetrain-swaps-minimopar-a555-a568-dohc
+  wave: E
+  source_kind: wayback_cdx
+  category: minimopar_drivetrain_swaps
+  fingerprint: minimopar A555 A568 DOHC
+  query_pattern: minimopar.net/*trans*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=minimopar.net%2F%2Atrans%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: minimopar.net
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: MiniMopar transaxle and swap archive (A555, A568, DOHC hybrid builds).
+    Seeded (A555, A568, DOHC) via wiki, private_references.
+- lead_id: wave-e-dodgegarage-smec-thedodgegarage-smec-68hc11-pin11
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_smec
+  fingerprint: thedodgegarage SMEC 68HC11 Pin11
+  query_pattern: thedodgegarage.com/*smec*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Asmec%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: TheDodgeGarage SMEC 68HC11 archive (Pin 11, 28C256 socket mods, BatOff).
+    Seeded (SMEC, 68HC11, Pin 11, 28C256) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-dodgegarage-sbec-thedodgegarage-sbec-blueberry60
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_sbec
+  fingerprint: thedodgegarage SBEC Blueberry60
+  query_pattern: thedodgegarage.com/*sbec*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Asbec%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: TheDodgeGarage SBEC tech archive (Blueberry60, Ladybug60, 68HC11 calibration).
+    Seeded (SBEC, Blueberry60, Ladybug60, 68HC11) via wiki, rom_manifests, sci_crossref,
+    private_references.
+- lead_id: wave-e-dodgegarage-6803-thedodgegarage-6803-lm-pm
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_6803
+  fingerprint: thedodgegarage 6803 LM PM
+  query_pattern: thedodgegarage.com/*6803*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2A6803%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: TheDodgeGarage 6803 Logic/Power Module archive and calibration reference.
+    Seeded (6803, PEFTBL, WOTTBL) via wiki, rom_manifests, private_references.
+- lead_id: wave-e-dodgegarage-chem-tables-thedodgegarage-peftbl-chemasm-d-cal
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_chem_tables
+  fingerprint: thedodgegarage PEFTBL ChemAsm D-Cal
+  query_pattern: thedodgegarage.com/*peftbl*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Apeftbl%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: TheDodgeGarage calibration archive (PEFTBL, WOTTBL, ChemAsm, zChEM, D-Cal).
+    Seeded (PEFTBL, WOTTBL, ChemAsm, zChEM) via wiki, rom_manifests, private_references.
+- lead_id: wave-e-dodgegarage-sci-drb-thedodgegarage-drb-ii-mpscan-0xf2
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_sci_drb
+  fingerprint: thedodgegarage DRB-II MPScan 0xF2
+  query_pattern: thedodgegarage.com/*drb*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Adrb%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/ecu/
+  rationale: TheDodgeGarage diagnostic & SCI archive (DRB-II, 62500, 0xF2/0xF4, MPScan).
+    Seeded (DRB-II, 62500, 0xF2, 0xF4) via wiki, rom_manifests, sci_crossref, private_references.
+- lead_id: wave-e-dodgegarage-turbo-maps-thedodgegarage-vnt25-te04h-td04lr
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_turbo_maps
+  fingerprint: thedodgegarage VNT25 TE04H TD04LR
+  query_pattern: thedodgegarage.com/*turbo*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Aturbo%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: profiles/turbo/
+  rationale: TheDodgeGarage turbocharger archive (TurboCalc, VNT25, TE04H, TD04LR).
+    Seeded (TurboCalc, VNT25, TE04H, TD04LR) via wiki, private_references.
+- lead_id: wave-e-dodgegarage-head-flow-thedodgegarage-782-445-dohc
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_head_flow
+  fingerprint: 'thedodgegarage #782 #445 DOHC'
+  query_pattern: thedodgegarage.com/*head*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Ahead%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/engine/
+  rationale: 'TheDodgeGarage cylinder head flowbench archive (#782, #445, DOHC). Seeded
+    (#782, #445, DOHC) via wiki, private_references.'
+- lead_id: wave-e-dodgegarage-transaxles-thedodgegarage-a555-a568-swaps
+  wave: E
+  source_kind: wayback_cdx
+  category: dodgegarage_transaxles
+  fingerprint: thedodgegarage A555 A568 swaps
+  query_pattern: thedodgegarage.com/*a555*
+  cdx_query_url: https://web.archive.org/cdx/search/cdx?url=thedodgegarage.com%2F%2Aa555%2A&output=json&fl=timestamp,original,mimetype,statuscode,digest&filter=statuscode:200&collapse=digest&limit=50
+  sample_memento_url_template: https://web.archive.org/web/{timestamp}id_/{original}
+  source_site: thedodgegarage.com
+  wayback_only: true
+  vault_dedup_sha256_matches: []
+  already_in_vault: false
+  status: queued_cdx
+  target_destination: knowledge/drivetrain/
+  rationale: TheDodgeGarage transaxle archive (A555, A568 Getrag, DOHC swap fitment).
+    Seeded (A555, A568, DOHC) via wiki, private_references.

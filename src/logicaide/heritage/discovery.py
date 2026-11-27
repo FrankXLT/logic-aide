@@ -87,12 +87,24 @@ def _slugify(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-") or "lead"
 
 
-def build_cdx_query_url(url_pattern: str, limit: int = 50) -> str:
-    """Build a canonical Wayback Machine CDX JSON query URL with digest collapsing."""
+def build_cdx_query_url(
+    url_pattern: str, limit: int = 50, *, to_timestamp: str | None = None,
+    filter_exprs: Sequence[str] = (), collapse: str = "digest",
+) -> str:
+    """Build a canonical Wayback Machine CDX JSON query URL with optional cutoff and filters."""
     encoded = urllib.parse.quote(url_pattern, safe="")
+    col = str(collapse).strip() or "digest"
+    if not re.fullmatch(r"[A-Za-z0-9_:]+", col):
+        raise ValueError(f"Invalid CDX collapse field: {collapse!r}")
+    filters = list(dict.fromkeys(["statuscode:200", *(str(e).strip() for e in filter_exprs if str(e).strip())]))
+    filter_qs = "".join(f"&filter={urllib.parse.quote(f, safe='!:.*-/=_')}" for f in filters)
+    ts_to = str(to_timestamp).strip() if to_timestamp is not None else ""
+    if to_timestamp is not None and not re.fullmatch(r"\d{4,14}", ts_to):
+        raise ValueError(f"Invalid CDX to_timestamp: {to_timestamp!r}")
+    to_qs = f"&to={ts_to}" if ts_to else ""
     return (
         f"{CDX_BASE_URL}?url={encoded}&output=json&fl=timestamp,original,mimetype,statuscode,digest"
-        f"&filter=statuscode:200&collapse=digest&limit={int(limit)}"
+        f"{filter_qs}&collapse={col}&limit={int(limit)}{to_qs}"
     )
 
 
@@ -275,7 +287,7 @@ def _normalize_extra_fingerprints(extra_fingerprints: Sequence[dict[str, Any] | 
         raw_pat = str(entry.get("query_pattern") or "").strip()
         default_pat = fp if "*" in fp else (f"{fp}*" if ("." in fp or "/" in fp) else f"*{_slugify(fp)}*")
         sha_val = str(entry.get("sha256") or entry.get("local_sha256") or "").strip().lower()
-        normalized.append({
+        item: dict[str, Any] = {
             "source_kind": str(entry.get("source_kind") or "wayback_cdx").strip().lower(),
             "forge": scrub_pii(str(entry.get("forge") or "").strip().lower()),
             "code_forge_query_url": scrub_pii(str(entry.get("code_forge_query_url") or "").strip()),
@@ -286,7 +298,11 @@ def _normalize_extra_fingerprints(extra_fingerprints: Sequence[dict[str, Any] | 
             "rationale": scrub_pii(str(entry.get("rationale") or "Supplemental heritage recovery fingerprint.")),
             "local_sha256": sha_val if SHA256_HEX_RE.fullmatch(sha_val) else "",
             "explicit_status": str(entry.get("status") or ""),
-        })
+        }
+        for k in ("to_timestamp", "filter_exprs", "collapse", "source_site", "wayback_only"):
+            if entry.get(k) is not None:
+                item[k] = entry[k]
+        normalized.append(item)
     return normalized
 
 
@@ -342,13 +358,23 @@ def _build_lead_entry(
         "lead_id": lead_id, "wave": wave.upper(), "source_kind": source_kind,
         "category": cat, "fingerprint": fp, "query_pattern": qpat,
     }
+    raw_to, raw_filters = raw_record.get("to_timestamp"), raw_record.get("filter_exprs") or ()
+    to_ts = str(raw_to).strip() if raw_to is not None and str(raw_to).strip() else None
+    f_exprs = (str(raw_filters),) if isinstance(raw_filters, str) else tuple(str(x) for x in raw_filters)
+    collapse = str(raw_record.get("collapse") or "digest").strip() or "digest"
     if source_kind == "code_forge":
         lead["forge"] = scrub_pii(str(raw_record.get("forge") or ""))
         lead["code_forge_query_url"] = scrub_pii(str(raw_record.get("code_forge_query_url") or ""))
         lead["cdx_query_url"] = None
     else:
-        lead["cdx_query_url"] = build_cdx_query_url(qpat) if qpat else None
+        lead["cdx_query_url"] = build_cdx_query_url(qpat, to_timestamp=to_ts, filter_exprs=f_exprs, collapse=collapse) if qpat else None
         lead["sample_memento_url_template"] = f"{WAYBACK_WEB_BASE}/{{timestamp}}id_/{{original}}"
+    if raw_record.get("source_site"):
+        lead["source_site"] = scrub_pii(str(raw_record["source_site"]))
+    if raw_record.get("wayback_only") is not None:
+        lead["wayback_only"] = bool(raw_record["wayback_only"])
+    if to_ts is not None:
+        lead["to_timestamp"] = to_ts
 
     lead.update({
         "vault_dedup_sha256_matches": matches, "already_in_vault": already_in_vault, "status": status,
@@ -385,9 +411,9 @@ def fetch_cdx_snapshots(cdx_url: str, user_agent: str = DEFAULT_USER_AGENT, time
 
 
 _QUEUE_KEYS = (
-    "lead_id", "wave", "source_kind", "forge", "category", "fingerprint", "query_pattern",
-    "code_forge_query_url", "cdx_query_url", "sample_memento_url_template",
-    "already_in_vault", "status", "target_destination",
+    "lead_id", "wave", "source_kind", "forge", "source_site", "wayback_only", "to_timestamp",
+    "category", "fingerprint", "query_pattern", "code_forge_query_url", "cdx_query_url",
+    "sample_memento_url_template", "already_in_vault", "status", "target_destination",
 )
 
 
@@ -432,6 +458,7 @@ def run_discover(
     profiles_turbo_dir: Path | str | None = Path("profiles/turbo"),
     extra_fingerprints: Sequence[dict[str, Any] | str] | None = None,
     rom_root: Path | str | None = Path("rom"),
+    repo_root: Path | str | None = None,
 ) -> dict[str, Any]:
     """Run Wave discovery, SHA-256 vault deduplication, and emit cleanroom YAML + queue JSON."""
     wave_norm = wave.strip().upper() or "A"
@@ -456,6 +483,9 @@ def run_discover(
     elif wave_norm == "D":
         from logicaide.heritage import discovery_wave_d
         raw_records = discovery_wave_d.extract_wave_d_fingerprints(private_root, manifest_path, extra_fingerprints)
+    elif wave_norm == "E":
+        from logicaide.heritage import discovery_wave_e
+        raw_records = discovery_wave_e.extract_wave_e_fingerprints(private_root, manifest_path, extra_fingerprints, repo_root=repo_root)
     else:
         raise ValueError(f"Unsupported wave identifier: {wave!r}")
 

@@ -371,6 +371,9 @@ def emit_sync_wiki_result(result: dict[str, Any], as_json: bool) -> None:
 
 
 def register_heritage_commands(heritage_group: click.Group) -> None:
-    """Register Wave D heritage subcommands onto ``heritage_group``."""
+    """Register Wave D and Wave E heritage subcommands onto ``heritage_group``."""
+    from logicaide.heritage.wave_e_cli import register_wave_e_commands
+
     for cmd in (parse_docs_cmd, build_index_cmd, index_alias_cmd, query_heritage_cmd, diagram_heritage_cmd):
         heritage_group.add_command(cmd)
+    register_wave_e_commands(heritage_group)
