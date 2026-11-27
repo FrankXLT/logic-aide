@@ -488,5 +488,10 @@ def sim_lookup_sci(
     )
 
 
+from logicaide.sim.cli_sim import register_sim_commands
+
+register_sim_commands(sim)
+
+
 if __name__ == "__main__":
     main()

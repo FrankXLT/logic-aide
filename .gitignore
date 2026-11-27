@@ -34,6 +34,11 @@ private_references/**
 Private References/
 Private References/**
 
+# Staged candidate ROMs and safety reports (keep README.md and .gitkeep tracked)
+staging/candidates/**
+!staging/candidates/.gitkeep
+!staging/candidates/README.md
+
 # Secrets, local env overrides, and personal local Claude instructions
 .env
 .env.*

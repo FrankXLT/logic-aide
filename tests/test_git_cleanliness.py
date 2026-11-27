@@ -31,6 +31,8 @@ MUST_IGNORE_PATHS = (
     "candidate.BIN",
     "dump.s19",
     "dump.S19",
+    "staging/candidates/probe/candidate.bin",
+    "staging/candidates/probe/REPORT.md",
 )
 
 MUST_NOT_IGNORE_PATHS = (
@@ -38,6 +40,8 @@ MUST_NOT_IGNORE_PATHS = (
     "data/drives/.gitkeep",
     "rom/inputs/README.md",
     "rom/stock_baselines/README.md",
+    "staging/candidates/.gitkeep",
+    "staging/candidates/README.md",
 )
 
 FORBIDDEN_INDEX_PREFIXES = (
@@ -45,11 +49,12 @@ FORBIDDEN_INDEX_PREFIXES = (
     "Private References/",
     "data/heritage_raw/",
     "data/drives/",
+    "staging/candidates/",
 )
 FORBIDDEN_INDEX_SUFFIXES = (".bin", ".s19", ".parquet", ".sqlite", ".sqlite3", ".sqlite-wal", ".sqlite-shm")
 
 CLEANROOM_ONLY_DIRS = ("profiles", "knowledge", "wiki", "scripts", "tests/fixtures")
-CODE_DIRS = ("src/logicaide", "mcp_servers")
+CODE_DIRS = ("src/logicaide", "mcp_servers", "rom/models")
 SCAN_EXTENSIONS = frozenset({".py", ".md", ".yaml", ".yml", ".json", ".toml", ".txt", ".csv", ".dlg"})
 
 EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
@@ -114,7 +119,12 @@ def test_git_index_has_no_forbidden_tracked_artifacts() -> None:
     violations: list[str] = []
 
     for path in tracked:
-        if path in ("data/heritage_raw/.gitkeep", "data/drives/.gitkeep"):
+        if path in (
+            "data/heritage_raw/.gitkeep",
+            "data/drives/.gitkeep",
+            "staging/candidates/.gitkeep",
+            "staging/candidates/README.md",
+        ):
             continue
         if path.startswith(FORBIDDEN_INDEX_PREFIXES):
             violations.append(f"forbidden prefix: {path}")
