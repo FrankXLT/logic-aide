@@ -30,7 +30,10 @@ from logicaide.telemetry.fixtures import (
 from logicaide.telemetry.issues import (
     VALID_BOOKMARK_SOURCES,
     VALID_ISSUE_SEVERITIES,
+    VALID_ISSUE_STATUSES,
     bookmark_tuning_issue,
+    create_or_update_tuning_issue,
+    get_tuning_issue,
     list_bookmarks,
     list_tuning_issues,
 )
@@ -57,6 +60,7 @@ from logicaide.telemetry.parquet_chunker import (
 )
 from logicaide.telemetry.rollups import (
     LOAD_CELL_ROLLUPS_SQL,
+    query_drive_timeseries,
     query_load_cell_rollups,
     summarize_telemetry_lake,
 )
@@ -129,20 +133,24 @@ __all__ = [
     "TelemetrySample",
     "VALID_BOOKMARK_SOURCES",
     "VALID_ISSUE_SEVERITIES",
+    "VALID_ISSUE_STATUSES",
     "VALID_RUN_KINDS",
     "WatchedChannel",
     "bookmark_tuning_issue",
     "build_telemetry_sample",
+    "create_or_update_tuning_issue",
     "decode_channel_value",
     "default_chrysler_turbo_cycle",
     "discover_private_logs",
     "encode_channel_bytes",
     "export_stimulus_fixture",
+    "get_tuning_issue",
     "list_bookmarks",
     "list_tuning_issues",
     "load_fixture_operating_points",
     "open_read_only_serial",
     "parse_telemetry_file",
+    "query_drive_timeseries",
     "query_load_cell_rollups",
     "register_telemetry_watch_command",
     "resolve_manifest_watchlist",

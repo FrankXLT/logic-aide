@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "ecu-telemetry": {
+      "command": "uv",
+      "args": ["run", "--offline", "python", "mcp_servers/ecu_telemetry.py", "--stdio"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    "hc11-emulator": {
+      "command": "uv",
+      "args": ["run", "--offline", "python", "mcp_servers/hc11_emulator.py", "--stdio"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    "chrysler-heritage": {
+      "command": "uv",
+      "args": ["run", "--offline", "python", "mcp_servers/chrysler_heritage.py", "--stdio"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

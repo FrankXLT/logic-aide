@@ -345,3 +345,153 @@ def get_vehicle_and_latest_revision(
         }
     finally:
         conn.close()
+
+
+def _validate_non_negative_limit(limit: int | None) -> int | None:
+    """Validate an optional non-negative integer limit, rejecting booleans."""
+    if limit is None:
+        return None
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit < 0:
+        raise ValueError(f"limit must be a non-negative integer, got {limit!r}")
+    return limit
+
+
+def _parse_quarantined_cells(raw_json: Any) -> list[Any]:
+    """Parse ``quarantined_cells_json`` into a Python list."""
+    if isinstance(raw_json, list):
+        return raw_json
+    parsed = json.loads(str(raw_json)) if raw_json else []
+    return parsed if isinstance(parsed, list) else []
+
+
+def _connect_existing_readonly(db_path: Path | str) -> sqlite3.Connection | None:
+    """Open an existing catalog database read-only after size, integrity, and schema checks."""
+    path = Path(db_path)
+    if not path.is_file():
+        return None
+    if path.stat().st_size == 0:
+        raise ValueError(f"Catalog database is empty: {path}")
+
+    uri = f"{path.resolve().as_uri()}?mode=ro"
+    conn: sqlite3.Connection | None = None
+    try:
+        conn = sqlite3.connect(uri, uri=True)
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys = ON;")
+        qc_row = conn.execute("PRAGMA quick_check(1);").fetchone()
+        if qc_row is None or str(qc_row[0]).lower() != "ok":
+            raise ValueError(f"Catalog database failed quick_check: {path}")
+        rows = conn.execute(
+            "SELECT name FROM sqlite_master WHERE type = 'table' AND name IN ('vehicles', 'sessions')"
+        ).fetchall()
+        if not {"vehicles", "sessions"}.issubset({str(r[0]) for r in rows}):
+            raise ValueError(f"Catalog database missing core tables ('vehicles', 'sessions'): {path}")
+        return conn
+    except BaseException as exc:
+        if conn is not None:
+            conn.close()
+        if isinstance(exc, sqlite3.Error):
+            raise ValueError(f"Invalid catalog database {path}: {exc}") from exc
+        raise
+
+
+def _query_filtered_rows(
+    db_path: Path | str, table: str, pairs: tuple[tuple[str, Any], ...], order_by: str, limit: int | None
+) -> list[dict[str, Any]]:
+    """Run a parameterized read-only equality/limit query against a catalog table."""
+    valid_limit = _validate_non_negative_limit(limit)
+    conn = _connect_existing_readonly(db_path)
+    if conn is None:
+        return []
+    try:
+        filters = [f"{col} = ?" for col, val in pairs if val is not None]
+        params: list[Any] = [val for _, val in pairs if val is not None]
+        where_sql = f"WHERE {' AND '.join(filters)}" if filters else ""
+        limit_sql = " LIMIT ?" if valid_limit is not None else ""
+        if valid_limit is not None:
+            params.append(valid_limit)
+        sql = f"SELECT * FROM {table} {where_sql} ORDER BY {order_by}{limit_sql}"
+        return [dict(row) for row in conn.execute(sql, params).fetchall()]
+    finally:
+        conn.close()
+
+
+def list_vehicles(
+    db_path: Path | str = DEFAULT_CATALOG_DB, *, car_id: str | None = None, ecu_family: str | None = None
+) -> list[dict[str, Any]]:
+    """Return sorted vehicle records enriched with latest revision metadata and counts."""
+    conn = _connect_existing_readonly(db_path)
+    if conn is None:
+        return []
+    try:
+        pairs = (("v.car_id", car_id), ("v.ecu_family", ecu_family))
+        filters = [f"{col} = ?" for col, val in pairs if val is not None]
+        params = [val for _, val in pairs if val is not None]
+        where_sql = f"WHERE {' AND '.join(filters)}" if filters else ""
+        sql = (
+            "SELECT v.*, r.revision_id AS latest_revision_id, r.compatibility_tier AS compatibility_tier, "
+            "r.compiled_at_utc AS compiled_at_utc, "
+            "(SELECT COUNT(*) FROM sessions s WHERE s.car_id = v.car_id) AS session_count, "
+            "(SELECT COUNT(*) FROM tuning_issues ti WHERE ti.car_id = v.car_id AND ti.status = 'OPEN') AS open_issue_count, "
+            "(SELECT COUNT(*) FROM candidate_builds cb WHERE cb.car_id = v.car_id) AS candidate_build_count "
+            "FROM vehicles v LEFT JOIN vehicle_profile_revisions r ON r.rowid = ("
+            "SELECT r2.rowid FROM vehicle_profile_revisions r2 WHERE r2.car_id = v.car_id "
+            f"ORDER BY r2.compiled_at_utc DESC, r2.rowid DESC LIMIT 1) {where_sql} ORDER BY v.car_id ASC"
+        )
+        return [dict(row) for row in conn.execute(sql, params).fetchall()]
+    finally:
+        conn.close()
+
+
+def list_sessions(
+    db_path: Path | str = DEFAULT_CATALOG_DB, *, car_id: str | None = None,
+    run_kind: str | None = None, build_id: str | None = None, limit: int | None = None,
+) -> list[dict[str, Any]]:
+    """List catalog sessions ordered newest-first with parsed ``quarantined_cells``."""
+    rows = _query_filtered_rows(
+        db_path, "sessions", (("car_id", car_id), ("run_kind", run_kind), ("build_id", build_id)),
+        "started_at_utc DESC, session_id ASC", limit,
+    )
+    for rec in rows:
+        rec["quarantined_cells"] = _parse_quarantined_cells(rec.get("quarantined_cells_json"))
+    return rows
+
+
+def get_session_record(session_id: str, db_path: Path | str = DEFAULT_CATALOG_DB) -> dict[str, Any] | None:
+    """Return a single session record with chunk, bookmark, and open-issue counts."""
+    conn = _connect_existing_readonly(db_path)
+    if conn is None:
+        return None
+    try:
+        sql = (
+            "SELECT s.*, "
+            "(SELECT COUNT(*) FROM parquet_chunks pc WHERE pc.session_id = s.session_id) AS chunk_count, "
+            "(SELECT COUNT(*) FROM bookmarks b WHERE b.session_id = s.session_id) AS bookmark_count, "
+            "(SELECT COUNT(*) FROM tuning_issues ti WHERE ti.session_id = s.session_id AND ti.status = 'OPEN') AS open_issue_count "
+            "FROM sessions s WHERE s.session_id = ?"
+        )
+        row = conn.execute(sql, (session_id,)).fetchone()
+        if row is None:
+            return None
+        rec = dict(row)
+        rec["quarantined_cells"] = _parse_quarantined_cells(rec.get("quarantined_cells_json"))
+        return rec
+    finally:
+        conn.close()
+
+
+def list_candidate_builds(
+    db_path: Path | str = DEFAULT_CATALOG_DB, *, car_id: str | None = None,
+    safety_gate_status: str | None = None, limit: int | None = None,
+) -> list[dict[str, Any]]:
+    """List candidate builds ordered newest-first, optionally filtered by car or gate status."""
+    return _query_filtered_rows(
+        db_path, "candidate_builds", (("car_id", car_id), ("safety_gate_status", safety_gate_status)),
+        "created_at DESC, build_id ASC", limit,
+    )
+
+
+def get_candidate_build(build_id: str, db_path: Path | str = DEFAULT_CATALOG_DB) -> dict[str, Any] | None:
+    """Return a single candidate build record by ``build_id``, or ``None``."""
+    rows = _query_filtered_rows(db_path, "candidate_builds", (("build_id", build_id),), "build_id ASC", 1)
+    return rows[0] if rows else None

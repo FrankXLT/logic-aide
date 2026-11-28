@@ -386,7 +386,6 @@ from logicaide.telemetry.watch_cli import register_telemetry_watch_command
 register_telemetry_watch_command(telemetry)
 
 
-
 @main.group(help="68HC11/6803 ROM manifests, behavioral twins, and safety gate commands.")
 def sim() -> None:
     """68HC11/6803 ROM manifests, behavioral twins, and safety gate commands."""
@@ -489,8 +488,10 @@ def sim_lookup_sci(
 
 
 from logicaide.sim.cli_sim import register_sim_commands
+from logicaide.workbench.cli_commands import register_workbench_commands
 
 register_sim_commands(sim)
+register_workbench_commands(main, telemetry)
 
 
 if __name__ == "__main__":

@@ -14,8 +14,16 @@ import click
 from logicaide.sim.assembler import AssembledRom, AssemblyError, assemble_tree
 from logicaide.sim.hc11_runner import TwinParitySummary, run_twin_parity
 from logicaide.sim.monte_carlo import SweepSummary, run_monte_carlo_sweep
+from logicaide.sim.replay import SingleReplaySummary, run_single_replay
 from logicaide.sim.safety_gate import StagingGateResult, run_staging_safety_gate
-from logicaide.sim.splay import RoundtripVerificationResult, build_candidate_rom_bytes, verify_roundtrip_sha256
+from logicaide.sim.splay import (
+    RoundtripVerificationResult,
+    SplayedTree,
+    build_candidate_rom_bytes,
+    ensure_writable_sim_path,
+    splay_rom_binary,
+    verify_roundtrip_sha256,
+)
 
 _ROM_SIZE_BYTES = 32768
 _BASE_ADDRESS = 0x8000
@@ -161,6 +169,26 @@ def _print_verify_summary(result: RoundtripVerificationResult) -> None:
     )
 
 
+def _print_replay_summary(summary: SingleReplaySummary) -> None:
+    """Print a concise human-readable single replay summary."""
+    status = "PASS" if summary.ok else "FAIL"
+    click.echo(
+        f"Single Replay: {status} | session={summary.session_id} | frames={summary.frame_count} "
+        f"(active={summary.active_frames}, quarantined={summary.quarantined_frames}) "
+        f"| max_lsb_diff={summary.max_lsb_diff} | max_cycles={summary.max_loop_cycles} ({summary.max_loop_ms}ms)"
+    )
+    for item in (summary.violations or ())[:5]:
+        click.echo(f"  - {item}")
+
+
+def _print_splay_summary(tree: SplayedTree) -> None:
+    """Print splayed 68HC11 assembly directory metadata."""
+    click.echo(
+        f"Splayed ROM -> {tree.output_dir} | entry={tree.entry_asm} "
+        f"| files={len(tree.files)} | sha256={tree.source_sha256[:12]}..."
+    )
+
+
 @click.command(name="parity")
 @click.option("--asm", "asm_path", type=click.Path(path_type=Path), default=Path("rom/src/main.asm"), show_default=True, help="Entry 68HC11 assembly file.")
 @click.option("--rom", "rom_path", type=click.Path(path_type=Path), default=None, help="Optional 32 KB .bin ROM overriding cleanroom assembly.")
@@ -281,9 +309,76 @@ def sim_verify_sha256(
         ctx.exit(2)
 
 
+@click.command(name="replay")
+@click.option("--fixture", "fixture_path", type=click.Path(path_type=Path), default=None, help="Optional GPS-stripped telemetry fixture (.csv, .parquet, .json).")
+@click.option("--profile", "profile_path", type=click.Path(path_type=Path), default=None, help="Optional vehicle build JSON profile.")
+@click.option("--rom", "rom_path", type=click.Path(path_type=Path), default=None, help="Optional 32 KB .bin ROM overriding cleanroom assembly.")
+@click.option("--asm", "asm_path", type=click.Path(path_type=Path), default=Path("rom/src/main.asm"), show_default=True, help="Entry 68HC11 assembly file.")
+@click.option("--car-id", default=None, help="Optional vehicle identifier override.")
+@click.option("--build-id", default="STOCK", show_default=True, help="Calibration build identifier.")
+@click.option("--session-id", default=None, help="Optional replay session identifier.")
+@click.option("--rev-limit-rpm", type=int, default=None, help="Optional rev-limit override in RPM.")
+@click.option("--overboost-cut-kpa", type=float, default=None, help="Optional overboost fuel-cut threshold in kPa.")
+@click.option("--use-adc", is_flag=True, default=False, help="Drive 68HC11 ADC registers instead of direct zero-page RAM injection.")
+@click.option("--max-frames", type=click.IntRange(min=1), default=250, show_default=True, help="Maximum fixture frames to replay.")
+@click.option("--lake-dir", type=click.Path(path_type=Path), default=Path("data/drives"), show_default=True, help="Parquet telemetry lake root directory.")
+@click.option("--db-path", type=click.Path(path_type=Path), default=Path("data/drives/catalog.sqlite"), show_default=True, help="SQLite catalog database path.")
+@click.option("--no-parquet", is_flag=True, default=False, help="Skip writing replay outputs to Parquet.")
+@click.option("--json", "output_json", is_flag=True, default=False, help="Emit single replay report as JSON.")
+@click.pass_context
+def sim_replay(
+    ctx: click.Context, fixture_path: Path | None, profile_path: Path | None, rom_path: Path | None,
+    asm_path: Path, car_id: str | None, build_id: str, session_id: str | None, rev_limit_rpm: int | None,
+    overboost_cut_kpa: float | None, use_adc: bool, max_frames: int, lake_dir: Path, db_path: Path,
+    no_parquet: bool, output_json: bool,
+) -> None:
+    """Replay a fixture or default drive cycle across Python behavioral twins and 68HC11."""
+    try:
+        summary = run_single_replay(
+            fixture_path=fixture_path, profile_path=profile_path, rom_path=rom_path, asm_path=asm_path,
+            car_id=car_id, build_id=build_id, session_id=session_id, rev_limit_rpm=rev_limit_rpm,
+            overboost_cut_kpa=overboost_cut_kpa, use_adc=use_adc, max_frames=max_frames,
+            lake_dir=lake_dir, db_path=db_path, write_parquet=not no_parquet,
+        )
+    except _HANDLED_ERRORS as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    _emit_json(summary) if output_json else _print_replay_summary(summary)
+    if not summary.ok:
+        ctx.exit(2)
+
+
+@click.command(name="splay")
+@click.option("--rom", "rom_path", type=click.Path(path_type=Path), default=None, help="Optional 32 KB .bin ROM to splay.")
+@click.option("--asm", "asm_path", type=click.Path(path_type=Path), default=Path("rom/src/main.asm"), show_default=True, help="Entry 68HC11 assembly file.")
+@click.option("--splay-dir", type=click.Path(path_type=Path), required=True, help="Destination directory for splayed .asm modules.")
+@click.option("--json", "output_json", is_flag=True, default=False, help="Emit splayed tree metadata as JSON.")
+def sim_splay(rom_path: Path | None, asm_path: Path, splay_dir: Path, output_json: bool) -> None:
+    """Splay a 32 KB 68HC11 ROM binary into assemblable subsystem .asm modules."""
+    try:
+        safe_dir = ensure_writable_sim_path(splay_dir)
+        if rom_path is not None:
+            if not rom_path.is_file():
+                raise FileNotFoundError(f"ROM binary not found: {rom_path}")
+            assembled = _rom_from_bytes(rom_path.read_bytes(), str(rom_path), asm_path)
+        else:
+            if not asm_path.is_file():
+                raise FileNotFoundError(f"Assembly entry file not found: {asm_path}")
+            assembled = assemble_tree(asm_path)
+        tree = splay_rom_binary(
+            assembled.rom_bytes, safe_dir, base_address=assembled.base_address, symbols=assembled.symbols or None,
+        )
+    except _HANDLED_ERRORS as exc:
+        raise click.ClickException(str(exc)) from exc
+
+    _emit_json(tree) if output_json else _print_splay_summary(tree)
+
+
 def register_sim_commands(sim_group: click.Group) -> None:
-    """Register M3 simulation, parity, sweep, staging, and roundtrip commands onto ``sim``."""
+    """Register M3 simulation, parity, sweep, staging, replay, splay, and roundtrip commands onto ``sim``."""
     sim_group.add_command(sim_parity, name="parity")
     sim_group.add_command(sim_sweep, name="sweep")
     sim_group.add_command(sim_stage, name="stage")
+    sim_group.add_command(sim_replay, name="replay")
+    sim_group.add_command(sim_splay, name="splay")
     sim_group.add_command(sim_verify_sha256, name="verify-sha256")

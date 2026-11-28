@@ -39,6 +39,7 @@ from logicaide.sim.monte_carlo import (
     SweepSummary,
     run_monte_carlo_sweep,
 )
+from logicaide.sim.replay import SingleReplaySummary, run_single_replay
 from logicaide.sim.safety_gate import (
     SafetyCheckItem,
     StagingGateResult,
@@ -58,11 +59,12 @@ __all__ = [
     "AssembledRom", "AssemblyError", "BAR_OVERBOOST_CEILINGS", "HC11_CLOCK_HZ",
     "LoopTimingResult", "MAX_MAIN_LOOP_CYCLES", "MAX_MAIN_LOOP_MS", "MC_SAMPLERS",
     "REV_LIMIT_CEILING_RPM", "RoundtripVerificationResult", "SafetyCheckItem",
-    "SplayedTree", "StagingGateResult", "SweepSummary", "TwinParityCase",
-    "TwinParitySummary", "VectorCheckResult", "assemble_source", "assemble_tree",
-    "build_candidate_rom_bytes", "create_hc11_cpu", "detect_external_assembler",
-    "ensure_writable_sim_path", "execute_ram_case", "extract_calibrations_from_rom",
-    "format_s19", "measure_main_loop_budget", "register_sim_commands",
-    "run_monte_carlo_sweep", "run_staging_safety_gate", "run_twin_parity",
-    "splay_rom_binary", "validate_rom_vectors", "verify_roundtrip_sha256",
+    "SingleReplaySummary", "SplayedTree", "StagingGateResult", "SweepSummary",
+    "TwinParityCase", "TwinParitySummary", "VectorCheckResult", "assemble_source",
+    "assemble_tree", "build_candidate_rom_bytes", "create_hc11_cpu",
+    "detect_external_assembler", "ensure_writable_sim_path", "execute_ram_case",
+    "extract_calibrations_from_rom", "format_s19", "measure_main_loop_budget",
+    "register_sim_commands", "run_monte_carlo_sweep", "run_single_replay",
+    "run_staging_safety_gate", "run_twin_parity", "splay_rom_binary",
+    "validate_rom_vectors", "verify_roundtrip_sha256",
 ]
